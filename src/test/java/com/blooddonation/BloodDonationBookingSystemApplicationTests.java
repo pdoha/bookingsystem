@@ -10,6 +10,6 @@ class ProjectApplicationTests {
 
 		@Test
 		void contextLoads() {
-
+			// 테스트
 		}
 }
