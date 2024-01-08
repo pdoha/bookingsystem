@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+
+    <!-- 모든 페이지에 style-->
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css}">
+    <link rel="stylesheet" type="text/css"
+          th:each="cssFile : ${addCommonCss}"
+          th:href="@{/common/css/{file}.css(file=${cssFile})}">
+
+    <!--관리자에 특화된 style-->
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/css/style.css}">
+    <link rel="stylesheet" type="text/css"
+          th:each="cssFile : ${addCss}"
+          th:href="@{/admin/css/{file}.css(file=${cssFile})}">
+
+    <th:block layout:fragment="addCss"></th:block><!--추가하지 못하는 경우 치환해서 쓰라는 의미 -->
+
+    <!-- 모든 페이지에 스크립트-->
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:each="jsFile : ${addCommonScript}"
+            th:src="@{/common/js/{file}.js(file=${jsFile})}"></script>
+
+    <!--관리자에 특화된 스크립트-->
+    <script th:src="@{/admin/js/common.js}"></script>
+    <script th:each="jsFile : ${addScript}"
+            th:src="@{/admin/js/{file}.js(file=${jsFile})}"></script>
+
+
+    <th:block layout:fragment="addScript"></th:block><!--추가하지 못하는 경우 치환해서 쓰라는 의미 -->
+</head>
+<body>
+<header th:replace="~{admin/outlines/header::common}"></header>
+<main layout:fragment="content"></main>
+<footer th:replace="~{admin/outlines/footer::common}"></footer>
+</body>
+</html>
