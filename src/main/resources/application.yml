@@ -1,4 +1,4 @@
-sever:
+server:
   port: 3000
 
 spring:
