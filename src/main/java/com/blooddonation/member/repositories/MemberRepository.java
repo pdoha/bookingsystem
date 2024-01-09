@@ -1,6 +1,7 @@
 package com.blooddonation.member.repositories;
 
 import com.blooddonation.member.entities.Member;
+import com.blooddonation.member.entities.QMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
@@ -15,15 +16,18 @@ public interface MemberRepository extends JpaRepository<Member, Long>,
     Optional<Member> findByUserId(String userId);
 
 
-  /*  default boolean existsByEmail(String email){
+
+    default boolean existsByEmail(String email){
+        //이메일 존재하는지 체크
         QMember member = QMember.member;
         return exists(member.email.eq(email));
     }
 
     default boolean existsByUserId(String userId){
+        //아이디 존재하는지 체크
         QMember member = QMember.member;
         return exists(member.userId.eq(userId));
-    }*/
+    }
 
 
 
