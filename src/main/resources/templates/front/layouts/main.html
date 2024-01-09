@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+
     <link rel="stylesheet" href="text/css" th:href="@{/common/css/style.css}">
-    <!---->
     <link rel="stylesheet" href="text/css"
           th:each="cssFile : ${addCommonCss}"
           th:href="@{/common/css/{file}.css(file=${cssFile})}">
