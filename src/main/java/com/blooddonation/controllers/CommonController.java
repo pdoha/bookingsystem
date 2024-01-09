@@ -1,7 +1,9 @@
 package com.blooddonation.controllers;
 
 import com.blooddonation.commons.exceptions.CommonException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CommonController {
 
     @ExceptionHandler(Exception.class)
-    public String errorHandler(Exception e, HttpServletResponse response, Model model){
+    public String errorHandler(Exception e, HttpServletResponse response, HttpServletRequest request, Model model){
 
 
         //모든 예외는 500으로 고정
@@ -22,6 +24,16 @@ public class CommonController {
             CommonException commonException = (CommonException) e;
             status = commonException.getStatus();
         }
+
+        response.setStatus(status.value());
+        //콘솔에 에러출력
+        e.printStackTrace();
+
+        model.addAttribute("status",status.value());
+        model.addAttribute("path", request.getRequestURL());
+        model.addAttribute("method", request.getMethod());
+        model.addAttribute("message", e.getMessage());
+
         return "error/common";
     }
 }
