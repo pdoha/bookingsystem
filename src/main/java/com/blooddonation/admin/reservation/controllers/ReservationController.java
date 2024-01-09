@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/admin/reservation")
@@ -30,6 +31,7 @@ public class ReservationController implements ExceptionProcessor {
      */
     @GetMapping
     public String list(Model model) {
+        commonProcess("list",model);
         return "admin/reservation/list";
     }
 
@@ -40,12 +42,47 @@ public class ReservationController implements ExceptionProcessor {
      */
     @GetMapping("/add_branch")
     public String addBranch(Model model) {
+        commonProcess("add_branch",model);
         return "admin/reservation/add_branch";
     }
 
+    /**
+     * 브랜치 추가 저장
+     * @param model
+     * @return
+     */
     @PostMapping("save_branch")
     public String saveBranch(Model model) {
         return "redirect:/admin/reservation/";
+    }
+
+    @GetMapping("/branch")
+    public String branchList(Model model) {
+        commonProcess("branch",model);
+        return "admin/reservation/branch_list";
+
+    }
+
+    /**
+     * 공통 처리
+     * @param mode
+     * @param model
+     */
+    private void commonProcess(String mode, Model model) {
+        String pageTitle = "예약 현황";
+        mode = Objects.requireNonNullElse(mode,"list");
+
+        if(mode.equals("add_branch")) {
+            pageTitle = "지점 등록";
+
+        } else if(mode.equals("edit_branch")) {
+            pageTitle="지점 수정";
+        } else if(mode.equals("branch")) {
+            pageTitle="지점 목록";
+        }
+
+        model.addAttribute("pageTitle",pageTitle);
+        model.addAttribute("subMenuCode",mode);
     }
 
 }
