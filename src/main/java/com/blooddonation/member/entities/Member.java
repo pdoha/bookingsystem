@@ -1,5 +1,6 @@
 package com.blooddonation.member.entities;
 
+import com.blooddonation.commons.entities.Base;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Member {
+public class Member extends Base {
     @Id @GeneratedValue
     private Long userNo;
 
