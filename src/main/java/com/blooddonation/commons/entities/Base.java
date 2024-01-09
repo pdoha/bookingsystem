@@ -1,4 +1,4 @@
-package com.blooddonation.entities;
+package com.blooddonation.commons.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

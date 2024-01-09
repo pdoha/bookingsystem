@@ -1,5 +1,6 @@
 package com.blooddonation.member.entities;
 
+
 import com.blooddonation.member.Authority;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(indexes=@Index(name="uq_authority", columnList="userNo, authority",
-                        unique=true))
+        unique=true))
 public class Authorities {
     @Id
     @GeneratedValue
