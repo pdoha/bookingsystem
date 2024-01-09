@@ -20,8 +20,8 @@ public class ReservationController implements ExceptionProcessor {
     public String getMenuCode() {
         return "reservation";
     }
-    @ModelAttribute
-    public List<MenuDetail> getsubMenus() {
+    @ModelAttribute("subMenus")
+    public List<MenuDetail> getSubMenus() {
         return Menu.getMenus("reservation");
     }
 
@@ -51,9 +51,9 @@ public class ReservationController implements ExceptionProcessor {
      * @param model
      * @return
      */
-    @PostMapping("save_branch")
+    @PostMapping("/save_branch")
     public String saveBranch(Model model) {
-        return "redirect:/admin/reservation/";
+        return "redirect:/admin/reservation/branch";
     }
 
     @GetMapping("/branch")
@@ -70,19 +70,21 @@ public class ReservationController implements ExceptionProcessor {
      */
     private void commonProcess(String mode, Model model) {
         String pageTitle = "예약 현황";
-        mode = Objects.requireNonNullElse(mode,"list");
+        mode = Objects.requireNonNullElse(mode, "list");
 
-        if(mode.equals("add_branch")) {
+        if (mode.equals("add_branch")) {
             pageTitle = "지점 등록";
 
-        } else if(mode.equals("edit_branch")) {
-            pageTitle="지점 수정";
-        } else if(mode.equals("branch")) {
-            pageTitle="지점 목록";
+        } else if (mode.equals("edit_branch")) {
+            pageTitle = "지점 수정";
+        } else if (mode.equals("branch")) {
+            pageTitle = "지점 목록";
+
         }
 
-        model.addAttribute("pageTitle",pageTitle);
-        model.addAttribute("subMenuCode",mode);
+        model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("subMenuCode", mode);
     }
-
 }
+
+
