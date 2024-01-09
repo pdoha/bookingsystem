@@ -19,13 +19,14 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     private FileProperties fileProperties;
 
+    //정적 업로드 경로
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {//정적 경로 설정 추
         registry.addResourceHandler(fileProperties.getPath() + "**")
                 .addResourceLocations("file:///" + fileProperties.getPath());
 
     }
-
+    //메세지 추가
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
@@ -34,5 +35,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
         return ms;
 
+    }
+
+    //양식에서 _method를 가지고 get/post 이외의 메서드를 쓸 수 있다
+    @Bean
+    public HiddenHttpMethodFilter httpMethodFilter(){
+        return new HiddenHttpMethodFilter();
     }
 }
