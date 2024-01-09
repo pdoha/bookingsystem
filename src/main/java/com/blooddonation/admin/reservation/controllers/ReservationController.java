@@ -3,8 +3,10 @@ package com.blooddonation.admin.reservation.controllers;
 import com.blooddonation.admin.menus.Menu;
 import com.blooddonation.admin.menus.MenuDetail;
 import com.blooddonation.commons.ExceptionProcessor;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +18,12 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/admin/reservation")
 public class ReservationController implements ExceptionProcessor {
+
     @ModelAttribute("menuCode")
     public String getMenuCode() {
         return "reservation";
     }
+
     @ModelAttribute("subMenus")
     public List<MenuDetail> getSubMenus() {
         return Menu.getMenus("reservation");
@@ -27,11 +31,11 @@ public class ReservationController implements ExceptionProcessor {
 
     /**
      * 예약 현황 / 예약 관리
-     * @return
      */
     @GetMapping
     public String list(Model model) {
-        commonProcess("list",model);
+        commonProcess("list", model);
+
         return "admin/reservation/list";
     }
 
@@ -41,30 +45,39 @@ public class ReservationController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/add_branch")
-    public String addBranch(Model model) {
-        commonProcess("add_branch",model);
+    public String addBranch(@ModelAttribute RequestBranch form, Model model) {
+        commonProcess("add_branch", model);
+
         return "admin/reservation/add_branch";
     }
 
     /**
-     * 브랜치 추가 저장
+     * 브랜치 추가, 저장
      * @param model
      * @return
      */
     @PostMapping("/save_branch")
-    public String saveBranch(Model model) {
+    public String saveBranch(@Valid RequestBranch form, Errors errors, Model model) {
+        String mode = form.getMode();
+        commonProcess(mode, model);
+
+        if (errors.hasErrors()) {
+            return "admin/reservation/" + mode;
+        }
+
         return "redirect:/admin/reservation/branch";
     }
 
     @GetMapping("/branch")
     public String branchList(Model model) {
-        commonProcess("branch",model);
-        return "admin/reservation/branch_list";
+        commonProcess("branch", model);
 
+        return "admin/reservation/branch_list";
     }
 
     /**
      * 공통 처리
+     *
      * @param mode
      * @param model
      */
@@ -86,5 +99,3 @@ public class ReservationController implements ExceptionProcessor {
         model.addAttribute("subMenuCode", mode);
     }
 }
-
-
