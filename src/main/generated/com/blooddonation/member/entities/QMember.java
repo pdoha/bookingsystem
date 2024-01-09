@@ -21,10 +21,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final com.blooddonation.commons.entities.QBase _super = new com.blooddonation.commons.entities.QBase(this);
 
-    public final StringPath birth = createString("birth");
-
-    public final StringPath bldType = createString("bldType");
-
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
@@ -34,8 +30,6 @@ public class QMember extends EntityPathBase<Member> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
-
-    public final StringPath phone = createString("phone");
 
     public final StringPath userId = createString("userId");
 
