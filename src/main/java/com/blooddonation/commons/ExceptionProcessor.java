@@ -1,19 +1,16 @@
-package com.blooddonation.controllers;
+package com.blooddonation.commons;
 
 import com.blooddonation.commons.exceptions.CommonException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice("com.blooddonation.controllers")
-public class CommonController {
+public interface ExceptionProcessor {
 
     @ExceptionHandler(Exception.class)
-    public String errorHandler(Exception e, HttpServletResponse response, HttpServletRequest request, Model model){
+    default String errorHandler(Exception e, HttpServletResponse response, HttpServletRequest request, Model model){
 
 
         //모든 예외는 500으로 고정
