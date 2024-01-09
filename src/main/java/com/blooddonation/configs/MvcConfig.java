@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableJpaAuditing //entityListener 설정 홠넝화
 @EnableConfigurationProperties(FileProperties.class)//불러와서 주입
 public class MvcConfig implements WebMvcConfigurer {
 
