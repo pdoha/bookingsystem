@@ -64,6 +64,9 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //비밀번호 해시화
+    //encode : 해시화
+    //matches : 해시된 비밀번호화 사용자가 입력한 비밀번호의 일치 여부
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
