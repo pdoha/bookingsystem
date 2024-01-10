@@ -43,4 +43,10 @@ public class MemberController implements ExceptionProcessor {
         return "redirect:/member/login";
 
     }
+
+    @GetMapping("/login")
+    public String login() {
+
+        return utils.tpl("member/login");
+    }
 }
