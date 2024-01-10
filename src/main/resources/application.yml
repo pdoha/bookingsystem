@@ -19,6 +19,17 @@ spring:
     username: PROJECT
     password: _aA123456
 
+  # JPA 설정
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddlAuto: create
+
   # 타임리프 설정
   thymeleaf:
     cache: false
