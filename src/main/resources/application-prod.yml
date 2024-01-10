@@ -1,7 +1,6 @@
 server:
   port: 3000
 
-spring:
   #파일 업로드 용량 설정
   servlet:
     multipart:
@@ -11,11 +10,9 @@ spring:
   #데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    # 실제 DB서버 주소 넣기
     url: jdbc:oracle:thin:@43.202.25.84:1521:xe
     username: PROJECT
     password: _aA123456
-    # 비번만 관리할 수 있는 서버가 따로 있음. : ?
 
   # JPA 설정
   jpa:
@@ -30,8 +27,18 @@ spring:
 
   # 타임리프 설정
   thymeleaf:
-    cache: true
-    prefix: classpath:/templates/
+    cache: false
+    prefix: file:src/main/resources/templates/
+
+  # 라이브 리로드 설정
+  devtools:
+    livereload:
+      enabled: true
+
+  # 정적 자원 설정(CSS, Js, 이미지)
+  web:
+    resources:
+      staticLocations: file:src/main/resources/static/
 
 # 로거 설정
 logging:
@@ -46,5 +53,5 @@ logging:
 # 파일 업로드 경로 설정
 file:
   upload:
-    path: /home/ubuntu/uploads/
+    path: C:/uploads/
     url: /uploads/
