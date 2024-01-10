@@ -1,4 +1,4 @@
-package com.blooddonation.member.entities;
+package com.bloodDonation.member.entities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -22,7 +22,7 @@ public class QAuthorities extends EntityPathBase<Authorities> {
 
     public static final QAuthorities authorities = new QAuthorities("authorities");
 
-    public final EnumPath<com.blooddonation.member.Authority> authority = createEnum("authority", com.blooddonation.member.Authority.class);
+    public final EnumPath<com.bloodDonation.member.Authority> authority = createEnum("authority", com.bloodDonation.member.Authority.class);
 
     public final QMember member;
 
