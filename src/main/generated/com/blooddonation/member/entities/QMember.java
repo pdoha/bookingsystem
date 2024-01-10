@@ -1,4 +1,4 @@
-package com.blooddonation.member.entities;
+package com.bloodDonation.member.entities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -19,7 +19,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public static final QMember member = new QMember("member1");
 
-    public final com.blooddonation.commons.entities.QBase _super = new com.blooddonation.commons.entities.QBase(this);
+    public final com.bloodDonation.commons.entities.QBase _super = new com.bloodDonation.commons.entities.QBase(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;

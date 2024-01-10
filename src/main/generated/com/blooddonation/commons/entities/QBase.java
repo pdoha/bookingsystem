@@ -1,4 +1,4 @@
-package com.blooddonation.commons.entities;
+package com.bloodDonation.commons.entities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
