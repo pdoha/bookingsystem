@@ -1,7 +1,7 @@
 package com.bloodDonation.member.service;
 
 import com.bloodDonation.commons.Utils;
-import com.blooddonation.member.MemberUtil;
+import com.bloodDonation.member.MemberUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
