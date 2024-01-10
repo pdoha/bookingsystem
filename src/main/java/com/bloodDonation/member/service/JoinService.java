@@ -6,7 +6,6 @@ import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class JoinService {
         member.setUserPw(hash);
 
         //DB에 저장
-        process(member);
+   //     process(member);
 
     }
 
