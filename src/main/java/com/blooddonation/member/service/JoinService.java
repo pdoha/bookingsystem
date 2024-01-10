@@ -36,7 +36,7 @@ public class JoinService {
         member.setUserPw(hash);
 
         //DB에 저장
-        process(member);
+   //     process(member);
 
     }
 
