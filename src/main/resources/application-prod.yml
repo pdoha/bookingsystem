@@ -30,11 +30,6 @@ server:
     cache: false
     prefix: classpath:/templates/
 
-  # 라이브 리로드 설정
-  devtools:
-    livereload:
-      enabled: true
-
   # 정적 자원 설정(CSS, Js, 이미지)
   web:
     resources:
@@ -53,5 +48,5 @@ logging:
 # 파일 업로드 경로 설정
 file:
   upload:
-    path: C:/uploads/
+    path: /home/ubuntu/uploads/
     url: /uploads/
