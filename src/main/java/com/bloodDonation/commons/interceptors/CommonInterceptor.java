@@ -1,46 +1,73 @@
 package com.bloodDonation.commons.interceptors;
 
+import com.bloodDonation.admin.config.controllers.BasicConfig;
+import com.bloodDonation.admin.config.service.ConfigInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.util.Arrays;
+
 
 @Component
+@RequiredArgsConstructor
 public class CommonInterceptor implements HandlerInterceptor {
+
+    private final ConfigInfoService infoService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         checkDevice(request);
+        clearLoginData(request);
+        loadSiteConfig(request);
+
         return true;
     }
 
     /**
-     * pc, mobile 수동 변경처리 ( 쿼리스트링 이용)
+     * PC, 모바일 수동 변경 처리
+     *
+     *  // device - PC : PC 뷰, Mobile : Mobile 뷰
      * @param request
      */
-    private void checkDevice(HttpServletRequest request){ //session 가지고 등록
-
-        //파라미터 값 가져오기
+    private void checkDevice(HttpServletRequest request) {
         String device = request.getParameter("device");
-
-        //값이 없을 경우
-        if(!StringUtils.hasText(device)){
+        if (!StringUtils.hasText(device)) {
             return;
         }
 
-        //값이 있을 경우
-        //대소문자 구분 없음
-        //MOBILE 이 아니면 PC
         device = device.toUpperCase().equals("MOBILE") ? "MOBILE" : "PC";
 
-        //SESSION 가져와서 넣자
         HttpSession session = request.getSession();
+        session.setAttribute("device", device);
+    }
 
-        //값이 있으면 고정
-        session.setAttribute("device" , device);
+    private void clearLoginData(HttpServletRequest request) {
+        String URL = request.getRequestURI();
+        if (URL.indexOf("/member/login") == -1) {
+            HttpSession session = request.getSession();
+            //MemberUtil.clearLoginData(session);
+        }
+    }
+
+    private void loadSiteConfig(HttpServletRequest request) {
+        String[] excludes = {".js", ".css", ".png", ".jpg", ".jpeg", "gif", ".pdf", ".xls", ".xlxs", ".ppt"};
+
+        String URL = request.getRequestURI().toLowerCase();
+
+        boolean isIncluded = Arrays.stream(excludes).anyMatch(s -> URL.contains(s));
+        if (isIncluded) {
+            return;
+        }
+
+        BasicConfig config = infoService.get("basic", BasicConfig.class)
+                .orElseGet(BasicConfig::new);
+
+        request.setAttribute("siteConfig", config);
     }
 }

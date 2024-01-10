@@ -1,6 +1,7 @@
 package com.bloodDonation.member.repositories;
 
 import com.bloodDonation.member.entities.Member;
+
 import com.bloodDonation.member.entities.QMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
