@@ -1,8 +1,8 @@
-package org.choongang.admin.config.service;
+package com.bloodDonation.admin.config.service;
 
+import com.bloodDonation.admin.config.entities.Configs;
+import com.bloodDonation.admin.config.repositories.ConfigsRepository;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.config.entities.Configs;
-import org.choongang.admin.config.repositories.ConfigsRepository;
 import org.springframework.stereotype.Service;
 
 @Service

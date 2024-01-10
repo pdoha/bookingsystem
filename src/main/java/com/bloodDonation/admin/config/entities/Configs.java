@@ -1,4 +1,4 @@
-package org.choongang.admin.config.entities;
+package com.bloodDonation.admin.config.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

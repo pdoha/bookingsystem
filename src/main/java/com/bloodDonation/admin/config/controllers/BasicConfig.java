@@ -1,4 +1,4 @@
-package org.choongang.admin.config.controllers;
+package com.bloodDonation.admin.config.controllers;
 
 import lombok.Data;
 
