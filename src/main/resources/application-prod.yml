@@ -28,7 +28,7 @@ server:
   # 타임리프 설정
   thymeleaf:
     cache: false
-    prefix: file:src/main/resources/templates/
+    prefix: classpath:/templates/
 
   # 라이브 리로드 설정
   devtools:
