@@ -1,8 +1,8 @@
 package com.bloodDonation.board.controllers;
 
+import com.bloodDonation.board.entities.BoardData;
+import com.bloodDonation.board.repositories.BoardDataRepository;
 import lombok.RequiredArgsConstructor;
-import org.choongang.board.entities.BoardData;
-import org.choongang.board.repositories.BoardDataRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

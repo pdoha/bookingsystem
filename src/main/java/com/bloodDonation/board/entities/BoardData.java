@@ -1,10 +1,10 @@
 package com.bloodDonation.board.entities;
 
+import com.bloodDonation.commons.entities.BaseMember;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
-import org.choongang.commons.entities.BaseMember;
 
 @Data
 @Entity
