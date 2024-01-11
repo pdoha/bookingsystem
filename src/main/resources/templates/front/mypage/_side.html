@@ -24,6 +24,23 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <div class="tit" th:href="@{/mypage/survey}" th:text="#{전자문진}"></div>
+        </li>
+        <li>
+            <div class="tit" th:text="#{내역조회}"></div>
+            <ul class="sub_menus">
+                <li>
+                    <a th:href="@{/mypage/bloodview}" th:text="#{나의_헌혈내역}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/mypage/surveyresult}" th:text="#{검사결과}"></a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <div class="tit" th:href="@{/mypage/unregister}" th:text="#{회원탈퇴}"></div>
+        </li>
     </ul>
 </aside>
 </html>
