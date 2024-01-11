@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="form" th:object="${requestBranch}">
+<th:block th:fragment="form" th:object="${requestCenter}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
     <h2>기본 정보</h2>

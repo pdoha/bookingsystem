@@ -19,6 +19,8 @@ spring:
     username: PROJECT
     password: _aA123456
 
+  # JPA 설정
+
   # 타임리프 설정
   thymeleaf:
     cache: false

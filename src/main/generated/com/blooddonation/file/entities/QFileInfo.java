@@ -15,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QFileInfo extends EntityPathBase<FileInfo> {
 
-    private static final long serialVersionUID = 1466580212L;
+    private static final long serialVersionUID = -1169083180L;
 
     public static final QFileInfo fileInfo = new QFileInfo("fileInfo");
 

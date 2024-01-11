@@ -1,4 +1,4 @@
-package com.bloodDonation.admin.reservation.controllers;
+package com.bloodDonation.admin.center.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RequestBranch {
+public class RequestCenter {
 
     private String mode = "add_branch";
 
