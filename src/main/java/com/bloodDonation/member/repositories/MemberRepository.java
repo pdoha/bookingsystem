@@ -3,6 +3,7 @@ package com.bloodDonation.member.repositories;
 import com.bloodDonation.member.entities.Member;
 
 import com.bloodDonation.member.entities.QMember;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
@@ -13,7 +14,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>,
         QuerydslPredicateExecutor<Member>{
 
     //편리한기능을 추가 - 이메일과 아이디로 조회할수있는 쿼리 작성
+    @EntityGraph(attributePaths = "authorities")
     Optional<Member> findByEmail(String email);
+    @EntityGraph(attributePaths = "authorities")
     Optional<Member> findByUserId(String userId);
 
 
