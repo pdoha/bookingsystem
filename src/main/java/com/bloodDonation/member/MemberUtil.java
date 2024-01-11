@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class MemberUtil {
     //현재 로그인 세션 비우는 것
     private final HttpSession session;
-    /*이거 오류나서 나중에 할께요
+
     public boolean isAdmin(){
         if(isLogin()){
             return getMember().getAuthorities()
@@ -21,8 +21,6 @@ public class MemberUtil {
         }
         return false;
     }
-    */
-
     /*getMember()를 활용해서 멤버를 가져올 수 있다면 로그인 상태*/
     public boolean isLogin(){
         return getMember() != null;
