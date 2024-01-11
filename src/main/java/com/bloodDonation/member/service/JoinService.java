@@ -39,7 +39,7 @@ public class JoinService {
         member.setEmail(form.getEmail());
         member.setMName(form.getMName());
         //비밀번호 확인하려고 잠깐 hash 대신 넣음
-        member.setUserPw(form.getUserPw());
+        member.setUserPw(hash);
         member.setUserId(form.getUserId());
 
         //DB에 저장

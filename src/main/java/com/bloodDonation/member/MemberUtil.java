@@ -38,7 +38,5 @@ public class MemberUtil {
         session.removeAttribute("NotBlank_userId");
         session.removeAttribute("NotBlank_userPw");
         session.removeAttribute("Global_error");
-
     }
-
 }
