@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<aside th:fragment="menus">
+
+<!-- 주메뉴 -->
+<aside th:fragment="menus">메뉴
     <a th:href="@{/admin/config}" th:classappend="${menuCode} == 'config' ? 'on'">
         <i class="xi-cog"></i> 기본설정
     </a>

@@ -33,8 +33,6 @@ public class Member extends Base {
 
     */
     @ToString.Exclude
-    @OneToMany(mappedBy = "member", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
-    //이건 MemberUtil에서 isAdmin쪽 getAuthorities
-
 }
