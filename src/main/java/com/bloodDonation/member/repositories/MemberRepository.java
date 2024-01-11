@@ -9,8 +9,8 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long>,
-    //추가할 쿼리가 많을때
-    QuerydslPredicateExecutor<Member>{
+        //추가할 쿼리가 많을때
+        QuerydslPredicateExecutor<Member>{
 
     //편리한기능을 추가 - 이메일과 아이디로 조회할수있는 쿼리 작성
     Optional<Member> findByEmail(String email);
@@ -34,5 +34,4 @@ public interface MemberRepository extends JpaRepository<Member, Long>,
 
 
 
-    }
-
+}
