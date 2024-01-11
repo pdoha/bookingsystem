@@ -6,11 +6,9 @@ import com.bloodDonation.member.service.JoinService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/member")
@@ -21,7 +19,10 @@ public class MemberController implements ExceptionProcessor {
 
     //회원가입
     @GetMapping("/join")
-    public String join(@ModelAttribute RequestJoin form){
+    public String join(@ModelAttribute RequestJoin form,
+                       @RequestParam(name="redirectURL", required = false) String redirectURL, Model model){
+        //주소 넘어오면 양식에 추가 ( model을 통해)
+        model.addAttribute("redirectURL", redirectURL);
         return utils.tpl("member/join");
     }
 

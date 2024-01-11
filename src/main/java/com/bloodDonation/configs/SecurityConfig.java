@@ -1,7 +1,7 @@
 package com.bloodDonation.configs;
 
-import com.blooddonation.member.service.LoginFailureHandler;
-import com.blooddonation.member.service.LoginSuccessHandler;
+import com.bloodDonation.member.service.LoginFailureHandler;
+import com.bloodDonation.member.service.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
