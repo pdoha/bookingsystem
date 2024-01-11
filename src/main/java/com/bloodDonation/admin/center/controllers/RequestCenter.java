@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class RequestCenter {
 
-    private String mode = "add_branch";
+    private String mode = "add_center";
 
     private Long cCode; // 지점 코드
 

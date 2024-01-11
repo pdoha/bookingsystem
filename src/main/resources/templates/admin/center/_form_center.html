@@ -5,15 +5,15 @@
 
     <h2>기본 정보</h2>
     <table class="table_cols mb30">
-        <tr th:if="*{mode == 'edit_branch' && cCode != null}">
-            <th>지점 코드</th>
+        <tr th:if="*{mode == 'edit_center' && cCode != null}">
+            <th>센터 코드</th>
             <td>
                 <input type="hidden" name="cCode" th:field="*{cCode}">
                 <th:block th:text="*{cCode}"></th:block>
             </td>
         </tr>
         <tr>
-            <th width="180">지점명</th>
+            <th width="180">센터명</th>
             <td>
                 <input type="text" name="cName" th:field="*{cName}">
                 <div class="error" th:each="err : ${#fields.errors('cName')}" th:text="${err}"></div>

@@ -25,7 +25,7 @@ public class Menu {
         // 예약 메뉴코드
         menus.put("reservation", Arrays.asList(
                 new MenuDetail("list","예약현황", "admin/center"),
-                new MenuDetail("branch","지점 목록","admin/center/branch"),
+                new MenuDetail("center","지점 목록","admin/center/center"),
                 new MenuDetail("add_branch","지점 등록","admin/center/add_branch"),
                 new MenuDetail("holiday", "휴무일 관리", "admin/center/holiday")
         ));
