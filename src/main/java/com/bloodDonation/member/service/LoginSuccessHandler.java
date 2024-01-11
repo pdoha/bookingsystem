@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
@@ -21,6 +22,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session = request.getSession();
         //session 데이터 지우기
         MemberUtil.clearLoginData(session);
+
+        String redirectURL = request.getParameter("redirectURL");
+        redirectURL = StringUtils.hasText(redirectURL) ? redirectURL : "/";
+
+        response.sendRedirect(request.getContextPath() + redirectURL);
 
     }
 }
