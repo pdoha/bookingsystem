@@ -1,4 +1,4 @@
-package com.bloodDonation.branch.entities;
+package com.bloodDonation.center.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
