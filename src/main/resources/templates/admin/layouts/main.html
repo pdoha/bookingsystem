@@ -39,7 +39,12 @@
         <!-- 주메뉴 -->
         <!-- 메뉴는 내용이많아서 별도 파일로 관리 < _side.html >-->
         <aside th:replace="~{admin/outlines/_side::menus}"></aside>
-        <section layout:fragment="content"></section>
+
+        <section>
+            <nav th:replace="~{admin/outlines/_submenu::submenus}"></nav>
+            <section layout:fragment="content"></section>
+
+        </section>
 
     </main>
     <footer th:replace="~{admin/outlines/footer::common}"></footer>

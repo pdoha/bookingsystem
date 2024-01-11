@@ -2,18 +2,23 @@
 <html xmlns:th="htt[:www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <header th:fragment="common">
+        <!--로고 -->
         <section class = "logo_area">
             <a th:href="@{/admin}">로고</a>
         </section>
+        <!--우측 상단 버튼-->
         <section class="btn_area">
             <th:block sec:authorize="isAuthenticated()">
                 <a th:href="@{/member/info}">회원정보 수정</a>
                 <a th:href="@{/member/logout}">로그아웃</a>
             </th:block>
+
             <th:block sec:authorize="isAnonymous()">
                 <a th:href="@{/member/join}">회원가입</a>
                 <a th:href="@{/member/login}">로그인</a>
             </th:block>
         </section>
+
+        <!--footer는 필요없음! 상단부분만-->
     </header>
 </html>
