@@ -5,7 +5,10 @@
 <main layout:fragment="content">
     <h1 th:text="#{로그인}"></h1>
     <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
-    <!--스프링 시큐리티가 처리하므로 주소만 알려주면됨-->
+        <!--로그인 성공시 이동 페이지 ( param으로 주소값을 따로 주면 그 주소로이동함!)-->
+        <input type="hidden" name="reidrectURL"
+               th:if="${param.redirectURL != null}" th:value="{param.redirectURL}">
+        <!--스프링 시큐리티가 처리하므로 주소만 알려주면됨-->
         <dl>
             <dt th:text="#{아이디}"></dt>
             <dd>

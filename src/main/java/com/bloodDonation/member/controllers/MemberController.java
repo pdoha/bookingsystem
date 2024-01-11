@@ -19,16 +19,15 @@ public class MemberController implements ExceptionProcessor {
 
     //회원가입
     @GetMapping("/join")
-    public String join(@ModelAttribute RequestJoin form,
-                       @RequestParam(name="redirectURL", required = false) String redirectURL, Model model){
-        //주소 넘어오면 양식에 추가 ( model을 통해)
-        model.addAttribute("redirectURL", redirectURL);
+    public String join(@ModelAttribute RequestJoin form, Model model){
+
+
         return utils.tpl("member/join");
     }
 
     //회원가입 처리
     @PostMapping("/join")
-    public String joinPs(@Valid RequestJoin form, Errors errors){
+    public String joinPs(@Valid RequestJoin form, Errors errors, Model model){
         joinService.process(form, errors);
 
         //가입 실패
@@ -46,7 +45,7 @@ public class MemberController implements ExceptionProcessor {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
 
         return utils.tpl("member/login");
     }
