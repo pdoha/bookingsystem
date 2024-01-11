@@ -16,6 +16,7 @@ public class Utils {
     private final HttpServletRequest request;
     private final HttpSession session;
 
+
     //메세지 코드에 관한 번들 가져오기
     private static final ResourceBundle commonsBundle;
     private static final ResourceBundle validationBundle;
