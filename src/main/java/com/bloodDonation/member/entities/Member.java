@@ -35,5 +35,4 @@ public class Member extends Base {
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
-
 }
