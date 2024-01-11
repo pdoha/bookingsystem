@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<aside th:fragment="menus">
+    <ul class="menus">
+        <li>
+            <div class="tit" th:text="#{개인정보}"></div>
+            <ul class="sub_menus">
+                <li>
+                    <a th:href="@{/mypage/info}" th:text="#{개인정보_조회}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/mypage/modify}" th:text="#{개인정보_변경}"></a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <div class="tit" th:text="#{예약정보}"></div>
+            <ul class="sub_menus">
+                <li>
+                    <a th:href="@{/mypage/reservation}" th:text="#{예약조회}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/mypage/reservation/modify}" th:text="#{예약변경}"></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+</html>
