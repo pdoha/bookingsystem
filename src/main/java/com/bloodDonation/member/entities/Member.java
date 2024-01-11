@@ -1,14 +1,11 @@
 package com.bloodDonation.member.entities;
 
 import com.bloodDonation.commons.entities.Base;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -35,7 +32,9 @@ public class Member extends Base {
     회원가입할때 받지말고 나중에 회원정보수정에 입력할수있게 수정
 
     */
-
-
+    @ToString.Exclude
+    @OneToMany(mappedBy = "member", fetch=FetchType.LAZY)
+    private List<Authorities> authorities = new ArrayList<>();
+    //이건 MemberUtil에서 isAdmin쪽 getAuthorities
 
 }
