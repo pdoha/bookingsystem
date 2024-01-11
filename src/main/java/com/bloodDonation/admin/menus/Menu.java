@@ -28,6 +28,8 @@ public class Menu {
         ));
     }
 
+    //주메뉴 코드를 갖고 서브메뉴를 조회할 수 있게
+    //매개변수 -  code = 주메뉴 코드
     public static List<MenuDetail> getMenus(String code) {
         return menus.get(code);
     }

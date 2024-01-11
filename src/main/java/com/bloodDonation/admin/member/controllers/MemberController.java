@@ -34,6 +34,7 @@ public class MemberController implements ExceptionProcessor {
 
     @GetMapping
     public String list(Model model){
+        model.addAttribute("subMenuCode", "list");
         //연동
         commonProcess("list", model);
         return "admin/member/list";
