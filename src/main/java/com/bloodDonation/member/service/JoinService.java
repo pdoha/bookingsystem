@@ -18,6 +18,7 @@ public class JoinService {
     private final JoinValidator validator; //검증추가
     private final PasswordEncoder encoder; //비밀번호 해시화
 
+
     //커맨드 객체 형태로 가입이 들어올 경우
     public void process(RequestJoin form, Errors errors){
         validator.validate(form, errors);
@@ -34,7 +35,7 @@ public class JoinService {
         member.setEmail(form.getEmail());
         member.setMName(form.getMName());
         //비밀번호 확인하려고 잠깐 hash 대신 넣음
-        member.setUserPw(form.getUserPw());
+        member.setUserPw(hash);
         member.setUserId(form.getUserId());
 
         //DB에 저장
