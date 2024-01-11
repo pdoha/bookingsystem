@@ -3,9 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+
+    <!--제목-->
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+
+    <!--아이콘 이미지 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="text/css" th:href="@{/common/css/style.css}">
-    <!---->
     <link rel="stylesheet" href="text/css"
           th:each="cssFile : ${addCommonCss}"
           th:href="@{/common/css/{file}.css(file=${cssFile})}">
@@ -15,6 +19,7 @@
           th:each="cssFile : ${addCss}"
           th:href="@{/admin/css/{file}.css(file=${cssFile})}">
 
+    <!--css-->
     <th:block layout:fragment="addCss"></th:block>
 
     <script th:src="@{/common/js/common.js}"></script>
@@ -30,7 +35,18 @@
 </head>
 <body>
     <header th:replace="~{admin/outlines/header::common}"></header>
-    <main layout:fragment="content"></main>
+    <main>
+        <!-- 주메뉴 -->
+        <!-- 메뉴는 내용이많아서 별도 파일로 관리 < _side.html >-->
+        <aside th:replace="~{admin/outlines/_side::menus}"></aside>
+
+        <section>
+            <nav th:replace="~{admin/outlines/_submenu::submenus}"></nav>
+            <section layout:fragment="content"></section>
+
+        </section>
+
+    </main>
     <footer th:replace="~{admin/outlines/footer::common}"></footer>
 </body>
 

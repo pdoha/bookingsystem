@@ -2,6 +2,7 @@ package com.bloodDonation.commons.interceptors;
 
 import com.bloodDonation.admin.config.controllers.BasicConfig;
 import com.bloodDonation.admin.config.service.ConfigInfoService;
+import com.bloodDonation.member.MemberUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -51,7 +52,7 @@ public class CommonInterceptor implements HandlerInterceptor {
         String URL = request.getRequestURI();
         if (URL.indexOf("/member/login") == -1) {
             HttpSession session = request.getSession();
-            //MemberUtil.clearLoginData(session);
+            MemberUtil.clearLoginData(session);
         }
     }
 

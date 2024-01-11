@@ -1,5 +1,7 @@
 package com.bloodDonation.configs;
 
+import com.bloodDonation.member.service.LoginFailureHandler;
+import com.bloodDonation.member.service.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -20,14 +22,14 @@ public class SecurityConfig {
             f.loginPage("/member/login") //주소는 바뀔 수 있음
                     .usernameParameter("userId") //이메일 or userId 달라질 수 있는 이름값도 알려준다
                     .passwordParameter("userPw")
-                    //성공시 이동할 페이지 (메인페이지 - "/" )
-                    .defaultSuccessUrl("/")
-                    //실패시 이동할 페이지 -> 로그인 창
-                    .failureUrl("/member/login?error=true");
+//                    //성공시 이동할 페이지 (메인페이지 - "/" )
+//                    .defaultSuccessUrl("/")
+//                    //실패시 이동할 페이지 -> 로그인 창
+//                    .failureUrl("/member/login?error=true");
 
                     //url 대신 상세 설정을 위해 (service에서 만든것)
-                   /* .successHandler(new LoginSuccessHandler())
-                    .failureHandler(new LoginFailureHandler());*/
+                    .successHandler(new LoginSuccessHandler())
+                    .failureHandler(new LoginFailureHandler());
 
         });
         /* 인증 설정 E - 로그인 */
