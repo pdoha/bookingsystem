@@ -22,13 +22,6 @@ public class Menu {
                 new MenuDetail("add", "게시판 등록", "/admin/bard/add"),
                 new MenuDetail("posts","게시글 관리", "/admin/board.posts")
         ));
-        // 예약 메뉴코드
-        menus.put("reservation", Arrays.asList(
-                new MenuDetail("list","예약현황", "admin/center"),
-                new MenuDetail("center","지점 목록","admin/center/center"),
-                new MenuDetail("add_branch","지점 등록","admin/center/add_branch"),
-                new MenuDetail("holiday", "휴무일 관리", "admin/center/holiday")
-        ));
     }
 
     public static List<MenuDetail> getMenus(String code) {
