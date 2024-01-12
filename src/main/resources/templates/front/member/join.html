@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1 th:text="#{회원가입}">가입하기 (PC)</h1>
+    <h1 th:text="#{회원가입}"></h1>
 
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
@@ -17,7 +17,7 @@
                 <input type="text" name="email" th:field="*{email}">
                 <button type="submit" th:text="#{인증하기}"></button>
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
-                <input type="text" name="ecode" th:field="*{ecode}" value="인증코드 입력">
+                <input type="text" name="ecode" th:field="*{ecode}" value="인증번호 입력">
                 <!--제한시간 3분 ?-->
                 <button type="submit" th:text="#{확인}"></button>
                 <button type="submit" th:text="#{재전송}"></button>

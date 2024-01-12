@@ -6,6 +6,8 @@ spring:
     active: dev
     # 공통 설정 dev에서 개인 설정
 
+
+
   # 파일 업로드 용량 설정
   servlet:
     multipart:
