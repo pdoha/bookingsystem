@@ -15,7 +15,9 @@
             <dt th:text="#{이메일}"></dt>
             <dd>
                 <input type="text" name="email" th:field="*{email}">
+                <button type="submit" th:text="#{인증하기}"></button>
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+                <input type="text" name="ecode" th:field="">
             </dd>
         </dl>
 
