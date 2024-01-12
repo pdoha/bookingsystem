@@ -18,6 +18,7 @@ public class ConfigInfoService {
 
     private final ConfigsRepository repository;
 
+    //option : null값의 처리를 다양하게 하기 위해서 넣음
     public <T> Optional<T> get(String code, Class<T> clazz) {//Optional<T> : null값 처리
         return get(code, clazz,null);
     }

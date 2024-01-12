@@ -32,6 +32,7 @@ public class BasicConfigController implements ExceptionProcessor {
     }
 
     @GetMapping
+
     public String index(Model model) {
 
         BasicConfig config = infoService.get("basic",BasicConfig.class).orElseGet(BasicConfig::new);
@@ -42,7 +43,7 @@ public class BasicConfigController implements ExceptionProcessor {
     }
 
     @PostMapping
-    public String save(BasicConfig config, Model model) {
+    public String save(BasicConfig config, Model model) {//저장하고 메시지 출력
 
         saveService.save("basic",config);
 
