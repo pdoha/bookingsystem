@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class centerInfo extends BaseMember {
+public class CenterInfo extends BaseMember {
 
     @Id @GeneratedValue
     private Long cCode;   // 센터 코드
@@ -47,5 +47,6 @@ public class centerInfo extends BaseMember {
     private int bookBlock;      // 예약 블록 10
 
     private int bookCapacity;   // 예약가능인원: -1이면 무제한, 0이면 예약 불가
+
 
 }
