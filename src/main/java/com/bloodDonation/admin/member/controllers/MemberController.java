@@ -55,6 +55,13 @@ public class MemberController implements ExceptionProcessor {
         return "redirect:/admin/member/list";
     }
 
+    //회원목록
+    public String memberList(Model model){
+        commonProcess("member", model);
+
+        return "admin/member/member_list";
+    }
+
     //공통 처리 - 제목,
     private void commonProcess(String mode, Model model){
         String pageTitle = "회원목록";

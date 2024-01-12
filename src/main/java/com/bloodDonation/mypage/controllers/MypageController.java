@@ -63,6 +63,18 @@ public class MypageController implements ExceptionProcessor {
 
         return "redirect:/mypage/info";
     }
+    @GetMapping("/reservation")
+    public String reservation(Model model){
+
+        return utils.tpl("mypage/reservation");
+    }
+    /*이거 추가하자마자 오류
+     @GetMapping("/reservation/modify)
+            public String reservationModify(Model model){
+
+            return utils.tpl("mypage/reservation/modify");
+            }
+            */
     @PostMapping("/survey")
     public String survey(Model model){
 
@@ -73,10 +85,15 @@ public class MypageController implements ExceptionProcessor {
 
         return utils.tpl("mypage/bloodview");
     }
-    @GetMapping("/survey")
+    @GetMapping("/surveyresult")
     public String surveyResult(Model model){
 
         return utils.tpl("mypage/surveyresult");
+    }
+    @GetMapping("/unregister")
+    public String unregister(Model model){
+
+        return utils.tpl("mypage/unregister");
     }
 
     private void commonProcess(String mode, Model model) {
@@ -87,9 +104,24 @@ public class MypageController implements ExceptionProcessor {
             pageTitle = Utils.getMessage("개인정보_조회", "commons");
         } else if (mode.equals("modify")) {
             pageTitle = Utils.getMessage("개인정보_변경", "commons");
+        } else if (mode.equals("reservation")) {
+            pageTitle = Utils.getMessage("예약조회", "commons");
+        } else if (mode.equals("reservation/modify")) {
+            pageTitle = Utils.getMessage("예약변경", "commons");
+        } else if (mode.equals("survey")) {
+                pageTitle = Utils.getMessage("전자문진", "commons");
+        } else if (mode.equals("bloodview")) {
+            pageTitle = Utils.getMessage("나의_헌혈내역", "commons");
+        } else if (mode.equals("surveyresult")) {
+            pageTitle = Utils.getMessage("검사결과", "commons");
+        } else {
+            if(mode.equals("unregister")) {
+                pageTitle = Utils.getMessage("회원탈퇴", "commons");
+            }
         }
 
-        model.addAttribute("pageTitle", pageTitle);
+
+            model.addAttribute("pageTitle", pageTitle);
     }
 
 }

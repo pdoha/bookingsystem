@@ -19,15 +19,31 @@ public class QFileInfo extends EntityPathBase<FileInfo> {
 
     public static final QFileInfo fileInfo = new QFileInfo("fileInfo");
 
+    public final com.bloodDonation.commons.entities.QBaseMember _super = new com.bloodDonation.commons.entities.QBaseMember(this);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+
+    //inherited
+    public final StringPath createdBy = _super.createdBy;
+
     public final BooleanPath done = createBoolean("done");
 
     public final StringPath extension = createString("extension");
 
     public final StringPath fileName = createString("fileName");
 
+    public final StringPath fileType = createString("fileType");
+
     public final StringPath gid = createString("gid");
 
     public final StringPath location = createString("location");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
+
+    //inherited
+    public final StringPath modifiedBy = _super.modifiedBy;
 
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 

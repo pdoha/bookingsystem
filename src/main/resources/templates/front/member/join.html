@@ -15,7 +15,12 @@
             <dt th:text="#{이메일}"></dt>
             <dd>
                 <input type="text" name="email" th:field="*{email}">
+                <button type="submit" th:text="#{인증하기}"></button>
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+                <input type="text" name="ecode" th:field="*{ecode}" value="인증코드 입력">
+                <!--제한시간 3분 ?-->
+                <button type="submit" th:text="#{확인}"></button>
+                <button type="submit" th:text="#{재전송}"></button>
             </dd>
         </dl>
 
@@ -48,6 +53,18 @@
             <dd>
                 <input type="text" name="mName" th:field="*{mName}">
                 <div class="error" th:each="err : ${#fields.errors('mName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{주소}"></dt>
+            <dd>
+                <input type="text" name="zonecode" th:field="*{address}" placeholder="우편번호" readonly>
+                <button type="button" class="search_address" th:text="#{주소_찾기}"></button>
+                <input type="text" name="address" th:field="*{address}" placeholder="주소" readonly>
+                <input type="text" name="addressSub" th:field="*{address}" placeholder="나머지 주소">
+
+
             </dd>
         </dl>
 
