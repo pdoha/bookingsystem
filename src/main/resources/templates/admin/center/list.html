@@ -4,17 +4,6 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>헌혈의집 센터 목록</h1>
-    <form name="frmSave" method="post" autocomplete="off">
-        <input type="hidden" name="mode" value="list">
 
-        <th:block th:replace="~{admin/center/_form_center::form}"></th:block>
-
-        <div class="submit_btns">
-            <button type="button">등록</button>
-            <button type="button">수정</button>
-            <button type="button">삭제</button>
-        </div>
-
-    </form>
 </section>
 </html>
