@@ -27,5 +27,12 @@ public class RequestJoin {
     @AssertTrue
     private boolean agree;
 
+    private String ecode;
+
+    private String zonecode;
+
+    private String address;
+
+    private String addressSub;
 
 }
