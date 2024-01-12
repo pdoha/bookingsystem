@@ -27,9 +27,14 @@ public class Member extends Base {
     @Column(length=30, nullable = false)
     private String mName; //이름
 
+
+    @Column(length = 30, nullable = false)
+    private String ecode;  //이메일인증코드
+
     /*@Column(length=40, nullable = false)
     private String phone;
     회원가입할때 받지말고 나중에 회원정보수정에 입력할수있게 수정
+
 
     */
     @ToString.Exclude
