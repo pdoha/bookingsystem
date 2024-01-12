@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <aside th:fragment="menus">
-    <h3>마이페이지</h3>
+    <h3><a th:href="@{/mypage}">마이페이지</a></h3>
     <ul class="menus">
-        <li>
+        <li class>
             <div class="tit" th:text="#{개인정보}"></div>
             <ul class="sub_menus">
+
                 <li>
                     <a th:href="@{/mypage/info}" th:text="#{개인정보_조회}"></a>
                 </li>
