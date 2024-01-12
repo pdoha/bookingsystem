@@ -9,33 +9,56 @@
         <dl>
             <dt th:text="#{회원명}"></dt>
             <dd>
-                <input type="text" name="mName">
+                <input type="hidden" name="mName" id="mName" value="">
             </dd>
         </dl>
         <dl>
             <dt th:text="#{아이디}"></dt>
             <dd>
-                <input type="text" name="userId">
+                <input type="hidden" name="userId" id="userId" value="">
             </dd>
         </dl>
         <dl>
             <dt th:text="#{비밀번호}"></dt>
             <dd>
-                <input type="password" name="userPw">
+                <input type="password" name="userPw" id="userPw"
+                autocomplete="off" class="frm_input_rePw">
+                <span id="chkPw1"></span>
+                <p class="bu_atte">
+                    ::before
+                    "비밀번호 변경시에만 작성해주세요"
+                </p>
             </dd>
         </dl>
 
         <dl>
             <dt th:text="#{비밀번호_확인}"></dt>
             <dd>
-                <input type="password" name="confirmPw">
+                <input type="password" name="confirmPw" id="confirmPw"
+                autocomplete="off" class="frm_input_rePw">
+                <span id="chkPw2"></span>
+                <p class="bu_atte">
+                    ::before
+                    "비밀번호는 영문/숫자/특수문자 중 ~자리로 입력해주세요"
+                </p>
             </dd>
         </dl>
 
         <dl>
             <dt th:text="#{이메일}"></dt>
             <dd>
-                <input type="text" name="email">
+                <input type="text" name="email" id="email" maxlength="70">
+                "@"
+                <input type="text" name="email2" id="email2" maxlength="50">
+                <select name="subEmail2" id="subEmail2">
+                    <option value>선택</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="daum.net">daum.net</option>
+                    <option value="hotmail.com">hotmail.com</option>
+                    <option value="1">직접입력</option>
+                </select>
             </dd>
         </dl>
         <dl>
@@ -71,7 +94,7 @@
                 <input type="text" name="tel" placeholder="-는 제외하고 숫자만 작성해주세요">
             </dd>
         </dl>
-        <button type="submit" >등록하기</button>
+        <button type="submit"><a th:href="@{/mypage/info}">등록하기</a></button>
     </form>
 </section>
 </html>
