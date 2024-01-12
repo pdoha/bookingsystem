@@ -27,7 +27,5 @@ public class RequestJoin {
     @AssertTrue
     private boolean agree;
 
-    //이메일 인증번호
-    @NotBlank
-    private String ecode;
+
 }

@@ -59,10 +59,10 @@
         <dl>
             <dt th:text="#{주소}"></dt>
             <dd>
-                <input type="text" name="zonecode" th:field="*{address}" placeholder="우편번호" readonly>
+                <input type="text" name="zonecode" th:field="*{zonecode}" placeholder="우편번호" readonly>
                 <button type="button" class="search_address" th:text="#{주소_찾기}"></button>
                 <input type="text" name="address" th:field="*{address}" placeholder="주소" readonly>
-                <input type="text" name="addressSub" th:field="*{address}" placeholder="나머지 주소">
+                <input type="text" name="addressSub" th:field="*{addressSub}" placeholder="나머지 주소">
 
 
             </dd>
