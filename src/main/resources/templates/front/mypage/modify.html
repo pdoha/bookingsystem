@@ -53,19 +53,25 @@
                 <input type="radio" name="bldType" value="true" id="bld_TypeAB" >
                 <label for="bld_TypeAB">AB</label>
 
-                <input type="radio" name="bldType" value="true" id="bld_Typeplus" >
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{RH형_선택(필수)}"></dt>
+            <dd>
+                <input type="radio" name="bldType2" value="true" id="bld_Typeplus" >
                 <label for="bld_Typeplus">Rh+</label>
 
-                <input type="radio" name="bldType" value="true" id="bld_Typeminus" >
+                <input type="radio" name="bldType2" value="true" id="bld_Typeminus" >
                 <label for="bld_Typeminus">Rh-</label>
             </dd>
         </dl>
         <dl>
             <dt th:text="#{전화번호}"></dt>
             <dd>
-                <input type="text" name="tel">
+                <input type="text" name="tel" placeholder="-는 제외하고 숫자만 작성해주세요">
             </dd>
         </dl>
+        <button type="submit" >등록하기</button>
     </form>
 </section>
 </html>
