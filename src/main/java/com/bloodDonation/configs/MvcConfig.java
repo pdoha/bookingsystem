@@ -26,6 +26,9 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler(fileProperties.getPath() + "**")
                 .addResourceLocations("file:///" + fileProperties.getPath());
 
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+
     }
     //메세지 추가
     @Bean
