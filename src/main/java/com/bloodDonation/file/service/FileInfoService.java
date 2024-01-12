@@ -1,13 +1,13 @@
 package com.bloodDonation.file.service;
 
+import com.bloodDonation.configs.FileProperties;
+import com.bloodDonation.file.entities.FileInfo;
+import com.bloodDonation.file.entities.QFileInfo;
+import com.bloodDonation.file.repositories.FileInfoRepository;
 import com.querydsl.core.BooleanBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
-import org.choongang.configs.FileProperties;
-import org.choongang.file.entities.FileInfo;
-import org.choongang.file.entities.QFileInfo;
-import org.choongang.file.repositories.FileInfoRepository;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

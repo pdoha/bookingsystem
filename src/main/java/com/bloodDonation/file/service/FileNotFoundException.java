@@ -1,7 +1,8 @@
 package com.bloodDonation.file.service;
 
-import org.choongang.commons.Utils;
-import org.choongang.commons.exceptions.CommonException;
+
+import com.bloodDonation.commons.Utils;
+import com.bloodDonation.commons.exceptions.CommonException;
 import org.springframework.http.HttpStatus;
 
 public class FileNotFoundException extends CommonException {
