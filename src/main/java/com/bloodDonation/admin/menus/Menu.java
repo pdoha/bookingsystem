@@ -26,6 +26,11 @@ public class Menu {
                 new MenuDetail("add", "게시판 등록", "/admin/bard/add"),
                 new MenuDetail("posts","게시글 관리", "/admin/board.posts")
         ));
+
+        //예약현황 메뉴코드
+        menus.put("reservation", Arrays.asList(
+                new MenuDetail("list", "예약자 목록", "/admin/reservation")
+        ));
     }
 
     //주메뉴 코드를 갖고 서브메뉴를 조회할 수 있게
