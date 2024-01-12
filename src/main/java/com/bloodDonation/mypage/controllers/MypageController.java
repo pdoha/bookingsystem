@@ -68,13 +68,13 @@ public class MypageController implements ExceptionProcessor {
 
         return utils.tpl("mypage/reservation");
     }
-    /*이거 추가하자마자 오류
-     @GetMapping("/reservation/modify)
+
+     @GetMapping("/reservation/modify")
             public String reservationModify(Model model){
 
             return utils.tpl("mypage/reservation/modify");
-            }
-            */
+     }
+
     @PostMapping("/survey")
     public String survey(Model model){
 
