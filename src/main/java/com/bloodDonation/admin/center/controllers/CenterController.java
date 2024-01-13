@@ -61,11 +61,6 @@ public class CenterController implements ExceptionProcessor {
         return "redirect:/admin/center/info_center";
     }
 
-    /**
-     * 센터 상세 정보
-     * @param model
-     * @return
-     */
     @GetMapping("/info_center")
     public String infoCenter(Model model) {
         commonProcess("info_center", model);
