@@ -31,7 +31,7 @@ public class CenterInfoService {
      * @return
      */
     public Optional<CenterInfo> findOne(Long cCode){
-        return repository.findByCode(cCode);
+        return repository.findBycCode(cCode);
     }
 
 

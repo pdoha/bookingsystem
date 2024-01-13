@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CenterInfoRepository extends JpaRepository<CenterInfo, Long>, QuerydslPredicateExecutor<CenterInfo> {
     //List<CenterInfo> findByCode(String cCode);
-    Optional<CenterInfo> findByCode(Long cCode);
+    Optional<CenterInfo> findBycCode(Long cCode);
 
 }
