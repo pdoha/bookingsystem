@@ -4,6 +4,54 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{개인정보_조회}"></h1>
+    <dl>
+        <dt th:text="#{회원명}"></dt>
+        <dd>
+            <input type="text" name="mName" id="mName" value="" readonly>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{아이디}"></dt>
+        <dd>
+            <input type="text" name="userId" id="userId" value="" readonly>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{비밀번호}"></dt>
+        <dd>
+            <input type="password" name="userPw" id="userPw"
+                   autocomplete="off" readonly>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{이메일}"></dt>
+        <dd>
+            <input type="text" name="email" id="email" maxlength="70" readonly>
+            @
+            <input type="text" name="email2" id="email2" maxlength="50" readonly>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{혈액형}"></dt>
+        <dd>
+            <input class="bld" type="text" name="bldType" maxlength="2" readonly>
+            <input class="bld2" type="text" name="bldType2" maxlength="3" readonly>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{전화번호}"></dt>
+        <dd>
+            <input class="phnum" type="text" name="tel" readonly>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{주소}"></dt>
+        <dd>
+            <input type="text" name="zonecode"  placeholder="우편번호" readonly>
+            <input type="text" name="address" placeholder="주소" readonly>
+            <input type="text" name="addressSub" placeholder="나머지 주소" readonly>
+        </dd>
+    </dl>
 
 </section>
 </html>

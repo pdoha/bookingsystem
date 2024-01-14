@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<aside th:fragment="menus">
+<aside class="side-bar" th:fragment="menus">
     <h3><a th:href="@{/mypage}">마이페이지</a></h3>
-    <ul class="menus">
-        <li class>
+    <ul>
+        <li>
             <div class="tit" th:text="#{개인정보}"></div>
             <ul class="sub_menus">
 
@@ -11,13 +11,14 @@
                     <a th:href="@{/mypage/info}" th:text="#{개인정보_조회}"></a>
                 </li>
                 <li>
+                    <label></label>
                     <a th:href="@{/mypage/modify}" th:text="#{개인정보_변경}"></a>
                 </li>
             </ul>
         </li>
         <li>
             <div class="tit" th:text="#{예약정보}"></div>
-            <ul class="sub_menus">
+            <ul>
                 <li>
                     <a th:href="@{/mypage/reservation}" th:text="#{예약조회}"></a>
                 </li>
@@ -27,11 +28,11 @@
             </ul>
         </li>
         <li>
-            <div class="tit"><a class="tit" th:href="@{/mypage/survey}" th:text="#{전자문진}"></a></div>
+            <div><a class="tit" th:href="@{/mypage/survey}" th:text="#{전자문진}"></a></div>
         </li>
         <li>
             <div class="tit" th:text="#{내역조회}"></div>
-            <ul class="sub_menus">
+            <ul>
                 <li>
                     <a th:href="@{/mypage/bloodview}" th:text="#{나의_헌혈내역}"></a>
                 </li>
@@ -41,7 +42,7 @@
             </ul>
         </li>
         <li>
-            <div class="tit"><a class="tit" th:href="@{/mypage/unregister}" th:text="#{회원탈퇴}"></a></div>
+            <div><a class="tit" th:href="@{/mypage/unregister}" th:text="#{회원탈퇴}"></a></div>
         </li>
     </ul>
 </aside>

@@ -4,6 +4,30 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{예약조회}"></h1>
-
+    <table border="1"
+    width="50%"
+    height="200"
+    bordercolor="red"
+    bgcolor="lightgray">
+      <thead>
+        <tr align="center">
+            <th>예약자명</th>
+            <th>예약장소</th>
+            <th>예약날짜</th>
+            <th>예약시간</th>
+            <th>전자문진 여부</th>
+        </tr>
+      </thead>
+        <tbody>
+            <tr align="center">
+               <td>예약자명적기</td>
+                <td>예약장소적기</td>
+                <td>예약날짜적기</td>
+                <td>예약시간적기</td>
+                <td>전자문진 Y/N</td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button"><!--a th:href="@{/예약페이지로 넘어가기}"-->변경하기<!--/a--></button>
 </section>
 </html>
