@@ -7,6 +7,23 @@ spring:
     # 공통 설정 dev에서 개인 설정
 
 
+  #이메일 인증
+  #이메일 메시지를 보내고 받는 데 사용되는 통신 프로토콜입니다.
+  #메일 서버 및 기타 메시지 전송 에이전트(MTA)는 SMTP를 사용하여 메일 메시지를 보내고, 받고, 중계합니다.
+  mail:
+    host: smtp.gmail.com # SMTP 서버 호스트 (구글)
+    port: 587 # 데이터가 이동하는 통로
+    username: ${mail.username} #{이메일 아이디 @gmail.com : @앞부분}
+    password: ${mail.password} #구글 비밀번화
+    # 메일 정보와 앱 비밀번호가 유출되는 것을 막기 위해 타임리프로 작성함
+    properties:
+      smtp:
+        auth: true #사용자 인증 시도 여부 - 기본값 false
+        timeout: 5000 # Socket Read Timeout  시간 (ms)  - 기본값 : 무한대
+        starttls:
+          enable: true # StartTLS 활성화 여부 - 기본값 false
+
+
 
   # 파일 업로드 용량 설정
   servlet:
