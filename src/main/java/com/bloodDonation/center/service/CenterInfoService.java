@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CenterInfoService {
 
-    private final CenterInfoRepository repository;
+    private final CenterInfoRepository repository;  // repository에게 DB관리 넘기므로 repository를 DI해줌
     private final HttpServletRequest request;
 
     /**

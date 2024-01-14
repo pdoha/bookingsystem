@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("/admin/center")
+@RequestMapping("/admin/center")    //url 하나당 하나의 컨트롤러에 매핑되는 다른 핸들러 매핑과 달리 메서드 단위까지 세분화하여 적용 갸능. url, 파라미터, 헤더 등.
 public class CenterController implements ExceptionProcessor {
 
-    @ModelAttribute("menuCode")
+    @ModelAttribute("menuCode") //getMenyCode의 리턴값을 Model 객체와 바인딩
     public String getMenuCode() {
         return "center";
     }
@@ -25,7 +25,7 @@ public class CenterController implements ExceptionProcessor {
      * 센터 목록
      */
     @GetMapping
-    public String list(Model model) {
+    public String list(Model model) {   // Model 객체: Controller에서 생성된 데이터를 담아 View로 전달할 때 사용
         commonProcess("list", model);
 
         return "admin/center/list";
@@ -37,7 +37,7 @@ public class CenterController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/add_center")
-    public String addCenter(@ModelAttribute RequestCenter form, Model model) {
+    public String addCenter(@ModelAttribute RequestCenter form, Model model) {  // Model 객체를 통해 form 파라미터의 값들을 Getter, Setter, 생성자를 통해 주입, 전달
         commonProcess("add_center", model);
 
         return "admin/center/add_center";
