@@ -24,6 +24,12 @@ public class RequestJoin {
     @NotBlank
     private String confirmPassword;
 
+    private String ecode;
+
+    private String zonecode;
+    private String address;
+    private String addressSub;
+
     @AssertTrue
     private boolean agree;
 
