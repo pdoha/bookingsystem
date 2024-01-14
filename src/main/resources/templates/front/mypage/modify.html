@@ -5,17 +5,17 @@
 <section layout:fragment="content">
     <h1 th:text="#{개인정보_변경}"></h1>
 
-    <form name="frmSave" method="post" th:action="@{/mypage/modify}" autocomplete="off">
+    <form name="frmSave" method="post" th:action="@{/mypage/modify}" autocomplete="off" th:object="${requestJoin}">
         <dl>
             <dt th:text="#{회원명}"></dt>
             <dd>
-                <input type="hidden" name="mName" id="mName" value="">
+                <input type="text" name="mName" id="mName" value="" readonly>
             </dd>
         </dl>
         <dl>
             <dt th:text="#{아이디}"></dt>
             <dd>
-                <input type="hidden" name="userId" id="userId" value="">
+                <input type="text" name="userId" id="userId" value="" readonly>
             </dd>
         </dl>
         <dl>
@@ -48,7 +48,7 @@
             <dt th:text="#{이메일}"></dt>
             <dd>
                 <input type="text" name="email" id="email" maxlength="70">
-                "@"
+                @
                 <input type="text" name="email2" id="email2" maxlength="50">
                 <select name="subEmail2" id="subEmail2">
                     <option value>선택</option>
@@ -62,36 +62,42 @@
             </dd>
         </dl>
         <dl>
-            <dt th:text="#{혈액형}"></dt>
+            <dt th:text="#{혈액형}" style="float: left;"></dt>
             <dd>
-                <input type="radio" name="bldType" value="true" id="bld_TypeA" >
+                <input type="radio" name="bldType" value="A" id="bld_TypeA" onclick="getRadio(this.id)">
                 <label for="bld_TypeA">A</label>
 
-                <input type="radio" name="bldType" value="true" id="bld_TypeB" >
+                <input type="radio" name="bldType" value="B" id="bld_TypeB" onclick="getRadio(this.id)">
                 <label for="bld_TypeB">B</label>
 
-                <input type="radio" name="bldType" value="true" id="bld_TypeO" >
+                <input type="radio" name="bldType" value="O" id="bld_TypeO" onclick="getRadio(this.id)">
                 <label for="bld_TypeO">O</label>
 
-                <input type="radio" name="bldType" value="true" id="bld_TypeAB" >
+                <input type="radio" name="bldType" value="AB" id="bld_TypeAB" onclick="getRadio(this.id)">
                 <label for="bld_TypeAB">AB</label>
 
-            </dd>
-        </dl>
-        <dl>
-            <dt th:text="#{RH형_선택(필수)}"></dt>
-            <dd>
-                <input type="radio" name="bldType2" value="true" id="bld_Typeplus" >
+                <label>&nbsp;&nbsp;&nbsp;RH형_선택(필수)</label>
+                <input type="radio" name="bldType2" value="Rh+" id="bld_Typeplus" >
                 <label for="bld_Typeplus">Rh+</label>
 
-                <input type="radio" name="bldType2" value="true" id="bld_Typeminus" >
+                <input type="radio" name="bldType2" value="Rh-" id="bld_Typeminus" >
                 <label for="bld_Typeminus">Rh-</label>
             </dd>
+
         </dl>
         <dl>
             <dt th:text="#{전화번호}"></dt>
             <dd>
-                <input type="text" name="tel" placeholder="-는 제외하고 숫자만 작성해주세요">
+                <input class="phnum" type="text" name="tel" placeholder="-는 제외하고 숫자만 작성해주세요">
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{주소}"></dt>
+            <dd>
+                <input type="text" name="zonecode"  placeholder="우편번호" readonly>
+                <button type="button" class="search_address" th:text="#{주소_찾기}"></button>
+                <input type="text" name="address" placeholder="주소"readonly>
+                <input type="text" name="addressSub" placeholder="나머지 주소">
             </dd>
         </dl>
         <button type="submit"><a th:href="@{/mypage/info}">등록하기</a></button>
