@@ -2,23 +2,34 @@ package com.bloodDonation.admin.board.controllers;
 
 import com.bloodDonation.admin.menus.Menu;
 import com.bloodDonation.admin.menus.MenuDetail;
+import com.bloodDonation.board.entities.Board;
+import com.bloodDonation.board.service.config.BoardConfigDeleteService;
+import com.bloodDonation.board.service.config.BoardConfigInfoService;
+import com.bloodDonation.board.service.config.BoardConfigSaveService;
 import com.bloodDonation.commons.ExceptionProcessor;
+import com.bloodDonation.commons.ListData;
+import com.bloodDonation.commons.Pagination;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller("adminBoardController")
 @RequestMapping("/admin/board")
+@RequiredArgsConstructor
 public class BoardController implements ExceptionProcessor {
+
+    private final BoardConfigSaveService configSaveService;
+    private final BoardConfigInfoService configInfoService;
+    private final BoardConfigDeleteService configDeleteService;
+
+    private final BoardConfigValidator configValidator;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
@@ -36,11 +47,46 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping
-    public String list(Model model) {
+    public String list(@ModelAttribute BoardSearch search, Model model) {
         commonProcess("list", model);
+
+        ListData<Board> data = configInfoService.getList(search);
+
+        List<Board> items = data.getItems();
+        Pagination pagination = data.getPagination();
+
+        model.addAttribute("items", items);
+        model.addAttribute("pagination", pagination);
 
         return "admin/board/list";
     }
+
+    /**
+     * 게시판 목록 - 수정
+     *
+     * @param chks
+     * @return
+     */
+    @PatchMapping
+    public String editList(@RequestParam("chk") List<Integer> chks, Model model) {
+        commonProcess("list", model);
+
+        configSaveService.saveList(chks);
+
+        model.addAttribute("script", "parent.location.reload()");
+        return "common/_execute_script";
+    }
+
+    @DeleteMapping
+    public String deleteList(@RequestParam("chk") List<Integer> chks, Model model) {
+        commonProcess("list", model);
+
+        configDeleteService.deleteList(chks);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
 
     /**
      * 게시판 등록
@@ -54,6 +100,19 @@ public class BoardController implements ExceptionProcessor {
         return "admin/board/add";
     }
 
+    //아이디 생성
+    @GetMapping("/edit/{bid}")
+    public String edit(@PathVariable("bid") String bid, Model model) {
+        commonProcess("edit", model);
+
+        RequestBoardConfig form = configInfoService.getForm(bid);
+        System.out.println(form);
+        model.addAttribute("requestBoardConfig", form);
+
+        return "admin/board/edit";
+    }
+
+
     /**
      * 게시판 등록/수정 처리
      *
@@ -65,10 +124,16 @@ public class BoardController implements ExceptionProcessor {
 
         commonProcess(mode, model);
 
+
+        configValidator.validate(config, errors);
+
         if (errors.hasErrors()) {
+
+            errors.getAllErrors().stream().forEach(System.out::println);
             return "admin/board/" + mode;
         }
 
+        configSaveService.save(config);
 
         return "redirect:/admin/board";
     }
