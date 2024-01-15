@@ -4,6 +4,7 @@ import com.bloodDonation.commons.ExceptionRestProcessor;
 import com.bloodDonation.commons.rests.JSONData;
 import com.bloodDonation.member.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,9 @@ public class ApiMemberController implements ExceptionRestProcessor {
     private final MemberRepository memberRepository;
 
     //이메일 중복 여부 체크
+    @GetMapping("/email_dup_check")
     public JSONData<Object> duplicateEmailCheck(@RequestParam("email") String email){
-        //존재하는지
+
         boolean isExists = memberRepository.existsByEmail(email);
 
         JSONData<Object> data = new JSONData<>();
