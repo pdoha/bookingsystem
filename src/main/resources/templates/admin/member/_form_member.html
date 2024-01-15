@@ -4,54 +4,56 @@
 <!--공유한 양식 -->
 <th:block th:fragment="form">
     <h2>회원관리</h2>
-    <table class="table_cols mb30">
-        <tbody>
-            <tr>
-                <!--달력 이모티콘 누르면 날력 나오게-->
-                <th>가입일</th>
-                <td colspan="5"> <!--1/9 :17시강의 ::23:48-->
-                    <input type="date" name="createSdate" value class="calendar">
-                    " ~ "
-                    <input type="date" name="createEdate" value class="calendar">
-                    <!--빠른 날짜 선택 -->
-                    <span class="quick_date" data-target-name="createSdate,createEdate">
-                        <span class="date_span" data-span="1_week">1주</span>
-                        <span class="date_span" data-span="1_month">1개월</span>
-                        <span class="date_span" data-span="3_week">3개월</span>
-                        <span class="date_span" data-span="1_year">1년</span>
-                    </span>
-                </td>
-
-            </tr>
-
-             <tr>
-                <th>가입구분</th>
-                <td width="250">
-                    <input type="checkbox" name="managerType" value="admin" id="managerType_admin">
-                    <label for="managerType_admin">관리자</label>
-
-                    <input type="checkbox" name="managerType" value="member" id="managerType_member">
-                    <label for="managerType_admin">회원</label>
-                </td>
-                 <th>아이디</th>
-                 <td width="250">
-                    <input type="text" name="managerId">
-                 </td>
-                 <th>관리자명</th>
-                 <td>
-                     <input type="text name=managerNm">
-                 </td>
-             </tr>
-        </tbody>
-    </table>
-
-    <button type="submit"></button>
-
-
-
-    <h2>관리자 목록</h2>
+    <form id="frmSearch" method="get" autocomplete="off">
         <table class="table_cols mb30">
+            <tbody>
+                <tr>
+                    <!--달력 이모티콘 누르면 날력 나오게-->
+                    <th>가입일</th>
+                    <td colspan="5"> <!--1/9 :17시강의 ::23:48-->
+                        <input type="date" name="createSdate" value class="calendar">
+                        " ~ "
+                        <input type="date" name="createEdate" value class="calendar">
+                        <!--빠른 날짜 선택 -->
+                        <span class="quick_date" data-target-name="createSdate,createEdate">
+                            <span class="date_span" data-span="1_week">1주</span>
+                            <span class="date_span" data-span="1_month">1개월</span>
+                            <span class="date_span" data-span="3_week">3개월</span>
+                            <span class="date_span" data-span="1_year">1년</span>
+                        </span>
+                    </td>
+
+                </tr>
+
+                 <tr>
+                    <th>가입구분</th>
+                    <td width="250">
+                        <input type="checkbox" name="managerType" value="admin" id="managerType_admin">
+                        <label for="managerType_admin">관리자</label>
+
+                        <input type="checkbox" name="managerType" value="member" id="managerType_member">
+                        <label for="managerType_admin">회원</label>
+                    </td>
+                     <th>아이디</th>
+                     <td width="250">
+                        <input type="text" name="managerId">
+                     </td>
+                     <th>관리자명</th>
+                     <td>
+                         <input type="text name=managerNm">
+                     </td>
+                 </tr>
+            </tbody>
         </table>
+        <div class="table-btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
+
+    </form>
+
+
+
+
 
 
 </th:block>
