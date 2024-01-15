@@ -4,7 +4,25 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{예약조회}"></h1>
-
+    <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off"
+          <!--th:object="${예-reservationSearch}"-->>
+        <table class="table_cols mb30">
+            <tr>
+                <th>키워드</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt"><!--th:field="*{sopt}"-->>
+                            <option value="ALL">날짜</option>
+                        </select>
+                        <input type="text" name="skey"><!--th:field="*{skey}"-->
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
+    </form>
     <table border="1"
     width="50%"
     height="200"
