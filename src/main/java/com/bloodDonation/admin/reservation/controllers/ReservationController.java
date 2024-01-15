@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class ReservationController implements ExceptionProcessor {
      */
     @GetMapping
     public String list(Model model) {
+        commonProcess("list",model);
         return "admin/reservation/list";
     }
 
@@ -43,25 +45,23 @@ public class ReservationController implements ExceptionProcessor {
  * @param model
  * @return
  */
-        /* 보류 중
-        @GetMapping("/add_reservation")
+        @GetMapping("/add")
         public String addReservation(Model model) {
             commonProcess("add_reservation",model);
-            return "admin/reservation/add_branch";
+            return "admin/reservation/add_reservation";
         }
-        */
 
     /**
      * 예약 추가, 저장
      * @param model
      * @return
      */
-        /* 보류중
+
         @PostMapping("/save_reservation")
         public String saveBranch(Model model) {
-            return "redirect:/admin/reservation1";
+            return "redirect:/admin/reservation";
         }
-        */
+
 
     private void commonProcess(String mode, Model model) {
         String pageTitle = "헌혈 예약자 목록";
@@ -70,6 +70,8 @@ public class ReservationController implements ExceptionProcessor {
 
         if(mode.equals("edit_reservation")) {
             pageTitle = "예약정보 수정";
+        } else if (mode.equals("add_reservation")) {
+            pageTitle = "예약 추가";
         }
 
         model.addAttribute("pageTitle", pageTitle);
