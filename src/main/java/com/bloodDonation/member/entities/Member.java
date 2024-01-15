@@ -21,15 +21,15 @@ public class Member extends Base {
     @Column(length=65, nullable = false)
     private String userPw;
 
+    @Column(length=65, nullable = false)
+    private String confirmPassword;
+
     @Column(length=40, nullable = false, unique = true)
     private String email;
 
     @Column(length=30, nullable = false)
     private String mName; //이름
 
-
-    @Column(length = 30, nullable = false)
-    private String ecode;  //이메일인증코드
 
     /*@Column(length=40, nullable = false)
     private String phone;
