@@ -57,3 +57,25 @@ a {
   /*left: 100%;     2차 메뉴를 1차 메뉴의 너비만큼 이동 */
   width: 100%;    /* 1차 메뉴의 너비를 상속 */
 }
+.terms{
+    padding-left: 30px;
+
+}
+.table_terms {
+           border-spacing: 0;
+           width: 100%;
+           border-top: 2px solid #222;
+           background: #fff;
+
+}
+.table_terms td,.table_terms th{
+    border-bottom: 1px solid ;
+
+    color: black;
+}
+.table_terms td{
+    width: 200%;
+}
+
+
+
