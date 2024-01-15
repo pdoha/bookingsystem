@@ -17,7 +17,7 @@ public class MemberUtil {
         if(isLogin()){
             return getMember().getAuthorities()
                     .stream().map(Authorities::getAuthority)
-                    .anyMatch(a->a == Authority.ADMIN);
+                    .anyMatch(a->a == Authority.ADMIN || a == Authority.MANAGER);
         }
         return false;
     }
