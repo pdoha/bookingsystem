@@ -3,8 +3,11 @@ package com.bloodDonation.mypage.controllers;
 
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.service.MyPageService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,7 @@ public class MypageController implements ExceptionProcessor {
 
     private final Utils utils;
     private final MyPageService service;
+    private final MemberUtil memberUtil;
 
     @ModelAttribute("addCss")
     public String[] getAddCss() {
@@ -53,8 +57,14 @@ public class MypageController implements ExceptionProcessor {
     }
 
     @GetMapping("/modify")
-    public String modifiy(Model model) {
+    public String modifiy(@ModelAttribute RequestJoin form, Model model) {
         commonProcess("modify", model);
+
+        if (memberUtil.isLogin()) {
+            Member member = memberUtil.getMember();
+            form.setUserId(member.getUserId());
+            form.setMName(member.getMName());
+        }
 
         return utils.tpl("mypage/modify");
     }
@@ -66,9 +76,16 @@ public class MypageController implements ExceptionProcessor {
     }
 
     @PostMapping("/modify")
-    public String modifyPs(Model model) {
+    public String modifyPs(@Valid RequestJoin form, Model model) {
         commonProcess("modify", model);
-
+        //변경된 개인정보가 requestjoin에 저장되야됨-null체크 필수?
+        if (memberUtil.isLogin()) {
+            Member member = memberUtil.getMember();
+            form.setUserPw(member.getUserPw());
+            form.setConfirmPassword(member.getConfirmPassword());
+            form.setEmail(member.getEmail());
+            //form.setZonecode(member.getZonecode());
+        }
         return "redirect:/mypage/info";
     }
     @GetMapping("/reservation")
