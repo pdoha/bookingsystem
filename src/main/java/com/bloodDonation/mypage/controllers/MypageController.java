@@ -73,34 +73,36 @@ public class MypageController implements ExceptionProcessor {
     }
     @GetMapping("/reservation")
     public String reservation(Model model){
-
+        commonProcess("reservation", model);
         return utils.tpl("mypage/reservation");
     }
 
      @GetMapping("/reservation/modify")
             public String reservationModify(Model model){
 
-            return utils.tpl("mypage/reservation/modify");
+            return utils.tpl("mypage/reservation_modify");
      }
 
-    @PostMapping("/survey")
+    @GetMapping("/survey")
     public String survey(Model model){
-
+        commonProcess("survey", model);
         return utils.tpl("mypage/survey");
     }
+
+
     @GetMapping("/bloodview")
     public String bloodview(Model model){
-
+        commonProcess("bloodview", model);
         return utils.tpl("mypage/bloodview");
     }
     @GetMapping("/surveyresult")
     public String surveyResult(Model model){
-
+        commonProcess("surveyresult", model);
         return utils.tpl("mypage/surveyresult");
     }
     @GetMapping("/unregister")
     public String unregister(Model model){
-
+        commonProcess("unregister", model);
         return utils.tpl("mypage/unregister");
     }
 
