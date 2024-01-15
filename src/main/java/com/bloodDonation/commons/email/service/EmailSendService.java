@@ -28,6 +28,7 @@ public class EmailSendService {
      * @param tplData : 치환코드
      * @return
      */
+    //메세지  + 파일첨부 + 추가데이터 같이 보내고싶을때
     public boolean sendMail(EmailMessage message, String tpl, Map<String, Object> tplData) {
         String text = null;
         /**
@@ -36,6 +37,7 @@ public class EmailSendService {
          * 타임리프로 번역된 텍스트를 반환 값으로 처리
          */
         if (StringUtils.hasText(tpl)) {
+            //추가데이터
             tplData = Objects.requireNonNullElse(tplData, new HashMap<>());
             Context context = new Context();
 
@@ -52,10 +54,11 @@ public class EmailSendService {
 
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            //파일점부 활성화 multipart : true
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(message.to()); // 메일 수신자
             mimeMessageHelper.setSubject(message.subject());  // 메일 제목
-            mimeMessageHelper.setText(text, true); // 메일 내용
+            mimeMessageHelper.setText(text, true); // 메일 내용 html 형태로 / false : 텍스트형태
             javaMailSender.send(mimeMessage);
             return true;
         } catch (MessagingException e) {
@@ -65,9 +68,10 @@ public class EmailSendService {
         return false;
 
     }
-
+    //tplData : 추가데이터
+    //간단하게 메세지만 보내는 경우
     public boolean sendMail(EmailMessage message) {
-        return sendMail(message, null, null);
+        return sendMail(message, null, null); //파일첨부 x , 추가데이터 x
     }
 }
 
