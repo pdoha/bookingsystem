@@ -14,13 +14,28 @@
         <dl>
             <dt th:text="#{이메일}"></dt>
             <dd>
-                <input type="text" name="email" th:field="*{email}">
-                <button type="submit" th:text="#{인증하기}"></button>
+                <div>
+                    <input type="text" name="email" th:field="*{email}">
+                    <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button"
+                        id="email_verify" th:text="#{인증코드전송}"></button>
+                </div>
+
+                <div class="auth_box">
+                    <th:block th:if="${session.EmailAuthVerified ==null || !session.EmailAuthVerified}">
+                        <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+                        <span id="auth_count">03:00</span> <!--제한시간-->
+                        <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
+                        <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
+                    </th:block>
+                    <!--인증 성공하면-->
+                    <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                        <span class='confirmed' th:text="#{확인된_이메일_입니다.}"></span>
+                    </th:block>
+                </div>
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
-                <input type="text" name="ecode" th:field="*{ecode}" value="인증번호 입력">
-                <!--제한시간 3분 ?-->
-                <button type="submit" th:text="#{확인}"></button>
-                <button type="submit" th:text="#{재전송}"></button>
+
+
+
             </dd>
         </dl>
 

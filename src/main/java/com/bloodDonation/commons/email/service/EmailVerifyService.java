@@ -14,25 +14,42 @@ public class EmailVerifyService {
     private final EmailSendService sendService;
     private final HttpSession session;
 
+    /**
+     * 이메일 인증 번호 발급 전송
+     * @param email
+     * @return
+     */
     public boolean sendCode(String email) {
-        int authNum = (int) (Math.random() * 99999);
 
-        session.setAttribute("EmailAuthNum", authNum);
-        session.setAttribute("EmailAuthStart", System.currentTimeMillis());
+        int authNum = (int) (Math.random() * 99999); //인증번호 랜덤
+
+        //데이터 유지하기위해 세션에 저장
+        session.setAttribute("EmailAuthNum", authNum); //인증번호
+        session.setAttribute("EmailAuthStart", System.currentTimeMillis()); //현재시간
 
         EmailMessage emailMessage = new EmailMessage(
                 email,
-                Utils.getMessage("Email.verification.subject", "commons"),
+                Utils.getMessage("Email.verification.subject", "commons"), //commons message 연결
                 Utils.getMessage("Email.verification.message", "commons"));
-        Map<String, Object> tplData = new HashMap<>();
+        Map<String, Object> tplData = new HashMap<>(); //추가 데이터
+
+        //데이터 추가 put
         tplData.put("authNum", authNum);
 
+        //auth : 템플릿
         return sendService.sendMail(emailMessage, "auth", tplData);
 
     }
 
+    /**
+     * 발급 받은 인증번호화 사용자 입력코드와 일치 여부 체크
+     * @param code
+     * @return
+     */
     public boolean check(int code) {
+        //인증번호 유지시켜야하니까 세션에 저장
         Integer authNum = (Integer) session.getAttribute("EmailAuthNum");
+        //보낸시간
         Long stime = (Long) session.getAttribute("EmailAuthStart");
         if (authNum != null && stime != null) {
             //인증시간 만료 여부 체크 - 3분 유효 시간

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,18 @@ import java.util.List;
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
+@SessionAttributes("EmailAuthVerified") //초기값 유지 하려고 세션쪽에 넣어주려고
 public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
 
+
     //회원가입
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model){
+        
+        //이메일 인증 여부 false로 초기화
+        model.addAttribute("EmailAuthVerified", false);
 
 
         return utils.tpl("member/join");
@@ -31,7 +37,11 @@ public class MemberController implements ExceptionProcessor {
 
     //회원가입 처리
     @PostMapping("/join")
-    public String joinPs(@Valid RequestJoin form, Errors errors, Model model){
+    public String joinPs(@Valid RequestJoin form, Errors errors, Model model, SessionStatus sessionStatus){
+        
+        //EmailAuthVerified 세션값 비우기
+        sessionStatus.setComplete();
+
         joinService.process(form, errors);
 
         //가입 실패
@@ -60,10 +70,10 @@ public class MemberController implements ExceptionProcessor {
         List<String> addCommonScript = new ArrayList<>(); // 공통 자바스크립트
         List<String> addScript = new ArrayList<>(); // 프론트 자바 스크립트
 
-        if (mode.equals("login")) {
+        if (mode.equals("login")) { //로그인
             pageTitle = Utils.getMessage("로그인", "commons");
 
-        } else if (mode.equals("join")) {
+        } else if (mode.equals("join")) { //회원가입
             addCommonScript.add("fileManager");
             addScript.add("member/form");
         }

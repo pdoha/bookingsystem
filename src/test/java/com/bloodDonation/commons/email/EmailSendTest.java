@@ -37,6 +37,7 @@ public class EmailSendTest {
     void sendWithTplTest(){
         EmailMessage message = new EmailMessage("qkrthdus5147@gmail.com", "이메일 전송 테스트", " 내용");
         Map<String, Object> tplData = new HashMap<>();
+        //tplData : 추가 데이터 (인증번호)
         tplData.put("authNum", "123456");
         boolean success = emailSendService.sendMail(message, "auth", tplData);
 
@@ -46,7 +47,7 @@ public class EmailSendTest {
     @Test
     @DisplayName("이메일 인증 번호 전송 테스트")
     void emailVerifyTest() {
-        boolean result = emailVerifyService.sendCode("yonggyo00@kakao.com");
+        boolean result = emailVerifyService.sendCode("qkrthdus5147@gmail.com");
         assertTrue(result);
     }
 }
