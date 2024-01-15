@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<section layout:fragment="content">
+    <div>
+        <h3>센터가 예약되었습니다</h3>
+        <ul>
+            <li>
+                주소: <span th:value="#{address}"></span>
+            </li>
+        </ul>
+    </div>
+    <h3>예약날짜를 선택해주세요</h3>
+    <!-- 달력출력-->
+    <h3>예약시간 및 헌혈종류를 선택해주세요</h3>
+    <!-- 날짜테이블과 헌혈종류 라디오버튼으로 변경가능하게 선택하는 테이블 -->
+    <table border="1"
+        bordercolor="black"
+        width="700"
+        height="200">
+        <thead>
+            <tr>
+                <th>시간</th>
+                <th>9:00</th>
+                <th>9:20</th>
+                <th>9:40</th>
+                <th>10:00</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>헌혈종류선택</td>
+                <td>
+                    <p>
+                    <input type="radio" name="" id="" >
+                    <label for="" >전혈</label>
+                    </p>
+                    <p>
+                    <input type="radio" name="" id="" >
+                    <label for="" >혈장</label>
+                    </p>
+                    <p>
+                    <input type="radio" name="" id="" >
+                    <label for="" >혈소판</label>
+                    </p>
+                    <p>
+                    <input type="radio" name="" id="" >
+                    <label for="" >혈소판혈장</label>
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >전혈</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈장</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈소판</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈소판혈장</label>
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >전혈</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈장</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈소판</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈소판혈장</label>
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >전혈</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈장</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈소판</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="" id="" >
+                        <label for="" >혈소판혈장</label>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>개인정보입력</h3>
+    <div>
+        <h5>개인정보를 확인해주세요</h5>
+        <ul>
+            <li>
+                <span>이름</span>
+                <span th:value="#{mName}"></span>
+            </li>
+        </ul>
+        <p>
+            <span>전화번호</span>
+            <input type="text" name="tel" id="tel" th:value="#{tel}">
+        </p>
+    </div>
+    <button>예약변경</button>
+</section>
+</html>

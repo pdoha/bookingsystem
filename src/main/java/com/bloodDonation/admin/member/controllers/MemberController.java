@@ -37,7 +37,7 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("subMenuCode", "list");
         //연동
         commonProcess("list", model);
-        return "admin/member/list";
+        return "admin/member/member_list";
     }
 
     //회원 등록 & 수정
@@ -53,13 +53,6 @@ public class MemberController implements ExceptionProcessor {
 
         //저장하면 회원목록으로 이동
         return "redirect:/admin/member/list";
-    }
-
-    //회원목록
-    public String memberList(Model model){
-        commonProcess("member", model);
-
-        return "admin/member/member_list";
     }
 
     //공통 처리 - 제목,
