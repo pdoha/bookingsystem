@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
-@SessionAttributes("EmailAuthVerified") //초기값 유지 하려고 세션쪽에 넣어주려고
+@SessionAttributes("EmailAuthVerified") //이메일 인증 여부 세션값 초기 처리
 public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
