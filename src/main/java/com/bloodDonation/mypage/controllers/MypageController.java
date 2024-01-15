@@ -53,6 +53,7 @@ public class MypageController implements ExceptionProcessor {
     public String info(Model model) {
         commonProcess("info", model);
 
+
         return utils.tpl("mypage/info");
     }
 
@@ -105,7 +106,11 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("survey", model);
         return utils.tpl("mypage/survey");
     }
-
+    @GetMapping("/dosurvey")
+    public String dosurvey(Model model){
+        commonProcess("dosurvey", model);
+        return utils.tpl("mypage/dosurvey");
+    }
 
     @GetMapping("/bloodview")
     public String bloodview(Model model){
@@ -136,7 +141,9 @@ public class MypageController implements ExceptionProcessor {
         } else if (mode.equals("reservation/modify")) {
             pageTitle = Utils.getMessage("예약변경", "commons");
         } else if (mode.equals("survey")) {
-                pageTitle = Utils.getMessage("전자문진", "commons");
+                pageTitle = Utils.getMessage("전자문진안내", "commons");
+        } else if (mode.equals("dosurvey")) {
+            pageTitle = Utils.getMessage("전자문진", "commons");
         } else if (mode.equals("bloodview")) {
             pageTitle = Utils.getMessage("나의_헌혈내역", "commons");
         } else if (mode.equals("surveyresult")) {
