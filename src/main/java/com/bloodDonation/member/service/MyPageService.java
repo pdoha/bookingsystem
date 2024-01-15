@@ -34,10 +34,10 @@ public class MyPageService {
         //DB에 저장
         memberRepository.saveAndFlush(member);
     }
-    //예약조회페이지에서 변경버튼 눌렀을 때
+/*    //예약조회페이지에서 변경버튼 눌렀을 때
     public Optional<Reservation> searchMyReservation(String userId){
         return reservationRepository.findByUserId(userId);
-    }
+    }*/
 
     public void modifyMyReservation(Reservation ireservation){
         Reservation reservation = new Reservation();
