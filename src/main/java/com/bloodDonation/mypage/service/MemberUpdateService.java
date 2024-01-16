@@ -1,4 +1,4 @@
-package com.bloodDonation.member.service;
+package com.bloodDonation.mypage.service;
 
 
 import com.bloodDonation.member.MemberUtil;
@@ -26,7 +26,7 @@ public class MemberUpdateService {
 
         Member member = memberUtil.getMember();//memberutil에 session에 저장된 내 정보를 가져오는 getmember이용하여 member에 저장
         member = memberRepository.findByUserId(member.getUserId()).orElse(null);//기본값으로 널 넣기
-        member.setMName(form.getMName());//회원명은 변경할것이 아닌데. 왜 set?
+        member.setMName(form.getMName());//회원명은 동명이인때문에 같은 이름인 사람이 여러명일수도 있음
 
         //주소-zonecode, address, addressSub도 수정하기로 함
         member.setZonecode(form.getZonecode());

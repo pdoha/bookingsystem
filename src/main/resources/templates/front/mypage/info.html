@@ -4,16 +4,17 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{개인정보_조회}"></h1>
+    <!--변경은 로그인된 상태의 session이용-->
     <dl>
         <dt th:text="#{회원명}"></dt>
-        <dd>
-            <input type="text" name="mName" id="mName" value="" readonly>
+        <dd><!--th:value="${session.member.mName}"-->
+            <input type="text" name="mName" id="mName" readonly>
         </dd>
     </dl>
     <dl>
         <dt th:text="#{아이디}"></dt>
-        <dd>
-            <input type="text" name="userId" id="userId" value="" readonly>
+        <dd><!--th:text="${session.member.userId}"-->
+            <input type="text" name="userId" id="userId" readonly>
         </dd>
     </dl>
     <dl>
@@ -23,14 +24,16 @@
                    autocomplete="off" readonly>
         </dd>
     </dl>
-    <dl>
+    <!--<dl>
         <dt th:text="#{이메일}"></dt>
         <dd>
             <input type="text" name="email" id="email" maxlength="70" readonly>
             @
             <input type="text" name="email2" id="email2" maxlength="50" readonly>
         </dd>
-    </dl>
+    </dl>-->
+    <!--혈액형하고, 전화번호는 회원가입할때는 필요없는 항목이라, 개인정보변경에서 입력한
+    혈액형과 전화번호는 따로 관리해서 null이 아니면 조회페이지에서 볼 수 있게 해야됨-->
     <dl>
         <dt th:text="#{혈액형}"></dt>
         <dd>
@@ -41,6 +44,10 @@
     <dl>
         <dt th:text="#{전화번호}"></dt>
         <dd>
+            <input class="phnum" type="text" name="tel" readonly>
+            -
+            <input class="phnum" type="text" name="tel" readonly>
+            -
             <input class="phnum" type="text" name="tel" readonly>
         </dd>
     </dl>
