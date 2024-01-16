@@ -84,5 +84,8 @@ a {
 .survey_btm{
     width: 250%;
 }
+.table_terms ul li {
+    padding-bottom: 10px;
+}
 
 
