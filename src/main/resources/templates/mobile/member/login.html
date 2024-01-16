@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="#{로그인}"></h1>
+        <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
+            ...
+
+            <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
+
+            ...
+        </form>
+
+
+</body>
+</html>
