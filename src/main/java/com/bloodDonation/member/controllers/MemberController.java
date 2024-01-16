@@ -27,7 +27,7 @@ public class MemberController implements ExceptionProcessor {
     //회원가입
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model){
-        
+        commonProcess("join", model);
         //이메일 인증 여부 false로 초기화
         model.addAttribute("EmailAuthVerified", false);
 
@@ -38,7 +38,8 @@ public class MemberController implements ExceptionProcessor {
     //회원가입 처리
     @PostMapping("/join")
     public String joinPs(@Valid RequestJoin form, Errors errors, Model model, SessionStatus sessionStatus){
-        
+        commonProcess("join", model);
+
         //EmailAuthVerified 세션값 비우기
         sessionStatus.setComplete();
 
@@ -75,6 +76,7 @@ public class MemberController implements ExceptionProcessor {
 
         } else if (mode.equals("join")) { //회원가입
             addCommonScript.add("fileManager");
+            addScript.add("member/join");
             addScript.add("member/form");
         }
 
