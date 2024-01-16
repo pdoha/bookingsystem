@@ -6,7 +6,7 @@ import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
-import com.bloodDonation.member.service.MyPageService;
+import com.bloodDonation.mypage.service.MyPageModifyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import java.util.Objects;
 public class MypageController implements ExceptionProcessor {
 
     private final Utils utils;
-    private final MyPageService service;
+    private final MyPageModifyService service;
     private final MemberUtil memberUtil;
 
     @ModelAttribute("addCss")
@@ -96,8 +96,8 @@ public class MypageController implements ExceptionProcessor {
     }
 
      @GetMapping("/reservation/modify")
-            public String reservationModify(Model model){
-
+     public String reservationModify(Model model){
+            commonProcess("reservation/modify",model);
             return utils.tpl("mypage/reservation_modify");
      }
 

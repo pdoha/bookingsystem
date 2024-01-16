@@ -1,4 +1,4 @@
-package com.bloodDonation.member.service;
+package com.bloodDonation.mypage.service;
 
 
 import com.bloodDonation.member.entities.Member;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class MyPageService {
+public class MyPageModifyService {
 
     private final MemberRepository memberRepository;
     private final ReservationRepository reservationRepository;
