@@ -71,7 +71,7 @@ public class BoardController {
 
         if(memberUtil.isLogin()) {
             Member member = memberUtil.getMember();
-            //form.setPoster(member.getName());//memberutils에서 넣고 풀기
+            form.setPoster(member.getUserId());
         }
 
         return utils.tpl("board/write");
