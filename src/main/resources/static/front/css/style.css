@@ -17,7 +17,7 @@ a {
     font-weight: bold;
 }
 .phnum {
-    width: 300px;
+    width: 50px;
 }
 .bld{
     width: 50px;
@@ -57,6 +57,7 @@ a {
   /*left: 100%;     2차 메뉴를 1차 메뉴의 너비만큼 이동 */
   width: 100%;    /* 1차 메뉴의 너비를 상속 */
 }
+/*전자문진 안내*/
 .terms{
     padding-left: 30px;
 
@@ -69,13 +70,22 @@ a {
 
 }
 .table_terms td,.table_terms th{
-    border-bottom: 1px solid ;
+    border-bottom: 1px solid black;
 
     color: black;
 }
 .table_terms td{
     width: 200%;
 }
-
+.table_terms th{
+    border-right: 1px solid black;
+}
+/*전자문진*/
+.survey_btm{
+    width: 250%;
+}
+.table_terms ul li {
+    padding-bottom: 10px;
+}
 
 

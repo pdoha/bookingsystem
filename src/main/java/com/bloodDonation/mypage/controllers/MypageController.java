@@ -6,7 +6,7 @@ import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
-import com.bloodDonation.member.service.MyPageService;
+import com.bloodDonation.mypage.service.MyPageModifyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import java.util.Objects;
 public class MypageController implements ExceptionProcessor {
 
     private final Utils utils;
-    private final MyPageService service;
+    private final MyPageModifyService service;
     private final MemberUtil memberUtil;
 
     @ModelAttribute("addCss")
@@ -96,8 +96,8 @@ public class MypageController implements ExceptionProcessor {
     }
 
      @GetMapping("/reservation/modify")
-            public String reservationModify(Model model){
-
+     public String reservationModify(Model model){
+            commonProcess("reservation/modify",model);
             return utils.tpl("mypage/reservation_modify");
      }
 
@@ -111,17 +111,29 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("dosurvey", model);
         return utils.tpl("mypage/dosurvey");
     }
-
-    @GetMapping("/bloodview")
-    public String bloodview(Model model){
-        commonProcess("bloodview", model);
-        return utils.tpl("mypage/bloodview");
+    @GetMapping("/dosurvey_last")
+    public String dosurveylast(Model model){
+        commonProcess("dosurvey", model);
+        return utils.tpl("mypage/dosurvey_last");
     }
+    //설문조사-결과는 surveyresult.html에 보여줘야 됨 결과페이지는 get으로매핑
+    //결과를 보여주기 전에 저장하는 건 postmapping?
+    //전자문진 결과도 커맨드, 엔티티 필요?
+
+    //검사결과는 전자문진 완료하면 볼 수 있게-나의 전자문진시 입력한 정보 보여주면서
+    //날짜 조회추가해서?
+    //검사결과도 바로보여주는게 아니라 검사결과페이지에서 결과보기버튼을 누르면 연결되게
     @GetMapping("/surveyresult")
     public String surveyResult(Model model){
         commonProcess("surveyresult", model);
         return utils.tpl("mypage/surveyresult");
     }
+    @GetMapping("/bloodview")
+    public String bloodview(Model model){
+        commonProcess("bloodview", model);
+        return utils.tpl("mypage/bloodview");
+    }
+
     @GetMapping("/unregister")
     public String unregister(Model model){
         commonProcess("unregister", model);

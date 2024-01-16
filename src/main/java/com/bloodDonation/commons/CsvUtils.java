@@ -53,7 +53,6 @@ public class CsvUtils {
      * @param filePath : csv 파일 경로
      * @param tableNm : 테이블명    ex. CENTER_INFO
      * @param fields : SQL 생성 필드    ex. new String[] {"location", "centerNm"};
-     * @param addField : 추가 필드
      * @param addValue : 추가 값
      * @param encoding : csv 파일 인코딩(윈도우즈 - EUC-KRm 맥 - UTF-8)
      * @return
@@ -67,24 +66,19 @@ public class CsvUtils {
             return this;
         }
 
-        final Long[] i = {00001L};
         //sqlData에 쿼리문 저장
         lines.forEach(line -> {
             StringBuffer sb = new StringBuffer(3000);
             sb.append("INSERT INTO ");
             sb.append(tableNm);
             sb.append(" (");
-            sb.append(Arrays.stream(fields).collect(Collectors.joining(",")));
-            //if (StringUtils.hasText(addField)) sb.append(",").append(addField);
-            sb.append(" ) VALUES (");
-            sb.append(i[0]);    // cCode
-            sb.append(", ");
-            sb.append(Arrays.stream(line).map(s -> "\"" + s + "\"").collect(Collectors.joining(",")));
-            if (StringUtils.hasText(addValue)) sb.append(",").append(addValue);
+            sb.append(Arrays.stream(fields).collect(Collectors.joining(", ")));
+            sb.append(" ) VALUES (CENTER_SEQ.NEXTVAL, ");
+            sb.append(Arrays.stream(line).map(s -> "\'" + s + "\'").collect(Collectors.joining(", ")));
+            if (StringUtils.hasText(addValue)) sb.append(", ").append(addValue);
             sb.append(");\n");
             sqlData.add(sb.toString());
 
-            i[0] += 1L;
         });
 
         return this;

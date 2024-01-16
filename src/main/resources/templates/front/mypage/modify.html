@@ -4,15 +4,19 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{개인정보_변경}"></h1>
-
+    <!--변경은 requestJoin이용-->
     <form name="frmSave" method="post" th:action="@{/mypage/modify}" autocomplete="off" th:object="${requestJoin}">
         <dl>
             <dt th:text="#{회원명}"></dt>
-            <dd th:text="*{mName}"></dd>
+            <dd>
+                <input type="text" th:text="*{mName}" name="mName" id="mName">
+            </dd>
         </dl>
         <dl>
             <dt th:text="#{아이디}"></dt>
-            <dd th:text="*{userId}"></dd>
+            <dd>
+                <input type="text" th:text="*{userId}" name="userId" id="userId">
+            </dd>
         </dl>
         <dl>
             <dt th:text="#{비밀번호}"></dt>
@@ -21,7 +25,7 @@
                 autocomplete="off" class="frm_input_rePw">
                 <span id="chkPw1"></span>
                 <p class="bu_atte">
-                    "비밀번호 변경시에만 작성해주세요"
+                    *비밀번호 변경시에만 작성해주세요.
                 </p>
             </dd>
         </dl>
@@ -33,11 +37,13 @@
                 autocomplete="off" class="frm_input_rePw">
                 <span id="chkPw2"></span>
                 <p class="bu_atte">
-                    "비밀번호는 영문/숫자/특수문자 중 ~자리로 입력해주세요"
+                    *비밀번호는 영문/숫자/특수문자 중 ~자리로 입력해주세요.
                 </p>
             </dd>
         </dl>
-
+        <!--이메일로 로그인할 수 있게 함 근데 이메일정보를 변경하면 엔티티와 memberinfoservice의
+        이메일 로그인하는 부분을 삭제해야됨
+        이메일수정하면 이 정보가 memberupdateservice에서 member쪽에 다시 저장되면 문제없는거?-->
         <dl>
             <dt th:text="#{이메일}"></dt>
             <dd>
@@ -55,6 +61,8 @@
                 </select>
             </dd>
         </dl>
+        <!--혈액형하고, 전화번호는 회원가입할때는 필요없는 항목이라, 개인정보변경에서 입력한
+    혈액형과 전화번호는 따로 관리해서 null이 아니면 조회페이지에서 볼 수 있게 해야됨-->
         <dl>
             <dt th:text="#{혈액형}" style="float: left;"></dt>
             <dd>
@@ -82,7 +90,15 @@
         <dl>
             <dt th:text="#{전화번호}"></dt>
             <dd>
-                <input class="phnum" type="text" name="tel" placeholder="-는 제외하고 숫자만 작성해주세요">
+                <select name="tel" id="tel">
+                    <option value>선택</option>
+                    <option value="tel010">010</option>
+                    <option value="tel011">011</option>
+                </select>
+                -
+                <input class="phnum" type="text" name="tel2" id="tel2">
+                -
+                <input class="phnum" type="text" name="tel3" id="tel3">
             </dd>
         </dl>
         <dl>
@@ -90,7 +106,7 @@
             <dd>
                 <input type="text" name="zonecode"  placeholder="우편번호" readonly>
                 <button type="button" class="search_address" th:text="#{주소_찾기}"></button>
-                <input type="text" name="address" placeholder="주소"readonly>
+                <input type="text" name="address" placeholder="주소" readonly>
                 <input type="text" name="addressSub" placeholder="나머지 주소">
             </dd>
         </dl>

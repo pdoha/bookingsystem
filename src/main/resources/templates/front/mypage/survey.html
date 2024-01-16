@@ -5,7 +5,7 @@
 <section layout:fragment="content">
     <h1 th:text="#{전자문진안내}"></h1>
     <h4 class="terms">헌혈 자격 조건</h4>
-    <div>
+    <div class="survey">
         <table class="table_terms">
             <colgroup>
                 <col width="20%">
@@ -117,7 +117,8 @@
                 </tr>
             </tbody>
         </table>
-        <button type="button"><a th:href="@{/mypage/dosurvey}">전자문진 하러가기</a></button>
+
     </div>
+    <button type="button"><a th:href="@{/mypage/dosurvey}">전자문진 하러가기</a></button>
 </section>
 </html>

@@ -2,6 +2,7 @@ package com.bloodDonation.member.service;
 
 
 import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.member.entities.Member;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +23,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session = request.getSession();
         //session 데이터 지우기
         MemberUtil.clearLoginData(session);
+
+        //세션에서 정보가져오려면 필요
+        MemberInfo memberInfo = (MemberInfo)authentication.getPrincipal();
+        Member member = memberInfo.getMember();
+        session.setAttribute("member", member);
 
         String redirectURL = request.getParameter("redirectURL");
         redirectURL = StringUtils.hasText(redirectURL) ? redirectURL : "/";

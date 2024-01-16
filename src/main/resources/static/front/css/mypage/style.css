@@ -1,3 +1,95 @@
 main { display: flex; }
 main > aside { width: 250px; }
 main > section { flex-grow: 1; background: #f8f8f8; }
+
+/*마이페이지 페이지들*/
+body, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;		/* 해당 태그의 list-style을 none으로 하는 것으로 ●을 제거한다 */
+}
+
+a {
+  color: inherit;		/* 부모 엘리먼트의 값을 물려받는다 */
+  text-decoration: none;	/* 해당 태그의 text-decoration을 none으로 하는 것으로 밑줄을 제거한다 */
+}
+
+.tit {
+    padding-bottom:5px;
+    padding-left: 10px;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.phnum {
+    width: 50px;
+}
+.bld{
+    width: 50px;
+}
+
+.bld2{
+    width: 50px;
+}
+.side-bar > ul ul {
+  display: none;
+}
+
+/* 모든 메뉴의 a에 속성값 부여 */
+.side-bar ul > li > a {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 40px;
+}
+
+/* 보기 편하게 글씨 크기를 키운다 */
+a {
+  font-size: 1rem;
+}
+
+.side-bar > ul > li {
+  position: relative;
+}
+
+/* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
+.side-bar > ul > li:hover > ul {
+  display: block;
+  position: static;
+  top: 5;         /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+  /*left: 100%;     2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+  width: 100%;    /* 1차 메뉴의 너비를 상속 */
+}
+/*전자문진 안내*/
+.terms{
+    padding-left: 30px;
+
+}
+.table_terms {
+           border-spacing: 0;
+           width: 100%;
+           border-top: 2px solid #222;
+           background: #fff;
+
+}
+.table_terms td,.table_terms th{
+    border-bottom: 1px solid black;
+
+    color: black;
+}
+.table_terms td{
+    width: 200%;
+}
+.table_terms th{
+    border-right: 1px solid black;
+}
+.table_terms ul li {
+    padding-bottom: 10px;
+}
+
+/*전자문진-상세내용*/
+.survey_btm{
+    width: 250%;
+}
