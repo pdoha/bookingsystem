@@ -61,13 +61,13 @@
                 아래 사항 중 선택해 주세요.
             </p>
         </div>
-        <input type="radio" name="" id="malaria_radio1">
+        <input type="radio" name="malaria" id="malaria_radio1">
         <label for="malaria_radio1">최근 1년 이내에 국내 말라리아 관련
         헌혈제한지역에서 1일 이상 숙박(거주 또는 군복무 포함)</label>
-        <input type="radio" name="" id="malaria_radio2">
+        <input type="radio" name="malaria" id="malaria_radio2">
         <label for="malaria_radio2">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 1일 이상 6개월 미만 숙박</label>
-        <input type="radio" name="" id="malaria_radio3">
+        <input type="radio" name="malaria" id="malaria_radio3">
         <label for="malaria_radio3">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 6개월 이상 거주 또는 군복무</label>
         <div>
@@ -80,13 +80,21 @@
                 아래 사항 중 선택해 주세요.
             </p>
         </div>
+        <input type="radio" name="vCJD" id="vCJD_radio1">
+        <label for="vCJD_radio1">1980년~1996년까지 1개월 이상 "영국" 거주/방문/여행</label>
+        <input type="radio" name="vCJD" id="vCJD_radio2">
+        <label for="vCJD_radio2">1997년~현재까지 3개월 이상 "영국" 거주/방문/여행</label>
+        <input type="radio" name="vCJD" id="vCJD_radio3">
+        <label for="vCJD_radio3">1980년~현재까지 5년 이상 "유럽국가" 거주/방문/여행</label>
+        <input type="radio" name="vCJD" id="vCJD_radio4">
+        <label for="vCJD_radio4">1980년 이후 "영국, 프랑스"에서의 수혈</label>
         <div>
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail5" id="survey_detail5"
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
         </div>
         <div class="survey_btn_area">
-            <button type="button"><a th:href="@{/mypage/survey}">이전</a></button>
-            <button type="button">다음</button>
+            <button type="button"><a th:href="@{/mypage/dosurvey}">이전</a></button>
+            <button type="button"><a th:href="@{/mypage/reservation}">완료</a></button>
         </div>
     </div>
 </section>
