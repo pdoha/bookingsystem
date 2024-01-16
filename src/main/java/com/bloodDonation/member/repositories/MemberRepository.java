@@ -3,6 +3,7 @@ package com.bloodDonation.member.repositories;
 import com.bloodDonation.member.entities.Member;
 
 import com.bloodDonation.member.entities.QMember;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -31,6 +32,21 @@ public interface MemberRepository extends JpaRepository<Member, Long>,
         //아이디 존재하는지 체크
         QMember member = QMember.member;
         return exists(member.userId.eq(userId));
+    }
+
+    /**
+     * 이메일과 회원명으로 조회되는지 체크 (비밀번호찾기)
+     * @param email
+     * @param name
+     * @return
+     */
+    default boolean existsByEmailAndName(String email, String name){
+        QMember member = QMember.member;
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(member.email.eq(email))
+                .and(member.mName.eq(name));
+
+        return exists(builder);
     }
 
 

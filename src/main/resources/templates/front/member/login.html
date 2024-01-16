@@ -27,6 +27,7 @@
                      th:text="${session.NotBlank_userPw}">
                 </div>
             </dd>
+            <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
         </dl>
         <button type="submit" th:text="#{로그인}"></button>
 
