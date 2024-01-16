@@ -26,9 +26,11 @@ public class RequestJoin {
 
     private String ecode;
 
-    private String zonecode;
-    private String address;
-    private String addressSub;
+    //주소
+    private String zonecode; //우편번호
+    private String address; //주소
+    private String addressSub; //상세주소
+
 
     @AssertTrue
     private boolean agree;

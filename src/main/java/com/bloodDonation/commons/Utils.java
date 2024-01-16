@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 @Component
@@ -33,6 +33,32 @@ public class Utils {
         commonsBundle = ResourceBundle.getBundle("messages.commons");
         validationBundle = ResourceBundle.getBundle("messages.validations");
         errorsBundle = ResourceBundle.getBundle("messages.errors");
+    }
+
+
+    //가입 이메일과 회원명으로 일치하는 회원이 있다면 비밀번호를 임의의 비밀번호로 초기화
+    //알파벳, 숫자, 특수문자 조합 랜덤 문자열 생성
+    public String randomChars(){
+        return randomChars(8); //비밀번호 8자
+    }
+    //어떤 데이터가 와도 같은 방식으로 데이터를 처리 Stream 사용
+    public String randomChars(int length){
+
+        // int -> char -> String
+        //알파벳 생성 대소문자 다 합친 s를 char 타입으로 만들고 string타입으로 변환
+        Stream<String> alphas = IntStream.concat(IntStream.rangeClosed((int)'a', (int)'z'), //특정범위의 정수 (a < x <=z)
+                                //일반 스트림 → 기본자료형 스트림으로 변환 메소드 : mapToObj 받은 char 문자열을 -> String 객체로
+                                IntStream.rangeClosed((int)'A', (int)'Z')).mapToObj(s -> String.valueOf((char)s)); //특정범위의 정수 (A < X < Z)
+        //숫자 생성 + string 타입
+        Stream<String> nums = IntStream.range(0, 10).mapToObj(String::valueOf);
+
+        //특수문자 생성 + string타입
+        Stream<String> specials = Stream.of("~","!","@","#","$","%","^","&","*","(",")","_","+","-","=","[","{","}","]",";",":");
+        //위에 만든 알파벳 + 숫자 + 특수문자를 collect로 모아서 toCollection을 이용해서 list형태로 변환해준다
+        List<String> chars = Stream.concat(Stream.concat(alphas, nums), specials).collect(Collectors.toCollection(ArrayList::new));
+        Collections.shuffle(chars); //shuffle 섞는다
+
+        return chars.stream().limit(length).collect(Collectors.joining());
     }
 
 

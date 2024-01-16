@@ -20,6 +20,7 @@
                         id="email_verify" th:text="#{인증코드전송}"></button>
                 </div>
 
+                <!--이메일 인증번호 -->
                 <div class="auth_box">
                     <th:block th:if="${session.EmailAuthVerified ==null || !session.EmailAuthVerified}">
                         <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
@@ -72,12 +73,21 @@
         </dl>
 
         <dl>
+           <!-- search_address 클래스가 지정되어 있으면 클릭시 주소 팝업이 뜹니다.
+            data-zonecode-id : 여기에 지정된 id를 가진 input 요소에 검색된 우편번호가 완성됩니다.
+            data-address-id : 여기에 지정된 id를 가진 input 요소에 검색된 주소가 완성됩니다.-->
             <dt th:text="#{주소}"></dt>
             <dd>
-                <input type="text" name="zonecode" th:field="*{zonecode}" placeholder="우편번호" readonly>
-                <button type="button" class="search_address" th:text="#{주소_찾기}"></button>
-                <input type="text" name="address" th:field="*{address}" placeholder="주소" readonly>
-                <input type="text" name="addressSub" th:field="*{addressSub}" placeholder="나머지 주소">
+                <div>
+                    <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly th:placeholder="#{우편번호}" >
+                    <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
+                </div>
+                <div>
+                    <input type="text" name="address" id="address" th:field="*{address}" readonly th:placeholder="#{주소}" >
+                </div>
+                <div>
+                    <input type="text" name="addressSub" th:field="*{addressSub}" th:placeholder="#{나머지 주소}">
+                </div>
             </dd>
         </dl>
 

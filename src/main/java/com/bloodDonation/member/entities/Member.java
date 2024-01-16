@@ -30,15 +30,15 @@ public class Member extends Base {
     @Column(length=30, nullable = false)
     private String mName; //이름
 
-    //마이페이지-개인정보변경 시 주소도 변경해야하므로, 엔티티에 추가
-    @Column(length=30, nullable = false)
+    //주소
+    @Column(length=10)
     private String zonecode;//우편번호
 
-    @Column(length=65, nullable = false)
-    private String address;//앞주소
+    @Column(length=100)
+    private String address;//주소
 
-    @Column(length=65, nullable = false)
-    private String addressSub;//뒷 주소
+    @Column(length=100)
+    private String addressSub;//상세주소
 
 
     /*@Column(length=40, nullable = false)

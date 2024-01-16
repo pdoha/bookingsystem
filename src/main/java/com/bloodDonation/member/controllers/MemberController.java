@@ -2,6 +2,7 @@ package com.bloodDonation.member.controllers;
 
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.service.FindPwService;
 import com.bloodDonation.member.service.JoinService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
+    private final FindPwService findPwService; //비밀번호찾기
 
 
     //회원가입
@@ -64,10 +66,45 @@ public class MemberController implements ExceptionProcessor {
 
         return utils.tpl("member/login");
     }
+
+    //비밀번호 찾기 양식
+    @GetMapping("/find_pw")
+    public String findPw(@ModelAttribute RequestFindPw form, Model model){
+        commonProcess("find_pw", model);
+
+        return utils.tpl("member/find_pw");
+    }
+
+    //비밀번호 찾기 처리
+    @PostMapping("/find_pw")
+    public String findPwPs(@Valid RequestFindPw form, Errors errors, Model model){
+        commonProcess("find_pw", model);
+
+        //비밀번호 찾기 처리
+        findPwService.process(form, errors);
+
+        if(errors.hasErrors()){
+            return utils.tpl("member/find_pw");
+        }
+
+        //비밀번호 찾기에 이상없다면 완료 페이지로 이동
+        return "redirect:/member/find_pw_done";
+    }
+
+    //비밀번호 찾기 완료 페이지
+    @GetMapping("/find_pw_done")
+    public String findPwDone(Model model){
+        commonProcess("find_pw", model);
+
+        return utils.tpl("member/find_pw_done");
+    }
+
+
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "join";
         String pageTitle = Utils.getMessage("회원가입", "commons");
 
+        List<String> addCss = new ArrayList<>(); // CSS 추가
         List<String> addCommonScript = new ArrayList<>(); // 공통 자바스크립트
         List<String> addScript = new ArrayList<>(); // 프론트 자바 스크립트
 
@@ -75,12 +112,16 @@ public class MemberController implements ExceptionProcessor {
             pageTitle = Utils.getMessage("로그인", "commons");
 
         } else if (mode.equals("join")) { //회원가입
+            addCss.add("member/join");
             addCommonScript.add("fileManager");
             addScript.add("member/join");
-            addScript.add("member/form");
+            addScript.add("member/form"); //이메일 js
+        } else if (mode.equals("find_pw")) { //비밀번호 찾기
+            pageTitle = Utils.getMessage("비밀번호_찾기", "commons");
         }
 
         model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("addCss", addCss);
         model.addAttribute("addCommonScript", addCommonScript);
         model.addAttribute("addScript", addScript);
     }
