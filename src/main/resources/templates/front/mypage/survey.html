@@ -3,7 +3,122 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <h1 th:text="#{전자문진}"></h1>
+    <h1 th:text="#{전자문진안내}"></h1>
+    <h4 class="terms">헌혈 자격 조건</h4>
+    <div>
+        <table class="table_terms">
+            <colgroup>
+                <col width="20%">
+                <col width="40%">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>나이</th>
+                    <td>
+                        <ul>
+                            <li>전혈헌혈:만16~69세</li>
+                            <li>혈장헌혈:만17~69세</li>
+                            <li>혈소판,혈소판혈장헌혈:만17~59세</li>
+                            <li>65세 이상인 자의 헌혈은 60세부터 64세까지 헌혈경험이 있는자에만 가능함</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>체중</th>
+                    <td>
+                        <ul>
+                            <li>남자 50kg 이상</li>
+                            <li>여자 45kg 이상</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr></tr>
+                    <th>건강진단</th>
+                    <td>
+                        <ul>
+                            <li>혈압(mmHg) : 수축기 90~179, 이완기 100 미만</li>
+                            <li>체온(℃) : 37.5℃ 이하</li>
+                            <li>맥박(회/분):50~100</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>헌혈간격</th>
+                    <td>
+                        <ul>
+                            <li>전혈헌혈 : 8주 경과</li>
+                            <li>혈장성분헌혈, 혈소판성분헌혈, 혈소판혈장성분헌혈 : 14일 경과</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>헌혈횟수</th>
+                    <td>
+                        <ul>
+                            <li>전혈헌혈 : 최근 1년 이내에 전혈헌혈횟수 최대 5회</li>
+                            <li>혈소판성분헌혈, 혈소판혈장성분헌혈 : 최근 1년 이내에 성분헌혈횟수 최대 24회</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>외국여행</th>
+                    <td>
+                        <ul>
+                            <li>외국을 여행한 경우는 귀국 후 4주 경과</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>질병</th>
+                    <td>
+                        <ul>
+                            <li>감염병 및 기타 질병 완치 후 일정기간 경과</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>약물</th>
+                    <td>
+                        <ul>
+                            <li>전립선비대증 치료제 복용 후 4주 또는 6개월 경과</li>
+                            <li>탈모증 치료제 복용 후 4주 경과</li>
+                            <li>여드름 치료제 복용 후 4주 경과</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>예방접종</th>
+                    <td>
+                        <ul>
+                            <li>인플루엔자, A형간염, 일본뇌염 등 예방접종 받은 후 24시간 경과</li>
+                            <li>B형 간염 예방접종 받은 날로부터 2주 경과</li>
+                            <li>홍역, 유행성이하선염, 풍진(MMR)의 혼합백신, 수두 등 예방접종 받은 날로부터 4주 경과</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>진료</th>
+                    <td>
+                        <ul>
+                            <li>수혈 후 1년 경과</li>
+                            <li>기타 진료 후 일정기간 경과</li>
+                        </ul>
+                        <span>*임신 중인자, 분만 또는 유산 후 6개월 이내인 자는
+                        헌혈에 참여하실 수 없습니다.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>검사결과</th>
+                    <td>
+                        <ul>
+                            <li>과거 헌혈검사(B형간염, C형간염, 매독검사 등) 결과 정상</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
+    </div>
+    <button type="button"><a th:href="@{/mypage/dosurvey}">전자문진 하러가기</a></button>
 </section>
 </html>

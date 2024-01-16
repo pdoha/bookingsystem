@@ -1,8 +1,11 @@
 package com.bloodDonation.admin.board.controllers;
 
+import com.bloodDonation.file.entities.FileInfo;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -54,4 +57,11 @@ public class RequestBoardConfig {
 
     private String htmlTop; // 게시판 상단 HTML
     private String htmlBottom; // 게시판 하단 HTML
+
+    @Transient
+    private List<FileInfo> htmlTopImages; // 게시판 상단 Top 이미지
+
+    @Transient
+    private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지
+
 }

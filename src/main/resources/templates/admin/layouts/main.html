@@ -3,7 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <!--제목-->
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 
@@ -24,7 +25,7 @@
 
     <script th:src="@{/common/js/common.js}"></script>
     <script th:each="jsFile : ${addCommonScript}"
-            th:src="@{/common/js/{file}}.js(file=${jsFile})}"></script>
+            th:src="@{/common/js/{file}.js(file=${jsFile})}"></script>
 
 
     <script th:src="@{/admin/js/common.js}"></script>
