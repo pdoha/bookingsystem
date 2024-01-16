@@ -114,6 +114,7 @@ public class MemberController implements ExceptionProcessor {
         } else if (mode.equals("join")) { //회원가입
             addCss.add("member/join");
             addCommonScript.add("fileManager");
+            addCommonScript.add("address");
             addScript.add("member/join");
             addScript.add("member/form"); //이메일 js
         } else if (mode.equals("find_pw")) { //비밀번호 찾기

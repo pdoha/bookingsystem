@@ -2,6 +2,7 @@ package com.bloodDonation.member.controllers;
 
 import com.bloodDonation.commons.validators.PasswordValidator;
 import com.bloodDonation.member.repositories.MemberRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,8 @@ import org.springframework.validation.Validator;
 public class JoinValidator implements Validator, PasswordValidator {
 
     private final MemberRepository memberRepository;
+    private final HttpSession session;
+
     @Override
     public boolean supports(Class<?> clazz) {
         //검증대상을 한정
@@ -39,6 +42,13 @@ public class JoinValidator implements Validator, PasswordValidator {
         if (StringUtils.hasText(email) && memberRepository.existsByEmail(email)){
             //이메일 값이 있고 이메일이 존재하면 에러메세지
             errors.rejectValue("email", "Duplicated");
+        }
+
+        //이메일 인증 했는지 체크
+        //NotVerified.email=이메일 확인이 필요합니다.
+        Boolean EmailAuthVerified = (Boolean) session.getAttribute("EmailAuthVerified");
+        if (EmailAuthVerified == null || !EmailAuthVerified) {
+            errors.rejectValue("email", "NotVerified");
         }
 
         // 아이디 중복 여부 체크
