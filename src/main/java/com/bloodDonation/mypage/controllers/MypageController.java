@@ -6,6 +6,7 @@ import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
+import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class MypageController implements ExceptionProcessor {
     private final Utils utils;
     private final MyPageModifyService service;
     private final MemberUtil memberUtil;
-
+    private final MemberUpdateService updateService;
     @ModelAttribute("addCss")
     public String[] getAddCss() {
 
@@ -77,16 +78,11 @@ public class MypageController implements ExceptionProcessor {
     }
 
     @PostMapping("/modify")
-    public String modifyPs(@Valid RequestJoin form, Model model) {
+    public String modifyPs(@Valid RequestMemberInfo form, Model model) {
         commonProcess("modify", model);
         //변경된 개인정보가 requestjoin에 저장되야됨-null체크 필수?
-        if (memberUtil.isLogin()) {
-            Member member = memberUtil.getMember();
-            form.setUserPw(member.getUserPw());
-            form.setConfirmPassword(member.getConfirmPassword());
-            form.setEmail(member.getEmail());
-            //form.setZonecode(member.getZonecode());
-        }
+        updateService.update(form);
+
         return "redirect:/mypage/info";
     }
     @GetMapping("/reservation")
