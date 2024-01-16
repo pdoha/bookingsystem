@@ -35,12 +35,18 @@ public class JoinService {
         //비밀번호 BCrypt로 해시화
         String hash = encoder.encode(form.getUserPw());
         //커맨드 객체 form 을 변환메소드 map이 멤버 정보를 비교해서 해시화된 비번만 넣어줌
+
+        //회원가입 회원정보
         Member member = new Member();
         member.setEmail(form.getEmail());
         member.setMName(form.getMName());
-        //비밀번호 확인하려고 잠깐 hash 대신 넣음
-        member.setUserPw(hash);
+        member.setUserPw(hash); //비밀번호 해시화
         member.setUserId(form.getUserId());
+
+        //회원가입 주소
+        member.setZonecode(form.getZonecode());
+        member.setAddress(form.getAddress());
+        member.setAddressSub(form.getAddressSub());
 
         //DB에 저장
         process(member);

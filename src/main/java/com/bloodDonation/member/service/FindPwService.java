@@ -10,6 +10,7 @@ import com.bloodDonation.member.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +27,12 @@ import java.util.Map;
 public class FindPwService {
 
     private final FindPwValidator validator;
-    private final MemberRepository repository;
+    private final MemberRepository memberRepository;
     private final EmailSendService sendService;
     private final PasswordEncoder encoder;
     private final Utils utils;
 
-    public void process(RequestFindPw form, Error errors){
+    public void process(RequestFindPw form, Errors errors){
         //비밀번호 찾기 검증
         validator.validate(form, errors);
 
