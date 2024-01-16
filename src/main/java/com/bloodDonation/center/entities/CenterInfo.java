@@ -48,5 +48,9 @@ public class CenterInfo extends BaseMember {
 
     private int bookCapacity;   // 예약가능인원: -1이면 무제한, 0이면 예약 불가
 
-
+    /**
+     * 필요 X
+     */
+    private String location;
+    private String centerType;
 }

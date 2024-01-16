@@ -67,7 +67,6 @@ public class CsvUtils {
             return this;
         }
 
-        final Long[] i = {00001L};
         //sqlData에 쿼리문 저장
         lines.forEach(line -> {
             StringBuffer sb = new StringBuffer(3000);
@@ -77,14 +76,13 @@ public class CsvUtils {
             sb.append(Arrays.stream(fields).collect(Collectors.joining(",")));
             //if (StringUtils.hasText(addField)) sb.append(",").append(addField);
             sb.append(" ) VALUES (");
-            sb.append(i[0]);    // cCode
-            sb.append(", ");
-            sb.append(Arrays.stream(line).map(s -> "\"" + s + "\"").collect(Collectors.joining(",")));
+            sb.append("CENTER_SEQ.NEXTVAL");    // cCode
+            sb.append(",");
+            sb.append(Arrays.stream(line).map(s -> "\'" + s + "\'").collect(Collectors.joining(",")));
             if (StringUtils.hasText(addValue)) sb.append(",").append(addValue);
             sb.append(");\n");
             sqlData.add(sb.toString());
 
-            i[0] += 1L;
         });
 
         return this;
