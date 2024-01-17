@@ -129,6 +129,11 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("bloodview", model);
         return utils.tpl("mypage/bloodview");
     }
+    @GetMapping("/myprint")
+    public String myprint(Model model){
+        commonProcess("myprint", model);
+        return utils.tpl("mypage/myprint");
+    }
 
     @GetMapping("/unregister")
     public String unregister(Model model){
@@ -154,8 +159,11 @@ public class MypageController implements ExceptionProcessor {
             pageTitle = Utils.getMessage("전자문진", "commons");
         } else if (mode.equals("bloodview")) {
             pageTitle = Utils.getMessage("나의_헌혈내역", "commons");
+        } else if (mode.equals("myprint")) {
+            pageTitle = Utils.getMessage("헌혈증서출력", "commons");
         } else if (mode.equals("surveyresult")) {
             pageTitle = Utils.getMessage("검사결과", "commons");
+
         } else {
             if(mode.equals("unregister")) {
                 pageTitle = Utils.getMessage("회원탈퇴", "commons");
