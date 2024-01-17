@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
+//초기화된 비밀번호 업데이트 및 메일전송 테스트
 @SpringBootTest
 public class FindPwServiceTest {
 
