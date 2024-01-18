@@ -1,5 +1,8 @@
 package com.bloodDonation.commons;
 
+import com.bloodDonation.board.service.GuestPasswordCheckException;
+import com.bloodDonation.commons.exceptions.AlertBackException;
+import com.bloodDonation.commons.exceptions.AlertException;
 import com.bloodDonation.commons.exceptions.CommonException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,8 +26,20 @@ public interface ExceptionProcessor {
         }
 
         response.setStatus(status.value());
-        //콘솔에 에러출력
         e.printStackTrace();
+
+        if (e instanceof AlertException) { // 자바스크립트 Alert형태로 응답
+            String script = String.format("alert('%s');", e.getMessage());
+
+            if (e instanceof AlertBackException) { // history.back(); 실행
+                script += "history.back();";
+            }
+
+            model.addAttribute("script", script);
+            return "common/_execute_script";
+
+        }
+
 
         model.addAttribute("status",status.value());
         model.addAttribute("path", request.getRequestURL());

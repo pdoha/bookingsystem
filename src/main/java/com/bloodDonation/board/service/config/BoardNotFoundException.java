@@ -1,5 +1,6 @@
 package com.bloodDonation.board.service.config;
 
+
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.commons.exceptions.AlertBackException;
 import org.springframework.http.HttpStatus;
