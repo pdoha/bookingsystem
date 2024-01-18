@@ -30,7 +30,7 @@
 
     <script th:src="@{/admin/js/common.js}"></script>
     <script th:each="jsFile : ${addScript}"
-            th:src="@{/admin/js/{file}}.js(file=${jsFile})}"></script>
+            th:src="@{/admin/js/{file}.js(file=${jsFile})}"></script>
 
     <th:block layout:fragment="addScript"></th:block>
 </head>

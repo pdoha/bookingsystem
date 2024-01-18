@@ -15,6 +15,9 @@ public class Member extends Base {
     @Id @GeneratedValue
     private Long userNo;
 
+    @Column(length = 65, nullable = false)
+    private String gid; //그룹아이디
+
     @Column(length=40, nullable = false, unique = true)
     private String userId;
 
