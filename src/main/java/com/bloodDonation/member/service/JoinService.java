@@ -23,6 +23,7 @@ public class JoinService {
     private final JoinValidator validator; //검증추가
     private final PasswordEncoder encoder; //비밀번호 해시화
     private final AuthoritiesRepository authoritiesRepository;
+
     //커맨드 객체 형태로 가입이 들어올 경우
     public void process(RequestJoin form, Errors errors){
         validator.validate(form, errors);

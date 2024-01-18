@@ -15,9 +15,11 @@ public class Menu {
         //menus : 주메뉴 (회원관리)
         //MenuDetail : 부메뉴 ( list로 받아옴!)
         menus.put("member", Arrays.asList(
-          new MenuDetail("setting", "기본설정" , "/admin/setting"),
-           new MenuDetail("list", "회원 목록", "/admin/member"),
-           new MenuDetail("authority", "회원 권한","/admin/member/authority")
+
+
+                new MenuDetail("list", "회원 목록", "/admin/member"),
+                new MenuDetail("list", "회원 등록", "/admin/member/add")
+
 
         ));
         //게시판 메뉴코드
