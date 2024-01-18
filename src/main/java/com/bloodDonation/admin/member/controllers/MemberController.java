@@ -61,9 +61,21 @@ public class MemberController implements ExceptionProcessor {
         //모드값이 없을때는 회원목록 (list) 쪽으로 넘긴다
         mode = StringUtils.hasText(mode) ? mode : "list";
 
+        //공통
         List<String> addCss = new ArrayList<>(); // CSS 추가
-        List<String> addCommonScript = new ArrayList<>(); // 공통 자바스크립트
-        List<String> addScript = new ArrayList<>(); // 프론트 자바스크립트
+
+        //양식에 필요한 스크립트 ( 게시판 등록, 수정에 다 필요하니까 form)
+        List<String> addScript = new ArrayList<>();
+
+        //추가 등록 수정에 필요한 공통적인 자바스크립트 (관리자쪽에 필요한 설정
+        List<String> addCommonScript = new ArrayList<>();
+
+
+        if (mode.equals("add") || mode.equals("edit")){ //회원 등록 또는 수정일때
+            addCommonScript.add("ckeditor5/ckeditor"); //에디터 추가
+            addScript.add("member/form"); // 양식
+
+        }
 
         if (mode.equals("add")){
             pageTitle = "회원 등록";
