@@ -29,6 +29,11 @@ public class Menu {
                 new MenuDetail("posts","게시글 관리", "/admin/board/posts")
         ));
 
+        // 센터 메뉴코드
+        menus.put("center", Arrays.asList(
+                new MenuDetail("list", "센터 목록", "/admin/center"),
+                new MenuDetail("add_center", "센터 등록", "admin/center/add_center")
+        ));
         //예약현황 메뉴코드
         menus.put("reservation", Arrays.asList(
                 new MenuDetail("list", "예약자 목록", "/admin/reservation"),

@@ -1,7 +1,9 @@
 package com.bloodDonation.admin.center.controllers;
 
-import com.bloodDonation.center.entities.CenterInfo;
+import com.bloodDonation.admin.menus.Menu;
+import com.bloodDonation.admin.menus.MenuDetail;
 import com.bloodDonation.center.service.CenterInfoService;
+import com.bloodDonation.center.service.CenterSaveService;
 import com.bloodDonation.commons.ExceptionProcessor;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-// edit_center 안 뜸 => 404
 
 @Controller
 @RequestMapping("/admin/center")    //url 하나당 하나의 컨트롤러에 매핑되는 다른 핸들러 매핑과 달리 메서드 단위까지 세분화하여 적용 갸능. url, 파라미터, 헤더 등.
@@ -24,19 +25,23 @@ import java.util.Objects;
 public class CenterController implements ExceptionProcessor {
 
     private final CenterInfoService centerInfoService;
+    private final CenterSaveService centerSaveService;
 
     @ModelAttribute("menuCode") //getMenyCode의 리턴값을 Model 객체와 바인딩
     public String getMenuCode() {
         return "center";
     }
 
+    @ModelAttribute("subMenus")
+    public List<MenuDetail> getSubMenus(){
+        return Menu.getMenus("center");
+    }
     /**
      * 센터 목록
      */
     @GetMapping
     public String list(Model model) {   // Model 객체: Controller에서 생성된 데이터를 담아 View로 전달할 때 사용
         commonProcess("list", model);
-        List<CenterInfo> centerInfoList = this.centerInfoService.findCenters();
 
         return "admin/center/list";
     }
@@ -81,6 +86,8 @@ public class CenterController implements ExceptionProcessor {
             return "admin/center/" + mode;
         }
 
+        centerSaveService.save(form);
+
         return "redirect:/admin/center/info_center";
     }
 
@@ -101,11 +108,12 @@ public class CenterController implements ExceptionProcessor {
         String pageTitle = "헌혈의집 센터 목록";
         mode = Objects.requireNonNullElse(mode, "list");
 
-        if (mode.equals("add_center")) {
-            pageTitle = "새로운 센터 등록";
+        List<String> addCommonScript = new ArrayList<>();
 
-        } else if (mode.equals("edit_center")) {
-            pageTitle = "센터 정보 수정";
+        if (mode.equals("add_center") || mode.equals("edit_center")) {
+            pageTitle = "센터";
+            pageTitle += mode.contains("edit") ? "수정" : "등록";
+            addCommonScript.add("address");
 
         } else if (mode.equals("info_center")) {
             pageTitle = "센터 상세 정보";
@@ -113,5 +121,6 @@ public class CenterController implements ExceptionProcessor {
         }
 
         model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("addCommonScript", addCommonScript);
     }
 }
