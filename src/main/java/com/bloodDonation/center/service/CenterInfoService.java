@@ -15,14 +15,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CenterInfoService {
 
-    private final CenterInfoRepository repository;  // repository에게 DB관리 넘기므로 repository를 DI해줌
+    private final CenterInfoRepository centerInfoRepository;  // repository에게 DB관리 넘기므로 repository를 DI해줌
     private final HttpServletRequest request;
 
     /**
      * 전체 센터 목록 조회
      */
     public List<CenterInfo> findCenters(){
-        return repository.findAll();
+        return this.centerInfoRepository.findAll();
     }
 
     /**
@@ -31,11 +31,11 @@ public class CenterInfoService {
      * @return
      */
     public Optional<CenterInfo> findOne(Long cCode){
-        return repository.findBycCode(cCode);
+        return centerInfoRepository.findBycCode(cCode);
     }
 
 
-    /**
+    /*
      * 센터 목록 조회
      *
      * @param cCode
