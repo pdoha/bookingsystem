@@ -8,7 +8,8 @@
         <h3>센터가 예약되었습니다</h3>
         <ul>
             <li>
-                주소: <span th:value="#{address}"></span>
+                주소: <!--<span th:value="${session.reservation?.centeraddress}">
+                </span> 센터주소랑 회원주소랑 address이름이 같음 수정필요-->
             </li>
         </ul>
     </div>
@@ -16,22 +17,19 @@
     <!-- 달력출력-->
     <h3>예약시간 및 헌혈종류를 선택해주세요</h3>
     <!-- 날짜테이블과 헌혈종류 라디오버튼으로 변경가능하게 선택하는 테이블 -->
-    <table border="1"
-        bordercolor="black"
-        width="700"
-        height="200">
+    <table class="myresmodify">
         <thead>
             <tr>
                 <th>시간</th>
                 <th>9:00</th>
-                <th>9:20</th>
-                <th>9:40</th>
+                <th>9:30</th>
                 <th>10:00</th>
+                <th>10:30</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>헌혈종류선택</td>
+                <td>헌혈 종류 선택</td>
                 <td>
                     <p>
                     <input type="radio" name="bookType" id="bookTypeAll1" value="전혈">
@@ -104,7 +102,6 @@
                         <label for="bookType3_4" >혈소판혈장</label>
                     </p>
                 </td>
-
             </tr>
         </tbody>
     </table>
@@ -113,12 +110,12 @@
         <h5>개인정보를 확인해주세요</h5>
         <ul>
             <li>
-                <span>이름</span>
+                <span>이름</span><!--${session.member.mName}-->
                 <span th:value="#{mName}"></span>
             </li>
         </ul>
         <p>
-            <span>전화번호</span>
+            <span>전화번호</span><!--${session.tel} tel은 엔티티쪽에서 관리되는게 아니라 엔티티추가가 좋을 듯-->
             <input type="text" name="tel" id="tel" th:value="#{tel}">
         </p>
     </div>

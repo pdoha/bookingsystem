@@ -30,6 +30,14 @@ public class MemberController implements ExceptionProcessor {
         return Menu.getMenus("member");
     }
 
+    //기본설정
+    public String setting(Model model){
+        model.addAttribute("subMenuCode", "setting");
+        //연동
+        commonProcess("setting", model);
+        return "admin/member/member_setting";
+    }
+
     //회원 목록 &  관리
 
     @GetMapping

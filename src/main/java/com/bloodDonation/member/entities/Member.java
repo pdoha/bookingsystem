@@ -21,8 +21,7 @@ public class Member extends Base {
     @Column(length=65, nullable = false)
     private String userPw;
 
-    @Column(length=65, nullable = false)
-    private String confirmPassword;
+    //비밀번호 확인은 디비에 들어가는게 아니고 form에서만 확인하는것!
 
     @Column(length=40, nullable = false, unique = true)
     private String email;
