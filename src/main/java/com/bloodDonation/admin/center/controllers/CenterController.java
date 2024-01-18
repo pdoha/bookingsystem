@@ -1,7 +1,10 @@
 package com.bloodDonation.admin.center.controllers;
 
+import com.bloodDonation.center.entities.CenterInfo;
+import com.bloodDonation.center.service.CenterInfoService;
 import com.bloodDonation.commons.ExceptionProcessor;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,11 +13,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Objects;
+
+// edit_center 안 뜸 => 404
 
 @Controller
 @RequestMapping("/admin/center")    //url 하나당 하나의 컨트롤러에 매핑되는 다른 핸들러 매핑과 달리 메서드 단위까지 세분화하여 적용 갸능. url, 파라미터, 헤더 등.
+@RequiredArgsConstructor
 public class CenterController implements ExceptionProcessor {
+
+    private final CenterInfoService centerInfoService;
 
     @ModelAttribute("menuCode") //getMenyCode의 리턴값을 Model 객체와 바인딩
     public String getMenuCode() {
@@ -27,6 +36,7 @@ public class CenterController implements ExceptionProcessor {
     @GetMapping
     public String list(Model model) {   // Model 객체: Controller에서 생성된 데이터를 담아 View로 전달할 때 사용
         commonProcess("list", model);
+        List<CenterInfo> centerInfoList = this.centerInfoService.findCenters();
 
         return "admin/center/list";
     }
@@ -41,6 +51,19 @@ public class CenterController implements ExceptionProcessor {
         commonProcess("add_center", model);
 
         return "admin/center/add_center";
+    }
+
+    /**
+     * 센터 수정
+     * @param model
+     * @return
+     */
+    @GetMapping("/edit_center")
+    public String editCenter(@ModelAttribute RequestCenter form, Model model) {  // Model 객체를 통해 form 파라미터의 값들을 Getter, Setter, 생성자를 통해 주입, 전달
+
+        commonProcess("edit_center", model);
+
+        return "admin/center/edit_center";
     }
 
     /**
