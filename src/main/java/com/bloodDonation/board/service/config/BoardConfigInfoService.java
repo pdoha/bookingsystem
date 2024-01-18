@@ -4,6 +4,7 @@ import com.bloodDonation.admin.board.controllers.BoardSearch;
 import com.bloodDonation.admin.board.controllers.RequestBoardConfig;
 import com.bloodDonation.board.entities.Board;
 import com.bloodDonation.board.entities.QBoard;
+import com.bloodDonation.board.repositories.BoardDataRepository;
 import com.bloodDonation.board.repositories.BoardRepository;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
@@ -30,6 +31,7 @@ import static org.springframework.data.domain.Sort.Order.desc;
 @RequiredArgsConstructor
 public class BoardConfigInfoService {
     private final BoardRepository boardRepository;
+    private final BoardDataRepository boardDataRepository;
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
 
@@ -85,7 +87,7 @@ public class BoardConfigInfoService {
      * @param search
      * @return
      */
-    public ListData<Board> getList(BoardSearch search) {
+    public ListData<Board> getList(BoardSearch search, boolean isAll) {
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
 
@@ -94,6 +96,7 @@ public class BoardConfigInfoService {
 
         /* 검색 조건 처리 S */
         String bid = search.getBid();
+        List<String> bids = search.getBids();
         String bName = search.getBName();
 
         String sopt = search.getSopt();
@@ -102,6 +105,16 @@ public class BoardConfigInfoService {
 
         if (StringUtils.hasText(bid)) { // 게시판 ID
             andBuilder.and(board.bid.contains(bid.trim()));
+        }
+
+        // 게시판 ID 여러개 조회
+        if (bids != null && !bids.isEmpty()) {
+            andBuilder.and(board.bid.in(bids));
+        }
+
+        if (!isAll) { //노출 상태인 게시판만 조회
+            andBuilder.and(board.active.eq(true));
+
         }
 
         if (StringUtils.hasText(bName)) { // 게시판 명
@@ -137,8 +150,42 @@ public class BoardConfigInfoService {
         return new ListData<>(data.getContent(), pagination);
     }
 
+    /**
+     * 노출 상태인 게시판 목록
+     *
+     * @param search
+     * @return
+     */
+    public ListData<Board> getList(BoardSearch search) {
+        return getList(search, false);
+    }
+
+    /**
+     * 노출 가능한 모든 게시판 목록
+     *
+     * @return
+     */
+    public List<Board> getList() {
+        QBoard board = QBoard.board;
+
+        List<Board> items = (List<Board>)boardRepository.findAll(board.active.eq(true), Sort.by(desc("listOrder"), desc("createdAt")));
+
+        return items;
+    }
+
+    /**
+     * 사용자가 이용한 게시판 정보
+     *
+     * @param userId
+     * @return
+     */
+    public List<Board> getUserBoardsInfo(String userId) {
+        List<String> bids = boardDataRepository.getUserBoards(userId);
+
+        QBoard board = QBoard.board;
+        List<Board> items = (List<Board>)boardRepository.findAll(board.bid.in(bids), Sort.by(desc("createdAt")));
+
+        return items;
+    }
+
 }
-
-
-
-
