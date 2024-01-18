@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
-@ControllerAdvice("org.choongang")
+@ControllerAdvice("com.boolDonation")
 @RequiredArgsConstructor
 public class BoardAdvice {
     private final BoardConfigInfoService configInfoService;
