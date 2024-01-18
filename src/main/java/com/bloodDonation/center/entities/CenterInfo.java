@@ -2,10 +2,16 @@ package com.bloodDonation.center.entities;
 
 import com.bloodDonation.commons.entities.BaseMember;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class CenterInfo extends BaseMember {
 
     @Id @GeneratedValue
