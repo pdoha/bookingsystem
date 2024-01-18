@@ -183,7 +183,7 @@ public class BoardConfigInfoService {
         List<String> bids = boardDataRepository.getUserBoards(userId);
 
         QBoard board = QBoard.board;
-        List<Board> items = (List<Board>)boardRepository.findAll(board.bid.in(bids), Sort.by(desc("createdAt")));
+        List<Board> items = (List<Board>)boardRepository.findAll(board.active.eq(true), Sort.by(desc("listOrder"), desc("createdAt")));
 
         return items;
     }

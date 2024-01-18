@@ -2,13 +2,21 @@ package com.bloodDonation.configs;
 
 import com.bloodDonation.member.service.LoginFailureHandler;
 import com.bloodDonation.member.service.LoginSuccessHandler;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.io.IOException;
 
 @Configuration
 @EnableMethodSecurity//메소드별 통제 가능
@@ -33,19 +41,19 @@ public class SecurityConfig {
 
         });
         /* 인증 설정 E - 로그인 */
-        return http.build();
-    }
+        //return http.build();
+    //}
 
 
-    /*    http.logout(c -> {
+        http.logout(c -> {
             //이동할 주소
             c.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout")).logoutSuccessUrl("/member/login");
 
         });
 
-        *//*인증 설정 E = 로그인, 로그아웃*//*
+        /*인증 설정 E = 로그인, 로그아웃*/
 
-        *//* 인가 설정 S - 접근 통제 *//*
+        /* 인가 설정 S - 접근 통제 */
         //hasAuthrity(..) hasAnyAuthority(..) - 여러개일때, hasRole, hasAnyRole
         //ROLE_롤명칭
         //hasAthority('ADMIN')
@@ -56,8 +64,8 @@ public class SecurityConfig {
                     //.requestMatchers("/admin/**").hasAnyAuthority("ADMIN","MAMAGER")//"ADMIN","MAMAGER"만 /admin/**의 모든 클래스 접근 가능
                     .anyRequest().permitAll();//그외 모든 페이지는 모두 접근 가능
         });
-        *//* 인가 설정 S - 접근 통제 *//*
-        *//*
+        /* 인가 설정 S - 접근 통제 *//*
+        /*
          http.exceptionHandling(c -> {
              c.authenticationEntryPoint(new AuthenticationEntryPoint() {
                  @Override
@@ -66,7 +74,7 @@ public class SecurityConfig {
                  }
              });//권한 실패했을때 로그인 페이지로 가는 것이 아니라 따로 정해놓은 페이지로 가기
          });
-        *//*
+        */
 
         //주소가  admin이면 관리자 페이지임.
         http.exceptionHandling(c -> {
@@ -80,9 +88,9 @@ public class SecurityConfig {
                 }
             });
         });
-
+        http.headers(c ->c.frameOptions(f ->f.sameOrigin()));
         return http.build();
-    }*/
+    }
 
     //비밀번호 해시화
     //encode : 해시화
