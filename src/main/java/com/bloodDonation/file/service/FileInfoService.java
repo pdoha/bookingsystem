@@ -65,7 +65,7 @@ public class FileInfoService {
             builder.and(fileInfo.done.eq(mode.equals("DONE")));
         }
 
-        List<FileInfo> items = (List<FileInfo>) repository.findAll(builder, Sort.by(asc("crearedAt")));//오름차순
+        List<FileInfo> items = (List<FileInfo>) repository.findAll(builder, Sort.by(asc("createdAt")));//오름차순
 
         items.forEach(this::addFileInfo);
 
