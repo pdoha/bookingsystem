@@ -15,18 +15,25 @@ public class Menu {
         //menus : 주메뉴 (회원관리)
         //MenuDetail : 부메뉴 ( list로 받아옴!)
         menus.put("member", Arrays.asList(
-          new MenuDetail("setting", "기본설정" , "/admin/setting"),
-           new MenuDetail("list", "회원 목록", "/admin/member"),
-           new MenuDetail("authority", "회원 권한","/admin/member/authority")
+
+
+                new MenuDetail("list", "회원 목록", "/admin/member"),
+                new MenuDetail("add", "회원 등록", "/admin/member/add")
+
 
         ));
         //게시판 메뉴코드
         menus.put("board", Arrays.asList(
                 new MenuDetail("list","게시판 목록", "/admin/board"),
-                new MenuDetail("add", "게시판 등록", "/admin/bard/add"),
-                new MenuDetail("posts","게시글 관리", "/admin/board.posts")
+                new MenuDetail("add", "게시판 등록", "/admin/board/add"),
+                new MenuDetail("posts","게시글 관리", "/admin/board/posts")
         ));
 
+        // 센터 메뉴코드
+        menus.put("center", Arrays.asList(
+                new MenuDetail("list", "센터 목록", "/admin/center"),
+                new MenuDetail("add_center", "센터 등록", "admin/center/add_center")
+        ));
         //예약현황 메뉴코드
         menus.put("reservation", Arrays.asList(
                 new MenuDetail("list", "예약자 목록", "/admin/reservation"),

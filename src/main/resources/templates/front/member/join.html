@@ -60,7 +60,7 @@
             <dt th:text="#{비밀번호_확인}"></dt>
             <dd>
                 <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
-                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+                <div class="error" th:each="err :${#fields.errors('confirmPassword')}" th:text="${err}"></div>
             </dd>
         </dl>
 

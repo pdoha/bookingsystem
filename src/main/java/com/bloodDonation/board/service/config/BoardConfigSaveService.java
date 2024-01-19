@@ -2,6 +2,7 @@ package com.bloodDonation.board.service.config;
 
 import com.bloodDonation.admin.board.controllers.RequestBoardConfig;
 import com.bloodDonation.board.entities.Board;
+import com.bloodDonation.board.repositories.BoardDataRepository;
 import com.bloodDonation.board.repositories.BoardRepository;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.commons.exceptions.AlertException;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardConfigSaveService {//추가도 하지만 수정도 같이 함.
     private final BoardRepository boardRepository;
+    private final BoardDataRepository boardDataRepository;
     private final FileUploadService fileUploadService;
     private final Utils utils;
 
@@ -48,6 +50,7 @@ public class BoardConfigSaveService {//추가도 하지만 수정도 같이 함.
         board.setUseUploadImage(form.isUseUploadImage());
         board.setUseUploadFile(form.isUseUploadFile());
         board.setLocationAfterWriting(form.getLocationAfterWriting());
+        board.setShowListBelowView(form.isShowListBelowView());
         board.setSkin(form.getSkin());
         board.setCategory(form.getCategory());
 
@@ -60,9 +63,12 @@ public class BoardConfigSaveService {//추가도 하지만 수정도 같이 함.
         board.setHtmlTop(form.getHtmlTop());
         board.setHtmlBottom(form.getHtmlBottom());
 
+        board.setListOrder(form.getListOrder());
+
+
         boardRepository.saveAndFlush(board);
 
-        // 파일 업로드 완료 처리 파일. 올라갔던 목록이 유지
+        // 파일 업로드 완료 처리
         fileUploadService.processDone(board.getGid());
     }
 
@@ -78,6 +84,9 @@ public class BoardConfigSaveService {//추가도 하지만 수정도 같이 함.
 
             boolean active = Boolean.parseBoolean(utils.getParam("active_" + chk));
             board.setActive(active);
+
+            int listOrder = Integer.parseInt(utils.getParam("listOrder_" + chk));
+            board.setListOrder(listOrder);
         }
 
         boardRepository.flush();

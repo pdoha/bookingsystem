@@ -18,6 +18,7 @@ import java.util.UUID;
 @Entity
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
+@Table(indexes = @Index(name="idx_board_basic", columnList = "listOrder DESC, createdAt DESC"))
 public class Board extends BaseMember {
 
     @Id
@@ -26,6 +27,8 @@ public class Board extends BaseMember {
 
     @Column(length = 65, nullable = false)
     private String gid = UUID.randomUUID().toString();//파일 업로드, 다운로드할때 필요
+
+    private int listOrder; // 진열 가중치
 
     @Column(length = 60, nullable = false)
     private String bName; // 게시판 이름
@@ -50,6 +53,8 @@ public class Board extends BaseMember {
 
     @Column(length = 10, nullable = false)
     private String locationAfterWriting = "list"; // 글 작성 후 이동 위치
+
+    private boolean showListBelowView; //글보기 하단 게시글 목록
 
     @Column(length = 10, nullable = false)
     private String skin = "default"; // 스킨
