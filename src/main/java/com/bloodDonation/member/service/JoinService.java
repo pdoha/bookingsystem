@@ -39,6 +39,7 @@ public class JoinService {
 
         //회원가입 회원정보
         Member member = new Member();
+        member.setGid(form.getGid());
         member.setEmail(form.getEmail());
         member.setMName(form.getMName());
         member.setUserPw(hash); //비밀번호 해시화

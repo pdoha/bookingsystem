@@ -5,6 +5,7 @@ import com.bloodDonation.center.entities.CenterInfo;
 import com.bloodDonation.center.repositories.CenterInfoRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,14 +31,17 @@ public class CenterInfoService {
 
     public RequestCenter getForm(Long cCode) {
         CenterInfo data = get(cCode);
-        RequestCenter form = new modelMapper().map(data, RequestCenter.class);
+        RequestCenter form = new ModelMapper().map(data, RequestCenter.class);
 
         String bookYoil = data.getBookYoil();
         if(StringUtils.hasText(bookYoil)){
             List<String> yoils = Arrays.stream(bookYoil.split(",")).toList();
             form.setBookYoil(yoils);
         }
+
+        return form;
     }
+
     /**
      * 전체 센터 목록 조회
      */

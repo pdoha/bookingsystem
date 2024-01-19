@@ -7,8 +7,13 @@ import lombok.Data;
 public class RequestMemberInfo {
     private String mName;
     private String userPw;
-    private String confirmPw;
+    private String confirmPassword;
     private String zonecode;
     private String address;
     private String addressSub;
+
+    private String bldType;
+    private String bldType2;
+
+    private String[] mobile;
 }

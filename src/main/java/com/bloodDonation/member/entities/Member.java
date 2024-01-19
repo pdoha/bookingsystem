@@ -43,13 +43,19 @@ public class Member extends Base {
     private String addressSub;//상세주소
 
 
-    /*@Column(length=40, nullable = false)
-    private String phone;
-    회원가입할때 받지말고 나중에 회원정보수정에 입력할수있게 수정
+   /* @Column(length=40)
+    private String mobile;
 
 
-    */
+    @Column(length=3)
+    private String bldType; // 혈액형
+
+    @Column(length=3)
+    private String bldType2; // RH+,-*/
+
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
+
+
 }
