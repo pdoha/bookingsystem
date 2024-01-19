@@ -18,7 +18,7 @@ public class Menu {
 
 
                 new MenuDetail("list", "회원 목록", "/admin/member"),
-                new MenuDetail("list", "회원 등록", "/admin/member/add")
+                new MenuDetail("add", "회원 등록", "/admin/member/add")
 
 
         ));
