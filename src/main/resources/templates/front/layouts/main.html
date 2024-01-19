@@ -23,6 +23,7 @@
     <script th:each="jsFile : ${addCommonScript}"
             th:src="@{/common/js/{file}.js(file=${jsFile})}"></script>
 
+    <th:block layout:fragment="addCommonScript"></th:block>
 
     <script th:src="@{/front/js/common.js}"></script>
     <script th:each="jsFile : ${addScript}"
