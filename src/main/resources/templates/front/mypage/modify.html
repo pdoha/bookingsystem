@@ -15,7 +15,7 @@
         </dl>
         <dl>
             <dt th:text="#{아이디}"></dt>
-            <dd th:text="*{userId}"></dd>
+            <dd th:text="${session.member.userId}"></dd>
         </dl>
         <dl>
             <dt th:text="#{비밀번호}"></dt>
@@ -88,15 +88,15 @@
         <dl>
             <dt th:text="#{전화번호}"></dt>
             <dd>
-                <select name="mobile" th:field="*{mobile}">
+                <select name="mobile">
                     <option value>선택</option>
                     <option value="tel010">010</option>
                     <option value="tel011">011</option>
                 </select>
                 -
-                <input type="text" name="mobile" th:field="*{mobile}">
+                <input type="text" name="mobile">
                 -
-                <input type="text" name="mobile" th:field="*{mobile}">
+                <input type="text" name="mobile">
             </dd>
         </dl>
         <dl>
