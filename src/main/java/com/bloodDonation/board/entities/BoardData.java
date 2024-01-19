@@ -1,6 +1,7 @@
 package com.bloodDonation.board.entities;
 
 import com.bloodDonation.commons.entities.Base;
+import com.bloodDonation.file.entities.FileInfo;
 import com.bloodDonation.member.entities.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,12 +20,12 @@ import java.util.UUID;
 @Table(indexes = {
         @Index(name = "idx_boardData_basic",columnList ="notice DESC, createdAt DESC")
 })
-public class BoardData extends Base {
+public class BoardData extends Base {//게시글 데이터
     @Id @GeneratedValue
     private Long seq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="boardSeq")
+    @JoinColumn(name="bid")
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,6 +34,9 @@ public class BoardData extends Base {
 
     @Column(length = 65, nullable = false)
     private String gid = UUID.randomUUID().toString();
+
+    @Column(length = 60)
+    private String category; //분류
 
     @Column(length = 40, nullable = false)
     private String poster; //작성자
@@ -54,9 +59,9 @@ public class BoardData extends Base {
 
     private String ua; //User_Agent : 브라우저 정보
 
-    private int num1; //추가필드 : 정수
-    private int num2; //추가필드 : 정수
-    private int num3; //추가필드 : 정수
+    private Long num1; //추가필드 : 정수//값이 없으면 null값으로 대체
+    private Long num2; //추가필드 : 정수
+    private Long num3; //추가필드 : 정수
 
     @Column(length = 100)
     private String text1; //추가 필드 : 한줄 텍스트
@@ -71,4 +76,23 @@ public class BoardData extends Base {
     private String longText2; //추가 필드 : 여러줄 텍스트
     @Lob
     private String longText3; //추가 필드 : 여러줄 텍스트
+    @Transient
+    private List<FileInfo> editorFiles; // 에디터 첨부 파일
+    @Transient
+    private List<FileInfo> attachFiles; // 첨부 파일
+
+    @Transient
+    private boolean editable; // 수정 가능 여부
+
+    @Transient
+    private boolean deletable;//삭제 가능 여부
+
+    @Transient
+    private boolean mine; //게시글 소유자
+
+    @Transient
+    private boolean showEditButton; //수정 버튼 노출 여부
+
+    @Transient
+    private boolean showDeleteButton; //삭제 버튼 노출 여부
 }

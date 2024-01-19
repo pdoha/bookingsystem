@@ -1,6 +1,7 @@
 package com.bloodDonation.admin.board.controllers;
 
 import lombok.Data;
+import java.util.List;
 
 @Data
 public class BoardSearch {
@@ -8,6 +9,8 @@ public class BoardSearch {
     private int limit = 20;
 
     private String bid;
+    private List<String> bids;
+
     private String bName;
     private boolean active;
 

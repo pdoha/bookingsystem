@@ -23,7 +23,7 @@ public class MvcConfig implements WebMvcConfigurer {
     //정적 업로드 경로
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {//정적 경로 설정 추
-        registry.addResourceHandler(fileProperties.getPath() + "**")
+        registry.addResourceHandler(fileProperties.getUrl() + "**")
                 .addResourceLocations("file:///" + fileProperties.getPath());
 
         registry.addResourceHandler("/**")

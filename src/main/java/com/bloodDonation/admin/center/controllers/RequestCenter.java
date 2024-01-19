@@ -35,6 +35,6 @@ public class RequestCenter {
     private String bookAvlEmin; // 예약 가능 종료 분
     private String bookNotAvl; // 예약 불가 시간
     private boolean bookHday; // 공휴일 예약 가능 여부
-    private String bookBlock; // 예약 블록
+    private int bookBlock; // 예약 블록
     private int bookCapacity; // -1이면 무제한, 0이면 예약 불가
 }

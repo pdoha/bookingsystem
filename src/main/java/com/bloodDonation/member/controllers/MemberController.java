@@ -106,7 +106,7 @@ public class MemberController implements ExceptionProcessor {
 
         List<String> addCss = new ArrayList<>(); // CSS 추가
         List<String> addCommonScript = new ArrayList<>(); // 공통 자바스크립트
-        List<String> addScript = new ArrayList<>(); // 프론트 자바 스크립트
+        List<String> addScript = new ArrayList<>(); // 프론트 자바스크립트
 
         if (mode.equals("login")) { //로그인
             pageTitle = Utils.getMessage("로그인", "commons");
