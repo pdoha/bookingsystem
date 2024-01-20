@@ -10,10 +10,13 @@ import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -59,14 +62,16 @@ public class MypageController implements ExceptionProcessor {
     }
 
     @GetMapping("/modify")
-    public String modifiy(@ModelAttribute RequestJoin form, Model model) {
+    //RequestMemberInfo로 변경
+    public String modify(@ModelAttribute RequestMemberInfo form, Model model) {
         commonProcess("modify", model);
-
+    //로그인 되었을때
         if (memberUtil.isLogin()) {
             Member member = memberUtil.getMember();
-            form.setUserId(member.getUserId());
-            form.setMName(member.getMName());
+            form = new ModelMapper().map(member, RequestMemberInfo.class);
         }
+
+        model.addAttribute("requestMemberInfo", form);
 
         return utils.tpl("mypage/modify");
     }
@@ -145,14 +150,20 @@ public class MypageController implements ExceptionProcessor {
         mode = Objects.requireNonNullElse(mode, "main");
         String pageTitle = Utils.getMessage("마이페이지", "commons");
 
+        List<String> addCommonScript = new ArrayList<>();
+
         if (mode.equals("info")) {
             pageTitle = Utils.getMessage("개인정보_조회", "commons");
         } else if (mode.equals("modify")) {
             pageTitle = Utils.getMessage("개인정보_변경", "commons");
+            addCommonScript.add("address");
+
         } else if (mode.equals("reservation")) {
             pageTitle = Utils.getMessage("예약조회", "commons");
         } else if (mode.equals("reservation/modify")) {
             pageTitle = Utils.getMessage("예약변경", "commons");
+
+
         } else if (mode.equals("survey")) {
                 pageTitle = Utils.getMessage("전자문진안내", "commons");
         } else if (mode.equals("dosurvey")) {

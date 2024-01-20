@@ -5,24 +5,23 @@
 <section layout:fragment="content">
     <h1 th:text="#{개인정보_변경}"></h1>
     <!--변경은 requestJoin이용-->
-    <form name="frmSave" method="post" th:action="@{/mypage/modify}" autocomplete="off" th:object="${requestJoin}">
+    <form name="frmSave" method="post" th:action="@{/mypage/modify}" autocomplete="off" th:object="${requestMemberInfo}">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
         <dl>
             <dt th:text="#{회원명}"></dt>
             <dd>
-                <input type="text" th:text="*{mName}" name="mName" id="mName">
+                <input type="text" name="mName" th:field="*{mName}">
             </dd>
         </dl>
         <dl>
             <dt th:text="#{아이디}"></dt>
-            <dd>
-                <input type="text" th:text="*{userId}" name="userId" id="userId">
-            </dd>
+            <dd th:text="${session.member.userId}"></dd>
         </dl>
         <dl>
             <dt th:text="#{비밀번호}"></dt>
             <dd>
-                <input type="password" name="userPw" id="userPw"
-                autocomplete="off" class="frm_input_rePw">
+                <input type="password" name="userPw" class="frm_input_rePw" th:field="*{userPw}">
+                <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
                 <span id="chkPw1"></span>
                 <p class="bu_atte">
                     *비밀번호 변경시에만 작성해주세요.
@@ -33,8 +32,7 @@
         <dl>
             <dt th:text="#{비밀번호_확인}"></dt>
             <dd>
-                <input type="password" name="confirmPw" id="confirmPw"
-                autocomplete="off" class="frm_input_rePw">
+                <input type="password" name="confirmPassword" class="frm_input_rePw" th:field="*{confirmPassword}">
                 <span id="chkPw2"></span>
                 <p class="bu_atte">
                     *비밀번호는 영문/숫자/특수문자 중 ~자리로 입력해주세요.
@@ -44,7 +42,7 @@
         <!--이메일로 로그인할 수 있게 함 근데 이메일정보를 변경하면 엔티티와 memberinfoservice의
         이메일 로그인하는 부분을 삭제해야됨
         이메일수정하면 이 정보가 memberupdateservice에서 member쪽에 다시 저장되면 문제없는거?-->
-        <dl>
+        <!--<dl>
             <dt th:text="#{이메일}"></dt>
             <dd>
                 <input type="text" name="email" id="email" maxlength="70">
@@ -60,29 +58,29 @@
                     <option value="1">직접입력</option>
                 </select>
             </dd>
-        </dl>
+        </dl>-->
         <!--혈액형하고, 전화번호는 회원가입할때는 필요없는 항목이라, 개인정보변경에서 입력한
     혈액형과 전화번호는 따로 관리해서 null이 아니면 조회페이지에서 볼 수 있게 해야됨-->
         <dl>
             <dt th:text="#{혈액형}" style="float: left;"></dt>
             <dd>
-                <input type="radio" name="bldType" value="A" id="bld_TypeA" onclick="getRadio(this.id)">
+                <input type="radio" name="bldType" value="A" id="bld_TypeA" th:field="*{bldType}">
                 <label for="bld_TypeA">A</label>
 
-                <input type="radio" name="bldType" value="B" id="bld_TypeB" onclick="getRadio(this.id)">
+                <input type="radio" name="bldType" value="B" id="bld_TypeB" th:field="*{bldType}">
                 <label for="bld_TypeB">B</label>
 
-                <input type="radio" name="bldType" value="O" id="bld_TypeO" onclick="getRadio(this.id)">
+                <input type="radio" name="bldType" value="O" id="bld_TypeO" th:field="*{bldType}">
                 <label for="bld_TypeO">O</label>
 
-                <input type="radio" name="bldType" value="AB" id="bld_TypeAB" onclick="getRadio(this.id)">
+                <input type="radio" name="bldType" value="AB" id="bld_TypeAB" th:field="*{bldType}">
                 <label for="bld_TypeAB">AB</label>
 
                 <label>&nbsp;&nbsp;&nbsp;RH형_선택(필수)</label>
-                <input type="radio" name="bldType2" value="Rh+" id="bld_Typeplus" >
+                <input type="radio" name="bldType2" value="Rh+" id="bld_Typeplus" th:field="*{bldType}">
                 <label for="bld_Typeplus">Rh+</label>
 
-                <input type="radio" name="bldType2" value="Rh-" id="bld_Typeminus" >
+                <input type="radio" name="bldType2" value="Rh-" id="bld_Typeminus" th:field="*{bldType}">
                 <label for="bld_Typeminus">Rh-</label>
             </dd>
 
@@ -90,27 +88,33 @@
         <dl>
             <dt th:text="#{전화번호}"></dt>
             <dd>
-                <select name="tel" id="tel">
+                <select name="mobile">
                     <option value>선택</option>
                     <option value="tel010">010</option>
                     <option value="tel011">011</option>
                 </select>
                 -
-                <input class="phnum" type="text" name="tel2" id="tel2">
+                <input type="text" name="mobile">
                 -
-                <input class="phnum" type="text" name="tel3" id="tel3">
+                <input type="text" name="mobile">
             </dd>
         </dl>
         <dl>
             <dt th:text="#{주소}"></dt>
             <dd>
-                <input type="text" name="zonecode"  placeholder="우편번호" readonly>
-                <button type="button" class="search_address" th:text="#{주소_찾기}"></button>
-                <input type="text" name="address" placeholder="주소" readonly>
-                <input type="text" name="addressSub" placeholder="나머지 주소">
+                <div>
+                    <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly th:placeholder="#{우편번호}" >
+                    <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
+                </div>
+                <div>
+                    <input type="text" name="address" id="address" th:field="*{address}" readonly th:placeholder="#{주소}" >
+                </div>
+                <div>
+                    <input type="text" name="addressSub" th:field="*{addressSub}" th:placeholder="#{나머지 주소}">
+                </div>
             </dd>
         </dl>
-        <button type="submit"><a th:href="@{/mypage/info}">등록하기</a></button>
+        <button type="submit"><a th:href="@{/mypage/info}">변경하기</a></button>
     </form>
 </section>
 </html>
