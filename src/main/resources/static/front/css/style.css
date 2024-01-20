@@ -11,7 +11,9 @@ dl { display: flex; }
 dt { width: 180px; }
 dd { flex-grow: 1; }
 
-.layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
+.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 60px; }
+
+main { min-height: 700px; }
 
 /* 페이징 공통 S */
 .pagination { text-align: center; margin: 30px 0; }

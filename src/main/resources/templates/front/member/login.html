@@ -2,7 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
+<th:block layout:fragment="addCommonScript">
+    <!-- BOOTSTRAP CARD -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
+    <!-- BOOTSTRAP CARD -->
+
+</th:block>
+<main layout:fragment="content" class="layout_width">
     <h1 th:text="#{로그인}"></h1>
     <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
         <!--로그인 성공시 이동 페이지 ( param으로 주소값을 따로 주면 그 주소로이동함!)-->
