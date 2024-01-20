@@ -1,6 +1,4 @@
-body {
-    background:  #f7f7f7;
-}
+
 
 header .site_top {background : #b82780; height : 100px; }
 a {text-decoration: none;}
@@ -17,7 +15,7 @@ input[type=button] { border:solid 2px blue }
 --------------------------------------------------------------*/
 
     .main-banner-container{
-          width: 100%;
+          width: 90%;
           margin:auto;
           margin-bottom: 200px;
 
@@ -77,11 +75,16 @@ li{
 # card
 --------------------------------------------------------------*/
 
-    .card{
-            width: 1200px;
+        .card{
+            width: 100%;
             border-radius: 80px;
             border-color:rgb(240, 153, 168);
+            margin: 0.5rem;
 
+        }
+
+        .section>img{
+                    10%;
         }
 
         .card-img-top{
@@ -101,61 +104,9 @@ li{
             color: rgb(117, 111, 111);
         }
 
-/*--------------------------------------------------------------
-# icons
---------------------------------------------------------------*/
-
-.flex_center{
-  display: flex;
-  justify-content: center;
-}
-
-.icon-box{
-  width:100%;
-  height: 100px;
-}
-
-
-.icon-box>h3{
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 50px;
-}
 
 
 
-.icon-box span{ display: block; text-align: center;}
-.icon-box a{
-  display: block;
-  width:130px;
-  height: 160px;
-  border-radius: 150px;
-  background-color: #fff;
-  align-items: center;
-  text-align: center;
-  padding-top:20%;
-  box-sizing: border-box;
-  margin : 50px 50px;
-}
-.icon-box img{
-  width: 35%;
-
-.icon-box span{
-  font-weight: bold;
-}
-
-/*--------------------------------------------------------------
-# box
---------------------------------------------------------------*/
-
-.box1{
-  margin-left: 100px;
-  position: absolute;
-  width: 100%;
-  height: 450px;
-  border-radius: 20px 20px 20px 20px;
-  background: linear-gradient(106.32deg, #db5295 14.23%, rgba(255, 25, 25, 0) 139.97%);
-}
 
 
 

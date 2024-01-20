@@ -1,7 +1,5 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
-* { font-family: 'Noto Sans KR', sans-serif; color: #000; box-sizing: border-box; outline: none; }
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+* { font-family: 'Poppins', sans-serif; color: #000; box-sizing: border-box; outline: none; }
 html { font-size: 13px; }
 body { margin: 0; }
 a { text-decoration: none; }
@@ -22,7 +20,7 @@ dd { flex-grow: 1; }
 .pagination .page + .page { margin-left: 3px; }
 /* 페이징 공통 E */
 
-/* 헤더 공통 S */
+/* 헤더 공통 S
 header .site_top { background: #f8f8f8; border-bottom: 1px solid #d5d5d5; }
 header .site_top > div { text-align: right; height: 30px; line-height: 30px; }
 header .site_top a { margin-left: 15px; }
@@ -31,15 +29,47 @@ header .site_top a:hover { text-decoration: underline; }
 header .logo_search > div { display: flex; align-items: center; justify-content: space-between; height: 100px; }
 header .logo_search .search { display: flex; }
 
-header nav { background: #596b99; }
+/*
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 0 25px; min-width: 120px; text-align: center; color: #fff; font-size: 1.35rem; }
 header nav > .inner a:hover { background: #222; }
+*/
+
+.header .navbar a{
+    margin: 0 1rem;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.header .navbar a:hover{
+  color: var(--main-color);
+  border-bottom: .1rem solid var(--main-color);
+  padding-bottom: .5rem;
+}
+
+
 /* 헤더 공통 S */
 
 /* 입력 항목 공통 S */
 input[type='text'],
 input[type='password'],
-input[type='email'] { width: 100%; height: 40px; padding: 0 10px; border: 1px solid #d5d5d5; border-radius: 3px; }
+input[type='email'] {
+        margin-top: 10px;
+        width: 300px;
+        height: 40px;
+        padding: 0 10px;
+        border: 2px solid green;
+        line-height: 30px;
+        border-radius: 30px;
+
+    }
+
+
+button{
+  border: 2px solid #e5e6f1;
+
+        border-radius: 10px;
+
+}
 select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
 /* 입력 항목 공통 E */
 
@@ -51,7 +81,10 @@ select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
 # 입력 항목 공통 Footer
 --------------------------------------------------------------*/
 
-
+.footer>h3{
+    text-align: center;
+    color: rgb(231, 92, 157);
+}
 
 .footer-container{
     border-top: 2px solid #efefef;
@@ -69,6 +102,7 @@ select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
 .footer li{
             float: right;
             font-size: 14px;
+            margin:0.3rem;
 }
 
 .footer ul a{ display: block; padding: 0 20px;
@@ -92,3 +126,7 @@ select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
     color : red;
     text-decoration: none;
 }
+
+/* 좌우 사이드 메뉴 */
+.left_menu { z-index: 10; position: fixed; width: 200px; border: 1px solid red; left: 0; bottom: 0;  height: 100%; background: #fff; }
+.right_menu { z-index: 10; position: fixed; width: 100px; border: 1px solid blue; right: 0; bottom: 0; height: 100%; background: #fff; }
