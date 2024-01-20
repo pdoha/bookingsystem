@@ -1,4 +1,4 @@
-package com.bloodDonation.center.controllers;
+package com.bloodDonation.admin.center.controllers;
 
 import lombok.Data;
 
