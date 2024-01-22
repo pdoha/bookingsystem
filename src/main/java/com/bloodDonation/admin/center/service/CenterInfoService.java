@@ -4,7 +4,7 @@ import com.bloodDonation.admin.center.controllers.RequestCenter;
 import com.bloodDonation.admin.center.repositories.CenterInfoRepository;
 import com.bloodDonation.admin.center.controllers.CenterSearch;
 import com.bloodDonation.admin.center.entities.CenterInfo;
-import com.bloodDonation.center.entities.QCenterInfo;
+import com.bloodDonation.admin.center.entities.QCenterInfo;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
 import com.bloodDonation.commons.Utils;
