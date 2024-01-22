@@ -1,7 +1,7 @@
 package com.bloodDonation.mypage.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.bloodDonation.member.entities.Member;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class Survey {
-    //private Member member;
+
+    @Id
+    @GeneratedValue
+    private Long seq;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
+
+    @Lob
+    private String data; // 설문 데이터  - JSON으로 기록
+
     @Column(length=3, nullable = false)
     private int positive;
 

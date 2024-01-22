@@ -4,7 +4,6 @@ package com.bloodDonation.mypage.controllers;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
-import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
@@ -101,7 +100,7 @@ public class MypageController implements ExceptionProcessor {
             commonProcess("reservation/modify",model);
             return utils.tpl("mypage/reservation_modify");
      }
-
+    /*
     @GetMapping("/survey")
     public String survey(Model model){
         commonProcess("survey", model);
@@ -117,6 +116,8 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("dosurvey", model);
         return utils.tpl("mypage/dosurvey_last");
     }
+
+
     //설문조사-결과는 surveyresult.html에 보여줘야 됨 결과페이지는 get으로매핑
     //결과를 보여주기 전에 저장하는 건 postmapping?
     //전자문진 결과도 커맨드, 엔티티 필요?
@@ -129,6 +130,8 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("surveyresult", model);
         return utils.tpl("mypage/surveyresult");
     }
+     */
+
     @GetMapping("/bloodview")
     public String bloodview(Model model){
         commonProcess("bloodview", model);
