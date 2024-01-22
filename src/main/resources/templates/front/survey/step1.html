@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmSurvey" method="post" th:object="{requestSurvey}">
+    <form name="frmSurvey" method="get">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>1.최근 3일 이내</h3>
@@ -14,9 +14,9 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="items[0]" id="item1_true" value="true">
+            <input type="radio" name="questions1[0]" id="item1_true" value="true">
             <label for="item1_true">예</label>
-            <input type="radio" name="items[0]" id="items1_false" value="false">
+            <input type="radio" name="questions1[0]" id="items1_false" value="false">
             <label for="items1_false">아니요</label>
         </div>
         <div class="survey_btm">
@@ -32,9 +32,9 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="items[1]" id="item2_true" value="true">
+            <input type="radio" name="questions1[1]" id="item2_true" value="true">
             <label for="item2_true">예</label>
-            <input type="radio" name="items[1]" id="item2_false" value="false">
+            <input type="radio" name="questions1[1]" id="item2_false" value="false">
             <label for="item2_false">아니요</label>
         </div>
         <div class="survey_btm">
@@ -52,9 +52,9 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="items[2]" id="item3_true" value="true">
+            <input type="radio" name="questions1[2]" id="item3_true" value="true">
             <label for="item3_true">예</label>
-            <input type="radio" name="items[2]" id="item3_false" value="false">
+            <input type="radio" name="questions1[2]" id="item3_false" value="false">
             <label for="item3_false">아니요</label>
         </div>
         <div class="survey_btm">
@@ -70,9 +70,9 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="items[3]" id="item4_true" value="true">
+            <input type="radio" name="questions1[3]" id="item4_true" value="true">
             <label for="item4_true">예</label>
-            <input type="radio" name="items[3]" id="item4_false" value="false">
+            <input type="radio" name="questions1[3]" id="item4_false" value="false">
             <label for="item4_false">아니요</label>
         </div>
         <div class="survey_btm">
@@ -88,9 +88,9 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="items[4]" id="item5_true" value="true">
+            <input type="radio" name="questions1[4]" id="item5_true" value="true">
             <label for="item5_true">예</label>
-            <input type="radio" name="items[4]" id="item5_false" value="false">
+            <input type="radio" name="questions1[4]" id="item5_false" value="false">
             <label for="item5_false">아니요</label>
         </div>
         <div>
@@ -99,7 +99,7 @@
         </div>
         <div class="survey_btn_area">
             <button type="button"><a th:href="@{/mypage/survey}">이전</a></button>
-            <button type="button"><a th:href="@{/mypage/dosurvey_last}">다음</a></button>
+            <button type="button"><a th:href="@{/survey/step2}">다음</a></button>
         </div>
     </div>
     </form>

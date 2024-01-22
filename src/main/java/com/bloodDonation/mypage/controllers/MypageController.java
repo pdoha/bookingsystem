@@ -100,12 +100,13 @@ public class MypageController implements ExceptionProcessor {
             commonProcess("reservation/modify",model);
             return utils.tpl("mypage/reservation_modify");
      }
-    /*
+
     @GetMapping("/survey")
     public String survey(Model model){
         commonProcess("survey", model);
         return utils.tpl("mypage/survey");
     }
+    /*
     @GetMapping("/dosurvey")
     public String dosurvey(Model model){
         commonProcess("dosurvey", model);
@@ -169,15 +170,16 @@ public class MypageController implements ExceptionProcessor {
 
         } else if (mode.equals("survey")) {
                 pageTitle = Utils.getMessage("전자문진안내", "commons");
-        } else if (mode.equals("dosurvey")) {
-            pageTitle = Utils.getMessage("전자문진", "commons");
+
         } else if (mode.equals("bloodview")) {
             pageTitle = Utils.getMessage("나의_헌혈내역", "commons");
         } else if (mode.equals("myprint")) {
             pageTitle = Utils.getMessage("헌혈증서출력", "commons");
+        /*} else if (mode.equals("dosurvey")) {
+            pageTitle = Utils.getMessage("전자문진", "commons");
         } else if (mode.equals("surveyresult")) {
             pageTitle = Utils.getMessage("검사결과", "commons");
-
+*/
         } else {
             if(mode.equals("unregister")) {
                 pageTitle = Utils.getMessage("회원탈퇴", "commons");

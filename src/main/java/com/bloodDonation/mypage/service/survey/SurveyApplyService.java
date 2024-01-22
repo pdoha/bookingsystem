@@ -28,12 +28,12 @@ public class SurveyApplyService {
 
         for (boolean result : form.getQuestions1()) {
            if (result) positive++;
-           else negative--;
+           else negative++;
         }
 
         for (boolean result : form.getQuestions2()) {
             if (result) positive++;
-            else negative--;
+            else negative++;
         }
 
         Survey survey = Survey.builder()
