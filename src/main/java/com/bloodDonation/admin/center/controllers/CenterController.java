@@ -1,11 +1,11 @@
 package com.bloodDonation.admin.center.controllers;
 
+import com.bloodDonation.admin.center.service.CenterDeleteService;
 import com.bloodDonation.admin.menus.Menu;
 import com.bloodDonation.admin.menus.MenuDetail;
-import com.bloodDonation.center.controllers.CenterSearch;
-import com.bloodDonation.center.entities.CenterInfo;
-import com.bloodDonation.center.service.CenterInfoService;
-import com.bloodDonation.center.service.CenterSaveService;
+import com.bloodDonation.admin.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.service.CenterInfoService;
+import com.bloodDonation.admin.center.service.CenterSaveService;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.ListData;
 import jakarta.validation.Valid;
@@ -19,13 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@Controller("adminCenterController")
 @RequestMapping("/admin/center")    //url 하나당 하나의 컨트롤러에 매핑되는 다른 핸들러 매핑과 달리 메서드 단위까지 세분화하여 적용 갸능. url, 파라미터, 헤더 등.
 @RequiredArgsConstructor
 public class CenterController implements ExceptionProcessor {
 
     private final CenterInfoService centerInfoService;
     private final CenterSaveService centerSaveService;
+    private final CenterDeleteService centerDeleteService;
 
     @ModelAttribute("menuCode") //getMenyCode의 리턴값을 Model 객체와 바인딩
     public String getMenuCode() {
@@ -37,7 +38,7 @@ public class CenterController implements ExceptionProcessor {
      * @return
      */
     @ModelAttribute("subMenus")
-    public List<MenuDetail> getSubMenus(){
+    public List<MenuDetail> getSubMednus(){
         return Menu.getMenus("center");
     }
     /**
@@ -53,6 +54,22 @@ public class CenterController implements ExceptionProcessor {
         model.addAttribute("pagination", data.getPagination());
 
         return "admin/center/list";
+    }
+
+    @PatchMapping
+    public String editList(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
+        centerSaveService.saveList(chks);
+        model.addAttribute("script", "parent.location.reload()");
+        return "common/_execute_script";
+    }
+
+    @DeleteMapping
+    public String deleteList(@RequestParam(name="chk", required = false) List<Integer> chks, Model model){
+
+        centerDeleteService.deleteList(chks);
+
+        model.addAttribute("script", "parent.location.reload()");
+        return "common/_execute_script";
     }
 
     /**
@@ -97,14 +114,18 @@ public class CenterController implements ExceptionProcessor {
             return "admin/center/" + mode;
         }
 
-        centerSaveService.save(form);
+        CenterInfo data = centerSaveService.save(form);
 
-        return "redirect:/admin/center/info_center";
+        return "redirect:/admin/center/info_center" + data.getCCode();
     }
 
-    @GetMapping("/info_center")
-    public String infoCenter(Model model) {
+    @GetMapping("/info_center/{cCode}")
+    public String infoCenter(@PathVariable("cCode") Long cCode, Model model) {
         commonProcess("info_center", model);
+
+        CenterInfo data = centerInfoService.get(cCode);
+
+        model.addAttribute("centerInfo", data);
 
         return "admin/center/info_center";
     }

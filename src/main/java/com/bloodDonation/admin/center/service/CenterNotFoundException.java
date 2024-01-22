@@ -1,4 +1,4 @@
-package com.bloodDonation.center.service;
+package com.bloodDonation.admin.center.service;
 
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.commons.exceptions.AlertBackException;

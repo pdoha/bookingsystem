@@ -1,10 +1,10 @@
-package com.bloodDonation.center.service;
+package com.bloodDonation.admin.center.service;
 
 import com.bloodDonation.admin.center.controllers.RequestCenter;
-import com.bloodDonation.center.controllers.CenterSearch;
-import com.bloodDonation.center.entities.CenterInfo;
-import com.bloodDonation.center.entities.QCenterInfo;
-import com.bloodDonation.center.repositories.CenterInfoRepository;
+import com.bloodDonation.admin.center.repositories.CenterInfoRepository;
+import com.bloodDonation.admin.center.controllers.CenterSearch;
+import com.bloodDonation.admin.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.entities.QCenterInfo;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
 import com.bloodDonation.commons.Utils;
@@ -87,16 +87,17 @@ public class CenterInfoService {
             BooleanExpression addressCond = centerInfo.address.contains(skey);
             BooleanExpression addressSubCond = centerInfo.addressSub.contains(skey);
 
-            if(sopt.equals("cName")){
+            if(sopt.equals("cName")){   //이름 검색
                 andBuilder.and(cNameCond);
-            } else if (sopt.equals("address")){
+            } else if (sopt.equals("address")){ //주소 검색
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 andBuilder.and(orBuilder.or(addressCond).or(addressSubCond));
-            } else {
+            } else {    //통합 검색
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 andBuilder.and(orBuilder.or(addressCond).or(addressSubCond).or(cNameCond));
             }
         }
+
         /* 검색 조건 처리 E */
 
 

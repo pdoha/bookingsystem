@@ -1,6 +1,6 @@
 package com.bloodDonation.reservation.entities;
 
-import com.bloodDonation.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.entities.CenterInfo;
 import com.bloodDonation.commons.entities.Base;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.reservation.constants.DonationType;

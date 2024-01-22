@@ -1,4 +1,4 @@
-package com.bloodDonation.center.entities;
+package com.bloodDonation.admin.center.entities;
 
 import com.bloodDonation.commons.entities.BaseMember;
 import jakarta.persistence.*;
@@ -59,5 +59,14 @@ public class CenterInfo extends BaseMember {
      */
     private String location;
     private String centerType;
+
+    @Transient
+    private String bookAvlShour; // 예약 가능 시작 시간
+    @Transient
+    private String bookAvlSmin; // 예약 가능 시작 분
+    @Transient
+    private String bookAvlEhour; // 예약 가능 종료 시간
+    @Transient
+    private String bookAvlEmin; // 예약 가능 종료 분
 
 }
