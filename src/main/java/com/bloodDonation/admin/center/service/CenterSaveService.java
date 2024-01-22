@@ -20,14 +20,12 @@ import java.util.stream.Collectors;
 public class CenterSaveService {
 
     private final CenterInfoRepository centerInfoRepository;
-
-    private final HttpServletRequest request;
     private final Utils utils;
+
     public CenterInfo save(RequestCenter form){
 
         String mode = form.getMode();
         Long cCode = form.getCCode();
-        String name = form.getCName();
 
         mode = StringUtils.hasText(mode) ? mode : "add_center";     // mode 기본값
 

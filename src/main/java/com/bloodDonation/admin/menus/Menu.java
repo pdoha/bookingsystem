@@ -14,14 +14,16 @@ public class Menu {
         //회원 메뉴코드
         //menus : 주메뉴 (회원관리)
         //MenuDetail : 부메뉴 ( list로 받아옴!)
+        menus.put("config", Arrays.asList(
+           new MenuDetail("basic", "기본설정", "/admin/config"),
+           new MenuDetail("api", "API 설정", "/admin/config/api")
+        ));
+
         menus.put("member", Arrays.asList(
-
-
                 new MenuDetail("list", "회원 목록", "/admin/member"),
                 new MenuDetail("add", "회원 등록", "/admin/member/add")
-
-
         ));
+
         //게시판 메뉴코드
         menus.put("board", Arrays.asList(
                 new MenuDetail("list","게시판 목록", "/admin/board"),

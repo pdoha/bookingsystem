@@ -60,7 +60,7 @@ public class SecurityConfig {
         //ROLE_ADMIN -> hasAuthority('ROLE_ADMIN')
         //hasRole('ADMIN')
         http.authorizeHttpRequests(c -> {
-            c.requestMatchers("/mypage2/**").authenticated() //회원전용
+            c.requestMatchers("/mypage/**").authenticated() //회원전용
                     //.requestMatchers("/admin/**").hasAnyAuthority("ADMIN","MAMAGER")//"ADMIN","MAMAGER"만 /admin/**의 모든 클래스 접근 가능
                     .anyRequest().permitAll();//그외 모든 페이지는 모두 접근 가능
         });

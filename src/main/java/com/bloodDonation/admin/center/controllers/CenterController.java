@@ -116,7 +116,7 @@ public class CenterController implements ExceptionProcessor {
 
         CenterInfo data = centerSaveService.save(form);
 
-        return "redirect:/admin/center/info_center" + data.getCCode();
+        return "redirect:/admin/center/info_center/" + data.getCCode();
     }
 
     @GetMapping("/info_center/{cCode}")
@@ -137,7 +137,7 @@ public class CenterController implements ExceptionProcessor {
      * @param model
      */
     private void commonProcess(String mode, Model model) {
-        String pageTitle = "헌혈의집 센터 목록";
+        String pageTitle = "헌혈의집 센터 관리";
         mode = Objects.requireNonNullElse(mode, "list");
 
         List<String> addCommonScript = new ArrayList<>();
