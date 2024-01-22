@@ -6,7 +6,6 @@
     <meta name="_csrf" th:content="${_csrf.token}">
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
-
     <link rel="stylesheet" href="text/css" th:href="@{/common/css/style.css}">
     <link rel="stylesheet" href="text/css"
           th:each="cssFile : ${addCommonCss}"
@@ -23,6 +22,7 @@
     <script th:each="jsFile : ${addCommonScript}"
             th:src="@{/common/js/{file}.js(file=${jsFile})}"></script>
 
+    <th:block layout:fragment="addCommonScript"></th:block>
 
     <script th:src="@{/front/js/common.js}"></script>
     <script th:each="jsFile : ${addScript}"
