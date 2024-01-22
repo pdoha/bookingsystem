@@ -1,6 +1,6 @@
-package com.bloodDonation.center.repositories;
+package com.bloodDonation.admin.center.repositories;
 
-import com.bloodDonation.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.entities.CenterInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
