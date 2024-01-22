@@ -29,11 +29,12 @@ public class SurveyController {
     }
 
 
-    @PostMapping("/step2")
+    @GetMapping("/step2")
     public String step2(RequestSurvey form, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return utils.tpl("survey/step1");
+
         }
 
         return utils.tpl("survey/step2");
