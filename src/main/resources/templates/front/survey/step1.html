@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmSurvey" method="post" th:object="${requestSurvey}">
+    <form name="frmSurvey" method="post" th:object="{requestSurvey}">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>1.최근 3일 이내</h3>
@@ -14,10 +14,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes1" value="">
-            <label for="yes1">예</label>
-            <input type="radio" name="no" id="no1" value="">
-            <label for="no1">아니요</label>
+            <input type="radio" name="items[0]" id="item1_true" value="true">
+            <label for="item1_true">예</label>
+            <input type="radio" name="items[0]" id="items1_false" value="false">
+            <label for="items1_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail1" id="survey_detail1"
@@ -32,10 +32,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes2" value="">
-            <label for="yes2">예</label>
-            <input type="radio" name="no" id="no2" value="">
-            <label for="no2">아니요</label>
+            <input type="radio" name="items[1]" id="item2_true" value="true">
+            <label for="item2_true">예</label>
+            <input type="radio" name="items[1]" id="item2_false" value="false">
+            <label for="item2_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail2" id="survey_detail2"
@@ -52,10 +52,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes3" value="">
-            <label for="yes3">예</label>
-            <input type="radio" name="no" id="no3" value="">
-            <label for="no3">아니요</label>
+            <input type="radio" name="items[2]" id="item3_true" value="true">
+            <label for="item3_true">예</label>
+            <input type="radio" name="items[2]" id="item3_false" value="false">
+            <label for="item3_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail3" id="survey_detail3"
@@ -70,10 +70,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes4" value="">
-            <label for="yes4">예</label>
-            <input type="radio" name="no" id="no4" value="">
-            <label for="no4">아니요</label>
+            <input type="radio" name="items[3]" id="item4_true" value="true">
+            <label for="item4_true">예</label>
+            <input type="radio" name="items[3]" id="item4_false" value="false">
+            <label for="item4_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail4" id="survey_detail4"
@@ -88,10 +88,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes5" value="">
-            <label for="yes5">예</label>
-            <input type="radio" name="no" id="no5" value="">
-            <label for="no5">아니요</label>
+            <input type="radio" name="items[4]" id="item5_true" value="true">
+            <label for="item5_true">예</label>
+            <input type="radio" name="items[4]" id="item5_false" value="false">
+            <label for="item5_false">아니요</label>
         </div>
         <div>
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail5" id="survey_detail5"
