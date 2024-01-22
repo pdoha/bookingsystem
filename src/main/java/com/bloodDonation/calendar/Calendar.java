@@ -1,4 +1,4 @@
-package com.bloodDonation.Calendar;
+package com.bloodDonation.calendar;
 
 import com.bloodDonation.commons.Utils;
 import org.springframework.stereotype.Component;
