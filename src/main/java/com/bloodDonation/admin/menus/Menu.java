@@ -32,7 +32,7 @@ public class Menu {
         // 센터 메뉴코드
         menus.put("center", Arrays.asList(
                 new MenuDetail("list", "센터 목록", "/admin/center"),
-                new MenuDetail("add_center", "센터 등록", "admin/center/add_center")
+                new MenuDetail("add_center", "센터 등록", "/admin/center/add_center")
         ));
         //예약현황 메뉴코드
         menus.put("reservation", Arrays.asList(
