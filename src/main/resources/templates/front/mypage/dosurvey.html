@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
+    <form name="frmSurvey" method="post" th:object="${requestSurvey}">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>1.최근 3일 이내</h3>
@@ -101,5 +102,6 @@
             <button type="button"><a th:href="@{/mypage/dosurvey_last}">다음</a></button>
         </div>
     </div>
+    </form>
 </section>
 </html>
