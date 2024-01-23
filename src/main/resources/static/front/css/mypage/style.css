@@ -1,19 +1,19 @@
-main { display: flex; }
+main { display: flex; width: 1200px; margin-top:100px; margin-bottom: 100px; margin-left: 50px;}
 main > aside { width: 250px; }
-main > section { flex-grow: 1; background: #f8f8f8; }
+main > section { flex-grow: 1;  }
 
 /*마이페이지 페이지들*/
 body, ul, li {
   margin: 0;
   padding: 0;
-  list-style: none;		/* 해당 태그의 list-style을 none으로 하는 것으로 ●을 제거한다 */
+
 }
 
-a {
-  color: inherit;		/* 부모 엘리먼트의 값을 물려받는다 */
-  text-decoration: none;	/* 해당 태그의 text-decoration을 none으로 하는 것으로 밑줄을 제거한다 */
-}
 
+
+
+
+/*sidebar*/
 .tit {
     padding-bottom:25px;
     padding-left: 20px;
@@ -99,31 +99,63 @@ a {
 }
 
 /*전자문진 안내*/
+table th{
+background-color: rgb(239, 195, 245);
+text-align: center;
+font-size: 18px;
+
+}
+
+table td{
+padding: 10px;
+list-style: decimal;
+}
+
+  table li{
+    margin-top: 20px;
+    margin-left: 30px;
+    list-style: disc;
+    font-size: 16px;
+
+
+  }
+
+table ul,li{
+  margin-top: 5px;
+
+    }
+
+/*헌혈 자격 조건*/
 .terms{
     padding-left: 30px;
+    height: 50px;
+    padding-top: 10px;
+    font-size: 20px;
 
 }
 .table_terms {
            border-spacing: 0;
            width: 100%;
            border-top: 2px solid #222;
-           background: #fff;
 
 }
+
+/*테이블 밑줄*/
 .table_terms td,.table_terms th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #faf3f3e7;
 
     color: black;
 }
 .table_terms td{
     width: 200%;
 }
-.table_terms th{
-    border-right: 1px solid black;
-}
+
 .table_terms ul li {
     padding-bottom: 10px;
 }
+
+
+
 
 /*전자문진-상세내용*/
 .survey_btm{
