@@ -11,6 +11,7 @@ import java.util.UUID;
 //검증 받을 데이터
 @Data
 public class RequestJoin {
+    private String mode;
 
     private String gid = UUID.randomUUID().toString();
 
@@ -41,6 +42,7 @@ public class RequestJoin {
 
     @AssertTrue
     private boolean agree;
+
 
 
 }

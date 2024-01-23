@@ -7,12 +7,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Data
 @Builder
 public class MemberInfo implements UserDetails {
     //외부에서 세팅하면 쓸 수 있게 넣어준다
+    private LocalDateTime createdAt; //가입일자
     private String email;
     private String userId;
     private String password;

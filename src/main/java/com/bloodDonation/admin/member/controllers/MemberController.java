@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/admin/member")
 public class MemberController implements ExceptionProcessor {
 
+
     //주메뉴
     @ModelAttribute("menuCode")
     public String getMenuCode(){
