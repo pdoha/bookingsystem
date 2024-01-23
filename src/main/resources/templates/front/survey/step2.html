@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmSurvey" method="post" th:action="@{/survey/apply}">
+    <form name="frmSurvey" method="get">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>6.최근 1년 이내</h3>
@@ -92,21 +92,16 @@
         </div>
         <input type="radio" name="questions2[9]" id="item10_false" value="false">
         <label for="item10_false">아니요</label>
-        <p>
         <input type="radio" name="questions2[9]" id="item10_true1" value="true">
         <label for="item10_true1">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 1일 이상 숙박(거주 또는 군복무 포함)</label>
-        </p>
-        <p>
-            <input type="radio" name="questions2[9]" id="item10_true2" value="true">
+        <input type="radio" name="questions2[9]" id="item10_true2" value="true">
         <label for="item10_true2">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 1일 이상 6개월 미만 숙박</label>
-        </p>
-        <p>
-            <input type="radio" name="questions2[9]" id="item10_true3" value="true">
+        <input type="radio" name="questions2[9]" id="item10_true3" value="true">
         <label for="item10_true3">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 6개월 이상 거주 또는 군복무</label>
-        </p>
+
         <div>
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail10" id="survey_detail10"
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
@@ -120,29 +115,22 @@
 
         <input type="radio" name="questions2[10]" id="item11_false" value="false">
         <label for="item11_false">아니요</label>
-        <p>
         <input type="radio" name="questions2[10]" id="item11_true1" value="true">
         <label for="item11_true1">1980년~1996년까지 1개월 이상 "영국" 거주/방문/여행</label>
-        </p>
-        <p>
-            <input type="radio" name="questions2[10]" id="item11_true2" value="true">
+        <input type="radio" name="questions2[10]" id="item11_true2" value="true">
         <label for="item11_true2">1997년~현재까지 3개월 이상 "영국" 거주/방문/여행</label>
-        </p>
-        <p>
-            <input type="radio" name="questions2[10]" id="item11_true3" value="true">
+        <input type="radio" name="questions2[10]" id="item11_true3" value="true">
         <label for="item11_true3">1980년~현재까지 5년 이상 "유럽국가" 거주/방문/여행</label>
-        </p>
-        <p>
-            <input type="radio" name="questions2[10]" id="item11_true4" value="true">
+        <input type="radio" name="questions2[10]" id="item11_true4" value="true">
         <label for="item11_true4">1980년 이후 "영국, 프랑스"에서의 수혈</label>
-        </p>
+
         <div>
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail11" id="survey_detail11"
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
         </div>
         <div class="survey_btn_area">
-            <a th:href="@{/survey/step1}">이전</a>
-            <button type="submit">완료</button>/<!--a태그는 get방식이라서, 버튼을 submit으로 하고, post매핑-->
+            <button type="button"><a th:href="@{/survey/step1}">이전</a></button>
+            <button type="button"><a th:href="@{/survey/result}">완료</a></button>
         </div>
     </div>
     </form>

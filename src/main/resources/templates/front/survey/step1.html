@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmSurvey" method="post" th:action="@{/survey/step2}">
+    <form name="frmSurvey" method="get">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>1.최근 3일 이내</h3>

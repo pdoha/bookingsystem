@@ -4,8 +4,6 @@ package com.bloodDonation.mypage.service;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.MemberRepository;
-import com.bloodDonation.member.service.MemberInfo;
-import com.bloodDonation.member.service.MemberInfoService;
 import com.bloodDonation.mypage.controllers.RequestMemberInfo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +17,6 @@ public class MemberUpdateService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder encoder;
     private final MemberUtil memberUtil;
-    private final MemberInfoService memberInfoService;
-    private final HttpSession session;
 
     //RequestMemberInfo--마이페이지-개인정보변경할 정보가 담긴 커맨드 객체
     public void update(RequestMemberInfo form) {
@@ -45,9 +41,5 @@ public class MemberUpdateService {
 
         //주소,비번 변경한거 저장하기
         memberRepository.saveAndFlush(member);
-
-        MemberInfo memberInfo = (MemberInfo)memberInfoService.loadUserByUsername(member.getUserId());
-
-        session.setAttribute("member", memberInfo.getMember());
     }
 }

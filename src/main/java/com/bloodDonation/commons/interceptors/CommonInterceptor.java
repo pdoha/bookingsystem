@@ -23,7 +23,7 @@ public class CommonInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        checkDevice(request); //기기 체크
+        checkDevice(request);
         clearLoginData(request);
         loadSiteConfig(request);
 
@@ -50,9 +50,9 @@ public class CommonInterceptor implements HandlerInterceptor {
 
     private void clearLoginData(HttpServletRequest request) {
         String URL = request.getRequestURI();
-        if (URL.indexOf("/member/login") == -1) { //문자열이 포함되지 않을때
-            HttpSession session = request.getSession(); //세션 객체 가져와서
-            MemberUtil.clearLoginData(session); //만들어놓은  MemberUtil 이용
+        if (URL.indexOf("/member/login") == -1) {
+            HttpSession session = request.getSession();
+            MemberUtil.clearLoginData(session);
         }
     }
 
