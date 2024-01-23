@@ -20,6 +20,9 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     private FileProperties fileProperties;
 
+
+
+
     //정적 업로드 경로
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {//정적 경로 설정 추

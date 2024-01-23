@@ -10,19 +10,106 @@
     <!--로그인 후 템플릿-->
     <th:block sec:authorize="isAuthenticated()"><!--로그인 상태-->
 
-        <!--마이페이지 프로필이미지-->
-        <th:block th:if="${session.member.profileImage != null}"
-                  th:utext="${utils.printThumb(session.member.profileImage.seq, 80,80,'profile_image')}">
-        </th:block>
-
         <!--환영 메세지-->
-        <span th:text = "${#messages.msg('LOGIN_MSG',session.member.name,session.member.userId)}"></span>
+        <span th:text="${#messages.msg('LOGIN_MSG',session.member.mName,session.member.userId)}"></span>
         <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
         <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
 
         <!--관리자 페이지 이동-->
         <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
     </th:block>
+
+
+
+
+    <nav class="navbar">
+
+    </nav>
+
+
+    <div class="gnb">
+        <ul>
+            <li><a href="/member/join">회원가입</a></li>
+            <li><a href="/member/login">로그인</a></li>
+            <li><a href="#">고객센터</a></li>
+        </ul>
+    </div>
+    <div class="header-container">
+        <h1>
+            <a href="http://localhost:3000">RED BANK</a>
+
+        </h1>
+
+        <ul>
+            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1043&cntntsId=1001">헌혈지식</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1058&cntntsId=1081">헌혈참여</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1072&cntntsId=1002">헌혈활동</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1068&bbsId=1101">고객센터</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1069&bbsId=1042">소식&프로모션</a></li>
+        </ul>
+
+
+
+        <div class="search-box">
+
+            <input type="text" placeholder="검색어를 입력해주세요"></input>
+
+        </div>
+
+    <style>
+        *{ margin: 0; padding: 0;}
+        a{text-decoration: none; color:inherit;}
+        li{list-style: none;}
+        body{
+            font-size:12px;
+            color:#545454;
+            font-family: '돋움';
+        }
+
+        .gnb{ width:1200px;
+            margin:auto;
+            overflow: auto;
+            margin-bottom: 30px;
+        }
+        .gnb>ul{ float:right;}
+        .gnb li{ float:left; }
+        .gnb a{ padding: 10px; display: block; }
+
+        .header-container{ width:1200px; margin: auto;
+            overflow: auto;
+        }
+
+
+
+
+        .header-container>h1{ color: red;
+            float:left; }
+
+        .search-box>input{ margin:auto; width: 200px;
+            background-color: yellow;
+            border: 2px solid green;
+            height: 40px;
+            float:right;
+            line-height: 30px;
+            border-radius: 30px;
+            text-align: center;
+        }
+        h1+ul{ float:left;}
+        h1+ul>li{ float:left;}
+        h1+ul>li>a{ float:left;
+            margin: 2rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: black;
+        }
+
+          h1+ul>li>a:hover{
+            color: red;
+            border-bottom: .1rem solid red;
+            padding-bottom: .1rem;
+
+          }
+    </style>
 
 </header>
 </html>

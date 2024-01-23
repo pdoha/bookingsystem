@@ -46,6 +46,11 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("add", model);
         return "admin/member/add";
     }
+    @PostMapping //페이지 이동없음
+    public String edit(Model model){
+        commonProcess("add", model);
+        return "admin/member/edit";
+    }
     //회원 추가 & 저장 (동시에 공유)
     @PostMapping("/save")
     public String save(Model model){
@@ -91,6 +96,7 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("subMenuCode", mode); //서브메뉴코드는 모드값과 동일하게
         model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
 
 
