@@ -3,6 +3,7 @@ package com.bloodDonation.admin.reservation.controllers;
 import com.bloodDonation.admin.menus.Menu;
 import com.bloodDonation.admin.menus.MenuDetail;
 import com.bloodDonation.commons.ExceptionProcessor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/admin/reservation")
+@RequiredArgsConstructor
 public class ReservationController implements ExceptionProcessor {
 
     //주메뉴 불러오기
