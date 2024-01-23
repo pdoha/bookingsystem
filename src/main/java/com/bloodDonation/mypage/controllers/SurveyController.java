@@ -28,8 +28,8 @@ public class SurveyController {
         return utils.tpl("survey/step1");
     }
 
-    //step1에서 다음페이지 넘어갈 때 form이 post이므로 post매핑으로 step2로 연결하기 
-    @PostMapping("/step2")
+
+    @GetMapping("/step2")
     public String step2(RequestSurvey form, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
