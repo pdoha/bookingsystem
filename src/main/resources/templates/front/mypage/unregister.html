@@ -3,7 +3,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <h1 th:text="#{회원탈퇴}"></h1>
-
+    <form name="frmUnregister" th:object="${requestUnRegister}">
+    <h1 class="unregister" th:text="#{회원탈퇴}"></h1>
+    <div>
+        <ul>
+            <li>비밀번호를 입력해주세요.</li>
+        </ul>
+    </div>
+    <div>
+        <th:block th:text="#{비밀번호}"></th:block>
+        <input type="password" name="userPw" id="userPw">
+        <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
+    </div>
+    </form>
 </section>
 </html>
