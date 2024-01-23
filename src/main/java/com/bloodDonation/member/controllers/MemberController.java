@@ -2,6 +2,8 @@ package com.bloodDonation.member.controllers;
 
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.service.FindPwService;
 import com.bloodDonation.member.service.JoinService;
 import jakarta.validation.Valid;
@@ -23,6 +25,7 @@ import java.util.List;
 public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
+    private final MemberUtil memberUtil;
     private final FindPwService findPwService; //비밀번호찾기
 
 
@@ -65,6 +68,16 @@ public class MemberController implements ExceptionProcessor {
     public String login(Model model) {
 
         return utils.tpl("member/login");
+    }
+
+    //회원조회
+    public void info(){
+        if(memberUtil.isLogin()){
+            Member member = memberUtil.getMember();
+            System.out.println(member);
+        }else{
+            System.out.println("미로그인 상태");
+        }
     }
 
     //비밀번호 찾기 양식
