@@ -5,32 +5,40 @@
     <meta charset="UTF-8">
     <meta name="_csrf" th:content="${_csrf.token}">
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta th:if="${siteConfig.siteDescription != null}" name="description" th:content="${siteConfig.siteDescription}">
+    <meta th:if="${siteConfig.siteKeywords != null}" name="keywords" th:content="${siteConfig.siteKeywords}">
     <!--제목-->
-    <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+    <title>
+        <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' - '}"></th:block>
+        <th:block th:if="${siteConfig.siteTitle != null}" th:text="${siteConfig.siteTitle}"></th:block>
+    </title>
 
+    <th:block layout:fragment="addCommonCss"></th:block>
     <!--아이콘 이미지 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <link rel="stylesheet" href="text/css" th:href="@{/common/css/style.css}">
+    <link rel="stylesheet" href="text/css" th:href="@{/common/css/style.css?v={v}(v=${siteConfig.cssJsVersion})}">
     <link rel="stylesheet" href="text/css"
           th:each="cssFile : ${addCommonCss}"
-          th:href="@{/common/css/{file}.css(file=${cssFile})}">
+          th:href="@{/common/css/{file}.css?v={v}(file=${cssFile}, v=${siteConfig.cssJsVersion})}">
 
-    <link rel="stylesheet" href="text/css" th:href="@{/admin/css/style.css}">
+    <link rel="stylesheet" href="text/css" th:href="@{/admin/css/style.css?v={v}(v=${siteConfig.cssJsVersion})}">
     <link rel="stylesheet" href="text/css"
           th:each="cssFile : ${addCss}"
-          th:href="@{/admin/css/{file}.css(file=${cssFile})}">
+          th:href="@{/admin/css/{file}.css?v={v}(file=${cssFile}, v=${siteConfig.cssJsVersion})}">
 
     <!--css-->
     <th:block layout:fragment="addCss"></th:block>
 
-    <script th:src="@{/common/js/common.js}"></script>
+    <th:block layout:fragment="addCommonScript"></th:block>
+    <script th:src="@{/common/js/layer.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
+    <script th:src="@{/common/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
     <script th:each="jsFile : ${addCommonScript}"
-            th:src="@{/common/js/{file}.js(file=${jsFile})}"></script>
+            th:src="@{/common/js/{file}.js?v={v}(file=${jsFile}, v=${siteConfig.cssJsVersion})}"></script>
 
 
-    <script th:src="@{/admin/js/common.js}"></script>
+    <script th:src="@{/admin/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
     <script th:each="jsFile : ${addScript}"
-            th:src="@{/admin/js/{file}.js(file=${jsFile})}"></script>
+            th:src="@{/admin/js/{file}.js?v={v}(file=${jsFile}, v=${siteConfig.cssJsVersion})}"></script>
 
     <th:block layout:fragment="addScript"></th:block>
 </head>

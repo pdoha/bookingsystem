@@ -64,7 +64,7 @@ header .btn_area a:last-of-type {
            background: #596b99;
            color: #fff;
 }
-/* 헤어 영역 E */
+/* 헤더 영역 E */
 
 /* 내용 영역 S */
 main {
@@ -128,7 +128,7 @@ nav.submenus {
            /* 매뉴 아래쪽 여백 */
            margin-bottom: 50px;
            display: flex;
-           align-ite ms: center;
+           align-items: center;
 }
 
 nav.submenus a {
@@ -254,3 +254,28 @@ select{
            margin-bottom: 30px;
            color: #596b99;
  }
+.error { box-shadow: 1px 1px 5px #596b99; padding: 7px 15px; border-radius: 5px; font-size: 0.95rem; color: #596b99; font-weight: 500; margin: 5px 0; }
+.error.global { padding: 10px 15px; font-size: 1.15rem; margin: 0 0 5px; }
+/* 메세지 공통 E */
+
+
+/* 페이징 공통 S */
+.pagination { text-align: center; margin: 30px 0; }
+.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #596b99; color: #fff; }
+.pagination .page + .page { margin-left: 3px; }
+/* 페이징 공통 E */
+
+
+/* 파일 공통 S */
+.file_tpl_box { display: inline-block; padding: 7px 10px; border: 1px solid #222; border-radius: 3px; margin: 5px 2px 0 0; background: #fff; }
+.file_tpl_box a:not(.remove) { text-decoration: underline; }
+.file_tpl_box i { padding: 0 5px; cursor: pointer; }
+/* 파일 공통 E */
+
+
+/* 입력 항목 그룹화 */
+.input_grp { display: flex; align-items: center; }
+.input_grp > * + * { margin-left: 3px; }
+
+.no_data { padding: 50px 0 !important; text-align: center; }

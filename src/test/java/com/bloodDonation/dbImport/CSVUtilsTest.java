@@ -28,7 +28,7 @@ public class CSVUtilsTest {
     @DisplayName("CSV 파일 변환 후 SQL 가공 함수 테스트")
     void test2(){
         String[] fields = {"c_Code", "location", "c_Name", "center_Type", "address", "tel_Num", "zonecode", "address_Sub", "oper_Hour", "book_Yoil", "book_Avl", "book_Not_Avl", "book_Hday", "book_Block", "book_Capacity"};
-        List<String> sqlData = csvUtils.makeSql("data/centerInfo.csv", "CENTER_INFO", fields, "'우편번호', NULL, '09:00-18:00', NULL, NULL, NULL, 1, 10, 10", "EUC-KR").toList();
+        List<String> sqlData = csvUtils.makeSql("data/centerInfo.csv", "CENTER_INFO", fields, "'우편번호', NULL, '09:00-18:00', NULL, NULL, NULL, 1, 10, 10", "UTF-8").toList();
 
         sqlData.forEach(System.out::println);
     }
@@ -36,9 +36,9 @@ public class CSVUtilsTest {
     @Test
     @DisplayName("CSV 파일 변환 -> SQL 가공 -> sql 파일로 작성 테스트")
     void test3(){
-        String destPath = "data/center.sql";
+        String destPath = "data/centerLocal.sql";
         String[] fields = {"c_Code", "location", "c_Name", "center_Type", "address", "tel_Num", "zonecode", "address_Sub", "oper_Hour", "book_Yoil", "book_Avl", "book_Not_Avl", "book_Hday", "book_Block", "book_Capacity"};
-        csvUtils.makeSql("data/centerInfo.csv", "CENTER_INFO", fields, "'우편번호', NULL, '09:00-18:00', NULL, NULL, NULL, 1, 10, 10", "EUC-KR").toFile(destPath);
+        csvUtils.makeSql("data/centerInfo.csv", "CENTER_INFO", fields, "'우편번호', NULL, '09:00-18:00', NULL, NULL, NULL, 1, 10, 10", "UTF-8").toFile(destPath);
         File file = new File(destPath);
 
         assertTrue(file.exists());
