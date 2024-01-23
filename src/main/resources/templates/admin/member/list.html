@@ -2,56 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
-<section layout:fragment="content">
-    <div class="content _box">
-        <h2>회원 목록</h2>
-        <form id="frmList" method="post" action="/manager/list" target="ifrmProcess" autocomplete="off">
-            <table class="table-rows">
-                <thead>
-                <tr>
-                    <th width="20">
-                        <input type="checkbox" class="js-checkall" id="js-checkall" data-target-name="id">
-                        <label for="js-checkall" class="standalone"></label>
-                    </th>
-                    <th width="120" nowrap>가입일시</th>
-                    <th width="120" nowrap>가입구분</th>
-                    <th width="120" nowrap>아이디</th>
-                    <th width="120" nowrap>회원명</th>
-                    <th width="120" nowrap>탈퇴일시</th>
-                    <th width="120" nowrap>이용제한</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
+    <section layout:fragment="content">
+
+
+            <h2>회원 목록</h2>
+            <form id="frmList" method="post" th:action="@{/admin/memberr/list}" target="ifrmProcess" autocomplete="off">
+                <table class="table_cols mb30">
+                    <thead>
                     <tr>
-                        <td align="center">
-                            <input type="checkbox" name="id" value="29" id="id_29">
-                            <label for="id_29" class="standalone"></label>
-                        </td>
-                        <td align="center">
-                            2024.01.24
-                            <br>
-                            10:30:02
-                        </td>
-                        <td align="center">관리자</td>
-                        <td align="center">id</td>
-                        <td align="center">이름</td>
-                        <td align="center"></td> <!--탈퇴 일시-->
-                        <td align="center"></td>  <!--이용 제한-->
-                        <td nowrap>
-                            <a href="../manager/edit/29" class="sbtn">
-                                <i class="xi-check-min"></i>정보수정
-                            </a>
-                            <span class="sbtn manager_control" data-id="29">
-                                <i class="xi-check-min"></i>이용관리
-                            </span>
-                        </td>
+                        <th width="20">
+                            <input type="checkbox" class="js-checkall" id="js-checkall" data-target-name="id">
+                            <label for="js-checkall" class="standalone"></label>
+                        </th>
+                        <th width="120" nowrap>가입일시</th>
+                        <th width="120" nowrap>가입구분</th>
+                        <th width="120" nowrap>아이디</th>
+                        <th width="120" nowrap>회원명</th>
+                        <th width="120" nowrap>탈퇴일시</th>
+                        <th width="120" nowrap>이용제한</th>
+                        <th></th>
                     </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td align="center">
+                                <input type="checkbox" name="id" value="29" id="id_29">
+                                <label for="id_29" class="standalone"></label>
+                            </td>
+                            <td align="center">
+                                2024.01.24
+                                <br>
+                                10:30:02
+                            </td>
+                            <td align="center">관리자</td>
+                            <td align="center">id</td>
+                            <td align="center">이름</td>
+                            <td align="center"></td> <!--탈퇴 일시-->
+                            <td align="center"></td>  <!--이용 제한-->
+                            <td nowrap>
+                                <a th:href="@{/admin/member/edit}" class="sbtn">
+                                    <i class="xi-check-min"></i>정보수정
+                                </a>
+                                <span class="sbtn manager_control" data-id="29">
+                                    <i class="xi-check-min"></i>이용관리
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
 
 
-</section>
+
+    </section>
 </html>

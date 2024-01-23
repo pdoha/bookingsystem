@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/admin/member")
 public class MemberController implements ExceptionProcessor {
 
+
     //주메뉴
     @ModelAttribute("menuCode")
     public String getMenuCode(){
@@ -45,6 +46,11 @@ public class MemberController implements ExceptionProcessor {
     public String add(Model model){
         commonProcess("add", model);
         return "admin/member/add";
+    }
+    @PostMapping //페이지 이동없음
+    public String edit(Model model){
+        commonProcess("add", model);
+        return "admin/member/edit";
     }
     //회원 추가 & 저장 (동시에 공유)
     @PostMapping("/save")
@@ -77,13 +83,14 @@ public class MemberController implements ExceptionProcessor {
 
         }
 
-        if (mode.equals("add")){
+        if (mode.equals("add") || (mode.equals("edit"))){
             pageTitle = "회원 등록";
-
-        }else if(mode.equals("edit")){
-            pageTitle = "회원 수정";
+            pageTitle += mode.contains("edit") ? "수정" : "등록";
+            addCommonScript.add("mName");
 
         }
+
+
 
 
 

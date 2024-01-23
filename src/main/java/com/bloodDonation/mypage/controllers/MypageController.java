@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -145,9 +146,18 @@ public class MypageController implements ExceptionProcessor {
     }
 
     @GetMapping("/unregister")
-    public String unregister(Model model){
+    public String unregister(@ModelAttribute RequestUnRegister form, Model model){
         commonProcess("unregister", model);
         return utils.tpl("mypage/unregister");
+    }
+
+    @PostMapping("/unregister")
+    public String unreggisterPs(@Valid RequestUnRegister form, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            return utils.tpl("mypage/unregister");
+        }
+
+        return "redirect:/";//탈퇴 후 메인페이지로
     }
 
     private void commonProcess(String mode, Model model) {

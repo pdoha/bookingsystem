@@ -21,8 +21,6 @@
 <main layout:fragment="content">
 
 
-    <h1 th:text="#{최신_게시글}"></h1>
-
     <!-- Swiper -->
     <div class="main-banner-container">
         <div class="swiper mainSwiper">
@@ -61,7 +59,7 @@
             </li>
             <li>
                 <a href="#" class="flex_center">
-                    <a href="https://www.bloodinfo.net/knrcbs/br/rcord/bldRcordList.do?mi=1107">헌혈내역조회</a>
+                    <a th:href="@{/mypage/bloodview}">헌혈내역조회</a>
                     <img th:src="@{/common/image/헌혈내역.png}">
 
                 </a>
