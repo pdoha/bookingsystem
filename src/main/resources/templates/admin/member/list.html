@@ -3,11 +3,33 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
     <section layout:fragment="content">
-
+            <h1>회원 관리</h1>
+            <h2>회원 검색</h2>
+            <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
+                <table class="table_cols">
+                    <tr>
+                        <th width="180" th:text="#{키워드검색}"></th>
+                        <td>
+                            <div class="input_grp">
+                                <select name="sopt" th:field="*{sopt}">
+                                    <option value="all" th:text="#{통합검색}"></option>
+                                    <option value="userId" th:text="#{아이디}"></option>
+                                    <option value="mName" th:text="#{회원명}"></option>
+                                    <option value="email" th:text="#{이메일}"></option>
+                                </select>
+                                <input type="text" name="skey" th:field="*{skey}">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="search_btn">
+                    <button type="submit" th:text="#{검색하기}"></button>
+                </div>
+            </form>
 
             <h2>회원 목록</h2>
-            <form id="frmList" method="post" th:action="@{/admin/memberr/list}" target="ifrmProcess" autocomplete="off">
-                <table class="table_cols mb30">
+            <form id="frmList" method="post" th:action="@{/admin/member/list}" target="ifrmProcess" autocomplete="off">
+                <table class="table_rows mb30">
                     <thead>
                     <tr>
                         <th width="20">
@@ -24,23 +46,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr th:if="${items == null || items.isEmpty()}">
+                            <td colspan="8" class="no_data" th:text="#{조회된_회원이_없습니다.}"></td>
+                        </tr>
+
+                        <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
                             <td align="center">
-                                <input type="checkbox" name="id" value="29" id="id_29">
-                                <label for="id_29" class="standalone"></label>
+                                <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                                <label th:for="${'chk_' + status.index}" class="standalone"></label>
                             </td>
-                            <td align="center">
-                                2024.01.24
-                                <br>
-                                10:30:02
-                            </td>
-                            <td align="center">관리자</td>
-                            <td align="center">id</td>
+                            <td align="center" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                            <td align="center"></td>
+                            <td align="center" th:text="*{userId}"></td>
                             <td align="center">이름</td>
-                            <td align="center"></td> <!--탈퇴 일시-->
+                            <td align="center" th:text="*{mName}"></td> <!--탈퇴 일시-->
                             <td align="center"></td>  <!--이용 제한-->
                             <td nowrap>
-                                <a th:href="@{/admin/member/edit}" class="sbtn">
+                                <a th:href="@{/admin/member/edit/{userId}(userId=*{userId})}" class="sbtn">
                                     <i class="xi-check-min"></i>정보수정
                                 </a>
                                 <span class="sbtn manager_control" data-id="29">
@@ -52,7 +74,7 @@
                 </table>
             </form>
 
-
+            <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 
     </section>
 </html>
