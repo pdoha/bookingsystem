@@ -12,7 +12,7 @@ import lombok.Data;
 public class Authorities {
     @Id
     @GeneratedValue
-    private Long seq;
+    private Long seq; //일련번호
 
     @Enumerated(EnumType.STRING)
     @Column(length=20, nullable = false)
