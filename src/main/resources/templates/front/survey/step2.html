@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmSurvey" method="get" th:action="@{/survey/apply}">
+    <form name="frmSurvey" method="post" th:action="@{/survey/apply}">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>6.최근 1년 이내</h3>
@@ -141,8 +141,8 @@
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
         </div>
         <div class="survey_btn_area">
-            <button type="button"><a th:href="@{/survey/step1}">이전</a></button>
-            <button type="submit"><a th:href="@{/survey/apply}">완료</a></button>
+            <a th:href="@{/survey/step1}">이전</a>
+            <button type="submit">완료</button>/<!--a태그는 get방식이라서, 버튼을 submit으로 하고, post매핑-->
         </div>
     </div>
     </form>
