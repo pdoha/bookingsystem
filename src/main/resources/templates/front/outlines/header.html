@@ -2,10 +2,7 @@
 <html xmlns:th="htt[:www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
-    <th:block sec:authorize="isAnonymous()"><!--미로그인 상태-->
-        <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
-        <a th:href="@{/member/login}" th:text="#{로그인}"></a>
-    </th:block>
+
 
     <!--로그인 후 템플릿-->
     <th:block sec:authorize="isAuthenticated()"><!--로그인 상태-->
@@ -29,15 +26,19 @@
 
     <div class="gnb">
         <ul>
-            <li><a href="/member/join">회원가입</a></li>
-            <li><a href="/member/login">로그인</a></li>
+            <th:block sec:authorize="isAnonymous()"><!--미로그인 상태-->
+                <li><a th:href="@{/member/join}">회원가입</a></li>
+                <li><a th:href="@{/member/login}">로그인</a></li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()"><!--로그인 상태-->
+                <li><a th:href="@{/member/mypage}">마이페이지</a></li>
+            </th:block>
             <li><a href="#">고객센터</a></li>
         </ul>
     </div>
     <div class="header-container">
         <h1>
             <a href="http://localhost:3000">RED BANK</a>
-
         </h1>
 
         <ul>
