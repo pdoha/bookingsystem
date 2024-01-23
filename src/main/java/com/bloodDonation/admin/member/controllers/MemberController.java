@@ -91,6 +91,7 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("subMenuCode", mode); //서브메뉴코드는 모드값과 동일하게
         model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
 
 
