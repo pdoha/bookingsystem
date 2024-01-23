@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller("adminCenterController")
-@RequestMapping("/admin/center")    //url 하나당 하나의 컨트롤러에 매핑되는 다른 핸들러 매핑과 달리 메서드 단위까지 세분화하여 적용 갸능. url, 파라미터, 헤더 등.
+@RequestMapping("/admin/center")    //url 하나당 하나의 컨트롤러에 매핑되는 다른 핸들러 매핑과 달리 메서드 단위까지 세분화하여 적용 가능. url, 파라미터, 헤더 등.
 @RequiredArgsConstructor
 public class CenterController implements ExceptionProcessor {
 
@@ -116,18 +116,7 @@ public class CenterController implements ExceptionProcessor {
 
         CenterInfo data = centerSaveService.save(form);
 
-        return "redirect:/admin/center/info_center/" + data.getCCode();
-    }
-
-    @GetMapping("/info_center/{cCode}")
-    public String infoCenter(@PathVariable("cCode") Long cCode, Model model) {
-        commonProcess("info_center", model);
-
-        CenterInfo data = centerInfoService.get(cCode);
-
-        model.addAttribute("centerInfo", data);
-
-        return "admin/center/info_center";
+        return "redirect:/admin/center";
     }
 
     /**
@@ -146,9 +135,6 @@ public class CenterController implements ExceptionProcessor {
             pageTitle = "센터";
             pageTitle += mode.contains("edit") ? "수정" : "등록";
             addCommonScript.add("address");
-
-        } else if (mode.equals("info_center")) {
-            pageTitle = "센터 상세 정보";
 
         }
 
