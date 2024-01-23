@@ -22,12 +22,15 @@ public class MemberUtil {
         return false;
     }
 
+    //로그인 여부 체크
     /*getMember()를 활용해서 멤버를 가져올 수 있다면 로그인 상태*/
     public boolean isLogin(){
         return getMember() != null;
     }
   
-    /*세션에 저장된 멤버를 가져오는 것*/
+
+    //회원 데이터 조회
+    //세션에 저장된 멤버데이터를 가져오는 것
     public Member getMember(){
         Member member = (Member) session.getAttribute("member");
         return member;

@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/admin/member")
 public class MemberController implements ExceptionProcessor {
 
+
     //주메뉴
     @ModelAttribute("menuCode")
     public String getMenuCode(){
@@ -82,13 +83,14 @@ public class MemberController implements ExceptionProcessor {
 
         }
 
-        if (mode.equals("add")){
+        if (mode.equals("add") || (mode.equals("edit"))){
             pageTitle = "회원 등록";
-
-        }else if(mode.equals("edit")){
-            pageTitle = "회원 수정";
+            pageTitle += mode.contains("edit") ? "수정" : "등록";
+            addCommonScript.add("mName");
 
         }
+
+
 
 
 
