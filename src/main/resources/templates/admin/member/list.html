@@ -56,7 +56,11 @@
                                 <label th:for="${'chk_' + status.index}" class="standalone"></label>
                             </td>
                             <td align="center" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
-                            <td align="center"></td>
+                            <td align="center">
+                               <th:block th:each="auth : *{authorities}">
+                                   <th:block th:text="${@utils.getMessage('Authority.' + auth.authority.name(), 'commons')}"></th:block>
+                               </th:block>
+                            </td>
                             <td align="center" th:text="*{userId}"></td>
                             <td align="center">이름</td>
                             <td align="center" th:text="*{mName}"></td> <!--탈퇴 일시-->
