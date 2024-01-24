@@ -38,7 +38,7 @@ public class CSVUtilsTest {
     void test3(){
         String destPath = "data/centerLocal.sql";
         String[] fields = {"c_Code", "location", "c_Name", "center_Type", "address", "tel_Num", "zonecode", "address_Sub", "oper_Hour", "book_Yoil", "book_Avl", "book_Not_Avl", "book_Hday", "book_Block", "book_Capacity"};
-        csvUtils.makeSql("data/centerInfo.csv", "CENTER_INFO", fields, "'우편번호', NULL, '09:00-18:00', NULL, NULL, NULL, 1, 10, 10", "UTF-8").toFile(destPath);
+        csvUtils.makeSql("data/centerInfo.csv", "CENTER_INFO", fields, "'우편번호', NULL, '09:00-18:00', '월,화,수,목,금', '09:30-17:30', '12:00-13:00', 0, 30, 10", "UTF-8").toFile(destPath);
         File file = new File(destPath);
 
         assertTrue(file.exists());

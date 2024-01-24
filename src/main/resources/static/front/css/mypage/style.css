@@ -1,10 +1,20 @@
-main { display: flex; }
+main { display: flex; width: 1200px; margin-top: 60px; margin-bottom: 100px; }
 main > aside { width: 250px; }
-main > section { flex-grow: 1; background: #f8f8f8; }
+main > section { flex-grow: 1;  }
 
+button{
+    margin-top: 50px;
+    text-align: center;
+    height: 70px;
+    width: 250px;
+    float: right;
+
+}
 
 *{
     font-family: 'Noto Sans KR', sans-serif , 'Nunito', sans-serif;
+       font-size: 16px;
+
         }
 
 
@@ -13,10 +23,13 @@ main > section { flex-grow: 1; background: #f8f8f8; }
     font-size: 18px;
     width: 180px;
 
+
+
   }
 
 .table li{
     margin-top: 20px;
+
 
   }
 
@@ -31,7 +44,8 @@ main > section { flex-grow: 1; background: #f8f8f8; }
 body, ul, li {
   margin: 0;
   padding: 0;
-  list-style: none;		/* 해당 태그의 list-style을 none으로 하는 것으로 ●을 제거한다 */
+
+
 }
 
 a {
@@ -49,13 +63,16 @@ a {
 }
 .phnum {
     width: 50px;
+
 }
 .bld{
     width: 50px;
+
 }
 
 .bld2{
     width: 50px;
+
 }
 .side-bar > ul ul {
   display: none;
@@ -121,11 +138,15 @@ a {
 .myresmodify tr td {
     border: 1px solid black;
     height: 50%;
+
 }
 
 /*전자문진 안내*/
 .terms{
     padding-left: 30px;
+    height: 30px;
+    font-size: 20px;
+    margin-bottom: 10px;
 
 }
 .table_terms {
@@ -135,19 +156,27 @@ a {
            background: #fff;
 
 }
+
+/*표 밑줄 */
 .table_terms td,.table_terms th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #e5e5e5;
 
     color: black;
+
 }
 .table_terms td{
     width: 200%;
-}
-.table_terms th{
-    border-right: 1px solid black;
-}
+    padding-left: 20px;
+
+    }
+
 .table_terms ul li {
     padding-bottom: 10px;
+    list-style: disc;
+    margin-left: 15px;
+
+
+
 }
 
 /*전자문진-상세내용*/
