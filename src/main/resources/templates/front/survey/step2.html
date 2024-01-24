@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmSurvey" method="get">
+    <form name="frmSurvey" method="post" th:action="@{/}">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>6.최근 1년 이내</h3>
@@ -130,7 +130,7 @@
         </div>
         <div class="survey_btn_area">
             <button type="button"><a th:href="@{/survey/step1}">이전</a></button>
-            <button type="button"><a th:href="@{/survey/result}">완료</a></button>
+            <button type="submit">완료</button>
         </div>
     </div>
     </form>
