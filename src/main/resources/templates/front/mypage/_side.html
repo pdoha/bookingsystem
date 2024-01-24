@@ -1,46 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<aside class="side-bar" th:fragment="menus">
+<th:block th:fragment="menus">
     <h3><a th:href="@{/mypage}">마이페이지</a></h3>
-    <ul>
-        <li>
-            <div class="tit" th:text="#{개인정보}"></div>
-            <ul class="sub_menus">
 
-                <li>
-                    <a th:href="@{/mypage/info}" th:text="#{개인정보_조회}"></a>
-                </li>
-                <li>
-                    <label></label>
-                    <a th:href="@{/mypage/modify}" th:text="#{개인정보_변경}"></a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <div class="tit" th:text="#{예약정보}"></div>
-            <ul>
-                <li>
-                    <a th:href="@{/mypage/reservation}" th:text="#{예약조회}"></a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <div><a class="tit" th:href="@{/mypage/survey}" th:text="#{전자문진}"></a></div>
-        </li>
-        <li>
-            <div class="tit" th:text="#{내역조회}"></div>
-            <ul>
-                <li>
-                    <a th:href="@{/mypage/bloodview}" th:text="#{나의_헌혈내역}"></a>
-                </li>
-                <li>
-                    <a th:href="@{/mypage/myprint}" th:text="#{헌혈증서출력}"></a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <div><a class="tit" th:href="@{/mypage/unregister}" th:text="#{회원탈퇴}"></a></div>
-        </li>
-    </ul>
+
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a th:href="@{/mypage}">마이페이지</a>
+
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span>개인정보</span>
+                </a>
+                <ul class="nav-content">
+                    <li>
+                        <a th:href="@{/mypage/info}" th:text="#{개인정보_조회}"></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/mypage/modify}" th:text="#{개인정보_변경}"></a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link"  href="#">
+                    <span>예약정보</span>
+                </a>
+                <ul class="nav-content">
+                    <li>
+                        <a th:href="@{/mypage/reservation}" th:text="#{예약조회}"></a>
+                    </li>
+
+                   <li>
+                        <a th:href="@{/mypage/survey}" th:text="#{전자문진}"></a>
+
+
+                    </li><!-- End Tables Nav -->
+                </ul>
+            </li><!-- End Forms Nav -->
+
+
+
+
+            <li class="nav-item">
+                <a class="nav-link"  href="#">
+                    <span>내역조회</span>
+                </a>
+                <ul class="nav-content">
+                    <li>
+                        <a th:href="@{/mypage/bloodview}" th:text="#{나의_헌혈내역}"></a>
+
+                    </li>
+                    <li>
+                        <a th:href="@{/mypage/myprint}" th:text="#{헌혈증서출력}"></a>
+
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link"  href="#">
+                    <span>회원탈퇴</span>
+                </a>
+                <ul class="nav-content">
+                    <li>
+                        <a class="tit" th:href="@{/mypage/unregister}" th:text="#{회원탈퇴}"></a>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 </aside>
+</th:block>
 </html>

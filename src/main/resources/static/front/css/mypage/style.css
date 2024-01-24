@@ -1,5 +1,8 @@
-main { display: flex; width: 1200px; margin-top: 60px; margin-bottom: 100px; }
-main > aside { width: 250px; }
+main { display: flex; width: 1200px; margin-top: 60px; margin-bottom: 100px; margin-left: 230px;
+
+
+
+
 main > section { flex-grow: 1;  }
 
 button{
@@ -16,7 +19,181 @@ button{
        font-size: 16px;
 
         }
+/*--------------------------------------------------------------
+# Step box
+--------------------------------------------------------------*/
+#subContent { position: relative; float:left;padding-left:3.5rem; padding-bottom: 1rem; width: calc(100% - 14rem); margin-left: 30px;}
 
+
+.titleArea { position:relative; margin-bottom: 3rem;}
+
+.titleArea::after { position: absolute; bottom: 0; left: 80px; width: 13rem; height: 2px; background: #f42e3d; content: ""; }
+
+.titleH2 { position: relative; display: inline-block; padding: 0.95rem 0; width: calc(100% - 8rem); font-size: 1.8rem; color: #000; font-weight: bolder; margin-left: 100px; margin-top: 100px;}
+
+
+.titleArea { margin-bottom: 2rem; }
+.step-container{
+    width: 1500px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+
+
+.step-card{
+    position: relative;
+    background-color: #fff;
+    border-radius: 20px;
+    height: 230px;
+    width: 270px;
+    box-shadow: 0 5px 10px rgb(0,0,0, 0.1);
+
+
+}
+
+
+
+
+.card-content{
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    border-radius: 20px 20px 0 0;
+    background-color: rgb(230, 213, 226) ;
+    text-align: center;
+
+}
+
+
+
+
+.step-box1{
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    top: 20px;
+
+
+
+}
+.step-box1::after{
+    color: black;
+
+}
+
+
+.step-card .step-box2{
+    position: absolute;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-box2 li{
+    padding: 5px;
+}
+
+
+/*--------------------------------------------------------------
+# Sidebar
+--------------------------------------------------------------*/
+.sidebar {
+  height: 550px;
+  position: fixed;
+  top: 200px;
+  left: 0;
+  bottom: 0;
+  width: 230px;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: #f7e8f7;
+  border-radius: 30px;
+
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 5px;
+
+}
+
+
+
+.sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  transition: 0.3;
+  background-color: #f3dbf3;
+  padding: 10px 15px;
+  border-radius: 6px;
+
+}
+
+.sidebar-nav .nav-link i {
+  font-size: 16px;
+  margin-right: 10px;
+  color: black;
+}
+
+
+
+
+.sidebar-nav .nav-link:hover {
+  color: #fff;
+  background: red;
+}
+
+.sidebar-nav .nav-link:hover i {
+  color: red;
+}
+
+
+
+.sidebar-nav .nav-content {
+  padding: 5px 0 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-nav .nav-content a {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #012970;
+  transition: 0.3;
+  padding: 10px 0 10px 40px;
+  transition: 0.3s;
+
+}
+
+.sidebar-nav .nav-content a i {
+  font-size: 6px;
+  margin-right: 8px;
+  line-height: 0;
+  border-radius: 50%;
+
+}
+
+.sidebar-nav .nav-content a:hover,
+.sidebar-nav .nav-content a.active {
+  color: red;
+
+}
+
+
+/*--------------------------------------------------------------
+# table
+--------------------------------------------------------------*/
 
 .table th{
     text-align: center;
@@ -48,98 +225,7 @@ body, ul, li {
 
 }
 
-a {
-  color: inherit;		/* 부모 엘리먼트의 값을 물려받는다 */
-  text-decoration: none;	/* 해당 태그의 text-decoration을 none으로 하는 것으로 밑줄을 제거한다 */
-}
 
-.tit {
-    padding-bottom:25px;
-    padding-left: 20px;
-
-    color: black;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-.phnum {
-    width: 50px;
-
-}
-.bld{
-    width: 50px;
-
-}
-
-.bld2{
-    width: 50px;
-
-}
-.side-bar > ul ul {
-  display: none;
-}
-
-/* 모든 메뉴의 a에 속성값 부여 */
-.side-bar ul > li > a {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 40px;
-}
-
-/* 보기 편하게 글씨 크기를 키운다 */
-a {
-  font-size: 1rem;
-}
-
-.side-bar > ul > li {
-  position: relative;
-}
-
-/* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
-.side-bar > ul > li:hover > ul {
-  display: block;
-  position: static;
-  top: 10;         /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
-  /*left: 100%;     2차 메뉴를 1차 메뉴의 너비만큼 이동 */
-  width: 100%;    /* 1차 메뉴의 너비를 상속 */
-}
-
-/*예약조회*/
-.table_cols td{
-    padding-left: 20px;
-}
-/*검색하기 버튼-날짜*/
-.search_btn{
-
-    padding-bottom: 30px;
-}
-#ressearchbtn{
-    width: 200px;
-    /*margin: auto;
-    display: block;*/
-    margin-left: 20px;
-    /*padding-left: 20px;*/
-}
-
-/*예약변경*/
-
-.myresmodify {
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-.myresmodify tr th {
-    border: 1px solid black;
-
-}
-
-.myresmodify tr td {
-    border: 1px solid black;
-    height: 50%;
-
-}
 
 /*전자문진 안내*/
 .terms{
@@ -159,7 +245,7 @@ a {
 
 /*표 밑줄 */
 .table_terms td,.table_terms th{
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e6e6e6;
 
     color: black;
 

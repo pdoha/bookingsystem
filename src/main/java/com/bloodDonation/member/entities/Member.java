@@ -46,12 +46,13 @@ public class Member extends Base {
    /* @Column(length=40)
     private String mobile;
 
-
+    */
+    //개인정보변경에서 변경정보를 멤버에 저장해야됨
     @Column(length=3)
     private String bldType; // 혈액형
 
     @Column(length=3)
-    private String bldType2; // RH+,-*/
+    private String bldType2; // RH+ -
 
 
     //권한

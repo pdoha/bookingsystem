@@ -24,7 +24,9 @@
     혈액형과 전화번호는 따로 관리해서 null이 아니면 조회페이지에서 볼 수 있게 해야됨-->
     <dl>
         <dt th:text="#{혈액형}"></dt>
-        <dd></dd>
+        <!--<dd></dd>-->
+        <dd th:text="*{bldType}"></dd>
+        <dd th:text="*{bldType2}"></dd>
     </dl>
     <dl>
         <dt th:text="#{전화번호}"></dt>
