@@ -4,7 +4,6 @@ package com.bloodDonation.mypage.controllers;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
-import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
@@ -76,12 +75,6 @@ public class MypageController implements ExceptionProcessor {
         return utils.tpl("mypage/modify");
     }
 
-    @PostMapping("/modify222")
-    public String modifiy22(@RequestBody Member member) {
-        service.modifyMyInfo(member);
-        return utils.tpl("mypage/modify");
-    }
-
     @PostMapping("/modify")
     public String modifyPs(@Valid RequestMemberInfo form, Model model) {
         commonProcess("modify", model);
@@ -107,6 +100,7 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("survey", model);
         return utils.tpl("mypage/survey");
     }
+    /*
     @GetMapping("/dosurvey")
     public String dosurvey(Model model){
         commonProcess("dosurvey", model);
@@ -117,6 +111,8 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("dosurvey", model);
         return utils.tpl("mypage/dosurvey_last");
     }
+
+
     //설문조사-결과는 surveyresult.html에 보여줘야 됨 결과페이지는 get으로매핑
     //결과를 보여주기 전에 저장하는 건 postmapping?
     //전자문진 결과도 커맨드, 엔티티 필요?
@@ -129,6 +125,8 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("surveyresult", model);
         return utils.tpl("mypage/surveyresult");
     }
+     */
+
     @GetMapping("/bloodview")
     public String bloodview(Model model){
         commonProcess("bloodview", model);
@@ -136,16 +134,25 @@ public class MypageController implements ExceptionProcessor {
     }
     @GetMapping("/myprint")
     public String myprint(Model model){
-        commonProcess("myprint", model);
+        //commonProcess("myprint", model);
         return utils.tpl("mypage/myprint");
     }
-
+    /*
     @GetMapping("/unregister")
-    public String unregister(Model model){
+    public String unregister(@ModelAttribute RequestUnRegister form, Model model){
         commonProcess("unregister", model);
         return utils.tpl("mypage/unregister");
     }
 
+    @PostMapping("/unregister")
+    public String unreggisterPs(@Valid RequestUnRegister form, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            return utils.tpl("mypage/unregister");
+        }
+
+        return "redirect:/";//탈퇴 후 메인페이지로
+    }
+    */
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "main");
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -166,12 +173,13 @@ public class MypageController implements ExceptionProcessor {
 
         } else if (mode.equals("survey")) {
                 pageTitle = Utils.getMessage("전자문진안내", "commons");
-        } else if (mode.equals("dosurvey")) {
-            pageTitle = Utils.getMessage("전자문진", "commons");
+
         } else if (mode.equals("bloodview")) {
             pageTitle = Utils.getMessage("나의_헌혈내역", "commons");
         } else if (mode.equals("myprint")) {
             pageTitle = Utils.getMessage("헌혈증서출력", "commons");
+        } else if (mode.equals("dosurvey")) {
+            pageTitle = Utils.getMessage("전자문진", "commons");
         } else if (mode.equals("surveyresult")) {
             pageTitle = Utils.getMessage("검사결과", "commons");
 

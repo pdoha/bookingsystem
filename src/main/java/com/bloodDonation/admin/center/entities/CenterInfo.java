@@ -38,7 +38,7 @@ public class CenterInfo extends BaseMember {
     @Column(length = 40)
     private String bookYoil; //  예약 요일 설정
 
-    @Column(length = 20)
+    @Column(length = 80, nullable = false)
     private String bookAvl; // 예약 가능 시간 09:00-18:00
 
     /**

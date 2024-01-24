@@ -2,12 +2,10 @@ package com.bloodDonation.admin.config.service;
 
 import com.bloodDonation.admin.config.entities.Configs;
 import com.bloodDonation.admin.config.repositories.ConfigsRepository;
-import com.bloodDonation.file.service.FileUploadService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -19,8 +17,6 @@ import java.util.Optional;
 public class ConfigInfoService {
 
     private final ConfigsRepository repository;
-    private final FileUploadService fileUploadService;
-    private final HttpServletRequest request;
 
     //option : null값의 처리를 다양하게 하기 위해서 넣음
     public <T> Optional<T> get(String code, Class<T> clazz) {//Optional<T> : null값 처리

@@ -2,6 +2,8 @@ package com.bloodDonation.admin.config.controllers;
 
 import com.bloodDonation.admin.config.service.ConfigInfoService;
 import com.bloodDonation.admin.config.service.ConfigSaveService;
+import com.bloodDonation.admin.menus.Menu;
+import com.bloodDonation.admin.menus.MenuDetail;
 import com.bloodDonation.commons.ExceptionProcessor;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/config")
@@ -26,13 +30,22 @@ public class BasicConfigController implements ExceptionProcessor {
         return "config";
     }
 
+    @ModelAttribute("subMenuCode")
+    public String getSubMenuCode(){
+        return "basic";
+    }
+
+    @ModelAttribute("subMenus")
+    public List<MenuDetail> getSubMenus(){
+        return Menu.getMenus("config");
+    }
+
     @ModelAttribute("pageTitle")
     public String getPageTitle() {
         return "기본설정";
     }
 
     @GetMapping
-
     public String index(Model model) {
 
         BasicConfig config = infoService.get("basic",BasicConfig.class).orElseGet(BasicConfig::new);

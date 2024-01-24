@@ -2,28 +2,83 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
-<section layout:fragment="content">
-    <h1>회원 목록</h1>
-    <table>
-        <thead>
-        <tr height="40" align="center">
-            <th>회원명</th>
-            <th>가입일시</th>
-            <th>아이디</th>
-            <th>비밀번호</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr align="center">
-            <td>회원명적기</td>
-            <td>가입일시작성</td>
-            <td>아이디수정</td>
-            <td>비밀번호수정</td>
-        </tr>
-        </tbody>
-    </table>
+    <section layout:fragment="content">
+            <h1>회원 관리</h1>
+                <h2>회원 검색</h2>
+                <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
+                    <table class="table_cols">
+                        <tr>
+                            <th width="180" th:text="#{키워드검색}"></th>
+                            <td>
+                                <div class="input_grp">
+                                    <select name="sopt" th:field="*{sopt}">
+                                        <option value="all" th:text="#{통합검색}"></option>
+                                        <option value="userId" th:text="#{아이디}"></option>
+                                        <option value="mName" th:text="#{회원명}"></option>
+                                        <option value="email" th:text="#{이메일}"></option>
+                                    </select>
+                                    <input type="text" name="skey" th:field="*{skey}">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="search_btn">
+                        <button type="submit" th:text="#{검색하기}"></button>
+                    </div>
+                </form>
 
+                <h2>회원 목록</h2>
+                <form id="frmList" method="post" th:action="@{/admin/member/list}" target="ifrmProcess" autocomplete="off">
+                    <table class="table_rows mb30">
+                        <thead>
+                        <tr>
+                            <th width="20">
+                                <input type="checkbox" class="js-checkall" id="js-checkall" data-target-name="id">
+                                <label for="js-checkall" class="standalone"></label>
+                            </th>
+                            <th width="120" nowrap>가입일시</th>
+                            <th width="120" nowrap>가입구분</th>
+                            <th width="120" nowrap>아이디</th>
+                            <th width="120" nowrap>회원명</th>
+                            <th width="120" nowrap>탈퇴일시</th>
+                            <th width="120" nowrap>이용제한</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${items == null || items.isEmpty()}">
+                                <td colspan="8" class="no_data" th:text="#{조회된_회원이_없습니다.}"></td>
+                            </tr>
 
+                            <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
+                                <td align="center">
+                                    <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                                    <label th:for="${'chk_' + status.index}" class="standalone"></label>
+                                </td>
+                                <td align="center" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                                <td align="center">
+                                   <th:block th:each="auth : *{authorities}">
+                                       <th:block th:text="${@utils.getMessage('Authority.' + auth.authority.name(), 'commons')}"></th:block>
+                                   </th:block>
+                                </td>
+                                <td align="center" th:text="*{userId}"></td>
+                                <td align="center"  th:text="*{mName}">></td>
+                                <td align="center"</td> <!--탈퇴 일시-->
+                                <td align="center"></td>  <!--이용 제한-->
+                                <td nowrap>
+                                    <a th:href="@{/admin/member/edit/{userId}(userId=*{userId})}" class="sbtn">
+                                        <i class="xi-check-min"></i>정보수정
+                                    </a>
+                                    <span class="sbtn manager_control" data-id="29">
+                                        <i class="xi-check-min"></i>이용관리
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
 
-</section>
+            <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+
+    </section>
 </html>

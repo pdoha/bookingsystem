@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
+    <form name="frmSurvey" method="post" th:action="@{/}">
     <div class="survey">
         <div class="survey_txt_box">
             <h3>6.최근 1년 이내</h3>
@@ -15,10 +16,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes6" value="">
-            <label for="yes6">예</label>
-            <input type="radio" name="no" id="no6" value="">
-            <label for="no6">아니요</label>
+            <input type="radio" name="questions2[5]" id="item6_true" value="true">
+            <label for="item6_true">예</label>
+            <input type="radio" name="questions2[5]" id="item6_false" value="false">
+            <label for="item6_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail6" id="survey_detail6"
@@ -35,10 +36,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes7" value="">
-            <label for="yes7">예</label>
-            <input type="radio" name="no" id="no7" value="">
-            <label for="no7">아니요</label>
+            <input type="radio" name="questions2[6]" id="item7_true" value="true">
+            <label for="item7_true">예</label>
+            <input type="radio" name="questions2[6]" id="item7_false" value="false">
+            <label for="item7_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail7" id="survey_detail7"
@@ -55,10 +56,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes8" value="">
-            <label for="yes8">예</label>
-            <input type="radio" name="no" id="no8" value="">
-            <label for="no8">아니요</label>
+            <input type="radio" name="questions2[7]" id="item8_true" value="true">
+            <label for="item8_true">예</label>
+            <input type="radio" name="questions2[7]" id="item8_false" value="false">
+            <label for="item8_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail8" id="survey_detail8"
@@ -74,10 +75,10 @@
             <p>
                 위의 내용에 해당이 되시면 "예"를, 관련 경험이 없다면 "아니요"에 체크해주세요.
             </p>
-            <input type="radio" name="yes" id="yes9" value="">
-            <label for="yes9">예</label>
-            <input type="radio" name="no" id="no9" value="">
-            <label for="no9">아니요</label>
+            <input type="radio" name="questions2[8]" id="item9_true" value="true">
+            <label for="item9_true">예</label>
+            <input type="radio" name="questions2[8]" id="item9_false" value="false">
+            <label for="item9_false">아니요</label>
         </div>
         <div class="survey_btm">
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail9" id="survey_detail9"
@@ -89,15 +90,18 @@
                 아래 사항 중 선택해 주세요.
             </p>
         </div>
-        <input type="radio" name="malaria" id="malaria_radio1">
-        <label for="malaria_radio1">최근 1년 이내에 국내 말라리아 관련
-        헌혈제한지역에서 1일 이상 숙박(거주 또는 군복무 포함)</label>
-        <input type="radio" name="malaria" id="malaria_radio2">
-        <label for="malaria_radio2">최근 1년 이내에 국내 말라리아 관련
+        <input type="radio" name="questions2[9]" id="item10_false" value="false">
+        <label for="item10_false">아니요</label>
+        <input type="radio" name="questions2[9]" id="item10_true1" value="true">
+        <label for="item10_true1">최근 1년 이내에 국내 말라리아 관련
+            헌혈제한지역에서 1일 이상 숙박(거주 또는 군복무 포함)</label>
+        <input type="radio" name="questions2[9]" id="item10_true2" value="true">
+        <label for="item10_true2">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 1일 이상 6개월 미만 숙박</label>
-        <input type="radio" name="malaria" id="malaria_radio3">
-        <label for="malaria_radio3">최근 1년 이내에 국내 말라리아 관련
+        <input type="radio" name="questions2[9]" id="item10_true3" value="true">
+        <label for="item10_true3">최근 1년 이내에 국내 말라리아 관련
             헌혈제한지역에서 6개월 이상 거주 또는 군복무</label>
+
         <div>
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail10" id="survey_detail10"
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
@@ -108,22 +112,27 @@
                 아래 사항 중 선택해 주세요.
             </p>
         </div>
-        <input type="radio" name="vCJD" id="vCJD_radio1">
-        <label for="vCJD_radio1">1980년~1996년까지 1개월 이상 "영국" 거주/방문/여행</label>
-        <input type="radio" name="vCJD" id="vCJD_radio2">
-        <label for="vCJD_radio2">1997년~현재까지 3개월 이상 "영국" 거주/방문/여행</label>
-        <input type="radio" name="vCJD" id="vCJD_radio3">
-        <label for="vCJD_radio3">1980년~현재까지 5년 이상 "유럽국가" 거주/방문/여행</label>
-        <input type="radio" name="vCJD" id="vCJD_radio4">
-        <label for="vCJD_radio4">1980년 이후 "영국, 프랑스"에서의 수혈</label>
+
+        <input type="radio" name="questions2[10]" id="item11_false" value="false">
+        <label for="item11_false">아니요</label>
+        <input type="radio" name="questions2[10]" id="item11_true1" value="true">
+        <label for="item11_true1">1980년~1996년까지 1개월 이상 "영국" 거주/방문/여행</label>
+        <input type="radio" name="questions2[10]" id="item11_true2" value="true">
+        <label for="item11_true2">1997년~현재까지 3개월 이상 "영국" 거주/방문/여행</label>
+        <input type="radio" name="questions2[10]" id="item11_true3" value="true">
+        <label for="item11_true3">1980년~현재까지 5년 이상 "유럽국가" 거주/방문/여행</label>
+        <input type="radio" name="questions2[10]" id="item11_true4" value="true">
+        <label for="item11_true4">1980년 이후 "영국, 프랑스"에서의 수혈</label>
+
         <div>
             <textarea class="survey_btm" title="상세내용입력" name="survey_detail11" id="survey_detail11"
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
         </div>
         <div class="survey_btn_area">
-            <button type="button"><a th:href="@{/mypage/dosurvey}">이전</a></button>
-            <button type="button"><a th:href="@{/mypage/surveyresult}">완료</a></button>
+            <button type="button"><a th:href="@{/survey/step1}">이전</a></button>
+            <button type="submit">완료</button>
         </div>
     </div>
+    </form>
 </section>
 </html>

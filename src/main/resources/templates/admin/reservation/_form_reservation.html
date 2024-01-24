@@ -1,4 +1,104 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object = "${requestReservation}">
+    <div class = "error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <h2>기본 정보</h2>
+
+    <table class="table_cols mb30">
+        <tr th:if="*{mode == 'edit_reservation' && bookCode != null}">
+            <th>예약자 코드</th>
+            <td>
+                <input type="hidden" name="bookCode" th:field="*{bookCode}">
+                <th:block th:text="*{bookCode}"></th:block>
+            </td>
+        </tr>
+        <tr>
+            <th width="180"> 예약자명 </th>
+            <td>
+                <input type="text" name="donorName" th:field="*{donorName}">
+                <div class="error" th:each="err : ${#fields.errors('donorName')}"
+                     th:text="${err}"></div>
+            </td>
+        </tr>
+        <tr>
+            <th width="180">회원번호</th>
+            <td>
+                여기 넣어야할까? 넣는다면 어떻게..?
+            </td>
+        </tr>
+        <tr>
+            <th>예약자 연락처</th>
+            <td>
+                <div class="input_grp">
+                    <input type="text" name="donorTel" th:field="*{donorTel[0]}" id="donorTel1"  maxlength="4" size="4" class="w100"> -
+                    <input type="text" name="donorTel" th:field="*{donorTel[1]}" id="donorTel2" maxlength="4" size="4" class="w100"> -
+                    <input type="text" name="donorTel" th:field="*{donorTel[2]}" id="donorTel3" maxlength="4" size="4" class="w100">
+                </div>
+                <div class="error" th:each="err : ${#fields.errors('donorTel')}" th:text="${err}"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>센터 선택</th>
+            <td>
+                <select>
+                    <option value="ALL">지역</option>
+                    <option value="Location1">지역1</option>
+                    <option value="Location2">지역2</option>
+                </select>
+                <select>
+                    <option value="ALL">세부지역</option>
+                    <option value="Location1">지역1</option>
+                    <option value="Location2">지역2</option>
+                </select>
+                <select>
+                    <option value="ALL">센터이름</option>
+                    <option value="center1">센터1</option>
+                    <option value="center2">센터2</option>
+                </select>
+                최종 선택한 센터이름을 여기에 출력
+            </td>
+        </tr>
+
+        <tr>
+            <th>예약날짜 및 시간</th>
+            <td>
+                <input type="date" name="bookDate" th:field="*{bookDate}" id="bookDate">
+
+                <select name="bookHour" th:field="*{bookHour}">
+                    <option th:each="hour : ${#numbers.sequence(0, 23)}" th:value="${#numbers.formatInteger(hour, 2)}"
+                            th:text="${#numbers.formatInteger(hour, 2)}"
+                    ></option>
+                </select>
+                :
+                <select name="bookMin" th:field="*{bookMin}">
+                    <option th:each="min : ${#numbers.sequence(0, 50, 10)}" th:value="${#numbers.formatInteger(min, 2)}"
+                            th:text="${#numbers.formatInteger(min, 2)}"
+                    ></option>
+                </select>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>헌혈 종류</th>
+            <td>
+                <input type="radio" name="bookType" value="true" id="bookType_all" th:field="*{bookType}">
+                <label for="bookType_all">전혈(ALL)</label>
+
+                <input type="radio" name="bookType" value="false" id="bookType_A" th:field="*{bookType}">
+                <label for="bookType_A">혈장(A)</label>
+
+                <input type="radio" name="bookType" value="false" id="bookType_B" th:field="*{bookType}">
+                <label for="bookType_B">혈소판(B)</label>
+
+                <div class="error" th:each="err : ${#fields.errors('bookType')}" th:text="${err}"></div>
+            </td>
+        </tr>
+
+    </table>
+
+</th:block>
+
+
 </html>

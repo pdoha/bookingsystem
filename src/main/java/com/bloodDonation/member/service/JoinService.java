@@ -22,7 +22,7 @@ public class JoinService {
     private final MemberRepository memberRepository; //회원가입 성공시 DB저장
     private final JoinValidator validator; //검증추가
     private final PasswordEncoder encoder; //비밀번호 해시화
-    private final AuthoritiesRepository authoritiesRepository;
+    private final AuthoritiesRepository authoritiesRepository;  //권한 부여
 
     //커맨드 객체 형태로 가입이 들어올 경우
     public void process(RequestJoin form, Errors errors){

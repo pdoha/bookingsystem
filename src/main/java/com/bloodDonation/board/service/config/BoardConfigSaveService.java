@@ -65,7 +65,6 @@ public class BoardConfigSaveService {//추가도 하지만 수정도 같이 함.
 
         board.setListOrder(form.getListOrder());
 
-
         boardRepository.saveAndFlush(board);
 
         // 파일 업로드 완료 처리

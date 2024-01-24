@@ -1,7 +1,7 @@
 package com.bloodDonation.admin.center.service;
 
 
-import com.bloodDonation.Calendar.Calendar;
+import com.bloodDonation.calendar.Calendar;
 
 public class ReservationCalendar extends Calendar {
 }

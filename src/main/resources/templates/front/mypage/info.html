@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -5,60 +6,40 @@
 <section layout:fragment="content">
     <h1 th:text="#{개인정보_조회}"></h1>
     <!--변경은 로그인된 상태의 session이용-->
+    <th:block th:object="${session.member}">
     <dl>
         <dt th:text="#{회원명}"></dt>
-        <dd><!--th:value="${session.member.mName}"-->
-            <input type="text" name="mName" id="mName" readonly>
-        </dd>
+        <dd th:text="*{mName}"></dd>
     </dl>
     <dl>
         <dt th:text="#{아이디}"></dt>
-        <dd><!--th:text="${session.member.userId}"-->
-            <input type="text" name="userId" id="userId" readonly>
-        </dd>
+        <dd th:text="*{userId}"></dd>
     </dl>
     <dl>
-        <dt th:text="#{비밀번호}"></dt>
-        <dd>
-            <input type="password" name="userPw" id="userPw"
-                   autocomplete="off" readonly>
-        </dd>
-    </dl>
-    <!--<dl>
         <dt th:text="#{이메일}"></dt>
-        <dd>
-            <input type="text" name="email" id="email" maxlength="70" readonly>
-            @
-            <input type="text" name="email2" id="email2" maxlength="50" readonly>
-        </dd>
-    </dl>-->
+        <dd th:text="*{email}"></dd>
+    </dl>
+
     <!--혈액형하고, 전화번호는 회원가입할때는 필요없는 항목이라, 개인정보변경에서 입력한
     혈액형과 전화번호는 따로 관리해서 null이 아니면 조회페이지에서 볼 수 있게 해야됨-->
     <dl>
         <dt th:text="#{혈액형}"></dt>
-        <dd>
-            <input class="bld" type="text" name="bldType" maxlength="2" readonly>
-            <input class="bld2" type="text" name="bldType2" maxlength="3" readonly>
-        </dd>
+        <!--<dd></dd>-->
+        <dd th:text="*{bldType}"></dd>
+        <dd th:text="*{bldType2}"></dd>
     </dl>
     <dl>
         <dt th:text="#{전화번호}"></dt>
-        <dd>
-            <input class="phnum" type="text" name="mobile" readonly>
-            -
-            <input class="phnum" type="text" name="mobile" readonly>
-            -
-            <input class="phnum" type="text" name="mobile" readonly>
-        </dd>
+        <dd></dd>
     </dl>
     <dl>
         <dt th:text="#{주소}"></dt>
         <dd>
-            <input type="text" name="zonecode" id="zonecode" placeholder="우편번호" readonly>
-            <input type="text" name="address" id="address" placeholder="주소" readonly>
-            <input type="text" name="addressSub" id="addressSub" placeholder="나머지 주소" readonly>
+            <th:block th:if="*{!#strings.isEmpty(zonecode)}" th:text="*{'(' + zonecode+ ')'}"></th:block>
+            <th:block th:text="*{address}"></th:block>
+            <th:block th:text="*{addressSub}"></th:block>
         </dd>
     </dl>
-
+    </th:block>
 </section>
 </html>

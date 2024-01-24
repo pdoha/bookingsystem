@@ -73,7 +73,7 @@ public class CsvUtils {
             sb.append(tableNm);
             sb.append(" (");
             sb.append(Arrays.stream(fields).collect(Collectors.joining(", ")));
-            sb.append(" ) VALUES (CENTER_SEQ.NEXTVAL, ");
+            sb.append(" ) VALUES (CENTER_INFO_SEQ.NEXTVAL, ");
             sb.append(Arrays.stream(line).map(s -> "\'" + s + "\'").collect(Collectors.joining(", ")));
             if (StringUtils.hasText(addValue)) sb.append(", ").append(addValue);
             sb.append(");\n");
