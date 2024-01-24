@@ -1,12 +1,14 @@
 package com.blooddonation.commons.entities;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
-
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
-import javax.annotation.processing.Generated;
+import com.bloodDonation.commons.entities.Base;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.DateTimePath;
+import com.querydsl.core.types.dsl.EntityPathBase;
+
+import javax.annotation.processing.Generated;
+
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
 
 /**
