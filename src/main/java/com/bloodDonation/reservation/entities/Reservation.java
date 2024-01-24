@@ -23,7 +23,7 @@ public class Reservation extends Base {
     private Member member; //회원쪽정보 가져올 것임
 
     @Column(length=15, nullable = false)
-    private String donnerTel; //헌혈자 전화번호
+    private String donorTel; //헌혈자 전화번호
 
      @Enumerated(EnumType.STRING)
      @Column(length=25, nullable = false)

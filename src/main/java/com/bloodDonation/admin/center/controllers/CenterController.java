@@ -140,5 +140,6 @@ public class CenterController implements ExceptionProcessor {
 
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("subMenuCode", mode);
     }
 }

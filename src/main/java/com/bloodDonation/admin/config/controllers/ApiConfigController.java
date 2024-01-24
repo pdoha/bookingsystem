@@ -29,9 +29,7 @@ public class ApiConfigController implements ExceptionProcessor {
     }
 
     @ModelAttribute("subMenuCode")
-    public String getSubMenuCode(){
-        return "api";
-    }
+    public String getSubMenuCode() { return "api"; }
 
     @ModelAttribute("subMenus")
     public List<MenuDetail> getSubMenus(){

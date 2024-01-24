@@ -3,20 +3,26 @@ package com.bloodDonation.admin.member.controllers;
 import com.bloodDonation.admin.menus.Menu;
 import com.bloodDonation.admin.menus.MenuDetail;
 import com.bloodDonation.commons.ExceptionProcessor;
+import com.bloodDonation.commons.ListData;
+import com.bloodDonation.member.controllers.MemberSearch;
+import com.bloodDonation.member.entities.Member;
+import com.bloodDonation.member.service.MemberInfo;
+import com.bloodDonation.member.service.MemberInfoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller("adminMemberController")
 @RequestMapping("/admin/member")
+@RequiredArgsConstructor
 public class MemberController implements ExceptionProcessor {
+
+    private final MemberInfoService memberInfoService;
 
     //주메뉴
     @ModelAttribute("menuCode")
@@ -31,12 +37,17 @@ public class MemberController implements ExceptionProcessor {
     }
 
 
-    //회원 목록 &  관리 (레이어팝업)
+    //회원 목록 &  관리
     @GetMapping
-    public String list(Model model){
+    public String list(@ModelAttribute MemberSearch search, Model model){
 
+        ListData<Member> data = memberInfoService.getList(search);
         //연동
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
         commonProcess("list", model);
+
+
         return "admin/member/list";
     }
 
@@ -46,9 +57,14 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("add", model);
         return "admin/member/add";
     }
-    @PostMapping //페이지 이동없음
-    public String edit(Model model){
+    @GetMapping("/edit/{userId}")
+    public String edit(@PathVariable("userId") String userId, Model model){
         commonProcess("add", model);
+
+        MemberInfo memberInfo = (MemberInfo)memberInfoService.loadUserByUsername(userId);
+        Member member = memberInfo.getMember();
+
+        model.addAttribute("member", member);
         return "admin/member/edit";
     }
     //회원 추가 & 저장 (동시에 공유)
@@ -82,8 +98,13 @@ public class MemberController implements ExceptionProcessor {
 
         }
 
-        if (mode.equals("add")){
-            pageTitle = "회원 등록";
+        if (mode.equals("add") || (mode.equals("edit"))){
+            if (mode.equals("add")){
+                pageTitle = "회원 등록";
+                pageTitle += mode.contains("edit") ? "수정" : "등록";
+                addCommonScript.add("mName");
+
+            }
 
         }else if(mode.equals("edit")){
             pageTitle = "회원 수정";

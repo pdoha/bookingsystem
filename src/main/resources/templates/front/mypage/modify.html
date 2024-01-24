@@ -77,10 +77,10 @@
                 <label for="bld_TypeAB">AB</label>
 
                 <label>&nbsp;&nbsp;&nbsp;RH형_선택(필수)</label>
-                <input type="radio" name="bldType2" value="Rh+" id="bld_Typeplus" th:field="*{bldType}">
+                <input type="radio" name="bldType2" value="Rh+" id="bld_Typeplus" th:field="*{bldType2}">
                 <label for="bld_Typeplus">Rh+</label>
 
-                <input type="radio" name="bldType2" value="Rh-" id="bld_Typeminus" th:field="*{bldType}">
+                <input type="radio" name="bldType2" value="Rh-" id="bld_Typeminus" th:field="*{bldType2}">
                 <label for="bld_Typeminus">Rh-</label>
             </dd>
 
@@ -114,7 +114,7 @@
                 </div>
             </dd>
         </dl>
-        <button type="submit" onclick="setMemberInfo"><a th:href="@{/mypage/info}">변경하기</a></button>
+        <button type="submit">변경하기</button>
     </form>
 </section>
 </html>

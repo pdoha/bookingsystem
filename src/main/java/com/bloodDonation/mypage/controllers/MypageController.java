@@ -75,12 +75,6 @@ public class MypageController implements ExceptionProcessor {
         return utils.tpl("mypage/modify");
     }
 
-    @PostMapping("/modify222")
-    public String modifiy22(@RequestBody Member member) {
-        service.modifyMyInfo(member);
-        return utils.tpl("mypage/modify");
-    }
-
     @PostMapping("/modify")
     public String modifyPs(@Valid RequestMemberInfo form, Model model) {
         commonProcess("modify", model);
