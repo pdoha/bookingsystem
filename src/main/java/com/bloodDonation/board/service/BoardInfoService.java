@@ -3,14 +3,17 @@ package com.bloodDonation.board.service;
 import com.bloodDonation.board.controllers.BoardDataSearch;
 import com.bloodDonation.board.controllers.RequestBoard;
 import com.bloodDonation.board.entities.*;
+import com.bloodDonation.board.entities.QBoardData;
 import com.bloodDonation.board.repositories.BoardDataRepository;
 import com.bloodDonation.board.repositories.BoardViewRepository;
+import com.bloodDonation.board.service.comment.CommentInfoService;
 import com.bloodDonation.board.service.config.BoardConfigInfoService;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.file.entities.FileInfo;
 import com.bloodDonation.file.service.FileInfoService;
+import com.bloodDonation.member.Authority;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.querydsl.core.BooleanBuilder;
@@ -36,7 +39,9 @@ public class BoardInfoService {
     private final EntityManager em;
     private final BoardDataRepository boardDataRepository;
     private final BoardViewRepository boardViewRepository;
+
     private final BoardConfigInfoService configInfoService;
+    private final CommentInfoService commentInfoService;
 
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
@@ -54,6 +59,10 @@ public class BoardInfoService {
         BoardData boardData = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
 
         addBoardData(boardData);
+
+        // 댓글 목록
+        List<CommentData> comments = commentInfoService.getList(seq);
+        boardData.setComments(comments);
 
         return boardData;
     }
@@ -88,7 +97,10 @@ public class BoardInfoService {
      */
     public ListData<BoardData> getList(String bid, BoardDataSearch search) {
 
-        Board board = configInfoService.get(bid);
+        Board board = StringUtils.hasText(bid) ? configInfoService.get(bid) : new Board();
+
+
+        board = configInfoService.get(bid);
 
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), board.getRowsPerPage());
@@ -96,9 +108,9 @@ public class BoardInfoService {
 
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
-
-        andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
-
+        if (StringUtils.hasText(bid)){
+            andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        }
         /* 검색 조건 처리 S */
 
         String sopt = search.getSopt();
@@ -165,6 +177,8 @@ public class BoardInfoService {
                 .where(andBuilder)
                 .orderBy(
                         new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
+                        new OrderSpecifier(Order.DESC, pathBuilder.get("listOrder")),
+                        new OrderSpecifier(Order.ASC, pathBuilder.get("listOrder2")),
                         new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
                 )
                 .fetch();
@@ -179,6 +193,9 @@ public class BoardInfoService {
         return new ListData<>(items, pagination);
     }
 
+    public ListData<BoardData> getList(BoardDataSearch search) {
+        return getList(null, search);
+    }
     /**
      * 최신 게시글
      * @param bid : 게시판 아이디
@@ -255,6 +272,28 @@ public class BoardInfoService {
         boardData.setShowDeleteButton(showDeleteButton);
 
         /* 수정, 삭제 권한 정보 E */
+
+        /* 댓글 작성 권한 처리 S */
+        boolean commentable = false;
+        Board board = boardData.getBoard();
+        Authority commentAccessType = board.getCommentAccessType();
+        // 관리자이거나 전체 작성 가능이면
+        if (commentAccessType == Authority.ALL) {
+            commentable = true;
+        }
+
+        if (memberUtil.isLogin()) {
+            if (commentAccessType == Authority.USER) {
+                commentable = true;
+            }
+
+            if (commentAccessType == Authority.ADMIN && memberUtil.isAdmin()) {
+                commentable = true;
+            }
+        }
+
+        boardData.setCommentable(commentable);
+        /* 댓글 작성 권한 처리 E */
     }
 
 
