@@ -29,7 +29,7 @@ public class SurveyController {
     }
 
 
-    @GetMapping("/step2")
+    @PostMapping("/step2")
     public String step2(RequestSurvey form, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
@@ -51,6 +51,12 @@ public class SurveyController {
 
         return "redirect:/survey/result";
     }
+    @PostMapping("/result")
+    public String result(RequestSurvey form, Model model){
+
+        return utils.tpl("survey/result");
+    }
+
     /*
     @PostMapping("/surveyresult")
     public String surveyresult(RequestSurvey requestSurvey){
