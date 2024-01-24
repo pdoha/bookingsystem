@@ -38,7 +38,7 @@
         <table class="table_rows">
             <thead>
                 <tr>
-                    <th height="40">
+                    <th height="40" width="50">
                         <input type="checkbox" class="checkall" id="checkall" data-target-name="chk">
                         <label for="checkall"></label>
                     </th>
@@ -53,7 +53,7 @@
                     <td colspan="5" class="no_data">조회된 센터가 없습니다.</td>
                 </tr>
                 <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                    <td>
+                    <td align="center">
                         <input type="hidden" th:name="${'cCode_' + status.index}" th:value="*{cCode}">
                         <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
                         <label th:for="${'chk_' + status.index}"></label>
