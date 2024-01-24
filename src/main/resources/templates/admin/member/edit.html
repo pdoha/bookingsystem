@@ -4,9 +4,74 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 수정</h1>
-    <form name="frmSave" method="post" th:action="@{/admin/member/save}" autocomplete="off">
+    <form name="frmSave" method="post"th:action="@{/admin/edit/{userId}}"  autocomplete="off" th:object="${requestJoin}">
         <!--양식공유-->
         <th:block th:replace="~{admin/member/_form::form}"></th:block>
+
+            <dl>
+                <dt>가입구분</dt>
+                <dd>
+                    <input type="radio" name="managerType" th:value="${USER}" id="managerType_USER" checked>
+                    <label for="managerType_USER" th:text="#{Authority.USER}"></label>
+
+                    <input type="radio" name="managerType" th:value="${MANAGER}" id="managerType_MANAGER" checked>
+                    <label for="managerType_MANAGER" th:text="#{Authority.MANAGER}"></label>
+
+                    <input type="radio" name="managerType" th:value="${ADMIN}" id="managerType_ADMIN" checked>
+                    <label for="managerType_ADMIN" th:text="#{Authority.ADMIN}"></label>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>아이디</dt>
+                <dd>user01</dd>
+            </dl>
+
+            <dl>
+                <dt>이메일</dt>
+                <dd>
+                    <input type="text" name="email" th:value="${email}">
+                </dd>
+            </dl>
+
+        <button type="button" id="changePw" class="sbtn mt10">비밀번호 변경하기</button>
+
+        <!--비밀번호 변경-->
+        <dl class="password_box">
+            <dt>변경 비밀번호</dt>
+            <dd>
+                <input type="password" name="managerPw">
+            </dd>
+        </dl>
+        <dl class="password_box">
+            <dt>비밀번호 확인</dt>
+        </dl>
+        <dd>
+            <input type="password" name="managerPwRe">
+        </dd>
+
+        <!--약관동의-->
+        <div class="terms">
+            <h2>약관동의</h2>
+            <div class="terms_tit">
+                <input type="checkbox" id="check_all" checked>
+                <label for="check_all">모든 약관을 확인하고 전체 동이합니다.</label>
+            </div>
+
+            <div class="terms_tit">
+                <input type="checkbox" class="check" name="userTerms" value="y" id="useTerms" checked>
+                <label for="useTerms">이용약관(필수)</label>
+            </div>
+
+            <textarea class="terms_contents" readonly>이용약관</textarea>
+            <div class="terms_tit">
+                <input type="checkbox" name="privateTerms" class="check" value="y" id="privateTerms" checked>
+                <label for="privateTerms">개인정보처리방침(필수)</label>
+            </div>
+            <textarea class="terms_contents" readonly>쏼라쏼라</textarea>
+
+        </div>
+        </form>
 
         <div class="submit_btns">
             <button type="reset" class="btn">다시입력</button>

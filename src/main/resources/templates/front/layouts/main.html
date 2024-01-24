@@ -17,6 +17,9 @@
           th:href="@{/front/css/{file}.css(file=${cssFile})}">
 
     <th:block layout:fragment="addCss"></th:block>
+    <!--레이어팝업-->
+    <script th:src="@{/common/js/layer.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
+    <script th:src="@{/common/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
 
     <script th:src="@{/common/js/common.js}"></script>
     <script th:each="jsFile : ${addCommonScript}"

@@ -16,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity//메소드별 통제 가능
 public class SecurityConfig {
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         /* 시큐리티의 핵심 기능 1. 인증(로그인) 2.인가(페이지 접근)*/
@@ -82,7 +83,13 @@ public class SecurityConfig {
                 }
             });
         });
+
+        //레이어 팝업
+        //같은 서버 자원 주소는 ifram 허용 처리
         http.headers(c ->c.frameOptions(f ->f.sameOrigin()));
+
+
+
         return http.build();
     }
 
