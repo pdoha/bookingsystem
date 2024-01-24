@@ -1,7 +1,10 @@
 package com.bloodDonation.board.service;
 
+import com.bloodDonation.board.entities.AuthCheck;
 import com.bloodDonation.board.entities.Board;
 import com.bloodDonation.board.entities.BoardData;
+import com.bloodDonation.board.entities.CommentData;
+import com.bloodDonation.board.service.comment.CommentInfoService;
 import com.bloodDonation.board.service.config.BoardConfigInfoService;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.commons.exceptions.AlertException;
@@ -11,20 +14,32 @@ import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-@RequiredArgsConstructor
 public class BoardAuthService {
 
-    private final BoardConfigInfoService configInfoService;
-    private final BoardInfoService infoService;
-    private final HttpSession session;
-    private final PasswordEncoder encoder;
-    private final MemberUtil memberUtil;
+    @Autowired
+    private BoardConfigInfoService configInfoService;
+
+    @Autowired
+    private BoardInfoService infoService;
+
+    @Autowired
+    private CommentInfoService commentInfoService;
+
+    @Autowired
+    private HttpSession session;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
+    @Autowired
+    private MemberUtil memberUtil;
 
     /**
      * 게시글 관련 권한 체크
@@ -37,7 +52,12 @@ public class BoardAuthService {
             return;
         }
 
-        BoardData data = infoService.get(seq);
+        AuthCheck data = null;
+        if (mode.indexOf("comment_") != -1) { // 댓글
+            data = commentInfoService.get(seq);
+        } else { // 게시글
+            data = infoService.get(seq);
+        }
 
         if ((mode.equals("update") && !data.isEditable()) || (mode.equals("delete") && !data.isDeletable())) {
             Member member = data.getMember();
@@ -80,10 +100,17 @@ public class BoardAuthService {
             }
             key = "guest_confirmed_" + seq;
 
-        } else if (mode.equals("comment_update") || mode.equals("comment_delete")) {//비회원 댓글
+        } else if (mode.equals("comment_update") || mode.equals("comment_delete")) { // 비회원 댓글
+            CommentData data = commentInfoService.get(seq);
+
+            boolean match = encoder.matches(password, data.getGuestPw());
+            System.out.printf("mode=%s, seq=%s, match=%s%n", mode, seq, match);
+
+            if (!match) {
+                throw new AlertException(Utils.getMessage("Mismatch.password"), HttpStatus.BAD_REQUEST);
+            }
 
             key = "guest_comment_confirmed_" + seq;
-
         }
         //비밀번호 인증 성공 처리
         session.setAttribute(key,true);
