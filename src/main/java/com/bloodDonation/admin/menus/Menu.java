@@ -39,7 +39,7 @@ public class Menu {
         //예약현황 메뉴코드
         menus.put("reservation", Arrays.asList(
                 new MenuDetail("list", "예약자 목록", "/admin/reservation"),
-                new MenuDetail("add", "예약자 추가", "/admin/reservation/add")
+                new MenuDetail("add_reservation", "예약자 추가", "/admin/reservation/add_reservation")
 
         ));
     }
