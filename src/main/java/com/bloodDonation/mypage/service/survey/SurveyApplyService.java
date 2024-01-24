@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class SurveyApplyService {
     private final SurveyRepository surveyRepository;
     private final MemberUtil memberUtil;
+
     public void apply(RequestSurvey form) {
 
         ObjectMapper om = new ObjectMapper();
@@ -26,12 +27,15 @@ public class SurveyApplyService {
 
         } catch (JsonProcessingException e) {}
 
-        for (boolean result : form.getQuestions1()) {
+        boolean [] questions1=form.getQuestions1();
+        boolean [] questions2=form.getQuestions2();
+
+        for (boolean result : questions1) {
            if (result) positive++;
            else negative++;
         }
 
-        for (boolean result : form.getQuestions2()) {
+        for (boolean result : questions2) {
             if (result) positive++;
             else negative++;
         }
@@ -44,5 +48,6 @@ public class SurveyApplyService {
                 .build();
 
         surveyRepository.saveAndFlush(survey);
+
     }
 }

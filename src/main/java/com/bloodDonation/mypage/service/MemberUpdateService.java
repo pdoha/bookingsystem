@@ -18,6 +18,8 @@ public class MemberUpdateService {
     private final PasswordEncoder encoder;
     private final MemberUtil memberUtil;
 
+    private final HttpSession session;
+
     //RequestMemberInfo--마이페이지-개인정보변경할 정보가 담긴 커맨드 객체
     public void update(RequestMemberInfo form) {
         if (!memberUtil.isLogin()) {
@@ -38,8 +40,12 @@ public class MemberUpdateService {
         if (StringUtils.hasText(userPw)) {
             member.setUserPw(encoder.encode(userPw));
         }
-
+        member.setBldType(form.getBldType());
+        member.setBldType2(form.getBldType2());
         //주소,비번 변경한거 저장하기
         memberRepository.saveAndFlush(member);
+
+        //db에 저장한 후 변경된 멤버데이터를 세션에 다시 set(update)
+        session.setAttribute("member", member);
     }
 }
