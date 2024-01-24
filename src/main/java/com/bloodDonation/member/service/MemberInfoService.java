@@ -7,7 +7,7 @@ import com.bloodDonation.member.controllers.MemberSearch;
 import com.bloodDonation.member.entities.Authorities;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.MemberRepository;
-import com.blooddonation.member.entities.QMember;
+import com.bloodDonation.member.entities.QMember;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import jakarta.servlet.http.HttpServletRequest;
