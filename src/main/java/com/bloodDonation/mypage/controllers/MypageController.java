@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -141,10 +140,10 @@ public class MypageController implements ExceptionProcessor {
     }
     @GetMapping("/myprint")
     public String myprint(Model model){
-        commonProcess("myprint", model);
+        //commonProcess("myprint", model);
         return utils.tpl("mypage/myprint");
     }
-
+    /*
     @GetMapping("/unregister")
     public String unregister(@ModelAttribute RequestUnRegister form, Model model){
         commonProcess("unregister", model);
@@ -159,7 +158,7 @@ public class MypageController implements ExceptionProcessor {
 
         return "redirect:/";//탈퇴 후 메인페이지로
     }
-
+    */
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "main");
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -185,11 +184,11 @@ public class MypageController implements ExceptionProcessor {
             pageTitle = Utils.getMessage("나의_헌혈내역", "commons");
         } else if (mode.equals("myprint")) {
             pageTitle = Utils.getMessage("헌혈증서출력", "commons");
-        /*} else if (mode.equals("dosurvey")) {
+        } else if (mode.equals("dosurvey")) {
             pageTitle = Utils.getMessage("전자문진", "commons");
         } else if (mode.equals("surveyresult")) {
             pageTitle = Utils.getMessage("검사결과", "commons");
-*/
+
         } else {
             if(mode.equals("unregister")) {
                 pageTitle = Utils.getMessage("회원탈퇴", "commons");
