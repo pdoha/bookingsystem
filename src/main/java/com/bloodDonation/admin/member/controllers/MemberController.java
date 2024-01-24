@@ -98,8 +98,13 @@ public class MemberController implements ExceptionProcessor {
 
         }
 
-        if (mode.equals("add")){
-            pageTitle = "회원 등록";
+        if (mode.equals("add") || (mode.equals("edit"))){
+            if (mode.equals("add")){
+                pageTitle = "회원 등록";
+                pageTitle += mode.contains("edit") ? "수정" : "등록";
+                addCommonScript.add("mName");
+
+            }
 
         }else if(mode.equals("edit")){
             pageTitle = "회원 수정";

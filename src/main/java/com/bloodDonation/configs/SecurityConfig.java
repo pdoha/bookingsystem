@@ -36,9 +36,12 @@ public class SecurityConfig {
 
         });
         /* 인증 설정 E - 로그인 */
-        //return http.build();
-    //}
 
+
+
+        //로그아웃
+        //로그아웃기능도 스프링 시큐리티쪽에 기능이 구현되어있음
+        //설정만 추가하면됨 (로그아웃핸들러가 있음)
 
         http.logout(c -> {
             //이동할 주소
@@ -54,8 +57,11 @@ public class SecurityConfig {
         //hasAthority('ADMIN')
         //ROLE_ADMIN -> hasAuthority('ROLE_ADMIN')
         //hasRole('ADMIN')
+
+        //인가 설정 - 접근 통제
         http.authorizeHttpRequests(c -> {
-            c.requestMatchers("/mypage/**").authenticated() //회원전용
+            //개발하느라 잠시 주석걸어놈! 나중에 배포전에 풀자!!
+            c//.requestMatchers("/mypage/**").authenticated() //회원전용
                     //.requestMatchers("/admin/**").hasAnyAuthority("ADMIN","MAMAGER")//"ADMIN","MAMAGER"만 /admin/**의 모든 클래스 접근 가능
                     .anyRequest().permitAll();//그외 모든 페이지는 모두 접근 가능
         });
@@ -71,11 +77,13 @@ public class SecurityConfig {
          });
         */
 
+        //오류페이지 상세설정
         //주소가  admin이면 관리자 페이지임.
         http.exceptionHandling(c -> {
             c.authenticationEntryPoint((req, res, e) -> {
                 String URL  = req.getRequestURI();
-                if (URL.indexOf("/admin") != -1) { //관리자 페이지
+                if (URL.indexOf("/admin") != -1) {
+                    //관리자 페이지
                     res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 } else {//회원전용 페이지
                     res.sendRedirect(req.getContextPath() + "/member/login");

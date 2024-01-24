@@ -54,6 +54,8 @@ public class Member extends Base {
     @Column(length=3)
     private String bldType2; // RH+ -
 
+
+    //권한
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
