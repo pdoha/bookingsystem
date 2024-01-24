@@ -37,7 +37,7 @@ public class MemberController implements ExceptionProcessor {
     }
 
 
-    //회원 목록 &  관리 (레이어팝업)
+    //회원 목록 &  관리
     @GetMapping
     public String list(@ModelAttribute MemberSearch search, Model model){
 
@@ -57,7 +57,7 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("add", model);
         return "admin/member/add";
     }
-    @GetMapping("/edit/{userId}") //페이지 이동없음
+    @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") String userId, Model model){
         commonProcess("add", model);
 
