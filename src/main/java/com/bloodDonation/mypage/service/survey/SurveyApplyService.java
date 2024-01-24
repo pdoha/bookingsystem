@@ -33,12 +33,16 @@ public class SurveyApplyService {
         for (boolean result : questions1) {
            if (result) positive++;
            else negative++;
+
         }
 
         for (boolean result : questions2) {
             if (result) positive++;
             else negative++;
         }
+
+        System.out.println("네------"+positive);
+        System.out.println("아니요------"+negative);
 
         Survey survey = Survey.builder()
                 .data(data)
