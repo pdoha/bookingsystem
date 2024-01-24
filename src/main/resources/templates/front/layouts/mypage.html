@@ -31,7 +31,7 @@
 <body>
 <header th:replace="~{front/outlines/header::common}"></header>
 <main>
-    <aside th:replace="~{front/mypage/_side::menus}"></aside> <!--디지인입힐때 메뉴추가할것-->
+    <th:block th:replace="~{front/mypage/_side::menus}"></th:block> <!--디지인입힐때 메뉴추가할것-->
     <section layout:fragment="content"></section>
 </main>
 <footer th:replace="~{front/outlines/footer::common}"></footer>
