@@ -46,7 +46,6 @@ public class BasicConfigController implements ExceptionProcessor {
     }
 
     @GetMapping
-
     public String index(Model model) {
 
         BasicConfig config = infoService.get("basic",BasicConfig.class).orElseGet(BasicConfig::new);

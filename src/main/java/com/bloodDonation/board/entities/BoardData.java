@@ -3,6 +3,7 @@ package com.bloodDonation.board.entities;
 import com.bloodDonation.commons.entities.Base;
 import com.bloodDonation.file.entities.FileInfo;
 import com.bloodDonation.member.entities.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Table(indexes = {
         @Index(name = "idx_boardData_basic",columnList ="notice DESC, createdAt DESC")
 })
-public class BoardData extends Base {//게시글 데이터
+public class BoardData extends Base implements AuthCheck{//게시글 데이터
     @Id @GeneratedValue
     private Long seq;
 
@@ -53,6 +54,19 @@ public class BoardData extends Base {//게시글 데이터
     private String content;
 
     private int viewCount; //조회수
+
+    private int commentCount; // 댓글 수
+
+    private boolean editorView; // true : 에디터를 통해서 작성
+
+    private Long parentSeq; // 부모 게시글 번호 - 답글인 경우
+
+    private Long listOrder; // 1차 정렬 순서 - 내림차순
+
+    @Column(length = 60)
+    private String listOrder2 = "R"; //답글 2차 정렬 -> 오름차순
+
+    private int depth;//답글 들여쓰기 정도
 
     @Column(length = 20)
     private String ip; //IP주소
@@ -88,6 +102,9 @@ public class BoardData extends Base {//게시글 데이터
     private boolean deletable;//삭제 가능 여부
 
     @Transient
+    private boolean commentable; // 댓글 작성 가능 여부
+
+    @Transient
     private boolean mine; //게시글 소유자
 
     @Transient
@@ -95,4 +112,8 @@ public class BoardData extends Base {//게시글 데이터
 
     @Transient
     private boolean showDeleteButton; //삭제 버튼 노출 여부
+
+    @Transient
+    @JsonIgnore
+    private List<CommentData> comments; // 댓글 목록
 }
