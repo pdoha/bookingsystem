@@ -50,7 +50,8 @@ public class SurveyApplyService {
                 .negative(negative)
                 .member(memberUtil.getMember())
                 .build();
-
+        System.out.println("survey에 담기는지-------"+survey.getPositive());
+        System.out.println("survey에 담기는지-------"+survey.getNegative());
         surveyRepository.saveAndFlush(survey);
 
     }
