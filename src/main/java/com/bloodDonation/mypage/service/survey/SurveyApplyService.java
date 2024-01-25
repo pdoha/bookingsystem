@@ -30,15 +30,21 @@ public class SurveyApplyService {
         boolean [] questions1=form.getQuestions1();
         boolean [] questions2=form.getQuestions2();
 
-        for (boolean result : questions1) {
-           if (result) positive++;
-           else negative++;
 
+        for(int i=0; i<5; i++){
+            if(questions1[i]==true){
+                positive++;
+            }else{
+                negative++;
+            }
         }
 
-        for (boolean result : questions2) {
-            if (result) positive++;
-            else negative++;
+        for(int i=5; i<11; i++){
+            if(questions2[i]==true){
+                positive++;
+            }else{
+                negative++;
+            }
         }
 
         System.out.println("네------"+positive);

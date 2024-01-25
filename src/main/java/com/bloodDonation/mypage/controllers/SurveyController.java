@@ -44,7 +44,7 @@ public class SurveyController {
     }
 
     @PostMapping("/apply")
-    public String apply(RequestSurvey form, Errors errors, Model model) {
+    public String surveyapply(RequestSurvey form, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return utils.tpl("survey/step2");
@@ -52,13 +52,15 @@ public class SurveyController {
 
         applyService.apply(form);
 
-        return "redirect:/survey/result";
+        return "redirect:survey";
+
     }
-    @PostMapping("/result")
+
+    /*@PostMapping("/result")
     public String result(Model model){
 
         return utils.tpl("survey/result");
-    }
+    }*/
 
     private void commonProcess(String mode, Model model) {
 
