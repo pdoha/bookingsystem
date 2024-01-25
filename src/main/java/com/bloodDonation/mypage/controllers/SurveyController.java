@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/survey")
 @RequiredArgsConstructor
@@ -52,9 +55,16 @@ public class SurveyController {
         return "redirect:/survey/result";
     }
     @PostMapping("/result")
-    public String result(RequestSurvey form, Model model){
+    public String result(Model model){
 
         return utils.tpl("survey/result");
+    }
+
+    private void commonProcess(String mode, Model model) {
+
+        List<String> addCommonScript = new ArrayList<>();
+
+
     }
 
     /*
