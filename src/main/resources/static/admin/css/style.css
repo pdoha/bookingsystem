@@ -106,3 +106,78 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 .input_grp > * + * { margin-left: 3px; }
 
 .no_data { padding: 50px 0 !important; text-align: center; }
+
+/* 회원정보 수정 페이지 */
+h1{
+     border-bottom: 0px
+}
+.form_box dl dt {
+    background: #f2f3f4;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+dt {
+    width: 130px;
+}
+
+.form_box dl:first-of-type {
+    border-top: 3px solid #222;
+}
+.form_box dl {
+    align-items: stretch;
+    border-bottom: 1px solid #d5d5d5;
+}
+dl {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+}
+
+.sbtn {
+    border: 1px solid #222;
+    color: #222;
+    background: #fff;
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/**
+ * 공통 이벤트 처리
+ */
+window.addEventListener("DOMContentLoaded", function() {
+    /** 체크박스 전체 선택 S */
+    var jsCheckAlls = document.querySelectorAll(".js-checkall");
+    for (let jsCheckAll of jsCheckAlls) {
+        jsCheckAll.addEventListener("click", function(e) {
+            /** name 값으로 전체 선택 S */
+            let targetNames = e.currentTarget.dataset.targetName;
+            if (targetNames) {
+                targetNames = targetNames.split(",");
+                for (let targetName of targetNames) {
+                    const list = document.querySelectorAll("input[name^='" + targetName + "']");
+
+                    for(let i = 0; i < list.length; i++) {
+                        list[i].checked = e.currentTarget.checked;
+                    }
+                }
+            }
+            /** name 값으로 전체 선택 E */
+            /** id 값으로 전체 선택 S */
+            let targetIds = e.currentTarget.dataset.targetId;
+            if (targetIds) {
+                targetIds = targetIds.split(",");
+                for (let id of targetIds) {
+                    const list = document.querySelectorAll(`input[id^='${id}']`);
+                    for (let el of list) {
+                        el.checked = e.currentTarget.checked;
+                    }
+                }
+            }
+            /** id 값으로 전체 선택 E */
+        });
+    } // endfor
+    /** 체크박스 전체 선택 E */
