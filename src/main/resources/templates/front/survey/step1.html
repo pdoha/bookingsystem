@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
-<section layout:fragment="content">
+<section layout:fragment="content" class="layout_width">
     <form name="frmSurvey" method="post" th:action="@{/survey/step2}">
     <div class="survey">
         <div class="survey_txt_box">
@@ -98,10 +98,16 @@
                       placeholder="상세내용을 입력해주세요" disabled="disabled"></textarea>
         </div>
         <div class="survey_btn_area">
-            <button type="button"><a th:href="@{/mypage/survey}">이전</a></button>
-            <button type="submit">다음</button>
+            <button type="button" class="survey-botton"><a th:href="@{/mypage/survey}">이전</a></button>
+            <button type="submit" class="survey-botton">다음</button>
         </div>
     </div>
+
+
     </form>
+
+
 </section>
+
+
 </html>
