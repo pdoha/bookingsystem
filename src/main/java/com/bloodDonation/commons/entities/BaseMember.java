@@ -15,11 +15,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class BaseMember extends Base{
 
     @CreatedBy
-    @Column(length = 40, updatable = false)
-    private String createdBy;
+    @Column(length = 40, updatable = false)//업데이트 불가능
+    private String createdBy; //최초 가입 날
 
     @LastModifiedBy
-    @Column(length = 40, insertable = false)
-    private String modifiedBy;
+    @Column(length = 40, insertable = false)//삽입 불가능
+    private String modifiedBy; //가입 변경
 
 }
