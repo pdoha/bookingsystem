@@ -1,0 +1,48 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif , 'Nunito', sans-serif;
+       font-size: 15px;
+
+        }
+
+
+.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 60px; margin-left: 300px;}
+
+main { min-height: 700px;}
+
+
+.survey_btm{
+    margin-bottom: 30px;
+}
+
+h3{
+font-size: 24px;
+padding: 5px;
+}
+
+survey h3,
+p,
+survey_txt_box{
+    padding: 10px;
+     font-size: 16px;
+}
+
+
+.survey_btn_area button{
+   width: 80px;
+   margin: 10px;
+
+}
+
+
+textarea{
+    width: 250px;
+    padding: 5px;
+    margin: 5px;
+
+}
+
+input{
+margin : 10px;
+}
+
+
