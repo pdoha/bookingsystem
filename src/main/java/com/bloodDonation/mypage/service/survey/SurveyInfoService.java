@@ -1,24 +1,36 @@
 package com.bloodDonation.mypage.service.survey;
 
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.repositories.SurveyRepository;
 import com.bloodDonation.mypage.entities.Survey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@RequestMapping("/result")
+
 public class SurveyInfoService {
     private final Utils utils;
+    private final SurveyRepository surveyRepository;
     private Survey survey;
 
-    public String result(Survey survey){
+    public String result(){
 
-        int positive=survey.getPositive();
-        int negative = survey.getNegative();
+        Optional<Survey> survey = surveyRepository.findById(Long.valueOf("seq"));
 
-        if(positive==11){
+        int positive=0;
+        int negative=0;
+        if(survey.isPresent()) {
+            Survey survey1 = survey.get();
+
+            positive=survey1.getPositive();
+            negative = survey1.getNegative();
+
+        }
+
+        if(negative==11){
             return utils.tpl("survey/result");
         }else{
             return utils.tpl("survey/surveyimpossible");
