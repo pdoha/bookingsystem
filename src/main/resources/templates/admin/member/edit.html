@@ -30,7 +30,7 @@
             <dl>
                 <dt>이메일</dt>
                 <dd>
-                    <input type="text" name="email" th:value="${email}">
+                    <input type="text" name="email" th:field="*{email}">
                 </dd>
             </dl>
 
@@ -52,20 +52,20 @@
 
 
             <!--약관동의-->
-            <div class="terms">
-                <h2>약관동의</h2>
+            <div class="terms mt30">
+                <h2 class="mb10">약관동의</h2>
                 <div class="terms_tit">
                     <input type="checkbox" id="check_all" checked>
                     <label for="check_all">모든 약관을 확인하고 전체 동이합니다.</label>
                 </div>
 
-                <div class="terms_tit">
+                <div class="terms_tit mb10">
                     <input type="checkbox" class="check" name="userTerms" value="y" id="useTerms" checked>
                     <label for="useTerms">이용약관(필수)</label>
                 </div>
 
                 <textarea class="terms_contents" readonly>이용약관</textarea>
-                <div class="terms_tit mt10">
+                <div class="terms_tit mt10 mb10">
                     <input type="checkbox" name="privateTerms" class="check" value="y" id="privateTerms" checked>
                     <label for="privateTerms">개인정보처리방침(필수)</label>
                 </div>
