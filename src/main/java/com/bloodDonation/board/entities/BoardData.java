@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * 게시판 글 데이터 관련 엔티티
+ */
 @Data
 @Builder
 @Entity
@@ -27,11 +30,11 @@ public class BoardData extends Base implements AuthCheck{//게시글 데이터
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="bid")
-    private Board board;
+    private Board board; //게시판
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="memberSeq")
-    private Member member;
+    private Member member; //회원
 
     @Column(length = 65, nullable = false)
     private String gid = UUID.randomUUID().toString();

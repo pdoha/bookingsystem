@@ -31,6 +31,11 @@ public class BoardController implements ExceptionProcessor {
 
     private final BoardConfigValidator configValidator;
 
+    /**
+     * 24.01.11
+     * 게시판 관리자 페이지 주메뉴/서브 메뉴
+     * @return
+     */
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
 
@@ -44,8 +49,8 @@ public class BoardController implements ExceptionProcessor {
     }
 
     /**
+     * 24.01.11
      * 게시판 목록
-     *
      * @return
      */
     @GetMapping
@@ -58,7 +63,7 @@ public class BoardController implements ExceptionProcessor {
         Pagination pagination = data.getPagination();
 
         model.addAttribute("items", items);
-        model.addAttribute("pagination", pagination);
+        model.addAttribute("pagination", pagination);//페이지 번호
 
         return "admin/board/list";
     }

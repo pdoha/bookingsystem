@@ -4,6 +4,7 @@ import com.bloodDonation.admin.reservation.controllers.RequestReservation;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.reservation.controllers.ReservationSearch;
 import com.bloodDonation.reservation.entities.QReservation;
 import com.bloodDonation.reservation.entities.Reservation;
@@ -22,6 +23,7 @@ import org.springframework.util.StringUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.data.domain.Sort.Order.desc;
@@ -31,6 +33,8 @@ import static org.springframework.data.domain.Sort.Order.desc;
 public class ReservationInfoService {
     private final ReservationRepository reservationRepository;
     private final HttpServletRequest request;
+    private final MemberUtil memberUtil;
+
 
     public Reservation get(Long bookCode) {
         Reservation reservation = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
@@ -105,4 +109,17 @@ public class ReservationInfoService {
 
         return new ListData<>(data.getContent(), pagination);
     }
+
+    //마이페이지 회원 예약조회에 이용할 메서드! 
+    public ListData<Reservation> getMyList(ReservationSearch search) {
+        //로그인정보가 없으면 null 출력
+        if (!memberUtil.isLogin()) {
+            return null;
+        }
+        //로그인 정보가 있으면 가져와서 그 로그인한 회원의 userId에만 해당하는 예약 데이터출력
+        search.setUserId(Arrays.asList(memberUtil.getMember().getUserId()));
+
+        return getList(search);
+    }
+
 }

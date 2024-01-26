@@ -17,7 +17,7 @@ public class MemberInfo implements UserDetails {
     private String userId;
     private String password;
     private Member member;
-
+    private boolean enable;
     private Collection<? extends GrantedAuthority> authorities;
 
     //권한 체크
@@ -60,6 +60,7 @@ public class MemberInfo implements UserDetails {
     @Override
     public boolean isEnabled() {
 
-        return true;
+        return enable;
     }
+
 }
