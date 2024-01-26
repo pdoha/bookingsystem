@@ -1,16 +1,20 @@
-main { display: flex; width: 1200px; margin-top: 60px; margin-bottom: 100px; margin-left: 230px;
+main { display: flex;
+        width: 1500px;
+           margin-bottom: 100px;
+           margin-left: 230px;
+           overflow-x: hidden;
 
 
 
 
 main > section { flex-grow: 1;  }
 
-button{
-    margin-top: 50px;
+.step-button{
+    margin-top: 80px;
     text-align: center;
     height: 70px;
-    width: 250px;
-    float: right;
+    width: 200px;
+    margin-left: 850px;
 
 }
 
@@ -267,5 +271,9 @@ body, ul, li {
 
 /*전자문진-상세내용*/
 .survey_btm{
-    width: 250%;
+    width: 1200px;
+
 }
+
+
+

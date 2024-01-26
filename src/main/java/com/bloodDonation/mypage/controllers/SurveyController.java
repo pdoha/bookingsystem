@@ -22,6 +22,11 @@ public class SurveyController {
         return new RequestSurvey();
     }
 
+    @ModelAttribute("addCss")
+    public String[] addCss() {
+        return new String[] { "survey/style" };
+    }
+
     @GetMapping("/step1")
     public String step1(@ModelAttribute RequestSurvey form, Model model) {
 
