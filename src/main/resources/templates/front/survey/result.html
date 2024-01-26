@@ -4,16 +4,23 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{검사결과}"></h1>
-    <div><h1>전자문진결과 헌혈이 가능합니다</h1></div>
-    <table >
-        <tbody>
-            <tr>
-                <td>내용1</td>
-            </tr>
-            <tr>
-                <td>내용2</td>
-            </tr>
-        </tbody>
-    </table>
+    <div><h1>전자문진결과 헌혈이 가능합니다.</h1></div>
+    <div><h2>전자문진 결과 헌혈이 가능하십니다.</h2></div>
+    <div>
+        <ul>
+            <li>
+                전자문진에서 헌혈이 가능하다고 판정되어도, 헌혈의 집 방문 시 현장 문진 결과에 따라 헌혈이
+                불가할 수도 있습니다.
+            </li>
+            <li>
+                이 문진결과는 제출일로부터 3일간만 유효하며 3일이 지난 경우 전자문진을 다시 작성하셔야 합니다.
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div><h4>헌혈 후 교부되는 헌혈증서를 의료기관에 제출하시면 수혈비용 중 본인부담금이 면제됩니다.</h4>
+        <h4>헌혈증서는 양도가 가능하므로 수혈이 필요한 분들에게 기증하시면 큰 도움이 됩니다.</h4></div>
+    <h3>적십자 인도주의 활동정보 수신에 동의해 주셔서 감사합니다.</h3>
+    <button type="button"><a th:href="@{/mypage/survey}">전자문진 완료</a></button>
 </section>
 </html>

@@ -60,5 +60,6 @@ public class Member extends Base {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
 
-
+    //회원탈퇴시-memberinfo쪽에 isEnable()의 리턴 시 필요
+    private boolean enable = true;
 }
