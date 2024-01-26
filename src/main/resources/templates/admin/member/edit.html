@@ -29,8 +29,8 @@
 
             <dl>
                 <dt>이메일</dt>
-                <dd th:text="*{#messages.msg('MAIL', email)}">
-                    <input type="text" name="email" th:value="${email}">
+                <dd>
+                    <input type="text" name="email" th:field="*{email}">
                 </dd>
             </dl>
 
