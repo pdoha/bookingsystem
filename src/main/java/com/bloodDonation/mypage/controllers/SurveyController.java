@@ -2,6 +2,7 @@ package com.bloodDonation.mypage.controllers;
 
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.mypage.service.survey.SurveyApplyService;
+import com.bloodDonation.mypage.service.survey.SurveyInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ public class SurveyController {
 
     private final Utils utils;
     private final SurveyApplyService applyService;
+    private final SurveyInfoService surveyInfoService;
 
     @ModelAttribute("requestSurvey")
     public RequestSurvey requestSurvey() {
@@ -57,7 +59,7 @@ public class SurveyController {
 
         applyService.apply(form);
 
-        return "redirect:survey";
+        return surveyInfoService.result();
 
     }
 

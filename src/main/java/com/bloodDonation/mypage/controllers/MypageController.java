@@ -5,11 +5,13 @@ import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
+import com.bloodDonation.mypage.service.MemberDeleteService;
 import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.Errors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,7 @@ public class MypageController implements ExceptionProcessor {
     private final MyPageModifyService service;
     private final MemberUtil memberUtil;
     private final MemberUpdateService updateService;
+    private final MemberDeleteService deleteService;
     @ModelAttribute("addCss")
     public String[] getAddCss() {
 
@@ -111,7 +114,7 @@ public class MypageController implements ExceptionProcessor {
         //commonProcess("myprint", model);
         return utils.tpl("mypage/myprint");
     }
-    /*
+
     @GetMapping("/unregister")
     public String unregister(@ModelAttribute RequestUnRegister form, Model model){
         commonProcess("unregister", model);
@@ -123,10 +126,10 @@ public class MypageController implements ExceptionProcessor {
         if (errors.hasErrors()) {
             return utils.tpl("mypage/unregister");
         }
-
+        deleteService.delete(form);
         return "redirect:/";//탈퇴 후 메인페이지로
     }
-    */
+
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "main");
         String pageTitle = Utils.getMessage("마이페이지", "commons");
