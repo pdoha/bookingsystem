@@ -1,6 +1,7 @@
 package com.bloodDonation.mypage.service.survey;
 
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.SurveyRepository;
 import com.bloodDonation.mypage.entities.Survey;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +15,13 @@ import java.util.Optional;
 public class SurveyInfoService {
     private final Utils utils;
     private final SurveyRepository surveyRepository;
+    private Member member;
     private Survey survey;
 
     public String result(){
 
         Optional<Survey> survey = surveyRepository.findById(1L);
-
+        /*Optional<Survey> survey = surveyRepository.findByuserNo(member.getUserNo());*/
         int positive=0;
         int negative=0;
         if(survey.isPresent()) {
