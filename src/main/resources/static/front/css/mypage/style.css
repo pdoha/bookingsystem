@@ -1,16 +1,20 @@
-main { display: flex; width: 1200px; margin-top: 60px; margin-bottom: 100px; margin-left: 230px;
+main { display: flex;
+        width: 1500px;
+           margin-bottom: 100px;
+           margin-left: 230px;
+           overflow-x: hidden;
 
 
 
 
 main > section { flex-grow: 1;  }
 
-button{
-    margin-top: 50px;
+.step-button{
+    margin-top: 80px;
     text-align: center;
     height: 70px;
-    width: 250px;
-    float: right;
+    width: 200px;
+    margin-left: 850px;
 
 }
 
@@ -22,7 +26,7 @@ button{
 /*--------------------------------------------------------------
 # Step box
 --------------------------------------------------------------*/
-#subContent { position: relative; float:left;padding-left:3.5rem; padding-bottom: 1rem; width: calc(100% - 14rem); margin-left: 30px;}
+#subContent { position: relative; float:left; padding-bottom: 1rem; width: calc(100% - 14rem); margin-left: 30px;}
 
 
 .titleArea { position:relative; margin-bottom: 3rem;}
@@ -34,7 +38,7 @@ button{
 
 .titleArea { margin-bottom: 2rem; }
 .step-container{
-    width: 1500px;
+    width: 1400px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -46,8 +50,8 @@ button{
     position: relative;
     background-color: #fff;
     border-radius: 20px;
-    height: 230px;
-    width: 270px;
+    height: 240px;
+    width: 250px;
     box-shadow: 0 5px 10px rgb(0,0,0, 0.1);
 
 
@@ -59,9 +63,9 @@ button{
 .card-content{
     position: absolute;
     width: 100%;
-    height: 30%;
+    height: 27%;
     border-radius: 20px 20px 0 0;
-    background-color: rgb(230, 213, 226) ;
+  background-color: #f7e8f7;
     text-align: center;
 
 }
@@ -75,8 +79,6 @@ button{
     font-weight: 600;
     text-align: center;
     top: 20px;
-
-
 
 }
 .step-box1::after{
@@ -94,6 +96,9 @@ button{
 }
 
 .step-box2 li{
+    margin-top: 10px;
+    margin-left: 30px;
+    list-style: disc;
     padding: 5px;
 }
 
@@ -246,7 +251,6 @@ body, ul, li {
 /*표 밑줄 */
 .table_terms td,.table_terms th{
     border-bottom: 1px solid #e6e6e6;
-
     color: black;
 
 }
@@ -267,5 +271,9 @@ body, ul, li {
 
 /*전자문진-상세내용*/
 .survey_btm{
-    width: 250%;
+    width: 1200px;
+
 }
+
+
+
