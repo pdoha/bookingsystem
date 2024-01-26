@@ -13,7 +13,7 @@ public class RequestBoardConfig {
 
     private String mode = "add";
 
-    private String gid = UUID.randomUUID().toString();
+    private String gid = UUID.randomUUID().toString();//그룹 아이디
 
     private int listOrder; // 진열 가중치
 

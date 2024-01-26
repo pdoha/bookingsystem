@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 24.01.24
+ * 댓글 관련 엔티티
+ */
 @Data
 @Builder
 @Entity

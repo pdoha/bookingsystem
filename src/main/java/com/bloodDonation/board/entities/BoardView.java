@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 게시글 조회 엔티티
+ */
 @Data
 @Entity
 @NoArgsConstructor @AllArgsConstructor
