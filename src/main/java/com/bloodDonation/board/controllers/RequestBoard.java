@@ -27,6 +27,8 @@ public class RequestBoard {
     @NotBlank
     private String content;//글내용
 
+    private Long parentSeq; // 부모 게시글 번호 - 답글
+
     //추가 필드 - 정수
     private Long num1;
     private Long num2;
