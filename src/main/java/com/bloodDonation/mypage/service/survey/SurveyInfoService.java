@@ -18,7 +18,7 @@ public class SurveyInfoService {
 
     public String result(){
 
-        Optional<Survey> survey = surveyRepository.findById(Long.valueOf("seq"));
+        Optional<Survey> survey = surveyRepository.findById(1L);
 
         int positive=0;
         int negative=0;
