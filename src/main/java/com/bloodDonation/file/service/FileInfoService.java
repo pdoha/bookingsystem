@@ -40,7 +40,7 @@ public class FileInfoService {
     }
 
     /**
-     *
+     * 24.01.12
      * @param gid
      * @param location //gid + location : 특정그룹의 위치
      * @param mode(완료 처리 하기위해)
@@ -90,6 +90,7 @@ public class FileInfoService {
 
 
     /**
+     * 24.01.12
      * 파일 추가 정보 처리
      *      - 파일 서버 경로(filePath)
      *      - 파일 URL(fileUrl)
@@ -134,6 +135,7 @@ public class FileInfoService {
     }
 
     /**
+     * 24.01.12
      * 파일별 특정 사이즈 썸네일 조회
      * @param seq
      * @param width
