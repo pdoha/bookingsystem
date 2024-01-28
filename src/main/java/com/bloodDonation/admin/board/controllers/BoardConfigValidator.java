@@ -20,11 +20,14 @@ public class BoardConfigValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        /* 게시판 아이디 중복 체크 */
+        /**
+         * 24.01.15
+         * 게시판 아이디 중복 체크
+        */
         RequestBoardConfig form = (RequestBoardConfig) target;
 
-        String bid = form.getBid();
-        String mode = form.getMode();
+        String bid = form.getBid(); // 게시판 아이디
+        String mode = form.getMode(); //게시판 mode
         if (mode.equals("add") && StringUtils.hasText(bid) && boardRepository.existsById(bid)) {
             errors.rejectValue("bid", "Duplicated");
         }

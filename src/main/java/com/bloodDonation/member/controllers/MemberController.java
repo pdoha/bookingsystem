@@ -77,6 +77,7 @@ public class MemberController implements ExceptionProcessor {
 
     @GetMapping("/login")
     public String login(Model model) {
+        commonProcess("login", model);
 
         return utils.tpl("member/login");
     }
@@ -124,6 +125,8 @@ public class MemberController implements ExceptionProcessor {
 
         if (mode.equals("login")) { //로그인
             pageTitle = Utils.getMessage("로그인", "commons");
+            addCss.add("member/style");
+            addScript.add("member/common");
 
         } else if (mode.equals("join")) { //회원가입
             addCss.add("member/join");

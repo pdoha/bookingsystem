@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-    <form name="frmUnregister" th:object="${requestUnRegister}">
+    <form name="frmUnregister" method="post" th:action="@{/mypage/unregister}" th:object="${requestUnRegister}">
     <h1 class="unregister" th:text="#{회원탈퇴}"></h1>
     <div>
         <ul>
@@ -15,6 +15,9 @@
         <input type="password" name="userPw" id="userPw">
         <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
     </div>
+        <p>
+        <button type="submit">완료</button>
+        </p>
     </form>
 </section>
 </html>
