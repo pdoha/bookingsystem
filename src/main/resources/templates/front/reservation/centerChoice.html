@@ -1,22 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>센터 선택</title>
-</head>
-<body>
-    <div id="map" style="width:500px;height:400px;"></div>
-    <!-- appkey: 각자 개개인의 키를 입력 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fe37ef5c3784cdc73ae0a51e056cfea"></script>
-    <script>
-        var container = document.getElementById('map');
-        var options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
-            level: 3
-        };
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
 
-        var map = new kakao.maps.Map(container, options);
-    </script>
+<h2>헌혈의집 선택</h2>
+<section layout:fragment="content">
+    <!--kakao appkey 가져오기-->
+    <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
 
-</body>
+    <!-- 필터링 검색 -->
+    <form name="frmSearch" method="get" th:object="${centerSearch}">
+        <table class="table_cols mb30">
+            <tr>
+                <th>모두선택</th>
+                <td>
+                    <label for="chkAll">
+                        <input type="checkbox" id="chkAll" name="chkAll" title="모두선택" value="Y"> "모두선택"
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>운영정보 선택</th>
+                <td>
+                    <label for="opWkDay">
+                        <input type="checkbox" id="opWkDay" value="Od1" title="평일"> "평일"
+                    </label>
+                    <label for="opWkend">
+                        <input type="checkbox" id="opWkend" value="Od2" title="주말"> "주말"
+                    </label>
+                    <label for="opHldy">
+                        <input type="checkbox" id="opHldy" value="Od3" title="공휴일"> "공휴일"
+                    </label>
+                     <label for="opExtn">
+                        <input type="checkbox" id="opExtn" value="Od4" title="야간"> "18시 이후"
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>지역 선택</th>
+                <td>
+                    <label for="selSd"></label>
+                    <select id="selSd" name="selSd" title="시도 선택">
+                        <option value>시도</option>
+                        <option value="서울">서울</option>
+                        <option value="부산">부산</option>
+                        <option value="대구">대구</option>
+                        <option value="인천">인천</option>
+                        <option value="울산">울산</option>
+                        <option value="세종">세종</option>
+                        <option value="경기">경기</option>
+                        <option value="강원">강원</option>
+                        <option value="충북">충북</option>
+                        <option value="대전">대전</option>
+                        <option value="충남">충남</option>
+                        <option value="전북">전북</option>
+                        <option value="광주">광주</option>
+                        <option value="전남">전남</option>
+                        <option value="경북">경북</option>
+                        <option value="경남">경남</option>
+                        <option value="제주">제주</option>
+                    </select>
+                    <label for="selSgg"></label>
+                    <select id="selSgg" name="selSgg" title="시군구 선택">
+                        <option value>시군구</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>키워드 입력</th>
+                <td>
+                    <div class="input_grp">
+                        <input type="text" name="skey" th:field="*{skey}" title="검색단어" value placeholder="헌혈의집 명 또는 헌혈의 집 주소를 입력해주세요" maxlength="80">
+                    </div>
+                </td>
+                <td>
+                    <div class="search_btn">
+                        <button type="submit" class="btn">검색</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <!-- 지도 표시 -->
+    <div class="directions">
+
+    </div>
+
+    <!-- 검색 결과 리스트-->
+    <form name="frmList" method="post" target="ifrmProcess" autocomplete="off">
+        <input type="hidden" name="_method" value="PATCH">
+        <table class="table_rows">
+            <thead>
+                <tr>
+                    <th>지역</th>
+                    <th>헌혈의집</th>
+                    <th>주소</th>
+                    <th>운영시간</th>
+                    <th>전화번호</th>
+                    <th></th>       <!-- 상세보기/예약하기 버튼 -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>
+                        <a href="javascript:" class="" onclick="viewCenterInfo('')">상세보기</a>
+                        <a href="javascript:" class="" onclick="bookCenter('')">예약하기</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 페이징 -->
+        <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+    </form>
+</section>
 </html>

@@ -1,0 +1,145 @@
+.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 60px; }
+
+main { min-height: 700px; }
+
+*{
+
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+
+}
+
+
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(245, 220, 243, 0.948);
+}
+
+
+
+.form-box h2{
+    margin-top: 100px;
+    font-size: 3.5em;
+    color: #162938;;
+    text-align: center;
+}
+
+
+.input-box{
+    position: relative;
+    width: 400px;
+    height: 30px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+    margin-left: 300px;
+    margin-top: 50px;
+
+}
+
+/*클릭 아이디 비번*/
+.input-box label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #162938;
+  font-weight: 500;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -3px;
+}
+
+/*입력창*/
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+
+}
+
+/*아이콘*/
+.input-box .icon{
+    position: absolute;
+    right: 3px;
+    font-size: 1.4em;
+    color: #162938;
+    line-height: 27px;
+}
+
+.remember-forgot{
+    font-size: .9em;
+    color: #162938;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input{
+    accent-color: #162938;
+    margin-right: 3px;
+}
+
+
+.remember-forgot a{
+    color: #162938;
+    text-decoration: none;
+
+}
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+
+.btn{
+    margin-top: 20px;
+    width: 20%;
+    height: 40px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 400px;
+
+}
+
+
+.login-register{
+
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a{
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+
+}
+
+.login-register p a:hover{
+    text-decoration: underline;
+}

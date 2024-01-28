@@ -5,10 +5,12 @@ import com.bloodDonation.admin.menus.MenuDetail;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.member.controllers.MemberSearch;
+import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.service.MemberInfo;
 import com.bloodDonation.member.service.MemberInfoService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -51,6 +53,14 @@ public class MemberController implements ExceptionProcessor {
         return "admin/member/list";
     }
 
+    //선택수정
+    @PatchMapping
+    public String editList(@RequestParam(name="chk", required = false) List<Long> chks, Model model) {
+        return "common/_execute_script";
+
+
+    }
+
     //회원 등록
     @GetMapping("/add")
     public String add(Model model){
@@ -59,12 +69,12 @@ public class MemberController implements ExceptionProcessor {
     }
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") String userId, Model model){
-        commonProcess("add", model);
+        commonProcess("edit", model);
 
         MemberInfo memberInfo = (MemberInfo)memberInfoService.loadUserByUsername(userId);
-        Member member = memberInfo.getMember();
+        RequestJoin member = new ModelMapper().map(memberInfo.getMember(), RequestJoin.class);
 
-        model.addAttribute("member", member);
+        model.addAttribute("requestJoin", member);
         return "admin/member/edit";
     }
     //회원 추가 & 저장 (동시에 공유)
@@ -95,6 +105,7 @@ public class MemberController implements ExceptionProcessor {
         if (mode.equals("add") || mode.equals("edit")){ //회원 등록 또는 수정일때
             addCommonScript.add("ckeditor5/ckeditor"); //에디터 추가
             addScript.add("member/form"); // 양식
+            addScript.add("member/manager"); //관리자 회원수정
 
         }
 

@@ -2,11 +2,15 @@ package com.bloodDonation.mypage.controllers;
 
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.mypage.service.survey.SurveyApplyService;
+import com.bloodDonation.mypage.service.survey.SurveyInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/survey")
@@ -16,10 +20,16 @@ public class SurveyController {
 
     private final Utils utils;
     private final SurveyApplyService applyService;
+    private final SurveyInfoService surveyInfoService;
 
     @ModelAttribute("requestSurvey")
     public RequestSurvey requestSurvey() {
         return new RequestSurvey();
+    }
+
+    @ModelAttribute("addCss")
+    public String[] addCss() {
+        return new String[] { "survey/style" };
     }
 
     @GetMapping("/step1")
@@ -41,7 +51,7 @@ public class SurveyController {
     }
 
     @PostMapping("/apply")
-    public String apply(RequestSurvey form, Errors errors, Model model) {
+    public String surveyapply(RequestSurvey form, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return utils.tpl("survey/step2");
@@ -49,12 +59,21 @@ public class SurveyController {
 
         applyService.apply(form);
 
-        return "redirect:/survey/result";
+        return surveyInfoService.result();
+
     }
-    @PostMapping("/result")
-    public String result(RequestSurvey form, Model model){
+
+    /*@PostMapping("/result")
+    public String result(Model model){
 
         return utils.tpl("survey/result");
+    }*/
+
+    private void commonProcess(String mode, Model model) {
+
+        List<String> addCommonScript = new ArrayList<>();
+
+
     }
 
     /*

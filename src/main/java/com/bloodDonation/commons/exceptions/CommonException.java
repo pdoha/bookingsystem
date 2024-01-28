@@ -18,6 +18,11 @@ public class CommonException extends RuntimeException{
         this.status = status;
     }
 
+    /**
+     * 24.01.18
+     * 공통 exception의 status 받아와서 retun(반환)함.
+     * @param status : 매개변수 1개일때
+     */
     public CommonException(HttpStatus status) {
         this.status = status;
     }

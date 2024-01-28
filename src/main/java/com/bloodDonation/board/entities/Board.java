@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * 게시판 기본 엔티티
+ */
 @Entity
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
@@ -95,12 +98,13 @@ public class Board extends BaseMember {
     private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지
 
     /**
+     * 24.01.15
      * 분류 List 형태로 변환
      * @return
      */
     public List<String> getCategories() {
         List<String> categories = new ArrayList<>();
-
+//category가 있으면
         if (StringUtils.hasText(category)) {
             categories = Arrays.stream(category.trim().split("\\n"))
                     .map(s ->s.trim().replaceAll("\\r","")).toList();

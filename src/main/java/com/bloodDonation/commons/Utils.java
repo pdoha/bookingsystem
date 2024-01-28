@@ -22,6 +22,7 @@ public class Utils {
     //유효성 검증 관련
     private final HttpServletRequest request;
     private final HttpSession session;
+    //파일 조회하기
     private final FileInfoService fileInfoService;
     private final ConfigInfoService infoService;
 
@@ -145,6 +146,12 @@ public class Utils {
 
         return data;
     }
+
+    /**
+     * 썸네일 정해진 사이즈 바꾸기
+     * @param size
+     * @return
+     */
 
     private int[] toConvert(String size) {
         size = size.trim();

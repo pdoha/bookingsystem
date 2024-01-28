@@ -60,7 +60,9 @@ public class MemberInfoService implements UserDetailsService {
                 .password(member.getUserPw())
                 .member(member)
                 .authorities(authorities)
+                .enable(member.isEnable())
                 .build();
+
     }
 
     public ListData<Member> getList(MemberSearch search) {
