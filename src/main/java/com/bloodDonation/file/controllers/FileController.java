@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 24.01.12
+ * 1. 파일의 직접 삭제, 다운로드
+ *
+ */
 @Controller
 @RequestMapping("/file")
 @RequiredArgsConstructor

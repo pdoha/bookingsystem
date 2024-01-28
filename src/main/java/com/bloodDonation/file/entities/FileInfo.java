@@ -25,20 +25,20 @@ public class FileInfo extends BaseMember {
     private Long seq; //파일 등록 번호, 서버에 업로드하는 파일명 기준
 
     @Column(length = 65, nullable = false)
-    private String gid = UUID.randomUUID().toString();//groupid로 구별하기 위해서
+    private String gid = UUID.randomUUID().toString();//게시글 하나에 여러개의 파일이 필요할시 groupid로 구별하기 위해서
     //문자열로 랜덤하게 유니크아이디를 만들수 있는 기능중 하나
 
-    @Column (length=65)//그룹 안에서 위치별로 구분
-    private String location;
+    @Column (length=65)
+    private String location;//그룹 안에서 위치별로 구분 ex)에디터, 첨부, 상세이미지등
 
     @Column (length = 80)
     private String fileName;
 
     @Column (length = 30)
-    private String extension;//확장자
+    private String extension;//확장자(시퀀스 번호.확장자 하기 위해)
 
     @Column(length = 65)
-    private String fileType;
+    private String fileType;//extension이 없는 경우도 있기 때문에, 이미지만따로 뽑아오는
 
     //편의상 만든 종목
     @Transient
