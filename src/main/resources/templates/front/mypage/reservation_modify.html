@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
-
+    <form name="frmresUpdate" method="post" th:action="@{/mypage/reservation/modify}">
     <div>
         <h3>센터가 예약되었습니다</h3>
         <ul>
@@ -298,6 +298,7 @@
             <input type="text" name="tel" id="tel" th:value="#{tel}">
         </p>
     </div>
-    <button>예약변경</button>
+    <button type="submit">예약변경</button>
+    </form>
 </section>
 </html>
