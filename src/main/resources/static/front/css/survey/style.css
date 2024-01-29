@@ -35,7 +35,8 @@ survey_txt_box{
 
 
 textarea{
-    width: 250px;
+    width: 650px;
+    height: 80px;
     padding: 5px;
     margin: 5px;
 
@@ -45,4 +46,6 @@ input{
 margin : 10px;
 }
 
-
+.survey_btn_area{
+margin-left: 550px;
+}
