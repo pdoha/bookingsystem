@@ -72,13 +72,15 @@ li{
 --------------------------------------------------------------*/
 
 .text-center .card{
-            width: 15rem;
+            width: 12rem;
+            height: 150px;
             border: 5px solid rgba(229, 46, 64, 0.452);
             border-radius: 20px;
             box-shadow: 0 0 5px rgba(207, 27, 177, 0.521);
-            margin: 2rem;
+            margin: 1rem;
             margin-top: 600px;
-            margin-left: 40px;
+            margin-left: 80px;
+
 
         }
 
@@ -105,7 +107,7 @@ li{
 
 .text-center .card img { width: 50% !important; display: block; margin: 0 auto; height:100px; margin-top:15px;}
 
-/*****************************************/
+/*-------------bottom card------------------*/
 
 .text-center2 .card2{
             width: 15rem;
@@ -127,6 +129,7 @@ li{
 
 
 .text-center2 .card-title2{
+         padding-top: 30px;
          font-size: 18px;
          font-weight: 600;
          color: rgb(236, 97, 120);
@@ -140,7 +143,7 @@ li{
 
 
 
-.text-center2 .card img { width: 50% !important; display: block; margin: 0 auto; height:200px; margin-top:15px;}
+.text-center .card img { width: 50% !important; display: block; margin: 0 auto; height:150px; margin-top:15px; text-align: center;}
 
 
 
@@ -155,7 +158,7 @@ progress {
 ::-webkit-progress-bar {
   background-color: white;
   width: 150px;
-  height:20px;
+  height: 20px;
   border-radius: 50px;
 
 }
@@ -163,7 +166,7 @@ progress {
 ::-webkit-progress-value {
   background-color: red;
   width: 150px;
-  height:20px;
+  height: 20px;
   border-radius: 50px;
 
 
@@ -205,14 +208,14 @@ h1{ text-align: center;}
 
 
 /*혈액형 동그라미*/
-.blood_notice .list_box .blood_list li .bloodType { width: 2.5rem; height: 2rem; line-height: 2rem; border-radius: 50%; background: #f7f7fa; color: #333; font-size: 2rem; text-align: center; margin: auto; margin-bottom: 100px; font-family: 'Montserrat'; font-weight: 600;  }
+.blood_notice .list_box .blood_list li .bloodType { width: 3.5rem; height: 3rem; line-height: 2rem; border-radius: 50%; background: #f7f7fa; color: #333; font-size: 2rem; text-align: center; margin: auto; margin-bottom: 100px; font-family: 'Montserrat'; font-weight: 600;  }
 
 .blood_notice .list_box .blood_list li .num{
     margin-top: 80px; font-family: 'Montserrat'; font-weight: 600; font-size: 18px;
 }
 
 /*blood bar*/
-.blood_notice .list_box .blood_list ul { display: table; table-layout: fixed; width: 100%; }
+.blood_notice .list_box .blood_list ul { display: table; table-layout: fixed; width: 100%;  }
 
 .blood_notice .list_box .blood_list li { position: relative; display: table-cell;  text-align: center; }
 
@@ -225,4 +228,25 @@ h1{ text-align: center;}
 
 
 
+/*--------------------------------------------------------------
+# 혈액 보유량
+--------------------------------------------------------------*/
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
 
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
