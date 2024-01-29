@@ -15,11 +15,15 @@ import java.util.List;
 @RestController
     @RequestMapping("/api/file")
     @RequiredArgsConstructor
-    public class ApiFileController implements ExceptionRestProcessor {
+    public class ApiFileController implements ExceptionRestProcessor {//ExceptionRestProcessor : 예외 나면 예외처리하라고 넣음
 
         private final FileUploadService uploadService;
         private final FileDeleteService deleteService;
-
+    /**
+     * 24.01.12
+     * 1. 업로드 파일의 gid,location등 텍스트 파일을 보냄
+     * MultipartFile[] : 여러개의 파일을 올림
+     */
 
         @PostMapping
         public JSONData<List<FileInfo>> upload(@RequestParam("file") MultipartFile[] files,

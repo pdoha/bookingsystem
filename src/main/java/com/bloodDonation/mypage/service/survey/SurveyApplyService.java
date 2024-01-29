@@ -47,8 +47,8 @@ public class SurveyApplyService {
             }
         }
 
-        System.out.println("네------"+positive);
-        System.out.println("아니요------"+negative);
+        /*System.out.println("네------"+positive);
+        System.out.println("아니요------"+negative);*/
 
         Survey survey = Survey.builder()
                 .data(data)
@@ -56,8 +56,8 @@ public class SurveyApplyService {
                 .negative(negative)
                 .member(memberUtil.getMember())
                 .build();
-        System.out.println("survey 후"+survey.getPositive());
-        System.out.println("survey 후"+survey.getNegative());
+       /* System.out.println("survey 후"+survey.getPositive());
+        System.out.println("survey 후"+survey.getNegative());*/
         surveyRepository.saveAndFlush(survey);
 
     }

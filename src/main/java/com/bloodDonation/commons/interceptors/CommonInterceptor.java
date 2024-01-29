@@ -56,12 +56,17 @@ public class CommonInterceptor implements HandlerInterceptor {
         }
     }
 
+    /**
+     * 24.01.11
+     * 허용되는 파일 확장자
+     * @param request
+     */
     private void loadSiteConfig(HttpServletRequest request) {
         String[] excludes = {".js", ".css", ".png", ".jpg", ".jpeg", "gif", ".pdf", ".xls", ".xlxs", ".ppt"};
 
-        String URL = request.getRequestURI().toLowerCase();
+        String URL = request.getRequestURI().toLowerCase();//대문자,소문자 구분 없이 소문자로 반환하기
 
-        boolean isIncluded = Arrays.stream(excludes).anyMatch(s -> URL.contains(s));
+        boolean isIncluded = Arrays.stream(excludes).anyMatch(s -> URL.contains(s));//허용되는 확장자인지 아닌지 학인
         if (isIncluded) {
             return;
         }
