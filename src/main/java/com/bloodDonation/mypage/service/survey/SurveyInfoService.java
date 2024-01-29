@@ -1,13 +1,14 @@
 package com.bloodDonation.mypage.service.survey;
 
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.SurveyRepository;
 import com.bloodDonation.mypage.entities.Survey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,17 +16,17 @@ import java.util.Optional;
 public class SurveyInfoService {
     private final Utils utils;
     private final SurveyRepository surveyRepository;
-    private Member member;
+    private final MemberUtil memberUtil;
     private Survey survey;
 
     public String result(){
+        Member member = memberUtil.getMember();
+        List<Survey> surveys = member.getSurveys();
 
-        Optional<Survey> survey = surveyRepository.findById(1L);
-        /*Optional<Survey> survey = surveyRepository.findByuserNo(member.getUserNo());*/
         int positive=0;
         int negative=0;
-        if(survey.isPresent()) {
-            Survey survey1 = survey.get();
+        if(surveys.isEmpty()) {
+            Survey survey1 = (Survey) surveys;
 
             positive=survey1.getPositive();
             negative = survey1.getNegative();
@@ -37,5 +38,6 @@ public class SurveyInfoService {
         }else{
             return utils.tpl("survey/surveyimpossible");
         }
+
     }
 }

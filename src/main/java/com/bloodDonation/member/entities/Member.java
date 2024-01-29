@@ -1,6 +1,7 @@
 package com.bloodDonation.member.entities;
 
 import com.bloodDonation.commons.entities.Base;
+import com.bloodDonation.mypage.entities.Survey;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -59,6 +60,10 @@ public class Member extends Base {
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Authorities> authorities = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Survey> surveys = new ArrayList<>();
 
     //회원탈퇴시-memberinfo쪽에 isEnable()의 리턴 시 필요
     private boolean enable = true;
