@@ -7,9 +7,11 @@ import com.bloodDonation.mypage.controllers.RequestUnRegister;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberDeleteService {
     private final MemberRepository memberRepository;
 
@@ -27,7 +29,8 @@ public class MemberDeleteService {
 
         if(member.getUserPw().equals(form.getUserPw())){
             member.setEnable(false);
-
+            member.setMName("****");
+            member.setUserPw("****");
             memberRepository.saveAndFlush(member);
 
         }
@@ -35,6 +38,6 @@ public class MemberDeleteService {
 
         //db에서 삭제된 멤버데이터를 세션에 다시 set(update)
         session.invalidate(); // 로그아웃
-        memberRepository.delete(member);
+        //memberRepository.delete(member);
     }
 }
