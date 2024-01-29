@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.StringUtils;
@@ -44,7 +45,11 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         if(StringUtils.hasText(username) && StringUtils.hasText(password)){
             session.setAttribute("Global_error", Utils.getMessage("Fail.login", "errors"));
         }
-
+        //탈퇴-메세지(로그인 실패)
+        if(exception instanceof DisabledException){
+            session.setAttribute("Global_error",
+                    Utils.getMessage("Resign.member", "errors"));
+        }
 
         //로그인 실패하면 로그인페이지로 이동하고 원인을 알려준다
         response.sendRedirect(request.getContextPath() + "/member/login");
