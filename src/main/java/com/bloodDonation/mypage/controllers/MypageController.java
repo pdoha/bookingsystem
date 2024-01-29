@@ -81,7 +81,7 @@ public class MypageController implements ExceptionProcessor {
     @PostMapping("/modify")
     public String modifyPs(@Valid RequestMemberInfo form, Model model) {
         commonProcess("modify", model);
-        //변경된 개인정보가 requestjoin에 저장되야됨-null체크 필수?
+
         updateService.update(form);
 
         return "redirect:/mypage/info";
@@ -93,12 +93,28 @@ public class MypageController implements ExceptionProcessor {
     }
 
      @GetMapping("/reservation/modify")
-     public String reservationModify(Model model){
+     public String reservationModify(@ModelAttribute RequestMyReservation form, Model model){
             commonProcess("reservation/modify",model);
+
+         if (memberUtil.isLogin()) {
+             Member member = memberUtil.getMember();//예약은 getReservation() 이용?
+             form = new ModelMapper().map(member, RequestMyReservation.class);
+         }
+
+         model.addAttribute("requestMyReservation", form);
             return utils.tpl("mypage/reservation_modify");
      }
 
-    @GetMapping("/survey")
+    @PostMapping("/reservation/modify")
+    public String reservationModifyPs(@Valid RequestMyReservation form, Model model) {
+        commonProcess("modify", model);
+
+        //예약변경 데이터를 저장해주는 서비스-form을 담아
+
+        return "redirect:/mypage/reservation";
+    }
+
+    @GetMapping("/survey") //전자문진 안내 페이지-나머지 전자문진은 surveyController쪽에 있음
     public String survey(Model model){
         commonProcess("survey", model);
         return utils.tpl("mypage/survey");

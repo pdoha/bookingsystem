@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
-@Controller
+@Controller("adminReservationController")
 @RequestMapping("/admin/reservation")
 @RequiredArgsConstructor
 public class ReservationController implements ExceptionProcessor {
