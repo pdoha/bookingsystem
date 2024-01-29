@@ -59,7 +59,7 @@ public class BoardAuthService {
             data = infoService.get(seq);
         }
 
-        if ((mode.equals("update") && !data.isEditable()) || (mode.equals("delete") && !data.isDeletable())) {
+        if ((mode.contains("update") && !data.isEditable()) || (mode.contains("delete") && !data.isDeletable())) {
             Member member = data.getMember();
 
             //비회원 -> 비밀번호 확인 필요
