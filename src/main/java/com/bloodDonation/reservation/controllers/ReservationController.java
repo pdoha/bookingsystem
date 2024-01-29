@@ -4,6 +4,7 @@ import com.bloodDonation.calendar.Calendar;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.reservation.service.ReservationApplyService;
+import com.bloodDonation.reservation.service.ReservationDateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +12,19 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/reservation")
 @RequiredArgsConstructor
-@SessionAttributes("requestReservation")
+@SessionAttributes({"requestReservation", "availableTimes"})
 public class ReservationController implements ExceptionProcessor {
 
     private final ReservationApplyService reservationApplyService;
     private final ReservationMainValidator reservationMainValidator;
+    private final ReservationDateService reservationDateService;
     private final Calendar calendar;
     private final Utils utils;
 
@@ -70,6 +74,11 @@ public class ReservationController implements ExceptionProcessor {
         }
 
         form.setMode("step2");
+
+        //검증 성공시 예약 시간대 블록 조회
+        List<LocalTime> availableTimes = reservationDateService.getAvailableTimes(form.getCCode(), form.getDate());
+
+        model.addAttribute("availableTimes", availableTimes);
 
         return utils.tpl("reservation/step2");
     }
