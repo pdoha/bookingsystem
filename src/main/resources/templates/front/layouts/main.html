@@ -34,9 +34,13 @@
     <th:block layout:fragment="addScript"></th:block>
 </head>
 <body>
-<header th:replace="~{front/outlines/header::common}"></header>
-<main layout:fragment="content"></main>
-<footer th:replace="~{front/outlines/footer::common}"></footer>
+    <th:block th:if="${hide_header == null}">
+    <header th:replace="~{front/outlines/header::common}"></header>
+    </th:block>
+    <main layout:fragment="content"></main>
+    <th:block th:if="${hide_footer == null}">
+    <footer th:replace="~{front/outlines/footer::common}"></footer>
+    </th:block>
 </body>
 
 </html>
