@@ -6,8 +6,6 @@ main { min-height: 700px; }
 
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
-    overflow-x: hidden;
-    overflow-y: hidden;
 
 
 }
@@ -20,20 +18,21 @@ body{
   align-items: center;
   background-color: rgba(245, 220, 243, 0.948);
 }
-
-
-
-.form-box h2{
-    margin-top: 100px;
+.form-box h1{
+    top: 0;
     font-size: 3.5em;
-    color: #162938;;
+    color: RED;
     text-align: center;
+    background: #fff;
+
 }
+
+
 
 
 .input-box{
     position: relative;
-    width: 400px;
+    width: 350px;
     height: 30px;
     border-bottom: 2px solid #162938;
     margin: 30px 0;
@@ -53,11 +52,14 @@ body{
   font-weight: 500;
   pointer-events: none;
   transition: .5s;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .input-box input:focus~label,
 .input-box input:valid~label{
-    top: -3px;
+
+  top: -3px;
 }
 
 /*입력창*/
@@ -78,7 +80,7 @@ body{
 .input-box .icon{
     position: absolute;
     right: 3px;
-    font-size: 1.4em;
+    font-size: 20px;
     color: #162938;
     line-height: 27px;
 }
@@ -95,12 +97,14 @@ body{
 .remember-forgot label input{
     accent-color: #162938;
     margin-right: 3px;
+    font-size: 50px;
 }
 
 
 .remember-forgot a{
     color: #162938;
     text-decoration: none;
+     font-size: 50px;
 
 }
 .remember-forgot a:hover{
@@ -131,6 +135,13 @@ body{
     text-align: center;
     font-weight: 500;
     margin: 25px 0 10px;
+    font-size: 16px;
+
+
+
+
+
+
 }
 
 .login-register p a{
@@ -138,8 +149,48 @@ body{
     text-decoration: none;
     font-weight: 600;
 
+
 }
 
-.login-register p a:hover{
+.login-register a a:hover{
     text-decoration: underline;
 }
+
+
+/*---------------회원가입--------------------*/
+.terms_agree{
+    padding: 10px;
+    left: 0;
+
+}
+
+.terms_contents {
+    width: 1000px;
+    height: 30vh;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(207, 27, 177, 0.521);
+    border: none;
+
+
+
+}
+
+.terms_tit{
+    margin-left: 6px;
+    margin-bottom: 5px;
+}
+
+.terms-button{
+      margin-top: 50px;
+      margin-bottom: 100px;
+       height: 50px;
+       width: 200px;
+       margin-left: 300px;
+       background: #fff;
+       color: black;
+       font-size: 16px;
+       font-weight: bold;
+       border-radius: 50px;
+}
+
