@@ -37,7 +37,7 @@
             <dt th:text="#{헌혈_타입}"></dt>
             <dd>
                 <th:block th:each="type, status : ${donationTypes}">
-                    <input type="radio" name="bookType" value="${type[0]}" th:id="${'bookType_' + status.index}" th:field="*{bookType}">
+                    <input type="radio" name="bookType" th:value="${type[0]}" th:id="${'bookType_' + status.index}" th:field="*{bookType}">
                     <label th:for="${'bookType_' + status.index}" th:text="${type[1]}"></label>
                 </th:block>
                 <div class="error" th:each="err : ${#fields.errors('bookType')}" th:text="${err}"></div>
