@@ -10,42 +10,43 @@
 
 <main layout:fragment="content" class="layout_width">
     <div class="form-box login">
-    <h2 th:text="#{로그인}"></h2>
+        <h2 th:text="#{로그인}"></h2>
+        <h1 style="width: 300px; margin-left: 320px; margin-bottom: 100px; border-radius: 50px;">RED BANK</h1>
 
 
-    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
-        <!--로그인 성공시 이동 페이지 ( param으로 주소값을 따로 주면 그 주소로이동함!)-->
-        <input type="hidden" name="redirectURL"
-               th:if="${param.redirectURL != null}" th:value="${param.redirectURL}">
-        <!--스프링 시큐리티가 처리하므로 주소만 알려주면됨-->
+        <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
+            <!--로그인 성공시 이동 페이지 ( param으로 주소값을 따로 주면 그 주소로이동함!)-->
+            <input type="hidden" name="redirectURL"
+                   th:if="${param.redirectURL != null}" th:value="${param.redirectURL}">
+            <!--스프링 시큐리티가 처리하므로 주소만 알려주면됨-->
 
-        <dl>
-            <div class="input-box">
+            <dl>
+                <div class="input-box">
                 <span class="icon">
                     <i class="xi-user"></i>
                 </span>
-                <input type="text" required>
-                <label>아이디</label>
+                    <input type="text" required>
+                    <label>아이디</label>
 
-            <dt th:text="#{아이디}"></dt>
-            <dd>
-                <input type="text" name="userId" th:value="${session.userId}">
-                <div class="error" th:if="${session.NotBlank_userId != null}"
-                     th:text="${session.NotBlank_userId}">
-                </div>
-            </dd>
-        </dl>
-        </div>
+                    <dt th:text="#{아이디}"></dt>
+                    <dd>
+                        <input type="text" name="userId" th:value="${session.userId}">
+                        <div class="error" th:if="${session.NotBlank_userId != null}"
+                             th:text="${session.NotBlank_userId}">
+                        </div>
+                    </dd>
+            </dl>
+    </div>
 
 
 
-        <dl>
-            <div class="input-box">
+    <dl>
+        <div class="input-box">
                     <span class="icon">
                         <i class="xi-lock"></i>
                     </span>
-                <input type="password" required>
-                <label>비밀번호</label>
+            <input type="password" required>
+            <label>비밀번호</label>
 
             <dt th:text="#{비밀번호}"></dt>
             <dd>
@@ -54,28 +55,30 @@
                      th:text="${session.NotBlank_userPw}">
                 </div>
             </dd>
-                <div class="remember-forgot">
-            <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
+    </dl>
 
-        </dl>
-        </div>
+
     </div>
 
 
 
 
 
-        <button type="submit" th:text="#{로그인}" class="btn"></button>
 
-        <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}">
 
+    <button type="submit" th:text="#{로그인}" class="btn"></button>
+
+    <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}">
+
+    </div>
+
+    <div class="login-register">
+            <label><input type="checkbox" >로그인 상태 유지
+                <a th:href="@{/member/find_pw}" style="margin: 20px;" th:text="#{비밀번호_찾기}"></a>
+            </label>
         </div>
 
-        <div class="login-register">
-            <p>아직 회원이 아니신가요?
-                <a href="#" class="register-link">회원가입</a>
-            </p>
-        </div>
+
     </form>
 </main>
 </html>

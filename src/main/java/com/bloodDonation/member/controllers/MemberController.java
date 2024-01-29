@@ -36,7 +36,8 @@ public class MemberController implements ExceptionProcessor {
         //이메일 인증 여부 false로 초기화
         model.addAttribute("EmailAuthVerified", false);
 
-
+        model.addAttribute("hide_header", true);
+        model.addAttribute("hide_footer", true);
         return utils.tpl("member/join");
     }
 
@@ -49,7 +50,8 @@ public class MemberController implements ExceptionProcessor {
         sessionStatus.setComplete();
 
         joinService.process(form, errors);
-
+        model.addAttribute("hide_header", true);
+        model.addAttribute("hide_footer", true);
         //가입 실패
         if(errors.hasErrors()) {//참이면
             //입력한 값 데이터(template)를 그대로 보여준다 (수정할 수 있게)
@@ -78,7 +80,8 @@ public class MemberController implements ExceptionProcessor {
     @GetMapping("/login")
     public String login(Model model) {
         commonProcess("login", model);
-
+        model.addAttribute("hide_header", true);
+        model.addAttribute("hide_footer", true);
         return utils.tpl("member/login");
     }
 
@@ -129,6 +132,7 @@ public class MemberController implements ExceptionProcessor {
             addScript.add("member/common");
 
         } else if (mode.equals("join")) { //회원가입
+            addCss.add("member/style");
             addCss.add("member/join");
             addCommonScript.add("fileManager");
             addCommonScript.add("address");
