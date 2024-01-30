@@ -14,7 +14,12 @@
         <th:block th:text="#{비밀번호}"></th:block>
         <input type="password" name="userPw" id="userPw" th:field="*{userPw}">
         <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
+
+        <th:block th:text="#{비밀번호_확인}"></th:block>
+        <input type="password" name="confirmPassword" class="frm_input_rePw" th:field="*{confirmPassword}">
+        <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
     </div>
+
         <p>
         <button type="submit" onclick="return confirm('정말 탈퇴하시겠습니까?');">완료</button>
         </p>
