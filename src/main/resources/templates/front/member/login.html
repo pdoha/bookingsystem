@@ -54,6 +54,7 @@
                     <a th:href="@{/member/join}" class="register-link">회원가입</a>
                 </p>
             </div>
+            <div class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
         </form>
     </div>
 </main>
