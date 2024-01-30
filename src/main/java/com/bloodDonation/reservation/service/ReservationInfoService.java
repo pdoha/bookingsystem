@@ -101,7 +101,14 @@ public class ReservationInfoService {
             andBuilder.and(reservation.bookDateTime.loe(LocalDateTime.of(eDate, LocalTime.of(23,59,59))));
 
         }
+        String sopt = search.getSopt();
+        String skey = search.getSkey();
 
+        sopt = StringUtils.hasText(sopt) ? sopt : "all";
+        if (StringUtils.hasText(skey)) {
+            skey = skey.trim();
+
+        }
         //검색 조건 페이징
 
         int page = Utils.onlyPositiveNumber(search.getPage(),1);
