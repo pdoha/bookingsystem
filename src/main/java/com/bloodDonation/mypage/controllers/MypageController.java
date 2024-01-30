@@ -11,9 +11,11 @@ import com.bloodDonation.mypage.service.MyPageModifyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.Errors;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class MypageController implements ExceptionProcessor {
     private final MemberUtil memberUtil;
     private final MemberUpdateService updateService;
     private final MemberDeleteService deleteService;
+    private final ResignValidator resignValidator;
     @ModelAttribute("addCss")
     public String[] getAddCss() {
 
@@ -138,11 +141,15 @@ public class MypageController implements ExceptionProcessor {
     }
 
     @PostMapping("/unregister")
-    public String unreggisterPs(@Valid RequestUnRegister form, Errors errors, Model model) {
+    @PreAuthorize("permitAll()")
+    public String unreggisterPs(RequestUnRegister form, Errors errors, Model model) {
+        resignValidator.validate(form, errors);
         if (errors.hasErrors()) {
             return utils.tpl("mypage/unregister");
         }
-        deleteService.delete(form);
+
+        deleteService.delete();
+
         return "redirect:/";//탈퇴 후 메인페이지로
     }
 
