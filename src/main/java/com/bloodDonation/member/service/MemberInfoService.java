@@ -60,7 +60,7 @@ public class MemberInfoService implements UserDetailsService {
                 .password(member.getUserPw())
                 .member(member)
                 .authorities(authorities)
-                .lock(member.isLock())
+                .lock(member.getLock())
                 .enable(member.isEnable())
                 .build();
 
