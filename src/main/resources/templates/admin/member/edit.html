@@ -11,13 +11,13 @@
             <dl>
                 <dt>가입구분</dt>
                 <dd>
-                    <input type="checkbox" name="authorities" th:value="USER" id="managerType_USER" checked>
+                    <input type="checkbox" name="authorities" th:value="USER" id="managerType_USER" th:field="*{authorities}">
                     <label for="managerType_USER" th:text="#{Authority.USER}"></label>
 
-                    <input type="checkbox" name="authorities" th:value="MANAGER" id="managerType_MANAGER" checked>
+                    <input type="checkbox" name="authorities" th:value="MANAGER" id="managerType_MANAGER" th:field="*{authorities}">
                     <label for="managerType_MANAGER" th:text="#{Authority.MANAGER}"></label>
 
-                    <input type="checkbox" name="authorities" th:value="ADMIN" id="managerType_ADMIN" checked>
+                    <input type="checkbox" name="authorities" th:value="ADMIN" id="managerType_ADMIN"  th:field="*{authorities}">
                     <label for="managerType_ADMIN" th:text="#{Authority.ADMIN}"></label>
                 </dd>
             </dl>

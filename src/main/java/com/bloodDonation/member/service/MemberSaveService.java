@@ -1,13 +1,16 @@
 package com.bloodDonation.member.service;
 
 import com.bloodDonation.admin.member.controllers.RequestControl;
+import com.bloodDonation.admin.member.controllers.RequestUpdate;
 import com.bloodDonation.member.entities.Authorities;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.AuthoritiesRepository;
 import com.bloodDonation.member.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +22,7 @@ public class MemberSaveService {
     //멤버 & 권한 정보 가져오기
     private final MemberRepository memberRepository;
     private final AuthoritiesRepository authoritiesRepository;
+    private final PasswordEncoder encoder;
 
     public void updateControl(RequestControl form){
 
@@ -54,5 +58,31 @@ public class MemberSaveService {
         authoritiesRepository.saveAllAndFlush(authorities);
     }
 
+    public void update(RequestUpdate form) {
+        Member member = memberRepository.findByUserId(form.getUserId()).orElseThrow(MemberNotFoundException::new);
+        member.setEmail(form.getEmail());
+
+        String userPw = form.getUserPw();
+        String confirmPw = form.getConfirmPw();
+        if (StringUtils.hasText(userPw)) {
+            member.setUserPw(encoder.encode(userPw));
+        }
+
+        memberRepository.saveAndFlush(member);
+
+        //권한은 가져와서 삭제 후에 다시 추가
+        List<Authorities> authorities = member.getAuthorities();
+        authoritiesRepository.deleteAll(authorities);
+        authoritiesRepository.flush();
+
+        //authorities 하나 더 만들어서
+        //넘어 오는건 이넘상수 a가 넘어와서 반환해서 리스트형태로 넘겨준다
+        authorities = form.getAuthorities().stream()
+                .map(a -> Authorities.builder()
+                        .authority(a)
+                        .member(member).build()).toList();
+
+        authoritiesRepository.saveAllAndFlush(authorities);
+    }
 
 }
