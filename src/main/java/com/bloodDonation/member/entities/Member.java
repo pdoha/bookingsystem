@@ -69,7 +69,5 @@ public class Member extends Base {
     //회원탈퇴시-memberinfo쪽에 isEnable()의 리턴 시 필요
     private boolean enable = true;
 
-    //탈퇴 일시
-    //enable = false 이면 탈퇴일시
-    private LocalDateTime resignAt;
+
 }

@@ -33,9 +33,10 @@
             <dt th:text="#{비밀번호_확인}"></dt>
             <dd>
                 <input type="password" name="confirmPassword" class="frm_input_rePw" th:field="*{confirmPassword}">
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
                 <span id="chkPw2"></span>
                 <p class="bu_atte">
-                    *비밀번호는 영문/숫자/특수문자 중 ~자리로 입력해주세요.
+                    *비밀번호는 영문/숫자/특수문자가 포함되어야 합니다.
                 </p>
             </dd>
         </dl>
