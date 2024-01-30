@@ -15,7 +15,9 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 public class RequestReservation {
+    private Long bookCode;
 
+    @NonNull
     private Long cCode; //센터 코드
     private String mode = "step1";
 
@@ -26,6 +28,7 @@ public class RequestReservation {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate date; //예약 일자
 
+    @NonNull
     @DateTimeFormat(pattern="HH:mm")
     private LocalTime time; // 예약 시간
 
