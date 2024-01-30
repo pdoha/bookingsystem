@@ -4,5 +4,9 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <h1>헌혈의집 센터 상세정보</h1>
+    <div id="map" style="width:100%;height:350px;"></div>
+    <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
+
+    <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
 </main>
 </html>
