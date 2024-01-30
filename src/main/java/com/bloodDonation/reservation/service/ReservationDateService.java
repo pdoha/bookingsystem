@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -21,6 +22,10 @@ import java.util.Locale;
 public class ReservationDateService {
 
     private final CenterInfoService infoService;
+    private final ReservationInfoService reservationInfoService;
+
+
+
 
     public boolean checkAvailable(Long cCode, String bookDate) {
 
@@ -110,6 +115,8 @@ public class ReservationDateService {
             }
         }
 
+        //예약 가능 인원수 체크
+        times = times.stream().filter(t -> reservationInfoService.getAvailableCapacity(cCode, LocalDateTime.of(date, t)) > 0).toList();
         return times;
     }
 }

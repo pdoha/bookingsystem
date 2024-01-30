@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 //예약 관리자페이지 커맨드 객체
 @Data
+
 public class RequestReservation {
     private String mode = "add"; //모드 - 기본값: 예약 수정
 

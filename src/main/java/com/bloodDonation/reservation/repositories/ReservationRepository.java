@@ -2,7 +2,11 @@ package com.bloodDonation.reservation.repositories;
 
 import com.bloodDonation.reservation.entities.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
+
+import java.time.LocalDateTime;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>,
         QuerydslPredicateExecutor<Reservation> {
@@ -12,7 +16,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
     @EntityGraph(attributePaths = "authorities")
     Optional<Reservation> findByUserId(String userId);*/
 
-
+    @Query("SELECT SUM(r.capacity) FROM Reservation r WHERE r.center.cCode = :cCode AND r.bookDateTime = :dateTime")
+    Integer getTotalCapacity(@Param("cCode") Long cCode, @Param("dateTime") LocalDateTime dateTime);
 
 
 }
