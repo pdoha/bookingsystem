@@ -39,10 +39,13 @@
             <tr>
                 <th>지역 선택</th>
                 <td>
-                    <label for="selSd"></label>
-                    <select id="selSd" name="selSd"></select>
-                    <label for="selSgg"></label>
-                    <select id="selSgg" name="selSgg"></select>
+                    <select title="시/도 선택" id="selSd" name="selSd">
+                        <option value="">시/도</option>
+                    </select>
+                    <select title="군/구 선택" id="selGg" name="selGg">
+                        <option value="">군/구</option>
+                    </select>
+
                 </td>
             </tr>
 
@@ -66,6 +69,7 @@
     <!-- 지도 표시 -->
     <div class="directions">
         <script type="text/javascript" src="resources/static/common/js/map.js"></script>
+        <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
     </div>
 
     <!-- 검색 결과 리스트-->

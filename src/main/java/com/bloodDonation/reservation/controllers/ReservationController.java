@@ -1,7 +1,11 @@
 package com.bloodDonation.reservation.controllers;
 
+import com.bloodDonation.admin.center.controllers.CenterSearch;
+import com.bloodDonation.admin.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.service.CenterInfoService;
 import com.bloodDonation.calendar.Calendar;
 import com.bloodDonation.commons.ExceptionProcessor;
+import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.reservation.service.ReservationApplyService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +25,7 @@ public class ReservationController implements ExceptionProcessor {
 
     private final ReservationApplyService reservationApplyService;
     private final ReservationMainValidator reservationMainValidator;
+    private final CenterInfoService centerInfoService;
     private final Calendar calendar;
     private final Utils utils;
 
@@ -39,6 +44,28 @@ public class ReservationController implements ExceptionProcessor {
     public String[] addScript() {
         return new String[] { "reservation/reservation" };
     }
+
+
+
+    /**
+     * 센터 필터링 검색/선택
+     *
+     * @param search
+     * @param model
+     * @return
+     */
+    @GetMapping("/centerChoice")
+    public String centerChoice(@ModelAttribute CenterSearch search, Model model) {
+
+        ListData<CenterInfo> data = centerInfoService.getList(search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        return utils.tpl("reservation/centerChoice");
+    }
+
+
 
     /**
      * 예약날짜 선택 (캘린더 노출 )
