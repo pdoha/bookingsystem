@@ -26,9 +26,10 @@ public class SurveyValidator implements Validator {
 
 
     }
-    private void validateStep1(RequestSurvey form, Errors errors){
+
+    private void validateStep1(RequestSurvey form, Errors errors) {
         boolean[] questions1 = form.getQuestions1();
-        if(questions1==null || questions1.length<5){
+        if (questions1 == null || questions1.length < 5) {
             errors.reject("Required.question", "설문 문항을 모두" +
                     "선택하세요");
         }
@@ -47,3 +48,4 @@ public class SurveyValidator implements Validator {
                     "선택하세요");
         }
     }
+}
