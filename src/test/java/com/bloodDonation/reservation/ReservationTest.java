@@ -1,8 +1,9 @@
 package com.bloodDonation.reservation;
 
-import com.bloodDonation.member.entities.Member;
+import com.bloodDonation.member.controllers.RequestJoin;
 import com.bloodDonation.member.service.MemberInfoService;
 import com.bloodDonation.member.service.MemberSaveService;
+import com.bloodDonation.reservation.controllers.RequestReservation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,13 +23,20 @@ public class ReservationTest {
 
     @Test
     void saveTest() {
-        Member member = new Member();
-        member.setUserId("user01");
-        member.setGid("응");
-        member.setUserPw("aA123456");
-        member.setEmail("user01@naver.com");
-        member.setMName("이이름");
+        RequestJoin join = new RequestJoin();
+        join.setUserId("user01");
+        join.setUserPw("aA123456");
+        join.setEmail("user01@naver.com");
+        join.setMName("이이름");
+        join.setConfirmPassword("aA123456");
+        join.setAgree(true);
 
+    }
+
+    @Test
+    void reservationSaveTest() {
+        RequestReservation add = new RequestReservation();
+        add.
     }
 
 }
