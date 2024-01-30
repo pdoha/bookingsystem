@@ -4,27 +4,30 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 수정</h1>
-    <form name="frmSave" id="frmJoin" class="form_box" method="post" th:action="@{/admin/member/save}" autocomplete="off" th:object="${requestJoin}">
+    <form name="frmSave" id="frmJoin" class="form_box" method="post" th:action="@{/admin/member/save}" autocomplete="off" th:object="${requestUpdate}">
 
 
 
             <dl>
                 <dt>가입구분</dt>
                 <dd>
-                    <input type="radio" name="managerType" th:value="${USER}" id="managerType_USER" checked>
+                    <input type="checkbox" name="authorities" th:value="USER" id="managerType_USER" checked>
                     <label for="managerType_USER" th:text="#{Authority.USER}"></label>
 
-                    <input type="radio" name="managerType" th:value="${MANAGER}" id="managerType_MANAGER" checked>
+                    <input type="checkbox" name="authorities" th:value="MANAGER" id="managerType_MANAGER" checked>
                     <label for="managerType_MANAGER" th:text="#{Authority.MANAGER}"></label>
 
-                    <input type="radio" name="managerType" th:value="${ADMIN}" id="managerType_ADMIN" checked>
+                    <input type="checkbox" name="authorities" th:value="ADMIN" id="managerType_ADMIN" checked>
                     <label for="managerType_ADMIN" th:text="#{Authority.ADMIN}"></label>
                 </dd>
             </dl>
 
             <dl>
                 <dt>아이디</dt>
-                <dd th:text="*{#messages.msg('USERID', mName, userId)}"></dd>
+                <dd>
+                    <input type="hidden" name="userId" th:field="*{userId}">
+                    <th:block th:text="*{userId}"></th:block>
+                </dd>
             </dl>
 
             <dl>
@@ -40,13 +43,13 @@
             <dl class="password_box dn">
                 <dt>변경 비밀번호</dt>
                 <dd>
-                    <input type="password" name="managerPw">
+                    <input type="password" name="userPw" th:field="*{userPw}">
                 </dd>
             </dl>
             <dl class="password_box dn">
                 <dt>비밀번호 확인</dt>
                 <dd>
-                    <input type="password" name="managerPwRe">
+                    <input type="password" name="confirmPw"  th:field="*{confirmPw}">
                 </dd>
             </dl>
 
@@ -113,12 +116,14 @@
                 </textarea>
 
             </div>
-    </form>
 
         <div class="submit_btns">
             <button type="reset" class="btn">다시입력</button>
             <button type="submit" class="btn">수정하기</button>
         </div>
+    </form>
+
+
 
 
 
