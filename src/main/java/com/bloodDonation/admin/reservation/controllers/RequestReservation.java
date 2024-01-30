@@ -1,10 +1,11 @@
 package com.bloodDonation.admin.reservation.controllers;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 //예약 관리자페이지 커맨드 객체
 @Data
+
 public class RequestReservation {
+    /*
     private String mode = "add"; //모드 - 기본값: 예약 수정
 
     private long bookCode; //예약코드
@@ -29,4 +30,6 @@ public class RequestReservation {
     private String bookHour; //예약 시간
     private String bookMin; //예약 분
 
+
+     */
 }

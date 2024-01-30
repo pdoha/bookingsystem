@@ -1,46 +1,62 @@
 package com.bloodDonation.reservation.service;
 
-import com.bloodDonation.admin.reservation.controllers.RequestReservation;
-import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.admin.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.service.CenterInfoService;
+import com.bloodDonation.commons.Utils;
+import com.bloodDonation.commons.exceptions.AlertException;
 import com.bloodDonation.reservation.constants.DonationType;
+import com.bloodDonation.reservation.constants.ReservationStatus;
+import com.bloodDonation.reservation.controllers.RequestReservation;
 import com.bloodDonation.reservation.entities.Reservation;
 import com.bloodDonation.reservation.repositories.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ReservationSaveService {
     private final ReservationRepository reservationRepository;
-    private final MemberUtil memberUtil;
+    private final ReservationInfoService infoService;
+    private final CenterInfoService centerInfoService;
+    private final Utils utils;
 
-    public Reservation save(RequestReservation form) {
-
-        String mode = form.getMode();
-        mode = StringUtils.hasText(mode) ? mode : "add_reservation";
-        Long bookCode = form.getBookCode();
-
-        Reservation data = null;
-        if(mode.equals("edit_reservation") && bookCode != null) {
-            data = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
-        } else {
-            data = new Reservation();
-            //회원정보 가져오기
-            data.setMember(memberUtil.getMember());
+    public void saveList(List<Integer> chks) {
+        if(chks ==null || chks.isEmpty()) {
+            throw new AlertException("수정할 예약을 선택하세요.", HttpStatus.BAD_REQUEST);
         }
 
-        String donorTel = Arrays.stream(form.getDonorTel()).collect(Collectors.joining("-"));
-        data.setDonorTel(donorTel);
+        for(int chk : chks) {
+            Long bookCode = Long.valueOf(utils.getParam("bookCode_" + chk));
+            Reservation reservation = reservationRepository.findById(bookCode).orElse(null);
+            if(reservation==null) {
+                continue;
+            }
+
+            ReservationStatus status = ReservationStatus.valueOf(utils.getParam("status_" + chk));
+            reservation.setStatus(status);
+        }
+        reservationRepository.flush();
+    }
+
+    public void save(RequestReservation form) {
+
+        Long bookCode = form.getBookCode();
+        Reservation data = infoService.get(bookCode);
+        CenterInfo center = centerInfoService.get(form.getCCode());
+
+        data.setCenter(center);
+        data.setStatus(ReservationStatus.valueOf(form.getStatus()));
         data.setBookType(DonationType.valueOf(form.getBookType()));
-        //예약자 이름 어떻게?
-        //센터 ,예약날짜, 회원번호
+        data.setCapacity(form.getPersons());
+        data.setDonorTel(form.getDonorTel());
+        data.setBookDateTime(LocalDateTime.of(form.getDate(), form.getTime()));
 
         reservationRepository.saveAndFlush(data);
-        return data;
+
 
     }
 }

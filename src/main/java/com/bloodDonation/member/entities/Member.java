@@ -77,6 +77,3 @@ public class Member extends Base {
     private boolean lock;
 
 }
-
-
-
