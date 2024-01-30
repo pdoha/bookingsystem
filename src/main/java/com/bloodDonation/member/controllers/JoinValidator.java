@@ -47,7 +47,7 @@ public class JoinValidator implements Validator, PasswordValidator {
         //이메일 인증 했는지 체크
         //NotVerified.email=이메일 확인이 필요합니다.
         Boolean EmailAuthVerified = (Boolean) session.getAttribute("EmailAuthVerified");
-        EmailAuthVerified = true; //이메일 오류로 잠시 동작 중지 true 값
+        EmailAuthVerified = true; //이메일 비활성화 true 값
         if (EmailAuthVerified == null || !EmailAuthVerified) {
             errors.rejectValue("email", "NotVerified");
         }
