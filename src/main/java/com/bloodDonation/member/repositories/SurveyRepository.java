@@ -16,11 +16,11 @@ public interface SurveyRepository extends JpaRepository<Survey, Long>, QuerydslP
         QSurvey survey = QSurvey.survey;
         return exists(survey.seq.eq(seq));
     }
-
-    /*default boolean existsByuserNo(Long userNo){
+    /*
+    default boolean existsByuserNo(Long userNo){
         //Survey에 userno 존재하는지 체크
         QSurvey survey = QSurvey.survey;
         return exists(survey.member.eq());
-    }*/
-
+    }
+    */
 }

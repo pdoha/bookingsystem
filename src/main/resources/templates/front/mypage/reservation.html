@@ -6,7 +6,7 @@
     <h1 th:text="#{예약조회}"></h1>
     <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off"
           <!--th:object="${예-reservationSearch}"-->
-        <table class="table_cols mb30">
+        <table class="table_cols">
             <tr>
                 <th>예약조회</th>
                 <td>
@@ -17,14 +17,15 @@
             </tr>
         </table>
         <div class="search_btn">
-            <button id="ressearchbtn" type="submit" >검색하기</button>
+            <button id="ressearchbtn" type="submit" style="background: #fff; color: black; width: 100px; font-weight: bold; height: 40px; float: right;
+ margin-bottom: 20px;">검색하기</button>
         </div>
     </form>
     <table border="1"
-    width="50%"
-    height="200"
-    bordercolor="red"
-    bgcolor="lightgray">
+    width="1200px;"
+    height="500px"
+    bordercolor="red;"
+    bgcolor="#fff">
       <thead>
         <tr align="center">
             <th>예약일시</th>

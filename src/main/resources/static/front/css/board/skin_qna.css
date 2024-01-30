@@ -1,4 +1,4 @@
-.board_view .subject { border: 1px solid #222; padding: 10px 15px; border-radius: 3px; font-size: 1.35rem; font-weight: 500; margin-bottom: 10px; }
+.board_view .subject { border: 2px solid #222; margin-top: 20px; padding: 10px 15px; border-radius: 3px; font-size: 1.35rem; font-weight: 500; margin-bottom: 10px; background: red; }
 .board_view .content { border: 1px solid #222; padding: 15px; border-radius: 3px; margin-bottom: 10px; min-height: 350px; }
 
 .board_view .post_info { display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; padding: 7px 15px; margin-bottom: 10px; }
@@ -12,8 +12,8 @@
 
 /* 게시판 버튼 공통 */
 .board_btns { text-align: right; }
-.board_btns .btn { display: inline-block; border: 1px solid #222; height: 27px; line-height: 25px; padding: 0 20px; border-radius: 3px; cursor: pointer; transition: all 0.5s; margin-left: 3px; }
-.board_btns .btn:hover { background: #222; color: #fff; }
+.board_btns .btn { display: inline-block; border: 1px solid #222; height: 27px; line-height: 25px; padding: 0 20px; border-radius: 3px; cursor: pointer; transition: all 0.5s; margin-left: 3px; background: rgba(207, 27, 177, 0.521); border: none; color: #fff;}
+.board_btns .btn:hover { background: rgba(207, 27, 177, 0.521); color: #fff; }
 
 /* 게시판 목록 */
 .board_list .items > .item { border-bottom: 1px solid #d5d5d5; display: flex; align-items: center; }
@@ -24,22 +24,22 @@
 .board_list .items .post_info { width: 360px; text-align: right; padding: 10px; }
 .board_list .items .post_info span + span { margin-left: 15px; }
 .board_list .items .subject { flex-grow: 1; padding: 10px; }
-.board_list .write_btn { background: #596b99; color: #fff; height: 35px; line-height: 35px; cursor: pointer; padding: 0 30px; border-radius: 3px; }
+.board_list .write_btn { background: rgba(207, 27, 177, 0.521); color: #fff; height: 35px; line-height: 35px; cursor: pointer; padding: 0 30px; border-radius: 3px; }
 
 .board_list .no_data { padding: 50px 0; text-align: center; border-top: 1px solid #d5d5d5; border-bottom: 1px solid #d5d5d5; }
 
 .board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5; }
 .board_list .list_search > form { display: flex; }
 .board_list .list_search > form > * + * { margin-left: 5px; }
-.board_list .list_search button { width: 180px; }
+.board_list .list_search button { width: 120px;  }
 .board_list .total { text-align: right; margin: 10px 10px 5px; }
 
 /* 댓글 */
 #frmComment { margin: 20px 0 30px; }
 .commenter_info { margin-bottom: 5px; }
-.commenter_info input { width: 120px; }
+.commenter_info input { width: 100px;  }
 .comment_content { display: flex; height: 100px; }
-.comment_content button { width: 100px; background: #596b99; color: #fff; border: 0; cursor: pointer; font-size: 1.15rem; }
+.comment_content button { width: 100px; background: #596b99; color: #fff; border: 0; cursor: pointer; font-size: 1.15rem; background: rgba(207, 27, 177, 0.521); margin-left: 5px; }
 .comment_content textarea { flex-grow: 1; border: 1px solid #d5d5d5; padding: 10px; resize: none; }
 
 .comment_items { margin-top: 10px; }
@@ -62,4 +62,4 @@
 #search_top { width: 450px; display: flex; margin: 30px auto 50px; }
 #search_top select { width: 150px; }
 #search_top button { width: 150px; cursor: pointer; }
-#search_top input[type='text'] { flex-grow: 1; margin: 0 5px; }
+#search_top input[type='text'] { flex-grow: 1; margin: 0 5px; width: 50px; }

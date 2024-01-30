@@ -51,7 +51,7 @@ public class BoardAuthService {
         if (memberUtil.isAdmin()) {//관리자는 체크 불필요
             return;
         }
-
+        System.out.printf("mode=%s, seq=%d%n", mode, seq);
         AuthCheck data = null;
         if (mode.indexOf("comment_") != -1) { // 댓글
             data = commentInfoService.get(seq);
@@ -59,7 +59,7 @@ public class BoardAuthService {
             data = infoService.get(seq);
         }
 
-        if ((mode.equals("update") && !data.isEditable()) || (mode.equals("delete") && !data.isDeletable())) {
+        if ((mode.contains("update") && !data.isEditable()) || (mode.contains("delete") && !data.isDeletable())) {
             Member member = data.getMember();
 
             //비회원 -> 비밀번호 확인 필요
@@ -104,7 +104,6 @@ public class BoardAuthService {
             CommentData data = commentInfoService.get(seq);
 
             boolean match = encoder.matches(password, data.getGuestPw());
-            System.out.printf("mode=%s, seq=%s, match=%s%n", mode, seq, match);
 
             if (!match) {
                 throw new AlertException(Utils.getMessage("Mismatch.password"), HttpStatus.BAD_REQUEST);

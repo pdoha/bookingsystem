@@ -12,11 +12,11 @@
     </div>
     <div>
         <th:block th:text="#{비밀번호}"></th:block>
-        <input type="password" name="userPw" id="userPw">
+        <input type="password" name="userPw" id="userPw" th:field="*{userPw}">
         <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
     </div>
         <p>
-        <button type="submit">완료</button>
+        <button type="submit" onclick="return confirm('정말 탈퇴하시겠습니까?');">완료</button>
         </p>
     </form>
 </section>
