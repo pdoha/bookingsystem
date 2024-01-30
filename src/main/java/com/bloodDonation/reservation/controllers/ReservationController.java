@@ -10,6 +10,7 @@ import com.bloodDonation.commons.Utils;
 import com.bloodDonation.reservation.entities.Reservation;
 import com.bloodDonation.reservation.service.ReservationApplyService;
 import com.bloodDonation.reservation.service.ReservationDateService;
+import com.bloodDonation.reservation.service.SearchCenterService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class ReservationController implements ExceptionProcessor {
     private final ReservationApplyService reservationApplyService;
     private final ReservationMainValidator reservationMainValidator;
     private final ReservationDateService reservationDateService;
-    private final CenterInfoService centerInfoService;
+    private final SearchCenterService searchCenterService;
     private final Calendar calendar;
     private final Utils utils;
 
@@ -63,14 +64,15 @@ public class ReservationController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/centerChoice")
-    public String centerChoice(@ModelAttribute CenterSearch search, Model model) {
+    public String centerChoice(@ModelAttribute RCenterSearch search, Model model) {
 
-        ListData<CenterInfo> data = centerInfoService.getList(search);
+        ListData<CenterInfo> data = searchCenterService.getList(search);
 
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
+        model.addAttribute("pageTitle", "헌혈의집 선택");
 
-        return utils.tpl("reservation/centerChoice");
+        return "reservation/centerChoice";
     }
 
 
