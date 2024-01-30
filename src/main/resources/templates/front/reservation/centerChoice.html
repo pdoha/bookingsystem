@@ -9,7 +9,7 @@
     <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
 
     <!-- 필터링 검색 -->
-    <form name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${centerSearch}">
+    <form name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${RCenterSearch}">
         <table class="table_cols mb30">
             <tr>
                 <th>모두선택</th>
@@ -52,8 +52,8 @@
             <tr>
                 <th>키워드 입력</th>
                 <td>
-                    <div class="input_grp">
-                        <input type="text" name="skey" th:field="*{skey}" title="검색단어" placeholder="헌혈의집 명 또는 헌혈의집 주소를 입력해주세요" maxlength="80">
+                    <div>
+                        <input type="text" name="skey" th:field="*{skey}" title="검색단어" placeholder="헌혈의집 이름 또는 헌혈의집 주소를 입력해주세요" maxlength="80">
                     </div>
                 </td>
                 <td>
@@ -68,7 +68,7 @@
 
     <!-- 지도 표시 -->
     <div class="directions">
-        <script type="text/javascript" src="resources/static/common/js/map.js"></script>
+        <script type="text/javascript" src="../../../../resources/static/common/js/map.js"></script>
         <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
     </div>
 
