@@ -12,8 +12,8 @@
 
         <!--환영 메세지-->
         <span th:text="${#messages.msg('LOGIN_MSG',session.member.mName,session.member.userId)}"></span>
-        <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
-        <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
+        <!--<a th:href="@{/mypage}" th:text="#{마이페이지}"></a>-->
+        <!--<a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>-->
 
         <!--관리자 페이지 이동-->
         <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
