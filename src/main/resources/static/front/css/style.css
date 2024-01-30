@@ -31,25 +31,17 @@ header .site_top a:hover { text-decoration: underline; }
 header .logo_search > div { display: flex; align-items: center; justify-content: space-between; height: 100px; }
 header .logo_search .search { display: flex; }
 
-/*
+
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 0 25px; min-width: 120px; text-align: center; color: #fff; font-size: 1.35rem; }
 header nav > .inner a:hover { background: #222; }
 */
 
-.header .navbar a{
-    margin: 0 1rem;
-    font-size: 1.6rem;
-    color: #fff;
-}
-
-.header .navbar a:hover{
-  color: var(--main-color);
-  border-bottom: .1rem solid var(--main-color);
-  padding-bottom: .5rem;
-}
-
 
 /* 헤더 공통 S */
+
+
+
+
 
 /* 입력 항목 공통 S */
 input[type='text'],
