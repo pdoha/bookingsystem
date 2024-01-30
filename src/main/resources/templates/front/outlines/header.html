@@ -21,6 +21,8 @@
 
 
 
+
+
     <div class="gnb">
         <ul>
             <li><a href="/member/join">회원가입</a></li>
@@ -34,13 +36,23 @@
 
         </h1>
 
-
+        <!--
 
         <ul>
-            <li><a href="">헌혈의 집 찾기</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1043&cntntsId=1001">헌혈지식</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1058&cntntsId=1081">헌혈참여</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1072&cntntsId=1002">헌혈활동</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1068&bbsId=1101">고객센터</a></li>
+            <li><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1069&bbsId=1042">소식&프로모션</a></li>
+        </ul>
+
+        -->
+
+        <ul>
+            <li><a href="">헌혈의집 찾기</a></li>
             <li><a href="">헌혈예약</a></li>
             <li><a href="">헌혈내역조회</a></li>
-            <li><a href="">자주묻는질문</a></li>
+            <li><a th:href="@{/board/list/qna}">자주묻는질문</a></li>
         </ul>
 
 
@@ -62,18 +74,18 @@
             margin:auto;
             overflow: auto;
 
-    }
-        .gnb>ul{ float:right;  }
+        }
+        .gnb>ul{ float:right;}
         .gnb li{ float:left; }
-        .gnb a{ padding: 10px; display: block;  }
+        .gnb a{ padding: 10px; display: block; }
 
         .header-container{ width:1200px; margin: auto;
-
+            overflow: auto;
         }
 
 
         .header-container>h1{ color: red;
-            float:left; height: 100px;}
+            float:left; }
 
         .search-box>input{ margin:auto; width: 200px;
             border: 2px solid green;
@@ -83,8 +95,8 @@
             border-radius: 30px;
             text-align: center;
         }
-        h1+ul{ float:left; }
-        h1+ul>li{ float:left; }
+        h1+ul{ float:left;}
+        h1+ul>li{ float:left;}
         h1+ul>li>a{ float:left;
             margin: 2rem;
             font-size: 1.6rem;

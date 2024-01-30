@@ -3,10 +3,15 @@ package com.bloodDonation.member.entities;
 
 import com.bloodDonation.member.Authority;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @Entity
+@NoArgsConstructor @AllArgsConstructor
 @Table(indexes=@Index(name="uq_authority", columnList="userNo, authority",
         unique=true))
 public class Authorities {

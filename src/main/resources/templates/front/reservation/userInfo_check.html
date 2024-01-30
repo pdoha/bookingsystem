@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<section layout:fragment="content">
+
+    <h1>개인정보 확인</h1>
+    <form>
+    <fieldset>
+        <table>
+            <tr>
+                <th>예약자명</th>
+                <td>예약자명 가져오기</td>
+            </tr>
+            <tr>
+                <th>예약자 연락처</th>
+                <td>예약자 연락처 가져오기</td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <h1>개인정보 수집 동의</h1>
+    <fieldset>
+
+    </fieldset>
+    <input type="checkbox" id="agree">
+    <label for="agree">동의합니다.</label>
+    <input type="checkbox" id="dontAgree">
+    <label for="dontAgree">동의하지 않습니다.</label>
+    <button>이전</button>
+    <button type="submit">예약하기</button>
+    </form>
+</section>
+
+
+</html>

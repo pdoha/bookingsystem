@@ -7,4 +7,6 @@ import lombok.Data;
 public class RequestUnRegister {
     @NotBlank
     private String userPw;
+    @NotBlank
+    private String confirmPassword;
 }

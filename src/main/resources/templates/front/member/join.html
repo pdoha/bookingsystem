@@ -9,45 +9,49 @@
 
 <main layout:fragment="content" class="layout_width">
     <div class="form-box register">
-        <h1 th:text="#{회원가입}"></h1>
+    <h1 th:text="#{회원가입}"></h1>
 
-        <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
-            <input type="hidden" name="gid" th:field="*{gid}">
+    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
+        <input type="hidden" name="gid" th:field="*{gid}">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
+        <!--에러페이지-->
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
-            <div class="input-box">
+        <div class="input-box">
                 <span class="icon">
                     <i class="xi-mail"></i>
                 </span>
-                <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            <input type="email" required>
+            <label>이메일주소</label>
+        </div>
 
-                <!--에러페이지-->
 
-                <label>이메일주소</label>
-                <input type="text" name="email" th:field="*{email}">
+        <div class="input-box">
+            <input type="email" required>
+            <label>이메일 인증번호</label>
+        </div>
+
+
+
+
+
+                <!--이메일 인증번호 -->
+                <div class="auth_box">
+                    <th:block th:if="${session.EmailAuthVerified ==null || !session.EmailAuthVerified}">
+                        <input type="text" id="auth_num" >
+                        <span id="auth_count">03:00</span> <!--제한시간-->
+                        <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
+                        <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
+                    </th:block>
+                    <!--인증 성공하면-->
+                    <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                        <span class='confirmed' th:text="#{확인된_이메일_입니다.}"></span>
+                    </th:block>
+                </div>
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
-            </div>
 
-            <div class="input-box">
-                <th:block th:if="${session.EmailAuthVerified ==null || !session.EmailAuthVerified}">
-                    <input type="text" id="auth_num" >
-                    <span id="auth_count">03:00</span> <!--제한시간-->
-                    <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
-                    <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
-                </th:block>
-                <!--인증 성공하면-->
-                <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
-                    <span class='confirmed' th:text="#{확인된_이메일_입니다.}"></span>
-                </th:block>
-            </div>
-
-
-
-
-            <!--이메일 인증번호 -->
-
-
-            <div class="input-box">
+        <div class="input-box">
                 <span class="icon">
                     <i class="xi-user"></i>
                 </span>
@@ -55,11 +59,11 @@
                 <input type="text" name="userId" th:field="*{userId}">
                 <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}">
                 </div>
-                <label>아이디</label>
-            </div>
+            <label>아이디</label>
+        </div>
 
 
-            <div class="input-box">
+        <div class="input-box">
                     <span class="icon">
                         <i class="xi-lock"></i>
                     </span>
@@ -67,17 +71,17 @@
                 <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}">
 
                 </div>
-                <div class="error" th:if="${session.NotBlank_userPw != null}"
-                     th:text="${session.NotBlank_userPw}">
-                </div>
-                <label>비밀번호</label>
+            <div class="error" th:if="${session.NotBlank_userPw != null}"
+                 th:text="${session.NotBlank_userPw}">
             </div>
+            <label>비밀번호</label>
+        </div>
 
 
 
-            <div class="input-box">
+        <div class="input-box">
                 <span class="icon">
-
+                    <i class="xi-lock"></i>
                 </span>
                 <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
                 <div class="error" th:each="err :${#fields.errors('confirmPassword')}" th:text="${err}">
@@ -86,74 +90,80 @@
             </div>
 
 
-            <div class="input-box">
+        <div class="input-box">
                 <span class="icon">
                     <i class="xi-user-plus"></i>
                 </span>
                 <input type="text" name="mName" th:field="*{mName}">
                 <div class="error" th:each="err : ${#fields.errors('mName')}" th:text="${err}">
                 </div>
-                <label>회원명</label>
-            </div>
+            <label>회원명</label>
+        </div>
 
 
 
-            <!-- search_address 클래스가 지정되어 있으면 클릭시 주소 팝업이 뜹니다.
-             data-zonecode-id : 여기에 지정된 id를 가진 input 요소에 검색된 우편번호가 완성됩니다.
-             data-address-id : 여기에 지정된 id를 가진 input 요소에 검색된 주소가 완성됩니다.-->
+
+
+           <!-- search_address 클래스가 지정되어 있으면 클릭시 주소 팝업이 뜹니다.
+            data-zonecode-id : 여기에 지정된 id를 가진 input 요소에 검색된 우편번호가 완성됩니다.
+            data-address-id : 여기에 지정된 id를 가진 input 요소에 검색된 주소가 완성됩니다.-->
 
             <div class="input-box">
                 <span class="icon">
                     <i class="xi-marker-plus"></i>
                 </span>
-                <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly >
+                    <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly >
 
-                <label>우편번호</label>
-                <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
-
+                    <label>우편번호</label>
             </div>
 
 
-            <div class="input-box">
+                    <div class="input-box">
                 <span class="icon">
                     <i class="xi-maker"></i>
                 </span>
-                <input type="text" name="address" id="address" th:field="*{address}" readonly >
+                    <input type="text" name="address" id="address" th:field="*{address}" readonly >
 
-                <label>주소</label>
+                        <label>주소</label>
+                        <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
 
-            </div>
+                    </div>
 
-            <div class="input-box">
+                <div class="input-box">
                 <span class="icon">
                 </span>
-                <input type="text" name="addressSub" th:field="*{addressSub}"  >
-                <label>나머지 주소</label>
+                    <input type="text" name="addressSub" th:field="*{addressSub}"  >
+                    <label>나머지 주소</label>
+                </div>
+
+
+
+
+
+
+
+
+        <!--약관은 자리만 만들고 관리자 페이지에서 추가해줄거임-->
+        <div th:text="#{회원가입_약관}" style="margin-top: 100px; margin-left: 8px; font-size: 22px; font-weight: bold;"></div>
+        <div class="terms">
+
+            <div class="terms_agree">
+                <input type="checkbox"  name="agree" value="true" id="agree" th:field="*{agree}">
+                <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
+                <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
             </div>
 
+            <div class="terms_tit">
+                <input type="checkbox" class="check" name="userTerms" value="y" id="useTerms">
+                <label for="useTerms">이용약관(필수)</label>
+            </div>
 
-
-            <!--약관은 자리만 만들고 관리자 페이지에서 추가해줄거임-->
-            <div th:text="#{회원가입_약관}" style="margin-top: 100px; margin-left: 8px; font-size: 22px; font-weight: bold;"></div>
-            <div class="terms">
-
-                <div class="terms_agree">
-                    <input type="checkbox"  name="agree" value="true" id="agree" th:field="*{agree}">
-                    <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
-                    <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
-                </div>
-
-                <div class="terms_tit">
-                    <input type="checkbox" class="check" name="userTerms" value="y" id="useTerms">
-                    <label for="useTerms">이용약관(필수)</label>
-                </div>
-
-                <textarea class="terms_contents" readonly>이용약관</textarea>
-                <div class="terms_tit mt10">
-                    <input type="checkbox" name="privateTerms" class="check" value="y" id="privateTerms">
-                    <label for="privateTerms">개인정보처리방침(필수)</label>
-                </div>
-                <textarea class="terms_contents" readonly>
+            <textarea class="terms_contents" readonly>이용약관</textarea>
+            <div class="terms_tit mt10">
+                <input type="checkbox" name="privateTerms" class="check" value="y" id="privateTerms">
+                <label for="privateTerms">개인정보처리방침(필수)</label>
+            </div>
+            <textarea class="terms_contents" readonly>
 고객님의 개인정보를 중요시하며, &quot;정보통신망 이용촉진 및 정보보호&quot;에 관한 법률을 준수하고 있습니다.
 
 회사는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
@@ -196,18 +206,14 @@
 신용정보의 수집/처리 및 이용 등에 관한 기록 : 3년 (신용정보의 이용 및 보호에 관한 법률)
                 </textarea>
 
-            </div>
+        </div>
 
-            <button type="submit" class="terms-button" th:text="#{가입하기}"></button>
-            <div class="login-register">
-                <p>이미 계정이 있습니까?
-                    <a th:href="@{/member/login}" class="register-link">로그인</a>
-                </p>
-            </div>
+        <button type="submit" class="terms-button" th:text="#{가입하기}"></button>
 
 
 
 
-        </form>
+
+    </form>
 </main>
 </html>

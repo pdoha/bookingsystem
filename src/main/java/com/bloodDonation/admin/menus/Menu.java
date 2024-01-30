@@ -20,8 +20,8 @@ public class Menu {
         ));
 
         menus.put("member", Arrays.asList(
-                new MenuDetail("list", "회원 목록", "/admin/member"),
-                new MenuDetail("add", "회원 등록", "/admin/member/add")
+                new MenuDetail("list", "회원 목록", "/admin/member")
+
         ));
 
         //게시판 메뉴코드
