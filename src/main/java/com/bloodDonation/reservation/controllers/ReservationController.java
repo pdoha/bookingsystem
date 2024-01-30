@@ -64,7 +64,7 @@ public class ReservationController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/centerChoice")
-    public String centerChoice(@ModelAttribute RCenterSearch search, Model model) {
+    public String centerChoice(@ModelAttribute("rCenterSearch") RCenterSearch search, Model model) {
 
         ListData<CenterInfo> data = searchCenterService.getList(search);
 
@@ -72,7 +72,7 @@ public class ReservationController implements ExceptionProcessor {
         model.addAttribute("pagination", data.getPagination());
         model.addAttribute("pageTitle", "헌혈의집 선택");
 
-        return "reservation/centerChoice";
+        return utils.tpl("reservation/centerChoice");
     }
 
 
