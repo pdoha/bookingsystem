@@ -33,29 +33,21 @@
                     <table class="table_rows mb30">
                         <thead>
                         <tr>
-                            <th width="20">
-                                <input type="checkbox" class="checkall" id="js-checkall" data-target-name="chk">
-                                <label for="js-checkall" class="standalone"></label>
-                            </th>
                             <th width="120" nowrap>가입일시</th>
                             <th width="120" nowrap>가입구분</th>
                             <th width="120" nowrap>아이디</th>
                             <th width="120" nowrap>회원명</th>
                             <th width="120" nowrap>탈퇴일시</th>
-                            <th width="120" nowrap>이용제한</th>
+                            <th width="120" nowrap>권한</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr th:if="${items == null || items.isEmpty()}">
-                                <td colspan="8" class="no_data" th:text="#{조회된_회원이_없습니다.}"></td>
+                                <td colspan="7" class="no_data" th:text="#{조회된_회원이_없습니다.}"></td>
                             </tr>
 
                             <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                                <td align="center">
-                                    <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
-                                    <label th:for="${'chk_' + status.index}" class="standalone"></label>
-                                </td>
                                 <td align="center" th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
                                 <td align="center">
                                    <th:block th:each="auth : *{authorities}">
@@ -64,13 +56,21 @@
                                 </td>
                                 <td align="center" th:text="*{userId}"></td>
                                 <td align="center"  th:text="*{mName}">></td>
-                                <td align="center"</td> <!--탈퇴 일시-->
-                                <td align="center"></td>  <!--이용 제한-->
+
+                                <!--탈퇴 일시-->
+                                <td align="center">
+                                    <th:block th:if="*{resignAt != null}" th:text="*{#temporals.format(resignAt, 'yyyy.MM.dd HH:mm:ss')}"></th:block>
+                                </td>
+
+                                <!--이용 제한 (권한) -->
+                                <td align="center">
+                                    <div th:each="authority : *{authorities}" th:object="${authority}" th:text="*{authority.title}"></div>
+                                </td>
                                 <td nowrap>
                                     <a th:href="@{/admin/member/edit/{userId}(userId=*{userId})}" class="sbtn">
                                         <i class="xi-check-min"></i>정보수정
                                     </a>
-                                    <span class="sbtn manager_control" data-id="29">
+                                    <span class="sbtn manager_control" th:data-user-id="*{userId}">
                                         <i class="xi-check-min"></i>이용관리
                                     </span>
                                 </td>
@@ -78,11 +78,6 @@
                         </tbody>
                     </table>
 
-                    <div class="table-action">
-                        <span class="sbtn black form_action" data-mode="edit" data-form-name="frmList">
-                            <i class="xi-check-min"></i>선택회원 수정하기
-                        </span>
-                    </div>
                 </form>
 
 

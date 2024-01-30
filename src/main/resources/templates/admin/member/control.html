@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/popup}">
+<section layout:fragment="content">
+    <h1>이용 관리</h1>
+
+    <form name="frmSave" method="post" th:0action="@{/admin/member/control}" autocomplete="off" th:object="${requestControl}">
+        <table class="table_cols">
+            <tr>
+                <th width="180">아이디</th>
+                <td>
+                    <input type="hidden" name="userId" th:field="*{userId}">
+                    <th:block th:text="*{userId}"></th:block>
+                    <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>탈퇴여부</th>
+                <td>
+                    <input type="radio" name="enable" value="false" id="enable_false" th:field="*{enable}">
+                    <label for="enable_false">예</label>
+
+                    <input type="radio" name="enable" value="true" id="enable_true" th:field="*{enable}">
+                    <label for="enable_true">아니오</label>
+                </td>
+            </tr>
+
+            <tr>
+                <th>권한</th>
+                <td>
+                    <input type="checkbox" name="authorities" value="USER" th:field="*{authorities}" id="authorities_USER">
+                    <label for="authorities_USER">일반</label>
+
+                    <input type="checkbox" name="authorities" value="MANAGER" th:field="*{authorities}" id="authorities_MANAGER">
+                    <label for="authorities_MANAGER">부관리자</label>
+
+                    <input type="checkbox" name="authorities" value="ADMIN" th:field="*{authorities}" id="authorities_ADMIN">
+                    <label for="authorities_ADMIN">관리자</label>
+
+                    <div class="error" th:each="err : ${#fields.errors('authorities')}" th:text="${err}"></div>
+                </td>
+            </tr>
+        </table>
+        <div class="submit_btns">
+            <button type="reset" class="btn">다시입력</button>
+            <button type="submit" class="btn">수정하기</button>
+        </div>
+    </form>
+</section>
+</html>

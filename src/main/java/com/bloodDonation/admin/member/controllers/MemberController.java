@@ -4,16 +4,19 @@ import com.bloodDonation.admin.menus.Menu;
 import com.bloodDonation.admin.menus.MenuDetail;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.ListData;
+import com.bloodDonation.member.Authority;
 import com.bloodDonation.member.controllers.MemberSearch;
-import com.bloodDonation.member.controllers.RequestJoin;
+import com.bloodDonation.member.entities.Authorities;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.service.MemberInfo;
 import com.bloodDonation.member.service.MemberInfoService;
+import com.bloodDonation.member.service.MemberSaveService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,6 +28,11 @@ import java.util.List;
 public class MemberController implements ExceptionProcessor {
 
     private final MemberInfoService memberInfoService;
+    private final MemberSaveService memberSaveService;
+
+    private final ControlValidator controlValidator;
+    private final UpdateValidator updateValidator;
+
 
     //주메뉴
     @ModelAttribute("menuCode")
@@ -42,12 +50,12 @@ public class MemberController implements ExceptionProcessor {
     //회원 목록 &  관리
     @GetMapping
     public String list(@ModelAttribute MemberSearch search, Model model){
-
+        commonProcess("list", model);
         ListData<Member> data = memberInfoService.getList(search);
         //연동
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
-        commonProcess("list", model);
+
 
 
         return "admin/member/list";
@@ -61,26 +69,79 @@ public class MemberController implements ExceptionProcessor {
 
     }
 
-    //회원 등록
-    @GetMapping("/add")
-    public String add(Model model){
-        commonProcess("add", model);
-        return "admin/member/add";
-    }
+
+    //회원 수정페이지
     @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") String userId, Model model){
+    public String edit(@PathVariable("userId") String userId, @ModelAttribute RequestUpdate form, Model model){
         commonProcess("edit", model);
 
         MemberInfo memberInfo = (MemberInfo)memberInfoService.loadUserByUsername(userId);
-        RequestJoin member = new ModelMapper().map(memberInfo.getMember(), RequestJoin.class);
+        Member member = memberInfo.getMember();
 
-        model.addAttribute("requestJoin", member);
+        List<Authority> authorities = member.getAuthorities() == null ? null
+                                    : member.getAuthorities().stream()
+                                    .map(Authorities::getAuthority).toList();
+
+        form.setUserId(userId);
+        form.setAuthorities(authorities);
+        form.setEmail(member.getEmail());
+
+        model.addAttribute("requestUpdate", form);
         return "admin/member/edit";
     }
+
+
+    //이용 관리(권한)
+    @GetMapping("/control/{userId}")
+    public String control(@PathVariable("userId") String userId, @ModelAttribute RequestControl form, Model model){
+        commonProcess("control", model);
+        MemberInfo memberInfo = (MemberInfo) memberInfoService.loadUserByUsername(userId);
+
+        //회원정보 가져와서
+        Member member = memberInfo.getMember();
+
+        //권한이 없으면 null,  있으면 이넘상수 authority만 뽑아서 가져옴
+        List<Authority> authorities = member.getAuthorities() == null ? null
+                                        : member.getAuthorities().stream()
+                                        .map(Authorities::getAuthority).toList();
+        //탈퇴처리, 권한 부여
+        form.setUserId(userId);
+        form.setEnable(member.isEnable());
+        form.setAuthorities(authorities);
+
+        return "admin/member/control";
+
+    }
+
+    //수정 처리
+    @PostMapping("/control")
+    public String controlPs(RequestControl form, Errors errors, Model model){
+
+        controlValidator.validate(form, errors); //검증 에러메세지
+        if(errors.hasErrors()){
+            return "admin/member/control";
+        }
+
+        memberSaveService.updateControl(form);
+
+        //탈퇴하면 목록 새로고침
+        model.addAttribute("script", "parent.location.reload();");
+
+        return "common/_execute_script";
+
+    }
+
     //회원 추가 & 저장 (동시에 공유)
     @PostMapping("/save")
-    public String save(Model model){
-        //모드값이 필요해서 나중에 할게요
+    public String save(@Valid RequestUpdate form, Errors errors, Model model){
+        commonProcess(form.getMode(), model);
+
+        updateValidator.validate(form, errors);
+
+        if(errors.hasErrors()){
+            //저장 실패시 수정목록 다시
+            return "admin/member/edit";
+        }
 
         //저장하면 회원목록으로 이동
         return "redirect:/admin/member";
@@ -102,25 +163,17 @@ public class MemberController implements ExceptionProcessor {
         List<String> addCommonScript = new ArrayList<>();
 
 
-        if (mode.equals("add") || mode.equals("edit")){ //회원 등록 또는 수정일때
+        addScript.add("member/common"); //관리자 회원수정
+
+        if (mode.equals("control") || mode.equals("edit")){ //회원 이용관리 또는 수정일때
+
+            pageTitle = mode.equals("edit") ? "회원 수정" : "이용관리";
+            pageTitle += mode.contains("edit") ? "회원 수정" : "이용관리";
+            addCommonScript.add("mName");
             addCommonScript.add("ckeditor5/ckeditor"); //에디터 추가
             addScript.add("member/form"); // 양식
-            addScript.add("member/manager"); //관리자 회원수정
-
-        }
-
-        if (mode.equals("add") || (mode.equals("edit"))){
-            if (mode.equals("add")){
-                pageTitle = "회원 등록";
-                pageTitle += mode.contains("edit") ? "수정" : "등록";
-                addCommonScript.add("mName");
 
             }
-
-        }else if(mode.equals("edit")){
-            pageTitle = "회원 수정";
-
-        }
 
 
 

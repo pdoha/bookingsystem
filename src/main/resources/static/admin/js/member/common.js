@@ -57,6 +57,21 @@ codefty.manager = {
 };
 
 window.addEventListener("DOMContentLoaded", function() {
+
+  const memberControls = document.getElementsByClassName("manager_control");
+
+    //팝업창
+    const {popup} = commonLib;
+
+    for( const el of memberControls){
+        el.addEventListener("click", function(){ //클릭하면 레이어팝업
+            const userId = this.dataset.userId;
+            const url = `/admin/member/control/${userId}`;
+
+            popup.open(url, 600, 650);
+
+        });
+    }
     /** 약관 동의 전체 선택  */
     var termsCheckAll = document.querySelector("#frmJoin .terms #check_all");
     if (termsCheckAll) {
