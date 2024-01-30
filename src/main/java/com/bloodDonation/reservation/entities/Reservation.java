@@ -4,19 +4,28 @@ import com.bloodDonation.admin.center.entities.CenterInfo;
 import com.bloodDonation.commons.entities.Base;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.reservation.constants.DonationType;
+import com.bloodDonation.reservation.constants.ReservationStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Reservation extends Base {
 
     @Id @GeneratedValue
     private  Long bookCode; //예약 코드
+
+    @Enumerated(EnumType.STRING)
+    @Column(length=15, nullable = false)
+    private ReservationStatus status = ReservationStatus.APPLY; //예약 상태
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="member_userNo")
@@ -35,5 +44,5 @@ public class Reservation extends Base {
 
     private LocalDateTime bookDateTime; //예약시간
 
-
+    private int capacity;
 }

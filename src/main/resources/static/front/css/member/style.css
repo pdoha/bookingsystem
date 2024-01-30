@@ -1,13 +1,13 @@
-.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 60px; }
+.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 150px;
+}
 
-main { min-height: 700px; }
+main { min-height: 700px;
+ }
 
 *{
 
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
-    overflow-x: hidden;
-    overflow-y: hidden;
 
 
 }
@@ -19,26 +19,24 @@ body{
   justify-content: center;
   align-items: center;
   background-color: rgba(245, 220, 243, 0.948);
-}
 
 
-
-.form-box h2{
-    margin-top: 100px;
+.form-box h1{
+    top: 0;
     font-size: 3.5em;
-    color: #162938;;
-    text-align: center;
+    color: RED;
+    margin-left: 360px;
 }
 
 
 .input-box{
     position: relative;
-    width: 400px;
+    width: 350px;
     height: 30px;
     border-bottom: 2px solid #162938;
     margin: 30px 0;
     margin-left: 300px;
-    margin-top: 50px;
+    margin-top: 100px;
 
 }
 
@@ -52,12 +50,14 @@ body{
   color: #162938;
   font-weight: 500;
   pointer-events: none;
-  transition: .5s;
+
+
 }
 
 .input-box input:focus~label,
 .input-box input:valid~label{
-    top: -3px;
+
+  top: -3px;
 }
 
 /*입력창*/
@@ -78,7 +78,7 @@ body{
 .input-box .icon{
     position: absolute;
     right: 3px;
-    font-size: 1.4em;
+    font-size: 20px;
     color: #162938;
     line-height: 27px;
 }
@@ -87,14 +87,16 @@ body{
     font-size: .9em;
     color: #162938;
     font-weight: 500;
-    margin: -15px 0 15px;
     display: flex;
     justify-content: space-between;
+    width: 200px;
+    margin-left: 370px;
 }
 
 .remember-forgot label input{
     accent-color: #162938;
     margin-right: 3px;
+    font-size: 50px;
 }
 
 
@@ -102,24 +104,25 @@ body{
     color: #162938;
     text-decoration: none;
 
+
 }
 .remember-forgot a:hover{
     text-decoration: underline;
 }
 
-.btn{
-    margin-top: 20px;
-    width: 20%;
-    height: 40px;
-    background: #162938;
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.2em;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 400px;
+.login-btn{
+    margin-top: 10px;
+    margin-left: 380px;
+       width: 20%;
+       height: 50px;
+       background: #162938;
+       border: none;
+       outline: none;
+       border-radius: 6px;
+       cursor: pointer;
+       font-size: 1em;
+       color: #fff;
+       font-weight: 500;
 
 }
 
@@ -128,18 +131,63 @@ body{
 
     font-size: .9em;
     color: #162938;
-    text-align: center;
     font-weight: 500;
-    margin: 25px 0 10px;
+    margin: 25px ;
+    margin-left: 340px;
+    font-size: 16px;
+
+
 }
+
+
 
 .login-register p a{
     color: #162938;
     text-decoration: none;
     font-weight: 600;
 
+
 }
 
 .login-register p a:hover{
     text-decoration: underline;
 }
+
+
+/*---------------회원가입--------------------*/
+.terms_agree{
+    padding: 10px;
+    left: 0;
+
+}
+
+.terms_contents {
+    width: 1000px;
+    height: 30vh;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(207, 27, 177, 0.521);
+    border: none;
+
+
+
+}
+
+.terms_tit{
+    margin-left: 6px;
+    margin-bottom: 5px;
+}
+
+.terms-button{
+      margin-top: 50px;
+      margin-bottom: 100px;
+       height: 50px;
+       width: 200px;
+       margin-left: 400px;
+       background: #fff;
+       color: black;
+       font-size: 16px;
+       font-weight: bold;
+       border-radius: 50px;
+}
+
