@@ -9,7 +9,7 @@
     <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
 
     <!-- 필터링 검색 -->
-    <form name="frmSearch" method="get" th:object="${centerSearch}">
+    <form name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${centerSearch}">
         <table class="table_cols mb30">
             <tr>
                 <th>모두선택</th>
@@ -39,38 +39,21 @@
             <tr>
                 <th>지역 선택</th>
                 <td>
-                    <label for="selSd"></label>
-                    <select id="selSd" name="selSd" title="시도 선택">
-                        <option value>시도</option>
-                        <option value="서울">서울</option>
-                        <option value="부산">부산</option>
-                        <option value="대구">대구</option>
-                        <option value="인천">인천</option>
-                        <option value="울산">울산</option>
-                        <option value="세종">세종</option>
-                        <option value="경기">경기</option>
-                        <option value="강원">강원</option>
-                        <option value="충북">충북</option>
-                        <option value="대전">대전</option>
-                        <option value="충남">충남</option>
-                        <option value="전북">전북</option>
-                        <option value="광주">광주</option>
-                        <option value="전남">전남</option>
-                        <option value="경북">경북</option>
-                        <option value="경남">경남</option>
-                        <option value="제주">제주</option>
+                    <select title="시/도 선택" id="selSd" name="selSd">
+                        <option value="">시/도</option>
                     </select>
-                    <label for="selSgg"></label>
-                    <select id="selSgg" name="selSgg" title="시군구 선택">
-                        <option value>시군구</option>
+                    <select title="군/구 선택" id="selGg" name="selGg">
+                        <option value="">군/구</option>
                     </select>
+
                 </td>
             </tr>
+
             <tr>
                 <th>키워드 입력</th>
                 <td>
                     <div class="input_grp">
-                        <input type="text" name="skey" th:field="*{skey}" title="검색단어" value placeholder="헌혈의집 명 또는 헌혈의 집 주소를 입력해주세요" maxlength="80">
+                        <input type="text" name="skey" th:field="*{skey}" title="검색단어" placeholder="헌혈의집 명 또는 헌혈의집 주소를 입력해주세요" maxlength="80">
                     </div>
                 </td>
                 <td>
@@ -79,12 +62,14 @@
                     </div>
                 </td>
             </tr>
+
         </table>
     </form>
 
     <!-- 지도 표시 -->
     <div class="directions">
-
+        <script type="text/javascript" src="resources/static/common/js/map.js"></script>
+        <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
     </div>
 
     <!-- 검색 결과 리스트-->
@@ -103,7 +88,21 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>
 
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
                     <td>
                         <a href="javascript:" class="" onclick="viewCenterInfo('')">상세보기</a>
                         <a href="javascript:" class="" onclick="bookCenter('')">예약하기</a>
