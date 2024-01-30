@@ -1,6 +1,8 @@
-.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 60px; }
+.layout_width { max-width: 1200px; min-width: 1000px; margin: 0 auto; margin-top: 150px;
+}
 
-main { min-height: 700px; }
+main { min-height: 700px;
+ }
 
 *{
 
@@ -17,17 +19,14 @@ body{
   justify-content: center;
   align-items: center;
   background-color: rgba(245, 220, 243, 0.948);
-}
+
+
 .form-box h1{
     top: 0;
     font-size: 3.5em;
-    color: RED;
-    text-align: center;
-    background: #fff;
-
+    color: #162938;
+    margin-left: 360px;
 }
-
-
 
 
 .input-box{
@@ -37,23 +36,22 @@ body{
     border-bottom: 2px solid #162938;
     margin: 30px 0;
     margin-left: 300px;
-    margin-top: 50px;
+    margin-top: 100px;
 
 }
 
 /*클릭 아이디 비번*/
 .input-box label{
   position: absolute;
-  top: 50%;
+  top: 80%;
   left: 5px;
   transform: translateY(-50%);
   font-size: 1em;
   color: #162938;
   font-weight: 500;
   pointer-events: none;
-  transition: .5s;
-  overflow-x: hidden;
-  overflow-y: hidden;
+
+
 }
 
 .input-box input:focus~label,
@@ -89,9 +87,10 @@ body{
     font-size: .9em;
     color: #162938;
     font-weight: 500;
-    margin: -15px 0 15px;
     display: flex;
     justify-content: space-between;
+    width: 200px;
+    margin-left: 370px;
 }
 
 .remember-forgot label input{
@@ -104,26 +103,26 @@ body{
 .remember-forgot a{
     color: #162938;
     text-decoration: none;
-     font-size: 50px;
+
 
 }
 .remember-forgot a:hover{
     text-decoration: underline;
 }
 
-.btn{
-    margin-top: 20px;
-    width: 20%;
-    height: 40px;
-    background: #162938;
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.2em;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 400px;
+.login-btn{
+    margin-top: 10px;
+    margin-left: 380px;
+       width: 20%;
+       height: 50px;
+       background: #162938;
+       border: none;
+       outline: none;
+       border-radius: 6px;
+       cursor: pointer;
+       font-size: 1.3em;
+       color: #fff;
+       font-weight: 500;
 
 }
 
@@ -132,17 +131,15 @@ body{
 
     font-size: .9em;
     color: #162938;
-    text-align: center;
     font-weight: 500;
-    margin: 25px 0 10px;
+    margin: 25px ;
+    margin-left: 340px;
     font-size: 16px;
 
 
-
-
-
-
 }
+
+
 
 .login-register p a{
     color: #162938;
@@ -152,7 +149,7 @@ body{
 
 }
 
-.login-register a a:hover{
+.login-register p a:hover{
     text-decoration: underline;
 }
 
@@ -167,7 +164,7 @@ body{
 .terms_contents {
     width: 1000px;
     height: 30vh;
-    padding: 10px;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(207, 27, 177, 0.521);
     border: none;
@@ -177,16 +174,16 @@ body{
 }
 
 .terms_tit{
-    margin-left: 6px;
+    margin-left: 8px;
     margin-bottom: 5px;
 }
 
 .terms-button{
-      margin-top: 50px;
-      margin-bottom: 100px;
+       margin-top: 50px;
+       margin-bottom: 100px;
        height: 50px;
        width: 200px;
-       margin-left: 300px;
+       margin-left: 400px;
        background: #fff;
        color: black;
        font-size: 16px;
