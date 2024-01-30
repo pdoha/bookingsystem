@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class SurveyController {
     private final Utils utils;
     private final SurveyApplyService applyService;
     private final SurveyInfoService surveyInfoService;
+    private SurveyValidator surveyValidator;
 
     @ModelAttribute("requestSurvey")
     public RequestSurvey requestSurvey() {
@@ -41,7 +43,8 @@ public class SurveyController {
 
     @PostMapping("/step2")
     public String step2(RequestSurvey form, Errors errors, Model model) {
-
+        form.setMode("step1");
+        surveyValidator.validate(form,errors);
         if (errors.hasErrors()) {
             return utils.tpl("survey/step1");
 
@@ -51,14 +54,17 @@ public class SurveyController {
     }
 
     @PostMapping("/apply")
-    public String surveyapply(RequestSurvey form, Errors errors, Model model) {
-
+    public String surveyapply(RequestSurvey form, Errors errors, Model model,
+                              SessionStatus status) {
+        form.setMode("step2");
+        surveyValidator.validate(form,errors);
         if (errors.hasErrors()) {
+            
             return utils.tpl("survey/step2");
         }
 
         applyService.apply(form);
-
+        status.setComplete();
         return surveyInfoService.result();
 
     }

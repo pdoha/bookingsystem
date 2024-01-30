@@ -10,8 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class SurveyApplyService {
@@ -32,9 +30,23 @@ public class SurveyApplyService {
 
         boolean [] questions1=form.getQuestions1();
         boolean [] questions2=form.getQuestions2();
+        String[] questions3 = form.getQuestions3();
 
+        for(boolean question : questions1){
+            if(question) positive++;
+            else negative++;
+        }
 
-        for(int i=0; i<5; i++){
+        for(boolean question : questions2){
+            if(question) positive++;
+            else negative++;
+        }
+
+        for(String question : questions3){
+            if(question.equals("false")) negative++;
+            else positive++;
+        }
+        /*for(int i=0; i<5; i++){
             if(questions1[i]==true){
                 positive++;
             }else{
@@ -48,13 +60,12 @@ public class SurveyApplyService {
             }else{
                 negative++;
             }
-        }
+        }*/
 
         /*System.out.println("네------"+positive);
         System.out.println("아니요------"+negative);*/
-        List<Survey> surveys = member.getSurveys();
-        Survey survey = (Survey) surveys;
-        survey = Survey.builder()
+
+        Survey survey = Survey.builder()
                 .data(data)
                 .positive(positive)
                 .negative(negative)
