@@ -1,6 +1,7 @@
 package com.bloodDonation.mypage.service.survey;
 
 import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.SurveyRepository;
 import com.bloodDonation.mypage.controllers.RequestSurvey;
 import com.bloodDonation.mypage.entities.Survey;
@@ -9,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SurveyApplyService {
@@ -16,7 +19,7 @@ public class SurveyApplyService {
     private final MemberUtil memberUtil;
 
     public void apply(RequestSurvey form) {
-
+        Member member = memberUtil.getMember();
         ObjectMapper om = new ObjectMapper();
 
         int positive = 0, negative = 0;
@@ -49,8 +52,9 @@ public class SurveyApplyService {
 
         /*System.out.println("네------"+positive);
         System.out.println("아니요------"+negative);*/
-
-        Survey survey = Survey.builder()
+        List<Survey> surveys = member.getSurveys();
+        Survey survey = (Survey) surveys;
+        survey = Survey.builder()
                 .data(data)
                 .positive(positive)
                 .negative(negative)
