@@ -103,7 +103,8 @@ public class ReservationController implements ExceptionProcessor {
     public String edit(@PathVariable("bookCode") Long bookCode, Model model) {
         commonProcess("edit_reservation", model);
 
-        RequestReservation form = infoService.getForm(bookCode);
+        com.bloodDonation.reservation.controllers.RequestReservation form = infoService.getForm(bookCode);
+
         System.out.println(form);
         model.addAttribute("requestReservation", form);
 

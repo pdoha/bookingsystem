@@ -1,10 +1,12 @@
 package com.bloodDonation.reservation.service;
 
-import com.bloodDonation.admin.reservation.controllers.RequestReservation;
+import com.bloodDonation.admin.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.service.CenterInfoService;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.reservation.controllers.RequestReservation;
 import com.bloodDonation.reservation.controllers.ReservationSearch;
 import com.bloodDonation.reservation.entities.QReservation;
 import com.bloodDonation.reservation.entities.Reservation;
@@ -25,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
@@ -32,8 +35,10 @@ import static org.springframework.data.domain.Sort.Order.desc;
 @RequiredArgsConstructor
 public class ReservationInfoService {
     private final ReservationRepository reservationRepository;
+    private final CenterInfoService centerInfoService;
     private final HttpServletRequest request;
     private final MemberUtil memberUtil;
+
 
 
     public Reservation get(Long bookCode) {
@@ -48,15 +53,15 @@ public class ReservationInfoService {
         Reservation reservation = get(bookCode);
         RequestReservation form = new ModelMapper().map(reservation, RequestReservation.class);
 
-        String donorTel = reservation.getDonorTel();
-
-        form.setBookCode(reservation.getBookCode());
-        form.setDonorName(reservation.getMember().getMName());
-        form.setDonorTel(StringUtils.hasText(donorTel) ? donorTel.split("-") : null);
+        form.setStatus(reservation.getStatus().name());
         form.setBookType(reservation.getBookType().name());
-        form.setCenter(reservation.getCenter().getCName());
 
-        form.setMode("edit_reservation");
+        LocalDateTime bookDateTime = reservation.getBookDateTime();
+        form.setDate(bookDateTime.toLocalDate());
+        form.setTime(bookDateTime.toLocalTime());
+        form.setPersons(reservation.getCapacity());
+        form.setCCode(reservation.getCenter().getCCode());
+        form.setMember(reservation.getMember());
 
         return form;
     }
@@ -120,6 +125,14 @@ public class ReservationInfoService {
         search.setUserId(Arrays.asList(memberUtil.getMember().getUserId()));
 
         return getList(search);
+    }
+
+    public int getAvailableCapacity(Long cCode, LocalDateTime bookDateTime) {
+        CenterInfo center = centerInfoService.get(cCode);
+        Integer current = reservationRepository.getTotalCapacity(cCode, bookDateTime);
+        int curr = Objects.requireNonNullElse(current, 0);
+
+        return center.getBookCapacity() - curr;
     }
 
 }
