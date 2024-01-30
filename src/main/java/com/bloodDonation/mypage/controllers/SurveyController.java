@@ -59,7 +59,7 @@ public class SurveyController {
         form.setMode("step2");
         surveyValidator.validate(form,errors);
         if (errors.hasErrors()) {
-            
+
             return utils.tpl("survey/step2");
         }
 
