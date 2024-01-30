@@ -16,7 +16,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
     @EntityGraph(attributePaths = "authorities")
     Optional<Reservation> findByUserId(String userId);*/
 
-    @Query("SELECT SUM(r.capacity) FROM Reservation r WHERE r.center.cCode = :cCode AND r.bookDateTime = :dateTime")
+    @Query("SELECT SUM(r.capacity) FROM Reservation r WHERE r.center.cCode = :cCode AND r.bookDateTime = :dateTime AND r.status <> com.bloodDonation.reservation.constants.ReservationStatus.CANCEL")
     Integer getTotalCapacity(@Param("cCode") Long cCode, @Param("dateTime") LocalDateTime dateTime);
 
 

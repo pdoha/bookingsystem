@@ -1,8 +1,8 @@
 package com.bloodDonation.commons;
 
-import com.bloodDonation.board.service.GuestPasswordCheckException;
 import com.bloodDonation.commons.exceptions.AlertBackException;
 import com.bloodDonation.commons.exceptions.AlertException;
+import com.bloodDonation.commons.exceptions.AlertRedirectException;
 import com.bloodDonation.commons.exceptions.CommonException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,6 +33,12 @@ public interface ExceptionProcessor {
 
             if (e instanceof AlertBackException) { // history.back(); 실행
                 script += "history.back();";
+            }
+
+            if(e instanceof AlertRedirectException) {
+                AlertRedirectException alertRedirectException = (AlertRedirectException) e;
+
+                script += String.format("%s.location.replace('%s');", alertRedirectException.getTarget(), alertRedirectException.getRedirectUrl());
             }
 
             model.addAttribute("script", script);

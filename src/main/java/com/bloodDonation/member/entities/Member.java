@@ -5,6 +5,7 @@ import com.bloodDonation.mypage.entities.Survey;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,4 +68,6 @@ public class Member extends Base {
 
     //회원탈퇴시-memberinfo쪽에 isEnable()의 리턴 시 필요
     private boolean enable = true;
+
+
 }
