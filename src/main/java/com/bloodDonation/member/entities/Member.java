@@ -70,4 +70,11 @@ public class Member extends Base {
     private boolean enable = true;
 
 
+    @Column(name="_lock")
+    private boolean lock;
+
+    //탈퇴 일시
+    //enable = false 이면 탈퇴일시
+    private LocalDateTime resignAt;
+
 }
