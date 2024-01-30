@@ -99,15 +99,33 @@
         </div>
         <div class="survey_btn_area">
             <button type="button" class="survey-botton"><a th:href="@{/mypage/survey}">이전</a></button>
-            <button type="submit" class="survey-botton">다음</button>
+            <button type="submit" class="survey-botton" onclick="check()">다음</button>
         </div>
     </div>
 
+        <script>
+            function check(){
+
+               console.log(1111111111111);
+                if(frmSurvey.questions1[0].checked==false){
+                    alert("모든 항목에 체크해주세요");
+                }
+                 if(frmSurvey.questions1[1].checked==false){
+                    alert("모든 항목에 체크해주세요");
+                }
+                 if(frmSurvey.questions1[2].checked==false){
+                    alert("모든 항목에 체크해주세요");
+                }
+                 if(frmSurvey.questions1[3].checked==false){
+                    alert("모든 항목에 체크해주세요");
+                }
+                 if(frmSurvey.questions1[4].checked==false){
+                    alert("모든 항목에 체크해주세요");
+                }
+            }
+        </script>
 
     </form>
 
-
 </section>
-
-
 </html>
