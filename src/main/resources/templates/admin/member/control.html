@@ -5,7 +5,7 @@
 <section layout:fragment="content">
     <h1>이용 관리</h1>
 
-    <form name="frmSave" method="post" th:0action="@{/admin/member/control}" autocomplete="off" th:object="${requestControl}">
+    <form name="frmSave" method="post" th:action="@{/admin/member/control}" autocomplete="off" th:object="${requestControl}">
         <table class="table_cols">
             <tr>
                 <th width="180">아이디</th>
@@ -48,5 +48,6 @@
             <button type="submit" class="btn">수정하기</button>
         </div>
     </form>
+    <i class="xi-close-thin layer_close"></i>
 </section>
 </html>
