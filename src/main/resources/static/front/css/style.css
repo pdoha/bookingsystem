@@ -55,6 +55,67 @@ header nav > .inner a:hover { background: #222; }
 
 /* 헤더 공통 S */
 
+  *{ margin: 0; padding: 0;}
+
+        a{text-decoration: none; color:inherit; }
+
+        li{list-style: none;}
+
+        body{
+            font-size:12px;
+            color:#545454;
+            font-family: '돋움';
+        }
+
+        .gnb{ width:1200px;
+            margin:auto;
+            overflow: auto;
+
+
+        }
+        .gnb>ul{ float:right;}
+        .gnb li{ float:left; }
+        .gnb a{ padding: 10px; display: block; }
+
+        .header-container{ width:1380px; margin: auto;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+        }
+
+     .header-container a{ text-decoration: none;}
+
+        .header-container>h1{ color: red;
+            float:left; }
+
+
+
+
+
+        .search-box>input{ margin:auto; width: 200px;
+            border: 2px solid green;
+            height: 40px;
+            float:right;
+            line-height: 30px;
+            border-radius: 30px;
+            text-align: center;
+        }
+        h1+ul{ float:left;}
+        h1+ul>li{ float:left;}
+        h1+ul>li>a{ float:left;
+            margin: 2rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: black;
+        }
+
+          h1+ul>li>a:hover{
+            color: red;
+            border-bottom: .1rem solid red;
+          }
 
 
 
