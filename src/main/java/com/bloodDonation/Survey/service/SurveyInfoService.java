@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 public class SurveyInfoService {
     private final SurveyRepository repository;
-
+    //검사후에, 이건 나의 검사결과를 불러올 때 findById(seq)로 디비에서 찾아오는 것-필요할 때 구현
     public Survey get(Long seq) {
         Survey survey = repository.findById(seq).orElseThrow(SurveyNotFoundException::new);
 
@@ -19,6 +19,7 @@ public class SurveyInfoService {
         return survey;
     }
 
+    //전자문진 완료 후에 결과페이지 나올때 쓰이는 로직-디비에 저장한 것을 통해, 개수를 세어 바로 결과페이지로 연결
     public boolean getResult(Survey survey) {
         int positive = 0, negative = 0;
         if (survey.isQ1()) positive++;
@@ -51,13 +52,13 @@ public class SurveyInfoService {
         if (survey.getQ10() == null || survey.getQ10().equals("false")) negative++;
         else positive++;
 
-        if (survey.getQ10() == null || survey.getQ10().equals("false")) negative++;
-        else positive++;
-
         if (survey.getQ11() == null || survey.getQ11().equals("false")) negative++;
         else positive++;
 
-        //네 아니요 개수가 아직 체크되지 않았는데 여기서 11개라고 확정해놓음?
+
+        survey.setPositive(positive);
+        survey.setNegative(negative);
+
         survey.setResult(negative == 11);
         return negative == 11;
     }
