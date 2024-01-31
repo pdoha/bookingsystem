@@ -2,33 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<h1>예약 정보</h1>
-<form>
-    <fieldset>
-        <ul>
-            <li>예약자명:</li>
+<main layout:fragment="content" th:object="${reservation}">
+    <h1>예약 정보</h1>
+    <form>
+        <fieldset>
+            <ul>
+                <li>
+                    예약자명:
+                    <th:block th:text="*{member.mName + '(' + member.userId + ')'}"></th:block>
+                </li>
 
-            <li>연락처:</li>
+                <li>
+                    연락처:
+                    <th:block th:text="*{donorTel}"></th:block>
+                </li>
 
-            <li>헌혈 종류:</li>
+                <li>
+                    헌혈 종류:
+                    <th:block th:text="*{bookType.title}"></th:block>
+                </li>
 
-            <li>
-                예약 센터명:    임시센터1  <button>상세보기</button>
-            </li>
+                <li>
+                    예약 센터명:
+                    <th:block th:text="*{center.cName}"></th:block>
+                    <a th:href="@{/center/{cCode}(cCode=*{center.cCode})}" target="_blank">상세보기</a>
+                </li>
 
-            <li>센터 주소:</li>
+                <li>
+                    센터 주소:
+                    <th:block th:if="*{!#strings.isEmpty(center.zonecode)}" th:text="*{'(' + center.zonecode + ')'}"></th:block>
+                    <th:block th:if="*{!#strings.isEmpty(center.address)}" th:text="*{center.address}"></th:block>
+                    <th:block th:if="*{!#strings.isEmpty(center.addressSub)}" th:text="*{center.addressSub}"></th:block>
+                </li>
 
-            <li>운영시간:</li>
+                <li>
+                    운영시간:
+                    <th:block th:text="*{center.operHour}"></th:block>
+                </li>
 
-            <li>센터 연락처:</li>
+                <li>
+                    센터 연락처:
+                    <th:block th:text="*{center.telNum}"></th:block>
+                </li>
 
-            <li>예약날짜 및 시간</li>
-        </ul>
+                <li>
+                    예약날짜 및 시간 :
+                    <th:block th:text="*{#temporals.format(bookDateTime, 'yyyy.MM.dd HH:mm')}"></th:block>
+                </li>
 
-    </fieldset>
-    <button>예약변경</button>
-    <button>예약취소</button>
-    <button>문진하기</button>
+            </ul>
 
-</form>
+        </fieldset>
+
+        <a th:href="@{/mypage/reservation/{bookCode}(bookCode=*{bookCode})}">예약변경/취소</a>
+        <a th:href="@{/mypage/survey}">문진하기</a>
+    </form>
+</main>
 </html>
