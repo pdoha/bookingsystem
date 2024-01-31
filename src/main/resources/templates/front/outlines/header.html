@@ -24,7 +24,7 @@
             <ul>
                 <li><a th:href="@{/mypage}" th:text="#{마이페이지}"></a></li>
                 <li><a th:href="@{/member/logout}" th:text="#{로그아웃}"></a></li>
-                <li><a href="#">고객센터</a></li>
+                <li><a th:href="@{/board/list/talk}">1:1 문의</a></li>
             </ul>
         </div>
         <!--관리자 페이지 이동-->
@@ -38,26 +38,15 @@
     <div class="header-container">
         <h1>
             <a href="http://localhost:3000">RED BANK</a>
-
         </h1>
 
-        <!--
-
-        <ul>
-            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1043&cntntsId=1001">헌혈지식</a></li>
-            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1058&cntntsId=1081">헌혈참여</a></li>
-            <li><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1072&cntntsId=1002">헌혈활동</a></li>
-            <li><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1068&bbsId=1101">고객센터</a></li>
-            <li><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1069&bbsId=1042">소식&프로모션</a></li>
-        </ul>
-
-        -->
 
         <ul>
             <li><a href="">헌혈의집 찾기</a></li>
             <li><a href="">헌혈예약</a></li>
             <li><a href="">헌혈내역조회</a></li>
             <li><a th:href="@{/board/list/qna}">자주묻는질문</a></li>
+            <li><a th:href="@{/board/list/community}">커뮤니티</a></li>
         </ul>
 
 

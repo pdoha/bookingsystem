@@ -174,6 +174,8 @@ public class MemberController implements ExceptionProcessor {
             addCommonScript.add("mName");
             addCommonScript.add("ckeditor5/ckeditor"); //에디터 추가
             addScript.add("member/form"); // 양식
+            addCss.add("admin/popup_style");
+            addScript.add("common/layer");
 
             }
 

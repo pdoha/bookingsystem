@@ -15,7 +15,11 @@
         <!--
         <h2 th:text="#{로그인}"></h2>
         -->
-        <h1>RED BANK</h1>
+
+
+        <h1>
+            <a href="http://localhost:3000" style="text-decoration: none; color: red" >RED BANK</a>
+        </h1>
 
         <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
             <!--로그인 성공시 이동 페이지 ( param으로 주소값을 따로 주면 그 주소로이동함!)-->
