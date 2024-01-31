@@ -88,21 +88,10 @@ header nav > .inner a:hover { background: #222; }
 
      .header-container a{ text-decoration: none;}
 
-        .header-container>h1{ color: red;
+        .header-container>h1{ color: red !important;
             float:left; }
 
 
-
-
-
-        .search-box>input{ margin:auto; width: 200px;
-            border: 2px solid green;
-            height: 40px;
-            float:right;
-            line-height: 30px;
-            border-radius: 30px;
-            text-align: center;
-        }
         h1+ul{ float:left;}
         h1+ul>li{ float:left;}
         h1+ul>li>a{ float:left;
@@ -118,14 +107,25 @@ header nav > .inner a:hover { background: #222; }
           }
 
 
+        .search-box>input{ margin:auto;
+            width: 200px;
+            border: 2px solid green;
+            height: 40px;
+            float:right;
+            line-height: 30px;
+            border-radius: 30px;
+            text-align: center;
+        }
 
 
-/* 입력 항목 공통 S */
+
+
+/* 검색어 */
+/* 입력 항목 공통  S */
 input[type='text'],
 input[type='password'],
 input[type='email'] {
-        margin-top: 10px;
-        width: 300px;
+        width: 200px;
         height: 40px;
         padding: 0 10px;
         border: 2px solid green;
@@ -137,10 +137,9 @@ input[type='email'] {
 
 button{
   border: 2px solid #e5e6f1;
-
-        border-radius: 10px;
-
+  border-radius: 10px;
 }
+
 select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
 /* 입력 항목 공통 E */
 
