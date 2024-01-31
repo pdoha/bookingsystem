@@ -30,8 +30,8 @@
                     <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
                         <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
                         <span id="auth_count">03:00</span>  <!--제한시간-->
-                        <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
-                        <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
+                        <button type="button" id="email_confirm" th:text="#{확인}" ></button>
+                        <button type="button" id="email_re_verify" th:text="#{재전송}" ></button>
                     </th:block>
 
                     <!--인증 성공하면-->
