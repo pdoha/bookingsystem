@@ -3,14 +3,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 
-<h2>헌혈의집 선택</h2>
 <section layout:fragment="content" class="layout_width">
+
     <!--kakao appkey 가져오기-->
     <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
 
+
+
+
+    <div id="subContent">
+        <div class="titleArea">
+            <h2 id="pageTitle" class="titleH2">헌혈의집 찾기</h2>
+        </div>
+
     <!-- 필터링 검색 -->
     <form name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${rCenterSearch}">
-        <table class="table_cols mb30">
+        <table class="table_terms">
+            <colgroup>
+                <col width="8%">
+                <col width="30%">
+            </colgroup>
             <tr>
                 <th>모두선택</th>
                 <td>
@@ -20,8 +32,10 @@
                 </td>
             </tr>
             <tr>
-                <th>운영정보 선택</th>
-                <td>
+
+                <th >운영정보 선택</th>
+                <td style="display: flex;
+                       justify-content: space-between; width: 450px;">
                     <label for="opWkDay">
                         <input type="checkbox" id="opWkDay" value="Od1" title="평일"> "평일"
                     </label>
@@ -36,6 +50,7 @@
                     </label>
                 </td>
             </tr>
+
             <tr>
                 <th>지역 선택</th>
                 <td>
@@ -53,17 +68,16 @@
                 <th>키워드 입력</th>
                 <td>
                     <div>
-                        <input type="text" name="skey"  th:field="*{skey}" title="검색단어" placeholder="헌혈의집 이름 또는 헌혈의집 주소를 입력해주세요" maxlength="80">
-                    </div>
-                </td>
-                <td>
-                    <div class="search_btn">
+                        <input type="text" name="skey"  th:field="*{skey}" title="검색단어" placeholder="헌혈의집 이름 또는 헌혈의집 주소를 입력해주세요" maxlength="80" style="width: 320px;">
                         <button type="submit" class="btn">검색</button>
                     </div>
                 </td>
+
             </tr>
 
         </table>
+
+
     </form>
 
     <!-- 지도 표시 -->
