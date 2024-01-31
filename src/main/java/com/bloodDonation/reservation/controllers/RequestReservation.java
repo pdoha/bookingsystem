@@ -47,4 +47,6 @@ public class RequestReservation {
 
     private Member member;
 
+    private boolean agree;
+
 }

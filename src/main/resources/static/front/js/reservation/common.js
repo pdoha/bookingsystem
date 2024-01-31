@@ -8,7 +8,6 @@ window.addEventListener("DOMContentLoaded", function() {
             const date = this.dataset.date;
             const time = this.value;
 
-
             const targetEl = document.getElementById("select_person");
 
             const url = `/api/reservation/available_capacity?cCode=${cCode}&date=${date}&time=${time}`;
