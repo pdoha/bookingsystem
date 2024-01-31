@@ -47,12 +47,14 @@
                 </label>
                 <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
             </div>
+
             <button type="submit" class="login-btn">로그인</button>
             <div class="login-register">
                 <p>아직 회원이 아니신가요?
                     <a th:href="@{/member/join}" class="register-link">회원가입</a>
                 </p>
             </div>
+            <div class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
         </form>
     </div>
 </main>

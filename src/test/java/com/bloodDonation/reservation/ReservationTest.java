@@ -36,7 +36,7 @@ public class ReservationTest {
     @Test
     void reservationSaveTest() {
         RequestReservation add = new RequestReservation();
-        add.
+        add.setMode("step1");
     }
 
 }

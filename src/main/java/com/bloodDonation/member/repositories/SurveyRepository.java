@@ -9,8 +9,9 @@ import java.util.Optional;
 
 public interface SurveyRepository extends JpaRepository<Survey, Long>, QuerydslPredicateExecutor<Survey> {
 
-    Optional<Survey> findById(Long seq);
-    /*Optional<Survey> findByuserNo(Long userNo);*/
+    /*Optional<Survey> findById(Long seq);*/
+
+    Optional<Survey> findBymemberUserNo(Long memberUserNo);
     default boolean existsById(Long seq){
         //Survey에 seq 존재하는지 체크
         QSurvey survey = QSurvey.survey;

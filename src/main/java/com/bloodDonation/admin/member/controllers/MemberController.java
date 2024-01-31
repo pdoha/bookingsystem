@@ -143,6 +143,8 @@ public class MemberController implements ExceptionProcessor {
             return "admin/member/edit";
         }
 
+        memberSaveService.update(form);
+
         //저장하면 회원목록으로 이동
         return "redirect:/admin/member";
     }

@@ -68,5 +68,6 @@ public class CenterInfo extends BaseMember {
     private String bookAvlEhour; // 예약 가능 종료 시간
     @Transient
     private String bookAvlEmin; // 예약 가능 종료 분
-
+    @Transient
+    private boolean bookAfter18; // 18시 이후 예약 가능 여부
 }

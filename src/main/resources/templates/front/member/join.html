@@ -7,43 +7,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </th:block>
 
-<main layout:fragment="content" class="layout_width">
-    <div class="form-box register">
+<main layout:fragment="content">
+
     <h1 th:text="#{회원가입}"></h1>
 
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
         <input type="hidden" name="gid" th:field="*{gid}">
-        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
         <!--에러페이지-->
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
-        <div class="input-box">
-                <span class="icon">
-                    <i class="xi-mail"></i>
-                </span>
-            <input type="email" required>
-            <label>이메일주소</label>
-        </div>
-
-
-        <div class="input-box">
-            <input type="email" required>
-            <label>이메일 인증번호</label>
-        </div>
-
-
-
-
+        <dl>
+            <dt th:text="#{이메일}"></dt>
+            <dd>
+                <div>
+                    <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
+                    <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
+                </div>
 
                 <!--이메일 인증번호 -->
                 <div class="auth_box">
-                    <th:block th:if="${session.EmailAuthVerified ==null || !session.EmailAuthVerified}">
-                        <input type="text" id="auth_num" >
-                        <span id="auth_count">03:00</span> <!--제한시간-->
+                    <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                        <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+                        <span id="auth_count">03:00</span>  <!--제한시간-->
                         <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
                         <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
                     </th:block>
+
                     <!--인증 성공하면-->
                     <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
                         <span class='confirmed' th:text="#{확인된_이메일_입니다.}"></span>
@@ -51,91 +41,71 @@
                 </div>
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
 
-        <div class="input-box">
-                <span class="icon">
-                    <i class="xi-user"></i>
-                </span>
+            </dd>
+        </dl>
 
+
+
+        <dl>
+            <dt th:text="#{아이디}"></dt>
+            <dd>
                 <input type="text" name="userId" th:field="*{userId}">
-                <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}">
-                </div>
-            <label>아이디</label>
-        </div>
+                <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+            </dd>
+        </dl>
 
-
-        <div class="input-box">
-                    <span class="icon">
-                        <i class="xi-lock"></i>
-                    </span>
+        <dl>
+            <dt th:text="#{비밀번호}"></dt>
+            <dd>
                 <input type="password" name="userPw" th:field="*{userPw}">
-                <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}">
+                <div class="error" th:each="err : ${#fields.errors('userPw')}" th:text="${err}"></div>
+            </dd>
+        </dl>
 
-                </div>
-            <div class="error" th:if="${session.NotBlank_userPw != null}"
-                 th:text="${session.NotBlank_userPw}">
-            </div>
-            <label>비밀번호</label>
-        </div>
-
-
-
-        <div class="input-box">
-                <span class="icon">
-                    <i class="xi-lock"></i>
-                </span>
+        <dl>
+            <dt th:text="#{비밀번호_확인}"></dt>
+            <dd>
                 <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
-                <div class="error" th:each="err :${#fields.errors('confirmPassword')}" th:text="${err}">
-                </div>
-                <label>비밀번호 확인</label>
-            </div>
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+            </dd>
+        </dl>
 
-
-        <div class="input-box">
-                <span class="icon">
-                    <i class="xi-user-plus"></i>
-                </span>
+        <dl>
+            <dt th:text="#{회원명}"></dt>
+            <dd>
                 <input type="text" name="mName" th:field="*{mName}">
-                <div class="error" th:each="err : ${#fields.errors('mName')}" th:text="${err}">
-                </div>
-            <label>회원명</label>
-        </div>
+                <div class="error" th:each="err : ${#fields.errors('mName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
 
-
-
-
+    <!--    <dl>
+            <dt th:text="#{프로필_이미지}"></dt>
+            <dd>
+                <div id="profile_image"></div>
+                <button type="button" class="upload_files"
+                        th:text="#{이미지_업로드}" data-image-only="true" data-single-file="true"></button>
+            </dd>
+        </dl>-->
 
            <!-- search_address 클래스가 지정되어 있으면 클릭시 주소 팝업이 뜹니다.
             data-zonecode-id : 여기에 지정된 id를 가진 input 요소에 검색된 우편번호가 완성됩니다.
             data-address-id : 여기에 지정된 id를 가진 input 요소에 검색된 주소가 완성됩니다.-->
 
-            <div class="input-box">
-                <span class="icon">
-                    <i class="xi-marker-plus"></i>
-                </span>
-                    <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly >
-
-                    <label>우편번호</label>
-            </div>
-
-
-                    <div class="input-box">
-                <span class="icon">
-                    <i class="xi-maker"></i>
-                </span>
-                    <input type="text" name="address" id="address" th:field="*{address}" readonly >
-
-                        <label>주소</label>
-                        <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
-
-                    </div>
-
-                <div class="input-box">
-                <span class="icon">
-                </span>
-                    <input type="text" name="addressSub" th:field="*{addressSub}"  >
-                    <label>나머지 주소</label>
+        <dl>
+            <dt th:text="#{주소}"></dt>
+            <dd>
+                <div>
+                    <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly th:placeholder="#{우편번호}">
+                    <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
                 </div>
-
+                <div>
+                    <input type="text" name="address" id="address" th:field="*{address}" readonly th:placeholder="#{주소}">
+                </div>
+                <div>
+                    <input type="text" name="addressSub" th:field="*{addressSub}" th:placeholder="#{나머지_주소}">
+                </div>
+            </dd>
+        </dl>
 
 
 
@@ -215,5 +185,6 @@
 
 
     </form>
+
 </main>
 </html>
