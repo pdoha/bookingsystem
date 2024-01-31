@@ -29,7 +29,7 @@ public class SurveyController {
 
     @ModelAttribute("addCss")
     public String[] addCss() {
-        return new String[] { "survey/style" };
+        return new String[] { "survey/style", "mypage/style" };
     }
 
     @GetMapping("/step1")

@@ -5,12 +5,12 @@ main { min-height: 700px;
  }
 
 *{
-
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
-
-
+     text-decoration: none;
 }
+
+
 
 
 
@@ -164,7 +164,7 @@ body{
 .terms_contents {
     width: 1000px;
     height: 30vh;
-    padding: 10px;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(207, 27, 177, 0.521);
     border: none;
