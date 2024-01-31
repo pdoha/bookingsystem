@@ -22,7 +22,7 @@
                 <div class="btns" th:if="*{showEditButton || showDeleteButton}">
                     <a th:if="*{showDeleteButton}" th:href="@{/comment/delete/{seq}(seq=*{seq})}" th:data-deletable="*{deletable}" class="delete_comment" th:text="#{삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
 
-
+                    <!--자바스크립-->
                     <button th:if="*{showEditButton}" type="button" class="edit_comment" th:data-seq="*{seq}" th:data-editable="*{editable}" th:text="#{수정}"></button>
                 </div>
             </li>

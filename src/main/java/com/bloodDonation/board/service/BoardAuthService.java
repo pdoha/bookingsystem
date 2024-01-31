@@ -66,7 +66,7 @@ public class BoardAuthService {
             if (member == null) {
                 session.setAttribute("mode",mode);
                 session.setAttribute("seq",seq);
-
+                System.out.printf("mode=%s, seq=%s%n", mode, seq);
                 throw new GuestPasswordCheckException();
             }
             //회원인 경우 > alert -> back
