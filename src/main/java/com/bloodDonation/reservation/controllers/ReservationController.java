@@ -1,8 +1,7 @@
 package com.bloodDonation.reservation.controllers;
 
-import com.bloodDonation.admin.center.controllers.CenterSearch;
 import com.bloodDonation.admin.center.entities.CenterInfo;
-import com.bloodDonation.admin.center.service.CenterInfoService;
+import com.bloodDonation.area.Areas;
 import com.bloodDonation.calendar.Calendar;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.ListData;
@@ -10,16 +9,19 @@ import com.bloodDonation.commons.Utils;
 import com.bloodDonation.reservation.entities.Reservation;
 import com.bloodDonation.reservation.service.ReservationApplyService;
 import com.bloodDonation.reservation.service.ReservationDateService;
+import com.bloodDonation.reservation.service.ReservationInfoService;
 import com.bloodDonation.reservation.service.SearchCenterService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +34,7 @@ public class ReservationController implements ExceptionProcessor {
     private final ReservationApplyService reservationApplyService;
     private final ReservationMainValidator reservationMainValidator;
     private final ReservationDateService reservationDateService;
+    private final ReservationInfoService reservationInfoService;
     private final SearchCenterService searchCenterService;
     private final Calendar calendar;
     private final Utils utils;
@@ -43,16 +46,6 @@ public class ReservationController implements ExceptionProcessor {
         return  new RequestReservation();
     }
 
-    @ModelAttribute("addCss")
-    public String[] addCss() {
-        return new String[] { "reservation/style" };
-
-    }
-
-    @ModelAttribute("addScript")
-    public String[] addScript() {
-        return new String[] { "reservation/common" };
-    }
 
 
 
@@ -65,12 +58,13 @@ public class ReservationController implements ExceptionProcessor {
      */
     @GetMapping("/centerChoice")
     public String centerChoice(@ModelAttribute("rCenterSearch") RCenterSearch search, Model model) {
+        commonProcess("search", model);
 
         ListData<CenterInfo> data = searchCenterService.getList(search);
 
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
-        model.addAttribute("pageTitle", "헌혈의집 선택");
+        model.addAttribute("sidoList", Areas.sido);
 
         return utils.tpl("reservation/centerChoice");
     }
@@ -86,6 +80,8 @@ public class ReservationController implements ExceptionProcessor {
      */
     @GetMapping("/step1/{cCode}")
     public String step1(@PathVariable("cCode") Long cCode, @ModelAttribute RequestReservation form, Model model) {
+        commonProcess("step1", model);
+
         form.setCCode(cCode);
         form.setMode("step1");
         model.addAttribute("requestReservation", form);
@@ -98,6 +94,7 @@ public class ReservationController implements ExceptionProcessor {
 
     @PostMapping("/step2")
     public String step2(RequestReservation form, Errors errors, Model model) {
+        commonProcess("step2", model);
 
         reservationMainValidator.validate(form, errors);
 
@@ -118,8 +115,10 @@ public class ReservationController implements ExceptionProcessor {
     }
 
 
+
     @PostMapping("/apply")
-    public String apply(RequestReservation form, Errors errors, Model model, SessionStatus status) {
+    public String apply(RequestReservation form, Errors errors, Model model) {
+        commonProcess("apply", model);
 
         reservationMainValidator.validate(form,errors);
         System.out.println(form);
@@ -128,12 +127,8 @@ public class ReservationController implements ExceptionProcessor {
             return utils.tpl("reservation/step2");
         }
 
-        //예약 신청 처리
-        Reservation reservation = reservationApplyService.apply(form);
 
-        status.setComplete(); //세션 비우기
-
-        String url = request.getContextPath() + "/SucessBooking/"+reservation.getBookCode();
+        String url = request.getContextPath() + "/reservation/check";
         String script = String.format("parent.location.replace('%s');",url);
 
         model.addAttribute("script", script);
@@ -141,4 +136,58 @@ public class ReservationController implements ExceptionProcessor {
         return "common/_execute_script";
     }
 
+    @GetMapping("/check")
+    public String check(RequestReservation form, Model model) {
+        commonProcess("check", model);
+
+        return utils.tpl("reservation/userInfo_check");
+    }
+
+    @PostMapping("/SucessBooking")
+    public String success(RequestReservation form, Errors errors, Model model, SessionStatus status) {
+        commonProcess("success", model);
+
+        form.setMode("step3");
+
+        reservationMainValidator.validate(form, errors);
+
+        if (errors.hasErrors()) { // 약관 동의시에만 성공 페이지로 이동
+            return utils.tpl("reservation/userInfo_check");
+        }
+
+        //예약 신청 처리
+        Reservation reservation = reservationApplyService.apply(form);
+        model.addAttribute("reservation", reservation);
+
+        status.setComplete(); // 세션 비우기
+
+        return utils.tpl("reservation/success_booking");
+    }
+
+    private void commonProcess(String mode, Model model) {
+        String pageTitle = "헌혈의집 찾기";
+        mode = StringUtils.hasText(mode) ? mode : "search";
+
+        List<String> addCss = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        addCss.add("reservation/style");
+        addScript.add("reservation/common");
+
+
+        if (mode.equals("check")) {
+
+        } else if (mode.equals("success")) {
+
+        } else if (mode.equals("search")) {
+            addCommonScript.add("area");
+        }
+
+
+        model.addAttribute("addCss", addCss);
+        model.addAttribute("addScript", addScript);
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("pageTitle", pageTitle);
+    }
 }

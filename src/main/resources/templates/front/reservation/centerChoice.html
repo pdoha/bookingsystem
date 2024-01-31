@@ -3,10 +3,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 
-<h2>헌혈의집 선택</h2>
-<section layout:fragment="content">
-    <!--kakao appkey 가져오기-->
+<th:block layout:fragment="addCommonScript">
     <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
+</th:block>
+
+<section layout:fragment="content">
+    <h2>헌혈의집 선택</h2>
 
     <!-- 필터링 검색 -->
     <form name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${rCenterSearch}">
@@ -39,11 +41,12 @@
             <tr>
                 <th>지역 선택</th>
                 <td>
-                    <select title="시/도 선택" id="selSd" name="selSd">
+                    <select title="시/도 선택" name="sido" class="select_area" data-target-id="sigugun">
                         <option value="">시/도</option>
+                        <option th:each="sido : ${sidoList}" th:value="${sido}" th:text="${sido}"></option>
                     </select>
-                    <select title="군/구 선택" id="selGg" name="selGg">
-                        <option value="">군/구</option>
+                    <select title="시/구/군 선택" name="sigugun" id="sigugun">
+                        <option value="">시/구/군</option>
                     </select>
 
                 </td>
@@ -67,10 +70,6 @@
     </form>
 
     <!-- 지도 표시 -->
-    <div class="directions">
-        <script type="text/javascript" src="../../../../resources/static/common/js/map.js"></script>
-        <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
-    </div>
 
     <!-- 검색 결과 리스트-->
     <form name="frmList" method="post" target="ifrmProcess" autocomplete="off">

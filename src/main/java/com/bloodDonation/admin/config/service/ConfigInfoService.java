@@ -45,7 +45,7 @@ public class ConfigInfoService {
             }else {// Class로 처리
                 data = om.readValue(jsonString,clazz);//문자열을 자바객체로 바꿈
             }
-            return Optional.ofNullable(null);
+            return Optional.ofNullable(data);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return Optional.ofNullable(null);
