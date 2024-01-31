@@ -31,7 +31,7 @@
 .board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5; }
 .board_list .list_search > form { display: flex; }
 .board_list .list_search > form > * + * { margin-left: 5px; }
-.board_list .list_search button { width: 180px; }
+.board_list .list_search button { width: 180px;  cursor: pointer;  }
 .board_list .total { text-align: right; margin: 10px 10px 5px; }
 
 /* 댓글 */
