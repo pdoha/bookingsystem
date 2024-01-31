@@ -39,6 +39,8 @@ public class ReservationMainValidator implements Validator {
         String mode = StringUtils.hasText(form.getMode()) ? form.getMode() : "step1";
         if (mode.equals("step2")) {
             validateStep2(form, errors);
+        } else if (mode.equals("step3")) {
+            validateStep3(form, errors);
         } else if (mode.equals("admin_add")) {
             validateStep1(form,errors);
             validateStep2(form, errors);
@@ -106,6 +108,10 @@ public class ReservationMainValidator implements Validator {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bookType", "NotBlank");
 
         }
-
+    private void validateStep3(RequestReservation form, Errors errors) {
+        if (!form.isAgree()) {
+            errors.rejectValue("agree", "AssertTrue");
+        }
+    }
     }
 
