@@ -1,3 +1,72 @@
+.layout_width { max-width: 1200px; min-width: 1000px; margin: auto; margin-top: 100px; box-shadow: 0 10px 10px rgb(0,0,0, 0.1);
+
+  }
+
+
+
+
+.subContent { position: relative; float:left; padding-bottom: 1rem; width: calc(100% - 14rem); }
+
+
+.titleArea { position:relative; margin-bottom: 3rem;}
+
+.titleArea::after { position: absolute; bottom: 0;  width: 13rem; height: 2px; background: #f42e3d; content: ""; margin-left: 10px; }
+
+.titleH2 { position: relative; padding: 0.95rem 0; width: calc(100% - 8rem); font-size: 1.8rem; color: #000; font-weight: bolder; margin-left: 20px;}
+
+
+.titleArea { margin-bottom: 3rem; }
+
+
+
+
+
+.table_terms {
+           border-spacing: 0;
+           width: 100%;
+           border-top: 2px solid #e6e6e6;
+           background: #fff;
+           height: 300px;
+           font-size: 16px;
+           line-height: 100px;
+
+
+
+
+}
+
+/*표 밑줄 */
+.table_terms td.table_terms th{
+    border-bottom: 1px solid #e6e6e6;
+    color: black;
+
+}
+
+/*
+.table_terms th {
+    border-bottom: 1px solid #e6e6e6;
+*/
+
+    }
+
+input{
+margin-left: 40px;
+}
+
+select{
+margin-left: 30px;
+}
+
+.btn{
+ width: 100px;
+ height: 40px;
+ background: #fff;
+ color: black;
+ margin: 20px;
+ cursor: pointer;
+}
+
+
 .year_month { text-align: center; margin-bottom: 15px; }
 .year_month .current { font-weight: 700; font-size: 2rem; line-height: 1; }
 .year_month a { display: inline-block; vertical-align: center; padding: 0 10px; font-size: 1.2rem; line-height: 1; }
