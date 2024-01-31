@@ -1,11 +1,15 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif , 'Nunito', sans-serif;
+       font-size: 16px;
+
+        }
+
+
 main { display: flex;
         width: 1500px;
            margin-bottom: 100px;
-           margin-left: 230px;
+           margin-left: 340px;
            overflow-x: hidden;
-
-
-
 
 main > section { flex-grow: 1;  }
 
@@ -17,14 +21,6 @@ main > section { flex-grow: 1;  }
     margin-left: 850px;
 
 }
-
-*{
-    font-family: 'Noto Sans KR', sans-serif , 'Nunito', sans-serif;
-       font-size: 16px;
-
-        }
-
-
 
  .table_cols{
     margin-left: 300px;
@@ -42,6 +38,7 @@ main > section { flex-grow: 1;  }
  background: #fff
  color: black;
  }
+
 /*--------------------------------------------------------------
 # Step box
 --------------------------------------------------------------*/

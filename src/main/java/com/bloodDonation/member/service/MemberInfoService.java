@@ -66,9 +66,15 @@ public class MemberInfoService implements UserDetailsService {
 
     }
 
+    /**
+     * 회원 목록
+     *
+     * @param search
+     * @return
+     */
     public ListData<Member> getList(MemberSearch search) {
-        int page = Utils.onlyPositiveNumber(search.getPage(), 1);
-        int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
+        int page = Utils.onlyPositiveNumber(search.getPage(), 1); // 페이지 번호
+        int limit = Utils.onlyPositiveNumber(search.getLimit(), 20); // 1페이지당 레코드 갯수
 
         QMember member = QMember.member;
         BooleanBuilder andBuilder = new BooleanBuilder();

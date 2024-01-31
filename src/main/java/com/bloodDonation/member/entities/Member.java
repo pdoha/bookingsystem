@@ -69,7 +69,6 @@ public class Member extends Base {
     //회원탈퇴시-memberinfo쪽에 isEnable()의 리턴 시 필요
     private boolean enable = true;
 
-
     @Column(name="_lock")
     private boolean lock;
 

@@ -3,8 +3,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
     <th:block sec:authorize="isAnonymous()"><!--미로그인 상태-->
-        <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
-        <a th:href="@{/member/login}" th:text="#{로그인}"></a>
+
+
+        <div class="gnb">
+            <ul>
+                <li> <a th:href="@{/member/join}" th:text="#{회원가입}"></a></li>
+                <li><a th:href="@{/member/login}" th:text="#{로그인}"></a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
     </th:block>
 
     <!--로그인 후 템플릿-->
@@ -12,9 +19,14 @@
 
         <!--환영 메세지-->
         <span th:text="${#messages.msg('LOGIN_MSG',session.member.mName,session.member.userId)}"></span>
-        <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
-        <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
 
+        <div class="gnb">
+            <ul>
+                <li><a th:href="@{/mypage}" th:text="#{마이페이지}"></a></li>
+                <li><a th:href="@{/member/logout}" th:text="#{로그아웃}"></a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
         <!--관리자 페이지 이동-->
         <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
     </th:block>
@@ -23,13 +35,6 @@
 
 
 
-    <div class="gnb">
-        <ul>
-            <li><a href="/member/join">회원가입</a></li>
-            <li><a href="/member/login">로그인</a></li>
-            <li><a th:href="@{/board/list/talk}">1:1 문의</a></li>
-        </ul>
-    </div>
     <div class="header-container">
         <h1>
             <a href="http://localhost:3000">RED BANK</a>
@@ -49,11 +54,10 @@
         -->
 
         <ul>
-            <li><a href="">헌혈의 집 찾기</a></li>
+            <li><a href="">헌혈의집 찾기</a></li>
             <li><a href="">헌혈예약</a></li>
             <li><a href="">헌혈내역조회</a></li>
             <li><a th:href="@{/board/list/qna}">자주묻는질문</a></li>
-            <li><a th:href="@{/board/list/talk}">1:1 문의</a></li>
         </ul>
 
 

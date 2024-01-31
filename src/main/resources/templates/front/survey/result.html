@@ -4,22 +4,111 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{검사결과}"></h1>
-    <div><h1>전자문진결과 헌혈이 가능합니다.</h1></div>
-    <div>
-        <ul>
-            <li>
-                전자문진에서 헌혈이 가능하다고 판정되어도, 헌혈의 집 방문 시 현장 문진 결과에 따라 헌혈이
-                불가할 수도 있습니다.
-            </li>
-            <li>
-                이 문진결과는 제출일로부터 3일간만 유효하며 3일이 지난 경우 전자문진을 다시 작성하셔야 합니다.
-            </li>
-        </ul>
-    </div>
-    <hr>
-    <div><h4>헌혈 후 교부되는 헌혈증서를 의료기관에 제출하시면 수혈비용 중 본인부담금이 면제됩니다.</h4>
-        <h4>헌혈증서는 양도가 가능하므로 수혈이 필요한 분들에게 기증하시면 큰 도움이 됩니다.</h4></div>
-    <h3>적십자 인도주의 활동정보 수신에 동의해 주셔서 감사합니다.</h3>
-    <button type="button"><a th:href="@{/mypage/survey}">전자문진 완료</a></button>
+    <div class="row">
+
+        <div class="info-box card">
+
+            <h1>전자문진에 참여해 주셔서 감사합니다.</h1>
+            <h2>전자문진 결과 현혈이 가능하십니다.</h2>
+            <ul>
+                <li>
+                    전자문진에서 헌혈이 가능하다고 판정되어도, 헐혈의 집 방문시 현장<br>문진 결과에 따라 헌혈이 불가할 수도 있습니다.
+                </li>
+                <li>
+                    이 문진 결과는 제출일로부터 3일간 (2024-01-25 까지)만 유효하며<br> 3일이지난 경우 전자문진을 다시 작성하셔야 합니다.
+                </li>
+            </ul>
+            <p></p>
+            <hr>
+
+            <p>헌혈 후 교부되는 헌혈증서를 의료기관에 제출하시면 수혈비용 중 본인부담금이 면제됩니다.</p>
+            <p>헌혈증서는 양도가 가능하므로 수혈이 필요한 분들에게 기증하시면 큰 다움이 됩니다.</p>
+
+            <p class="last">적십자 인도주의 활동정보 수신에 동의해 주셔서 감사합니다.</p>
+            <br>
+            <button type="button"><a th:href="@{/mypage/survey}">전자문진 완료</a></button>
+        </div>
+        </div>
+
+        <style>
+
+            body{
+             background-color: antiquewhite;
+            }
+            /*--------------------------------------------------------------
+            # CARD
+            --------------------------------------------------------------*/
+
+
+            .card {
+              margin-bottom: 50px;
+              border: none;
+              border-radius: 10px;
+              box-shadow: 0px 0 10px rgb(211, 206, 206);
+              background-color: #fff;
+
+            }
+
+            /*--------------------------------------------------------------
+            # 카드 디자인
+            --------------------------------------------------------------*/
+
+            .contact .info-box {
+              padding: 28px 30px;
+              width: 700px;
+              height: 450px;
+
+            }
+
+            .contact .info-box h1{
+              text-align: center;
+            }
+
+
+
+            .contact .info-box h2{
+              text-align: center;
+              margin-bottom: 25px;
+              font-size: 21px;
+              color: red;
+              font-weight: 700;
+
+            }
+
+
+            .contact .info-box p {
+              padding: 0;
+              line-height: 24px;
+              font-size: 16px;
+              font-weight: 900;
+              margin-left: 17px;
+
+
+            }
+
+            .contact .info-box li{
+              padding: 5px;
+              margin: 10px;
+            }
+
+
+            .contact .info-box .last{
+              margin-left: 70px;
+              font-size: 20px;
+            }
+
+
+            .contact .info-box button{
+            background-color: red;
+            color: #fff;
+            height: 45px;
+            margin-left: 270px;
+            border: none;
+            font-size: 16px;
+
+            }
+
+        </style>
+
 </section>
 </html>

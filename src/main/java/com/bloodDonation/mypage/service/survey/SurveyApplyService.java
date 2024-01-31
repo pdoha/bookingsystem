@@ -1,6 +1,7 @@
 package com.bloodDonation.mypage.service.survey;
 
 import com.bloodDonation.member.MemberUtil;
+import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.SurveyRepository;
 import com.bloodDonation.mypage.controllers.RequestSurvey;
 import com.bloodDonation.mypage.entities.Survey;
@@ -16,7 +17,7 @@ public class SurveyApplyService {
     private final MemberUtil memberUtil;
 
     public void apply(RequestSurvey form) {
-
+        Member member = memberUtil.getMember();//로그인 후 메인으로 이동한 다음 마이페이지에 로그인 회원정보있어야 함
         ObjectMapper om = new ObjectMapper();
 
         int positive = 0, negative = 0;
@@ -49,12 +50,13 @@ public class SurveyApplyService {
 
         /*System.out.println("네------"+positive);
         System.out.println("아니요------"+negative);*/
-
-        Survey survey = Survey.builder()
+        /*List<Survey> surveys = member.getSurveys();*/
+        /*Survey survey = (Survey) surveys;*/
+       Survey survey = Survey.builder()
                 .data(data)
                 .positive(positive)
                 .negative(negative)
-                .member(memberUtil.getMember())
+                .member(memberUtil.getMember())//로그인 후 메인으로 이동한 다음 마이페이지에 로그인 회원정보있어야 함
                 .build();
        /* System.out.println("survey 후"+survey.getPositive());
         System.out.println("survey 후"+survey.getNegative());*/
