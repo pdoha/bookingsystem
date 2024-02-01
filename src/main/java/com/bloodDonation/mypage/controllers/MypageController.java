@@ -94,28 +94,28 @@ public class MypageController implements ExceptionProcessor {
         commonProcess("reservation", model);
         return utils.tpl("mypage/reservation");
     }
-
-     @GetMapping("/reservation/modify")
+    @RequestMapping("/reservation")
+     @GetMapping("/centerChoice")
      public String reservationModify(@ModelAttribute RequestMyReservation form, Model model){
-            commonProcess("reservation/modify",model);
-
+            /*commonProcess("reservation/modify",model);*/
          if (memberUtil.isLogin()) {
              Member member = memberUtil.getMember();//예약은 getReservation() 이용?
              form = new ModelMapper().map(member, RequestMyReservation.class);
          }
 
          model.addAttribute("requestMyReservation", form);
-            return utils.tpl("mypage/reservation_modify");
+            /*return utils.tpl("mypage/reservation_modify");*/
+        return utils.tpl("reservation/centerChoice");
      }
 
-    @PostMapping("/reservation/modify")
+    /*@PostMapping("/reservation/modify")
     public String reservationModifyPs(@Valid RequestMyReservation form, Model model) {
         commonProcess("modify", model);
 
         //예약변경 데이터를 저장해주는 서비스-form을 담아
 
         return "redirect:/mypage/reservation";
-    }
+    }*/
 
     @GetMapping("/survey") //전자문진 안내 페이지-나머지 전자문진은 surveyController쪽에 있음
     public String survey(Model model){
