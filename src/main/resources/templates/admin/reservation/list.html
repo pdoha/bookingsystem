@@ -7,19 +7,19 @@
     <h1>예약자 리스트</h1>
     <h2>예약자 조회</h2>
     <form name="frmSearch" method = "get" th:action="@{/admin/reservation}" autocomplete="off"
-        th:object="${ReservationSearch}">
+        th:object="${reservationSearch}">
         <table class = "table_cols mb30">
             <tr>
                 <th>키워드</th>
                 <td>
                     <div class="input_grp">
-                        <select name="sopt">
-                            <option value = "ALL">통합검색</option>
-                            <option value = "memberSeq">회원번호</option>
-                            <option value = "userId">예약자 ID</option>
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value = "all">통합검색</option>
                             <option value = "bookCode">예약코드</option>
+                            <option value = "userId">예약자 이름/ID</option>
+                            <option value = "center">예약센터</option>
                         </select>
-                        <input type="text">
+                        <input type="text" name="skey" th:field="*{skey}">
                     </div>
                 </td>
             </tr>
@@ -48,7 +48,6 @@
                     <th width="120">예약한 센터</th>
                     <th width="200">예약 변겅</th>
 
-                    <th>예약 변경</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -69,7 +68,7 @@
 
                    <td th:text="*{bookCode}" align="center"></td>
                     <td>
-                        <th:block th:if="*{member != null}" th:text="*{member.name + '(' + member.userId + ')'}">
+                        <th:block th:if="*{member != null}" th:text="*{member.mName + '(' + member.userId + ')'}">
                         </th:block>
                     </td>
                     <td th:text="*{#temporals.format(bookDateTime, 'yyyy.MM.dd HH:mm')}" align="center"></td>
@@ -89,6 +88,7 @@
                 <button type="button" class="form_action sbtn on" data-mode="edit" data-form-name="frmList">선택 예약 수정</button>
 
             </div>
+            <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 
         </form>
 

@@ -12,6 +12,7 @@ import com.bloodDonation.reservation.entities.QReservation;
 import com.bloodDonation.reservation.entities.Reservation;
 import com.bloodDonation.reservation.repositories.ReservationRepository;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,9 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -72,26 +71,46 @@ public class ReservationInfoService {
         BooleanBuilder andBuilder = new BooleanBuilder();
 
         //검색 조건 키워드들
+        /*
         List<Long> memberSeq = search.getMemberSeq();
         List<Long> bookCode = search.getBookCode();
         List<String> userId = search.getUserId();
-        LocalDate sDate = search.getSDate();
-        LocalDate eDate = search.getEDate();
+        List<String> userName = search.getUserName();
+        List<String> center = search.getCenter();
+         */
+        //LocalDate sDate = search.getSDate();
+        //LocalDate eDate = search.getEDate();
 
+        String sopt = search.getSopt();
+        String skey = search.getSkey();
 
-        //회원번호로 조회
-        if(memberSeq != null && !memberSeq.isEmpty()) {
-            andBuilder.and(reservation.member.userNo.in(memberSeq));
+        sopt = StringUtils.hasText(sopt) ? sopt : "all";
+        if (StringUtils.hasText(skey)) {
+            skey = skey.trim();
+
+            BooleanExpression bookCodeCond = reservation.bookCode.stringValue().contains(skey);
+            BooleanExpression userIdCond = reservation.member.userId.contains(skey);
+            BooleanExpression userNameCond = reservation.member.mName.contains(skey);
+            BooleanExpression centerCond = reservation.center.cName.contains(skey);
+
+            if(sopt.equals("bookCode")) {
+                 andBuilder.and(bookCodeCond);
+
+            } else if (sopt.equals("userId")) {
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                andBuilder.and(orBuilder.or(userIdCond).or(userNameCond));
+            } else if (sopt.equals("center")) {
+                andBuilder.and(centerCond);
+            } else {
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                andBuilder.and(orBuilder.or(bookCodeCond).or(userIdCond).or(userNameCond).or(centerCond));
+            }
         }
 
-        if(bookCode != null && !bookCode.isEmpty()) {
-            andBuilder.and(reservation.bookCode.in(bookCode));
-        }
 
-        if(userId != null && !userId.isEmpty()) {
-            andBuilder.and(reservation.member.userId.in(userId));
-        }
 
+
+        /*
         if(sDate != null) {
             andBuilder.and(reservation.bookDateTime.goe(LocalDateTime.of(
                     sDate, LocalTime.of(0,0,0))));
@@ -101,20 +120,15 @@ public class ReservationInfoService {
             andBuilder.and(reservation.bookDateTime.loe(LocalDateTime.of(eDate, LocalTime.of(23,59,59))));
 
         }
-        String sopt = search.getSopt();
-        String skey = search.getSkey();
 
-        sopt = StringUtils.hasText(sopt) ? sopt : "all";
-        if (StringUtils.hasText(skey)) {
-            skey = skey.trim();
+         */
 
-        }
         //검색 조건 페이징
 
         int page = Utils.onlyPositiveNumber(search.getPage(),1);
-        int limit = Utils.onlyPositiveNumber(search.getLimit(),20);
+        int limit = Utils.onlyPositiveNumber(search.getLimit(),5);
 
-        Pageable pageable = PageRequest.of(page, limit, Sort.by(desc("createdAt")));
+        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
         Page<Reservation> data = reservationRepository.findAll(andBuilder, pageable);
 
         Pagination pagination = new Pagination(page, (int)data.getTotalElements(), 10, limit, request);

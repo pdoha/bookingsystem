@@ -48,19 +48,20 @@ public class SearchCenterService {
 
         /* 검색 조건 처리 S */
         // 평일, 주말, 공휴일, 18시 이후
+        /*
         boolean weekday = search.isWeekday();
         boolean weekend = search.isWeekend();
         boolean bookHday = search.isBookHday();
         boolean bookAfter18 = search.isBookAfter18();
+        */
+
 
         // 시도군구
-        String address = search.getAddress();
-        String addressSub = search.getAddressSub();
 
         //키워드 검색
-        String skey = search.getSkey();
-
-
+        //String sopt = search.getSopt();     //키워드 검색 옵션
+        String skey = search.getSkey();     //키워드
+        //sopt = StringUtils.hasText(sopt) ? sopt : "all";
 
         if(StringUtils.hasText(skey)){
             BooleanExpression cNameCond = centerInfo.cName.contains(skey.trim());
