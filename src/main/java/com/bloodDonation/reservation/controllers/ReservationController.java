@@ -1,6 +1,7 @@
 package com.bloodDonation.reservation.controllers;
 
 import com.bloodDonation.admin.center.entities.CenterInfo;
+import com.bloodDonation.admin.center.service.CenterInfoService;
 import com.bloodDonation.area.Areas;
 import com.bloodDonation.calendar.Calendar;
 import com.bloodDonation.commons.ExceptionProcessor;
@@ -11,6 +12,9 @@ import com.bloodDonation.reservation.service.ReservationApplyService;
 import com.bloodDonation.reservation.service.ReservationDateService;
 import com.bloodDonation.reservation.service.ReservationInfoService;
 import com.bloodDonation.reservation.service.SearchCenterService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -35,6 +39,7 @@ public class ReservationController implements ExceptionProcessor {
     private final ReservationMainValidator reservationMainValidator;
     private final ReservationDateService reservationDateService;
     private final ReservationInfoService reservationInfoService;
+    private final CenterInfoService centerInfoService;
     private final SearchCenterService searchCenterService;
     private final Calendar calendar;
     private final Utils utils;
@@ -60,11 +65,28 @@ public class ReservationController implements ExceptionProcessor {
     public String centerChoice(@ModelAttribute("rCenterSearch") RCenterSearch search, Model model) {
         commonProcess("search", model);
 
-        ListData<CenterInfo> data = searchCenterService.getList(search);
+        ListData<CenterInfo> data = centerInfoService.getList(search);
+
+        search.setLimit(10000);
+        ListData<CenterInfo> data2 = centerInfoService.getList(search);
+        List<CenterInfo> items2 = data2.getItems();
+
+        ObjectMapper om = new ObjectMapper();
+        om.registerModule(new JavaTimeModule());
+
+        try {
+            String jsonData = om.writeValueAsString(items2);
+            model.addAttribute("jsonData", jsonData);
+        } catch (JsonProcessingException e) {}
 
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
         model.addAttribute("sidoList", Areas.sido);
+
+        String sido = search.getSido();
+        if (StringUtils.hasText(sido)) {
+            model.addAttribute("sigugunList", Areas.getSigugun(sido));
+        }
 
         return utils.tpl("reservation/centerChoice");
     }
@@ -182,6 +204,8 @@ public class ReservationController implements ExceptionProcessor {
 
         } else if (mode.equals("search")) {
             addCommonScript.add("area");
+            addCommonScript.add("map");
+            addScript.add("center/search");
         }
 
 
