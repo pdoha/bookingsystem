@@ -10,9 +10,11 @@
 <main layout:fragment="content">
 
 
-    <!--
-      <h1 th:text="#{회원가입}"></h1>
-    -->
+
+    <h1>
+        <a href="http://localhost:3000">RED BANK</a>
+    </h1>
+
 
 
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}" class="form-box register">
@@ -29,26 +31,28 @@
                  <span class="icon">
                     <i class="xi-mail"></i>
                  </span>
-                 <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
                  <label>이메일주소</label>
+                 <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
                  <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송} " style="float : right;margin-top: 5px;"></button>
              </div>
 
             <!--이메일 인증번호 -->
             <div class="input-box auth_box">
                 <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                    <label>이메일 인증번호</label>
                     <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+
                     <span id="auth_count">03:00</span>  <!--제한시간-->
                     <button type="button" id="email_confirm" th:text="#{확인}" style="float : right;margin-top: 5px;"></button>
                     <button type="button" id="email_re_verify" th:text="#{재전송}" style="float : right;margin-top: 5px;" ></button>
-                    <label>이메일 인증번호</label>
-                </th:block>
 
+                </th:block>
+            </div>
                 <!--인증 성공하면-->
                 <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
                     <span class='confirmed' th:text="#{확인된_이메일_입니다.}"></span>
                 </th:block>
-            </div>
+
             <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
 
 
