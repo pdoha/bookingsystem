@@ -51,12 +51,14 @@ commonLib.popup = {
         layerDimEl.addEventListener("click", this.close);
     },
 
-   /* //레이어팝업 버튼
-        const layerClose = document.createElement("i");
-        layerClose.className = "xi-close-thin layer_close";
-        popupEl.appendChild(layerClose);
-        layerClose.addEventListener("click", commonLib.popup.close);*/
-    // 레이어 팝업 닫기
+         //레이어팝업 버튼
+          const layerClose = document.createElement("i");
+          layerClose.className = "xi-close-thin layer_close";
+          popupEl.appendChild(layerClose);
+          layerClose.addEventListener("click", commonLib.popup.close);
+            // 레이어 팝업 닫기
+
+    },
     close() {
         const popupEl = document.getElementById("layer_popup");
         if (popupEl) popupEl.parentElement.removeChild(popupEl);

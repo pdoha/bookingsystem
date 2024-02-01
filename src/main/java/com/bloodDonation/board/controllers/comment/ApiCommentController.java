@@ -5,6 +5,7 @@ import com.bloodDonation.board.service.BoardAuthService;
 import com.bloodDonation.board.service.comment.CommentInfoService;
 import com.bloodDonation.board.service.comment.CommentSaveService;
 import com.bloodDonation.commons.ExceptionProcessor;
+import com.bloodDonation.commons.ExceptionRestProcessor;
 import com.bloodDonation.commons.rests.JSONData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/comment")
 @RequiredArgsConstructor
-public class ApiCommentController implements ExceptionProcessor {
+public class ApiCommentController implements ExceptionRestProcessor {
 
     private final CommentInfoService commentInfoService;
     private final CommentSaveService commentSaveService;

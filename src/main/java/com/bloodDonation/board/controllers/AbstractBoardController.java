@@ -55,7 +55,7 @@ public abstract class AbstractBoardController implements ExceptionProcessor {
 
         addScript.add("board/common"); // 게시판 공통 스크립트
 
-        addCommonScript.add("follow"); // 팔로잉, 언팔로잉
+        //addCommonScript.add("follow"); // 팔로잉, 언팔로잉
 
         /* 게시판 설정 처리 S */
         board = configInfoService.get(bid);
