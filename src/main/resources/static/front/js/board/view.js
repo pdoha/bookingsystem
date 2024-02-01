@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", function() {
                  formData.append('mode', 'edit');
                  formData.append('seq', seq);
                  formData.append('content', content);
-
+                 formData.append("boardDataSeq", frmComment.boardDataSeq.value);
                  const { ajaxLoad } = commonLib;
 
                  ajaxLoad('PATCH', '/api/comment', formData, 'json')
