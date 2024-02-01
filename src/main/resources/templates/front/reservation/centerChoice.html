@@ -9,10 +9,26 @@
 
 <section layout:fragment="content">
     <h2>헌혈의집 선택</h2>
+<section layout:fragment="content" class="layout_width">
+
+    <!--kakao appkey 가져오기-->
+    <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
+
+
+
+
+    <div id="subContent">
+        <div class="titleArea">
+            <h2 id="pageTitle" class="titleH2">헌혈의집 찾기</h2>
+        </div>
 
     <!-- 필터링 검색 -->
     <form name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${rCenterSearch}">
-        <table class="table_cols mb30">
+        <table class="table_terms">
+            <colgroup>
+                <col width="8%">
+                <col width="30%">
+            </colgroup>
             <tr>
                 <th>모두선택</th>
                 <td>
@@ -22,8 +38,10 @@
                 </td>
             </tr>
             <tr>
-                <th>운영정보 선택</th>
-                <td>
+
+                <th >운영정보 선택</th>
+                <td style="display: flex;
+                       justify-content: space-between; width: 450px;">
                     <label for="opWkDay">
                         <input type="checkbox" id="opWkDay" value="Od1" title="평일"> "평일"
                     </label>
@@ -70,6 +88,10 @@
     </form>
 
     <!-- 지도 표시 -->
+    <div class="directions">
+        <script type="text/javascript" src="../../../../resources/static/common/js/map.js"></script>
+        <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
+    </div>
 
     <!-- 검색 결과 리스트-->
     <form name="frmList" method="post" target="ifrmProcess" autocomplete="off">

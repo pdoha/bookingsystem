@@ -53,6 +53,7 @@ main > section { flex-grow: 1;  }
 
 
 .titleArea { margin-bottom: 2rem; }
+
 .step-container{
     width: 1400px;
     margin: auto;
