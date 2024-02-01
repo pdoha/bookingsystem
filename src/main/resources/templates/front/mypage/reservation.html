@@ -4,7 +4,7 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{예약조회}"></h1>
-    <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off"
+    <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off">
           <!--th:object="${예-reservationSearch}"-->
         <table class="table_cols">
             <tr>
@@ -47,7 +47,7 @@
                     <button type="button"><a th:href="@{/mypage/survey}">전자문진_하러가기</button>
                 </td>
                 <td>
-                    <button type="button"><a th:href="@{/mypage/reservation/modify}">변경</a></button>
+                    <button type="button"><a th:href="@{/reservation/centerChoice}">변경</a></button>
                     <button type="button">취소</button>
                 </td>
             </tr>
