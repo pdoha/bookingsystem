@@ -49,7 +49,7 @@ commonLib.popup = {
 
         /* 레이어 배경 클릭시 close 처리 */
         layerDimEl.addEventListener("click", this.close);
-
+    },
 
          //레이어팝업 버튼
           const layerClose = document.createElement("i");
