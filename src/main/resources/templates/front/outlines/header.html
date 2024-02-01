@@ -9,7 +9,7 @@
             <ul>
                 <li> <a th:href="@{/member/join}" th:text="#{회원가입}"></a></li>
                 <li><a th:href="@{/member/login}" th:text="#{로그인}"></a></li>
-                <li><a href="#">고객센터</a></li>
+                <li><a href="#">커뮤니티</a></li>
             </ul>
         </div>
     </th:block>
@@ -46,7 +46,7 @@
             <li><a href="/reservation/main">헌혈예약</a></li>
             <li><a href="">헌혈내역조회</a></li>
             <li><a th:href="@{/board/list/qna}">자주묻는질문</a></li>
-            <li><a th:href="@{/board/list/community}">커뮤니티</a></li>
+            <li><a th:href="@{/board/list/talk}">고객상담</a></li>
         </ul>
 
 
@@ -55,7 +55,12 @@
         </div>
 
     <style>
+        .header-container h1 a{
+        color: red; font-size: 46px;
+        }
 
+         a{   text-decoration: none; color: black;
+}
     </style>
 
 </header>
