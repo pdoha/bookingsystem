@@ -8,7 +8,7 @@ var commonLib = commonLib || {};
 * @param params : 요청 데이터(POST, PUT, PATCH ... )
 * @param responseType :  json : javascript 객체로 변환
 */
-commonLib.ajaxLoad = function(method, url, params, responseType) {
+commonLib.ajaxLoad = function(method, url, params, responseType, headers) {
     method = method || "GET";
     params = params || null;
 
@@ -21,20 +21,27 @@ commonLib.ajaxLoad = function(method, url, params, responseType) {
         xhr.open(method, url);
         xhr.setRequestHeader(tokenHeader, token);
 
-        xhr.send(params); // 요청 body에 실릴 데이터 키=값&키=값& .... FormData 객체 (POST, PATCH, PUT)
+        if (headers) {
+            for (const key in headers) {
+                xhr.setRequestHeader(key, headers[key]);
+            }
+        }
 
-          xhr.onreadystatechange = function() {
+       xhr.send(params); // 요청 body에 실릴 데이터 키=값&키=값& .... FormData 객체 (POST, PATCH, PUT)
+
+
+        xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                const resData = (responseType && responseType.toLowerCase() == 'json') ? JSON.parse(xhr.responseText) : xhr.responseText;
+                const resData = (xhr.responseText.trim() && responseType && responseType.toLowerCase() == 'json') ? JSON.parse(xhr.responseText) : xhr.responseText;
 
-                if (xhr.status == 200) {
+                if (xhr.status == 200 || xhr.status == 201) {
 
                     resolve(resData); // 성공시 응답 데이터
                 } else {
                     reject(resData);
                 }
             }
-          };
+        };
 
         xhr.onabort = function(err) {
             reject(err); // 중단 시
@@ -45,6 +52,7 @@ commonLib.ajaxLoad = function(method, url, params, responseType) {
         };
     });
 };
+
 
 /**
 * 위지윅 에디터 로드
@@ -63,52 +71,6 @@ commonLib.loadEditor = function(id, height) {
     });
 }
 
-//이메일 인증 메일보내기 및 검증 함수 추가
-//var commonLib = commonLib || {};
-
-/**
-* ajax 처리
-*
-* @param method : 요청 메서드 - GET, POST, PUT ...
-* @param url : 요청 URL
-* @param responseType : json - 응답 결과를 json 변환, 아닌 경우는 문자열로 반환
-*/
-commonLib.ajaxLoad = function(method, url, params, responseType) {
-    method = !method || !method.trim()? "GET" : method.toUpperCase();
-    const token = document.querySelector("meta[name='_csrf']").content;
-    const header = document.querySelector("meta[name='_csrf_header']").content;
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.setRequestHeader(header, token);
-
-        xhr.send(params);
-        responseType = responseType?responseType.toLowerCase():undefined;
-        if (responseType == 'json') {
-            xhr.responseType=responseType;
-        }
-
-        xhr.onreadystatechange = function() {
-            if (xhr.status == 200 && xhr.readyState == XMLHttpRequest.DONE) {
-                const resultData = responseType == 'json' ? xhr.response : xhr.responseText;
-
-                resolve(resultData);
-            }
-        };
-
-        xhr.onabort = function(err) {
-            reject(err);
-        };
-
-        xhr.onerror = function(err) {
-            reject(err);
-        };
-
-        xhr.ontimeout = function(err) {
-            reject(err);
-        };
-    });
-};
 
 /**
 * 이메일 인증 메일 보내기
