@@ -22,6 +22,11 @@ public class SurveyController {
     private final Utils utils;
     private final SurveyApplyService applyService;
 
+    @ModelAttribute("addCss")
+    public String[] addCss(){
+        return new String[]{"survey/style", "mypage/style"};
+    }
+
     // 전자문진 신청 페이지
     @GetMapping
     public String index(@ModelAttribute RequestSurvey form, Model model) {

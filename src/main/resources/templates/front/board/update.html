@@ -19,7 +19,7 @@
         <th:block th:replace="~{front/board/skins/review/update::review}"></th:block>
     </th:block>
 
-    <th:block thLif="${board.skin =='blog'}">
+    <th:block th:if="${board.skin =='blog'}">
         <th:block th:replace="~{front/board/skins/blog/update::blog}"></th:block>
     </th:block>
 </main>
