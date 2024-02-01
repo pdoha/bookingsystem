@@ -21,7 +21,7 @@
     <script th:src="@{/common/js/layer.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
     <script th:src="@{/common/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
 
-    <script th:src="@{/common/js/common.js}"></script>
+    <th:block layout:fragment="addCommonScript"></th:block>
     <script th:each="jsFile : ${addCommonScript}"
             th:src="@{/common/js/{file}.js(file=${jsFile})}"></script>
 
@@ -41,7 +41,7 @@
     <th:block th:if="${hide_footer == null}">
     <footer th:replace="~{front/outlines/footer::common}"></footer>
     </th:block>
-
+    <iframe name="ifrmProcess" class="dn"></iframe>
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
         // Get the button:
