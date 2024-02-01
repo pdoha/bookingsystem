@@ -86,20 +86,16 @@
 
     <!-- 검색 결과 리스트-->
     <table class="table_rows">
-        <h2 style="margin-top: 50px; margin-bottom: 15px; ">헌혈의집 지도 표시</h2>
+        <h2 style="margin-top: 50px; margin-bottom: 15px; ">헌혈의집 목록</h2>
         <hr />
-        <table class="table_rows" style="background: rgb(248, 240, 230);">
+        <table class="table_rows" style="background: rgb(248, 240, 230); width: 100%;" >
             <thead>
                 <tr>
-                    <th height="40" width="50">
-                        <input type="checkbox" class="checkall" id="checkall" data-target-name="chk">
-                        <label for="checkall"></label>
-                    </th>
-                    <th width="270">지역</th>
-                    <th width="270">헌혈의집</th>
-                    <th width="270">주소</th>
-                    <th width="270">운영시간</th>
-                    <th width="270">전화번호</th>
+                    <th width="100">지역</th>
+                    <th width="150">헌혈의집</th>
+                    <th width="500">주소</th>
+                    <th width="150">운영시간</th>
+                    <th width="150">전화번호</th>
                     <th></th>       <!-- 상세보기/예약하기 버튼 -->
                 </tr>
             </thead>
@@ -108,26 +104,20 @@
                     <td colspan="6" class="no_data">조회된 센터가 없습니다.</td>
                 </tr>
                 <tr th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
-                    <td th:text="*{#strings.listSplit(address,' ')[0]}"></td>
-                    <td th:text="*{cName}"></td>
+                    <td th:text="*{#strings.listSplit(address,' ')[0]}" align="center"></td>
+                    <td th:text="*{cName}" align="center"></td>
                     <td>
                         <th:block th:text="*{#strings.concat(address, ' ', addressSub)}"></th:block>
                     </td>
-                    <td th:text="*{operHour}"></td>
-                    <td th:text="*{telNum}"></td>
-                    <td>
+                    <td th:text="*{operHour}" align="center"></td>
+                    <td th:text="*{telNum}" align="center"></td>
+                    <td align="center">
                         <a th:href="@{/center/{cCode}(cCode=*{cCode})}">상세보기</a>
                         <a th:href="@{/center/{cCode}#reservation_box(cCode=*{cCode})}">예약하기</a>
                     </td>
                 </tr>
             </tbody>
     </table>
-
-        <div class="table_actions" style="margin-bottom: 200px;  display: flex;
-        justify-content: flex-end;">
-            <button type="button" class="sbtn form_action" data-form-name="frmList" data-mode="details">상세보기</button>
-            <button type="button" class="sbtn on form_action" data-form-name="frmList" data-mode="reservation">예약하기</button>
-        </div>
 
 
     <!-- 페이징 -->
