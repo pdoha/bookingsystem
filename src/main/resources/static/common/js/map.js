@@ -200,7 +200,7 @@ commonLib.map = {
         function infoWindow(map, lat, lng, content) {
             new kakao.maps.InfoWindow({
                 map,
-                position : new kakao.maps.LatLng(lat, lng),
+                position : mapCenter,
                 content,
                 removable : true
             });
