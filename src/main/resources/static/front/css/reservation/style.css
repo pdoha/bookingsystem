@@ -1,13 +1,13 @@
+
 .layout_width { max-width: 1200px; min-width: 1000px; margin: auto; margin-top: 100px;
 
-/*box-shadow: 0 10px 10px rgb(0,0,0, 0.1);*/
 
   }
 
 
 
 
-.subContent { position: relative; float:left; padding-bottom: 1rem; width: calc(100% - 14rem); }
+.subContent { position: relative; float:left; padding-bottom: 1rem; width: calc(100% - 12rem); }
 
 
 .titleArea { position:relative; margin-bottom: 3rem;}
@@ -89,3 +89,102 @@ margin-left: 10px;
 .days input[type='radio'] { display: none; }
 .days input[type='radio']+label { display: block; text-align: center; font-size: 2rem; font-weight: 500; cursor: pointer; line-height: 98px; }
 .days input[type='radio']:checked+label { background: #222; color: #fff; }
+
+
+
+/*--------------------------------------------*/
+/*---------------step box---------------------------*/
+.step_box { position: relative; width: 800px; margin-bottom: 2.5rem; height: 50px; }
+
+.step_box ul { display: table; table-layout: fixed; width: 100%; background:#f5f3f3; border: 5px solid#f5f3f3; border-radius: 3rem; padding: 0.5rem 0.7rem; font-size: 12px; }
+
+/*가운데 정렬*/
+.step_box li { position: relative; display: table-cell; text-align: center; padding-left: 10px;  }
+
+
+
+
+
+/*흰색박스 크기*/
+.step_box li p { display: block; position: relative; min-height: 4.6rem; display: flex; flex-direction: column; justify-content: center; padding: 0.5rem 0; }
+
+.step_box .icon{
+    font-size: 40px;
+    margin-left: 30px;
+    position: absolute; top: 30%;
+}
+
+.step_box li span { color: #222; font-size: 1rem; font-weight: 700; line-height:1.2rem; }
+
+.step_box li span em { color: #f42e3d;   }
+
+
+/*흰색박스 크기*/
+/* 헌혈예약 : on */
+.step_box li.on p { width: 140px; background: #fff; border-radius: 2rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+/* ----------헌혈예약이란------------------------ */
+.title1-container{
+    margin-top: 100px;
+    width: 65%;
+    height: 130px;
+    border-radius: 2rem;
+    background: #fff;
+    padding-left: 32px;
+    border: 2px solid #f5f3f3;
+    padding: 5px;
+
+}
+
+.tit1 {padding-left:32px; font-size:20px; line-height:1.6; font-family:"NanumSquareB"; color:#111;  }
+
+.box_st3 { padding: 0.5rem; }
+
+.title2-container{
+    margin-top: 50px;
+    width: 50%;
+    height: 200px;
+    border-radius: 2rem;
+    background:#f5f3f3;
+    padding-top: 20px;
+    margin-bottom: 100px;
+}
+
+
+.tit2{padding-left:32px;}
+.tit3{padding-left:32px; font-size:20px; line-height:1.6; font-family:"NanumSquareB"; color:#111; padding-top: 50px;}
+
+.indent> li { font-size:1rem; }
+
+
+.list_st1 > li { font-size:1rem; color: #444; margin-left: 30px; margin-top: 15px; }
+
+.list_st2 > li { font-size:1rem; color: #666; }
+
+.list_st3>li, .list_st4 > li { font-size:14px; list-style: none; padding: 10px; margin-left: 30px; }
+.list_st3>em {
+margin-left: 30px;
+}
+
+.icon{
+    color: red;
+}
+
+.reservation{
+    background-color: #ebe8e8;
+    margin-top: 25px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: black;
+    font-weight: 500;
+    margin-left: 650px;
+
+}
