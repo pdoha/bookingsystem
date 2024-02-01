@@ -3,59 +3,170 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content" th:object="${reservation}">
-    <h1>예약 정보</h1>
+    <style>
+        .container {
+           width: 1000px;
+           margin: 0 auto;
+           margin-top: 100px;
+           margin-bottom: 100px;
+       }
+
+        hr {
+        border: 1px solid #FF0000; /* 선의 두께와 색상을 설정합니다. */
+        margin-top:50px;
+    }
+        .con1 {
+        margin-top : 50px;
+        }
+
+        fieldset {
+         border-radius : 10px;
+        border: 1px solid #ccc;
+        padding: 13px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #edf1f5;
+        font-size: 16px;
+        padding: 20px 20px;
+        }
+
+        .success{
+          border-radius : 10px;
+        border: 1px solid #ccc;
+        padding: 13px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        padding: 20px 20px;
+        background-color: #ffffff;
+        color: #787878;
+
+        }
+
+        li {
+        padding-left:10px;
+        font-color: #4d4d4d;
+
+        }
+
+
+
+    #btn {
+          display: inline-block;
+    padding: 10px 20px; /* 내용과 테두리 간격을 조절할 수 있는 패딩 값 */
+    background-color: red;
+    color: white;
+    text-decoration: none; /* 기본 링크 밑줄 제거 */
+    font-size:16px;
+    width: 200px; /* 원하는 가로 크기 설정 */
+    height: 50px; /* 원하는 세로 크기 설정 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    border-redius: 1px;
+
+    }
+
+    label {
+    font-size:16px;
+    font-color: #414242;
+        }
+
+    .rData {
+    padding-left: 30px;
+    }
+
+    .inf {
+    font-size: 20px;
+        }
+
+    .detail {
+        display: inline-block;
+        padding: 2px 12px;
+        background-color: #ffffff; /* 원하는 배경색으로 조절 */
+        color: #000000; /* 텍스트 색상 */
+        text-decoration: none;
+        border-radius: 5px; /* 둥근 모서리를 위해 추가 */
+            border: 2px solid #404040; /* 테두리 스타일 및 색상 조절 */
+
+    }
+
+.successBtn {
+    text-align:right;
+}
+
+    </style>
+    <div class="container">
+        <hr>
+        <div class="con1">
+    <h1>예약 정보 확인</h1>
     <form>
         <fieldset>
+            <div class="inf">
+                <b><th:block th:text="*{member.mName}"></th:block></b>
+                님의 예약정보입니다.
+            </div>
+            <br>
             <ul>
                 <li>
-                    예약자명:
+                    <b>예약자명:</b>
                     <th:block th:text="*{member.mName + '(' + member.userId + ')'}"></th:block>
                 </li>
 
                 <li>
-                    연락처:
+                    <b>연락처:</b>
                     <th:block th:text="*{donorTel}"></th:block>
                 </li>
 
                 <li>
-                    헌혈 종류:
+                    <b>헌혈 종류:</b>
                     <th:block th:text="*{bookType.title}"></th:block>
                 </li>
 
                 <li>
-                    예약 센터명:
+                    <b> 예약 센터명:</b>
                     <th:block th:text="*{center.cName}"></th:block>
                     <a th:href="@{/center/{cCode}(cCode=*{center.cCode})}" target="_blank">상세보기</a>
                 </li>
 
                 <li>
-                    센터 주소:
+                    <b>센터 주소:</b>
                     <th:block th:if="*{!#strings.isEmpty(center.zonecode)}" th:text="*{'(' + center.zonecode + ')'}"></th:block>
                     <th:block th:if="*{!#strings.isEmpty(center.address)}" th:text="*{center.address}"></th:block>
                     <th:block th:if="*{!#strings.isEmpty(center.addressSub)}" th:text="*{center.addressSub}"></th:block>
                 </li>
 
                 <li>
-                    운영시간:
+                    <b>운영시간:</b>
                     <th:block th:text="*{center.operHour}"></th:block>
                 </li>
 
                 <li>
-                    센터 연락처:
+                    <b>센터 연락처:</b>
                     <th:block th:text="*{center.telNum}"></th:block>
                 </li>
 
                 <li>
-                    예약날짜 및 시간 :
+                    <b>예약날짜 및 시간 :</b>
                     <th:block th:text="*{#temporals.format(bookDateTime, 'yyyy.MM.dd HH:mm')}"></th:block>
                 </li>
 
             </ul>
 
         </fieldset>
-
-        <a th:href="@{/mypage/reservation/{bookCode}(bookCode=*{bookCode})}">예약변경/취소</a>
-        <a th:href="@{/mypage/survey}">문진하기</a>
+        <div>
+            <fieldset class="success">
+                <h3>성공적으로 예약되었습니다.</h3>
+            </fieldset>
+        </div>
+        <div class="successBtn">
+        <a th:href="@{/mypage/reservation/{bookCode}(bookCode=*{bookCode})}" id="btn">예약변경/취소</a>
+        <a th:href="@{/mypage/survey}" id="btn">문진하기</a>
+        </div>
     </form>
+        </div>
+        <hr>
+
+    </div>
 </main>
 </html>
