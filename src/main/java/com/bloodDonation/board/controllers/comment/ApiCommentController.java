@@ -41,7 +41,6 @@ public class ApiCommentController implements ExceptionProcessor {
     public JSONData<Object> authCheck(@RequestParam("seq") Long seq) {
 
         boardAuthService.check("comment_update", seq);
-
         return new JSONData<>();
     }
 

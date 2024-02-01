@@ -51,7 +51,7 @@ public class BoardAuthService {
         if (memberUtil.isAdmin()) {//관리자는 체크 불필요
             return;
         }
-        System.out.printf("mode=%s, seq=%d%n", mode, seq);
+        System.out.printf("-------------");
         AuthCheck data = null;
         if (mode.indexOf("comment_") != -1) { // 댓글
             data = commentInfoService.get(seq);
@@ -66,7 +66,6 @@ public class BoardAuthService {
             if (member == null) {
                 session.setAttribute("mode",mode);
                 session.setAttribute("seq",seq);
-                System.out.printf("mode=%s, seq=%s%n", mode, seq);
                 throw new GuestPasswordCheckException();
             }
             //회원인 경우 > alert -> back
@@ -101,8 +100,8 @@ public class BoardAuthService {
             key = "guest_confirmed_" + seq;
 
         } else if (mode.equals("comment_update") || mode.equals("comment_delete")) { // 비회원 댓글
-            CommentData data = commentInfoService.get(seq);
 
+            CommentData data = commentInfoService.get(seq);
             boolean match = encoder.matches(password, data.getGuestPw());
 
             if (!match) {
