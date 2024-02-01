@@ -17,6 +17,7 @@ main { min-height: 700px;}
 h3{
 font-size: 24px;
 padding: 5px;
+margin-bottom: 10px;
 }
 
 survey h3,
