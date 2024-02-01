@@ -137,7 +137,8 @@ public class ReservationController implements ExceptionProcessor {
         List<LocalTime> availableTimes = reservationDateService.getAvailableTimes(form.getCCode(), form.getDate());
 
         model.addAttribute("availableTimes", availableTimes);
-
+        model.addAttribute("hide_header",true);
+        model.addAttribute("hide_footer",true);
         return utils.tpl("reservation/step2");
     }
 
