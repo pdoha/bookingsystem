@@ -52,7 +52,12 @@ public class ReservationController implements ExceptionProcessor {
     }
 
 
+    @GetMapping("/main")
+    public String rsvMain(@ModelAttribute("rCenterSearch") RCenterSearch search, Model model){
+        commonProcess("rsvMain", model);
 
+        return utils.tpl("reservation/main");
+    }
 
     /**
      * 센터 필터링 검색/선택
