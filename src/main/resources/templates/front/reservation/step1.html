@@ -4,7 +4,7 @@
       layout:decorate="~{front/layouts/popup}">
 
 <main layout:fragment="content" class = "reservation_step">
-
+<div class="rCal">
     <form name="frmStep1" method="post" th:action="@{/reservation/step2}" autocomplete="off"
           th:object="${requestReservation}">
         <h3 th:text="#{방문일자_선택}"></h3>
@@ -46,6 +46,6 @@
 
 
     </form>
-
+</div>
 </main>
 </html>

@@ -3,14 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 
-<section layout:fragment="content" class="layout_width">
-
-    <!--kakao appkey 가져오기-->
+<th:block layout:fragment="addCommonScript">
     <th:block th:replace="~{common/_kakao_map_script::script}"></th:block>
+</th:block>
 
+<section layout:fragment="content" class="layout_width">
+    <input type="hidden" name="jsonData" th:value="${jsonData}">
 
-
-
+    <!--디자인-->
     <div id="subContent">
         <div class="titleArea">
             <h2 id="pageTitle" class="titleH2">헌혈의집 찾기</h2>
@@ -50,15 +50,16 @@
                     </label>
                 </td>
             </tr>
-
             <tr>
                 <th>지역 선택</th>
                 <td>
-                    <select title="시/도 선택" id="selSd" name="selSd">
+                    <select title="시/도 선택" name="sido" class="select_area" data-target-id="sigugun" th:field="*{sido}">
                         <option value="">시/도</option>
+                        <option th:each="sido : ${sidoList}" th:value="${sido}" th:text="${sido}"></option>
                     </select>
-                    <select title="군/구 선택" id="selGg" name="selGg">
-                        <option value="">군/구</option>
+                    <select title="시/구/군 선택" name="sigugun" id="sigugun" th:field="*{sigugun}">
+                        <option value="">시/구/군</option>
+                        <option th:if="${sigugunList != null}" th:each="item : ${sigugunList}" th:value="${item}" th:text="${item}"></option>
                     </select>
 
                 </td>
@@ -68,80 +69,63 @@
                 <th>키워드 입력</th>
                 <td>
                     <div>
-                        <input type="text" name="skey"  th:field="*{skey}" title="검색단어" placeholder="헌혈의집 이름 또는 헌혈의집 주소를 입력해주세요" maxlength="80" style="width: 320px; border: 2px solid #e6e6e6;">
+                        <input type="text" name="skey"  th:field="*{skey}" title="검색단어" placeholder="헌혈의집 이름 또는 헌혈의집 주소를 입력해주세요" maxlength="80">
+                    </div>
+                </td>
+                <td>
+                    <div class="search_btn">
                         <button type="submit" class="btn">검색</button>
                     </div>
                 </td>
-
             </tr>
 
         </table>
-
-
     </form>
 
-    <!-- 지도 표시 -->
-    <div class="directions">
-        <script type="text/javascript" src="../../../../resources/static/common/js/map.js"></script>
-        <script type="text/javascript" src="../../../static/front/js/center/view.js"></script>
-    </div>
+    <div id="center_map"></div>
 
     <!-- 검색 결과 리스트-->
-    <form name="frmList" method="post" target="ifrmProcess" autocomplete="off">
-        <input type="hidden" name="_method" value="PATCH">
-        <h2 style="margin-top: 150px; margin-bottom: 15px; ">헌혈의집 지도 표시</h2>
-        <hr />
-        <table class="table_rows" style="background: rgb(248, 240, 230);">
+    <table class="table_rows">
             <thead>
                 <tr>
-                    <th height="40" width="50">
-                        <input type="checkbox" class="checkall" id="checkall" data-target-name="chk">
-                        <label for="checkall"></label>
-                    </th>
-                    <th width="270">지역</th>
-                    <th width="270">헌혈의집</th>
-                    <th width="270">주소</th>
-                    <th width="270">운영시간</th>
-                    <th width="270">전화번호</th>
+                    <th>지역</th>
+                    <th>헌혈의집</th>
+                    <th>주소</th>
+                    <th>운영시간</th>
+                    <th>전화번호</th>
                     <th></th>       <!-- 상세보기/예약하기 버튼 -->
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr th:if="${items == null || items.isEmpty()}">
+                    <td colspan="6" class="no_data">조회된 센터가 없습니다.</td>
+                </tr>
+                <tr th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+                    <td th:text="*{#strings.listSplit(address,' ')[0]}"></td>
+                    <td th:text="*{cName}"></td>
                     <td>
-
+                        <th:block th:text="*{#strings.concat(address, ' ', addressSub)}"></th:block>
                     </td>
+                    <td th:text="*{operHour}"></td>
+                    <td th:text="*{telNum}"></td>
                     <td>
-
+                        <a th:href="@{/center/{cCode}(cCode=*{cCode})}">상세보기</a>
+                        <a th:href="@{/center/{cCode}#reservation_box(cCode=*{cCode})}">예약하기</a>
                     </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <!--
-                    <td>
-                        <a href="javascript:" class="" onclick="viewCenterInfo('')">상세보기</a>
-                        <a href="javascript:" class="" onclick="bookCenter('')">예약하기</a>
-                    </td>
-                    -->
                 </tr>
             </tbody>
-        </table>
+    </table>
 
+    <!-- 페이징 -->
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 
-        <div class="table_actions" style="margin-bottom: 200px;  display: flex;
-  justify-content: flex-end;">
-            <button type="button" class="sbtn form_action" data-form-name="frmList" data-mode="details">상세보기</button>
-            <button type="button" class="sbtn on form_action" data-form-name="frmList" data-mode="reservation">예약하기</button>
-        </div>
-
-        <!-- 페이징 -->
-        <th:block th:replace="~{common/_pagination::pagination}"></th:block>
-    </form>
+    <script type="text/html" id="tpl">
+            <div>
+                <a href="[url]" class="center_name">[cName]</a>
+                <div class="center_address">[address]</div>
+                <div class="center_tel">[telNum]</div>
+                <div class="center_operHour">[operHour]</div>
+            </div>
+    </script>
 </section>
 </html>
