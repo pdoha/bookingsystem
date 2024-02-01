@@ -98,21 +98,19 @@
 
 
             <div class="input-box">
+                <label>주소</label>
                 <span class="icon">
                     <i class="xi-marker-plus"></i>
                 </span>
                 <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly th:placeholder="#{우편번호}">
-                <label>우편번호</label>
+
                 <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address" style="float : right;margin-top: 5px;"></button>
             </div>
-            <div class="input-box">
-                <span class="icon">
-                    <i class="xi-maker"></i>
-                </span>
+            <div class="input-box2">
                 <input type="text" name="address" id="address" th:field="*{address}" readonly th:placeholder="#{주소}">
-                <label>주소</label>
+
             </div>
-            <div class="input-box">
+            <div class="input-box2">
                 <span class="icon">
                 </span>
                 <input type="text" name="addressSub" th:field="*{addressSub}" th:placeholder="#{나머지_주소}">
