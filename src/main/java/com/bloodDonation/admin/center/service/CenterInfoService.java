@@ -5,9 +5,11 @@ import com.bloodDonation.admin.center.controllers.RequestCenter;
 import com.bloodDonation.admin.center.repositories.CenterInfoRepository;
 import com.bloodDonation.admin.center.entities.CenterInfo;
 import com.bloodDonation.admin.center.entities.QCenterInfo;
+import com.bloodDonation.area.Areas;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Pagination;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.reservation.controllers.RCenterSearch;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,6 +63,8 @@ public class CenterInfoService {
         return form;
     }
 
+    /* 검색 조건 처리 S */
+
     public ListData<CenterInfo> getList(CenterSearch search){
         int page = Utils.onlyPositiveNumber(search.getPage(),1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
@@ -89,6 +93,26 @@ public class CenterInfoService {
                 andBuilder.and(orBuilder.or(addressCond).or(addressSubCond).or(cNameCond));
             }
         }
+
+        if (search instanceof RCenterSearch) {
+            RCenterSearch rSearch = (RCenterSearch)search;
+            String sido = rSearch.getSido();
+            String sigugun = rSearch.getSigugun();
+
+            if (StringUtils.hasText(sido)) {
+                sido = sido.trim();
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                orBuilder.or(centerInfo.address.contains(sido))
+                        .or(centerInfo.address.contains(Areas.getShortSido(sido)));
+                andBuilder.and(orBuilder);
+            }
+
+            if (StringUtils.hasText(sigugun)) {
+                sigugun = sigugun.trim();
+                andBuilder.and(centerInfo.address.contains(sigugun));
+            }
+        }
+
 
         /* 검색 조건 처리 E */
 
