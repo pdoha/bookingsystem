@@ -11,14 +11,18 @@ main { min-height: 700px;
 }
 
 
+ h1 a{
+        color: red; font-size: 46px;
+        font-weight: 400;
 
+        }
 
 
 body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(245, 220, 243, 0.948);
+  background-color: #fff;
 
 
 .form-box h1{
@@ -43,13 +47,15 @@ body{
 /*클릭 아이디 비번*/
 .input-box label{
   position: absolute;
-  top: 50%;
+  top: -42%;
   left: 5px;
   transform: translateY(-50%);
-  font-size: 1em;
+  font-size: 1.8em;
   color: #162938;
   font-weight: 500;
   pointer-events: none;
+  padding-bottom: 20px;
+
 
 
 }
@@ -71,6 +77,8 @@ body{
     color: #162938;
     font-weight: 600;
     padding: 0 35px 0 5px;
+    margin-top:10px;
+    margin-top:5px;
 
 }
 
@@ -166,10 +174,7 @@ body{
     height: 30vh;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(207, 27, 177, 0.521);
-    border: none;
-
-
+    border: 1px solid #ccc;
 
 }
 
@@ -193,4 +198,14 @@ body{
 }
 
 button { cursor: pointer; }
+
+.error{
+        margin-left:400px;
+        font-size: 15px;
+        color: red;
+        }
+
+#auth_count{
+    font-size:15px;
+}
 
