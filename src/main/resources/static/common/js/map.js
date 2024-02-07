@@ -1,6 +1,7 @@
 var commonLib = commonLib || {};
 
 commonLib.map = {
+    mapEl : null,
     /**
     * 지도 로드
     *
@@ -40,68 +41,73 @@ commonLib.map = {
 
         /* 여러개 마커 표기 처리 S */
         if (positions && positions.length > 0) {
+            let mapOption, map;
+            if (positions[0].lat && positions[0].lng) {
+                mapOption = {
+                    center: new kakao.maps.LatLng(positions[0].lat, positions[0].lng), // 지도의 중심좌표
+                    level: zoom ? zoom : 3 // 지도의 확대 레벨
+                };
 
-           let mapOption, map;
-           if (positions[0].lat && positions[0].lng) {
-               mapOption = {
-                   center: new kakao.maps.LatLng(positions[0].lat, positions[0].lng), // 지도의 중심좌표
-                   level: zoom ? zoom : 3 // 지도의 확대 레벨
-                   };
-
-                   map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-               }
-
-                for (const pos of positions) {
-
-                    if (pos.address) { // 주소
-                        geocoder.addressSearch(pos.address, function(result, status) {
-                            // 정상적으로 검색이 완료됐으면
-                            if (status === kakao.maps.services.Status.OK) {
-                                const lat = result[0].y;
-                                const lng = result[0].x;
-                                const coords = new kakao.maps.LatLng(lat, lng);
-
-                                if (!map) {
-                                    mapOption = {
-                                        center: coords, // 지도의 중심좌표
-                                        level: zoom ? zoom : 3 // 지도의 확대 레벨
-                                        };
-
-                                        map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-                                }
+                map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+                this.mapEl = map;
+            }
 
 
+            for (const pos of positions) {
 
-                                new kakao.maps.Marker({
-                                    map, // 마커를 표시할 지도
-                                    position: coords
-                                });
+                if (pos.address) { // 주소
+                    geocoder.addressSearch(pos.address, function(result, status) {
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === kakao.maps.services.Status.OK) {
+                            const lat = result[0].y;
+                            const lng = result[0].x;
+                            const coords = new kakao.maps.LatLng(lat, lng);
 
-                                // 인포 윈도우 있는 경우
-                                if (pos.content && pos.content.trim()) {
-                                    infoWindow(map, lat, lng, pos.content);
-                                }
+                            if (!map) {
+                                mapOption = {
+                                    center: coords, // 지도의 중심좌표
+                                    level: zoom ? zoom : 3 // 지도의 확대 레벨
+                                };
 
-                                map.setCenter(coords);
+                                map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
                             }
-                        });
 
-                    } else { // 좌표
-                        new kakao.maps.Marker({
-                            map, // 마커를 표시할 지도
-                            position: new kakao.maps.LatLng(pos.lat, pos.lng), // 마커를 표시할 위치
-                            title : pos.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                            image : pos.image && pos.image.length >= 3 ? new kakao.maps.MarkerImage(pos.image[0], new kakao.maps.Size(pos.image[1], pos.image[2])) : undefined // 마커 이미지
-                        });
+                            commonLib.map.mapEl = map;
 
-                        // 인포 윈도우 있는 경우
-                        if (pos.content && pos.content.trim()) {
-                            infoWindow(map, pos.lat, pos.lng, pos.content);
-                        }
+
+                            new kakao.maps.Marker({
+                                map, // 마커를 표시할 지도
+                                position: coords
+                            });
+
+                            // 인포 윈도우 있는 경우
+                            if (pos.content && pos.content.trim()) {
+                                infoWindow(map, lat, lng, pos.content);
+                            }
+
+                            map.setCenter(coords);
+                       }
+                    });
+
+                } else { // 좌표
+                    new kakao.maps.Marker({
+                        map, // 마커를 표시할 지도
+                        position: new kakao.maps.LatLng(pos.lat, pos.lng), // 마커를 표시할 위치
+                        title : pos.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image : pos.image && pos.image.length >= 3 ? new kakao.maps.MarkerImage(pos.image[0], new kakao.maps.Size(pos.image[1], pos.image[2])) : undefined // 마커 이미지
+                    });
+
+                    // 인포 윈도우 있는 경우
+                    if (pos.content && pos.content.trim()) {
+                        infoWindow(map, pos.lat, pos.lng, pos.content);
                     }
+
                 }
-                return;
-           }
+            }
+
+
+            return;
+        }
         /* 여러개 마커 표기 처리 E */
 
          // 지도를 표시할 div
@@ -111,7 +117,7 @@ commonLib.map = {
          };
 
          const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
+         this.mapEl = map;
 
          let marker = new kakao.maps.Marker({
              // 지도 중심좌표에 마커를 생성합니다
@@ -200,10 +206,22 @@ commonLib.map = {
         function infoWindow(map, lat, lng, content) {
             new kakao.maps.InfoWindow({
                 map,
-                position : mapCenter,
+                position : new kakao.maps.LatLng(lat, lng),
                 content,
                 removable : true
             });
         }
+    },
+    move(address) {
+        const geocoder = new kakao.maps.services.Geocoder();
+        geocoder.addressSearch(address, function(result, status) {
+
+            if (status === kakao.maps.services.Status.OK) {
+                const lat = result[0].y;
+                const lng = result[0].x;
+                const coords = new kakao.maps.LatLng(lat, lng);
+                commonLib.map.mapEl.panTo(coords);
+            }
+        });
     }
 };

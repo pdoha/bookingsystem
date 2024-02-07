@@ -23,4 +23,15 @@ window.addEventListener("DOMContentLoaded", function() {
     map.load("center_map", "100%", 400, {
       positions,
     });
+
+    //주소 클릭시 지도의 위치를 이동
+    const moveMaps = document.getElementsByClassName("move_map");
+    for(const el of moveMaps) {
+
+        el.addEventListener("click", function() {
+            const tr = el.parentElement;
+            const address = tr.dataset.address.trim();
+            map.move(address);
+        });
+    }
 });

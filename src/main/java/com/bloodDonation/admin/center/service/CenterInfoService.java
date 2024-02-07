@@ -94,11 +94,12 @@ public class CenterInfoService {
             }
         }
 
-        if (search instanceof RCenterSearch) {
+        if (search instanceof RCenterSearch) {  // 프론트 센터 필터링 검색
             RCenterSearch rSearch = (RCenterSearch)search;
             String sido = rSearch.getSido();
             String sigugun = rSearch.getSigugun();
 
+            //시도구군 검색
             if (StringUtils.hasText(sido)) {
                 sido = sido.trim();
                 BooleanBuilder orBuilder = new BooleanBuilder();
@@ -111,9 +112,41 @@ public class CenterInfoService {
                 sigugun = sigugun.trim();
                 andBuilder.and(centerInfo.address.contains(sigugun));
             }
+
+            // 체크박스 필터링 검색
+            List<String> sopr = rSearch.getSopr();
+            if (sopr != null) {
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                if (sopr.contains("평일")){
+                    orBuilder.or(centerInfo.bookYoil.contains("월"))
+                            .or(centerInfo.bookYoil.contains("화"))
+                            .or(centerInfo.bookYoil.contains("수"))
+                            .or(centerInfo.bookYoil.contains("목"))
+                            .or(centerInfo.bookYoil.contains("금"));
+                }
+
+                if (sopr.contains("주말")) {
+                    orBuilder.or(centerInfo.bookYoil.contains("토"))
+                            .or(centerInfo.bookYoil.contains("일"));
+                }
+
+                if (sopr.contains("공휴일")) {
+                    orBuilder.or(centerInfo.bookHday.eq(true));
+                }
+
+                if (sopr.contains("야간")) {
+                    orBuilder.or(centerInfo.bookAvl.contains("18:"))
+                            .or(centerInfo.bookAvl.contains("19:"))
+                            .or(centerInfo.bookAvl.contains("20:"))
+                            .or(centerInfo.bookAvl.contains("21:"))
+                            .or(centerInfo.bookAvl.contains("22:"))
+                            .or(centerInfo.bookAvl.contains("23:"))
+                            .and(centerInfo.bookAvl.notLike("%-18:00"));
+                }
+                andBuilder.and(orBuilder);
+            }
+
         }
-
-
         /* 검색 조건 처리 E */
 
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
