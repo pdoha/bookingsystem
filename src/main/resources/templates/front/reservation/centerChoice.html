@@ -39,10 +39,10 @@
                 <tr th:if="${items == null || items.isEmpty()}">
                     <td colspan="6" class="no_data">조회된 센터가 없습니다.</td>
                 </tr>
-                <tr th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
-                    <td th:text="*{#strings.listSplit(address,' ')[0]}" align="center"></td>
-                    <td th:text="*{cName}" align="center"></td>
-                    <td>
+                <tr th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}" th:data-address="*{address + (addressSub == null ? '' : ' ' + addressSub)}">
+                    <td th:text="*{#strings.listSplit(address,' ')[0]}" align="center"></td>    <!--지역-->
+                    <td class="move_map" th:text="*{cName}" align="center"></td>              <!--헌혈의집-->
+                    <td class="move_map">
                         <th:block th:text="*{#strings.concat(address, ' ', addressSub)}"></th:block>
                     </td>
                     <td th:text="*{operHour}" align="center"></td>
