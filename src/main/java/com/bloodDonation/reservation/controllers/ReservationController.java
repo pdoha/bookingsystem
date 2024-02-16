@@ -72,7 +72,6 @@ public class ReservationController implements ExceptionProcessor {
 
         ListData<CenterInfo> data = centerInfoService.getList(search);
 
-        search.setLimit(10000);
         ListData<CenterInfo> data2 = centerInfoService.getList(search);
         List<CenterInfo> items2 = data2.getItems();
 

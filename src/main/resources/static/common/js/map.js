@@ -75,14 +75,16 @@ commonLib.map = {
                             commonLib.map.mapEl = map;
 
 
-                            new kakao.maps.Marker({
+                            let marker = new kakao.maps.Marker({
                                 map, // 마커를 표시할 지도
                                 position: coords
                             });
 
+                            marker.setMap(map);
+
                             // 인포 윈도우 있는 경우
                             if (pos.content && pos.content.trim()) {
-                                infoWindow(map, lat, lng, pos.content);
+                                infoWindow(map, lat, lng, pos.content, marker);
                             }
 
                             map.setCenter(coords);
@@ -112,19 +114,13 @@ commonLib.map = {
 
          // 지도를 표시할 div
          const mapOption = {
-                center: new kakao.maps.LatLng(lat ? lat : 33.450701, lng ? lng : 126.570667), // 지도의 중심좌표
+                center: new kakao.maps.LatLng(lat ? lat : 36.63561274925683, lng ? lng : 127.48850318407854), // 지도의 중심좌표
                 level: zoom ? zoom : 3 // 지도의 확대 레벨
          };
 
          const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
          this.mapEl = map;
 
-         let marker = new kakao.maps.Marker({
-             // 지도 중심좌표에 마커를 생성합니다
-             position: map.getCenter(),
-             title,
-             image : image && image.length >= 3 ? new kakao.maps.MarkerImage(image[0], new kakao.maps.Size(image[1], image[2])) : undefined,
-         });
 
          // 지도에 마커를 표시합니다
          if (address && address.trim()) {
@@ -158,9 +154,10 @@ commonLib.map = {
                         callback(lat, lng);
                      }
 
+                    marker.setMap(map);
                      // 인포 윈도우 있는 경우
                      if (content && content.trim()) {
-                        infoWindow(map, lat, lng, content);
+                        infoWindow(map, lat, lng, content, marker);
                      }
                 } // endif
             }); // endif
@@ -170,7 +167,7 @@ commonLib.map = {
 
             // 인포 윈도우 있는 경우
             if (content && content.trim()) {
-                infoWindow(map, lat, lng, content);
+                infoWindow(map, lat, lng, content, marker);
             }
          }
 
@@ -203,13 +200,14 @@ commonLib.map = {
         * 인포윈도우 표시
         *
         */
-        function infoWindow(map, lat, lng, content) {
-            new kakao.maps.InfoWindow({
-                map,
-                position : new kakao.maps.LatLng(lat, lng),
-                content,
-                removable : true
-            });
+        function infoWindow(map, lat, lng, content, marker) {
+            var infowin = new kakao.maps.InfoWindow({
+                            map,
+                            position : new kakao.maps.LatLng(lat, lng),
+                            content,
+                            removable : true
+                        });
+            infowin.open(map, marker);
         }
     },
     move(address) {
