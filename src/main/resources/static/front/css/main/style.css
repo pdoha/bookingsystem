@@ -173,15 +173,20 @@ progress {
 }
 
 h1{ text-align: center;}
+
         /* 오늘의 혈액보유량 */
-.blood_notice { position: absolute;  width: 850px; height: 380px;  border: 3px solid rgba(229, 46, 64, 0.452);
+.blood_notice {
+    position: absolute;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: auto;
+    border: 3px solid rgba(229, 46, 64, 0.452);
     border-radius: 20px;
     backdrop-filter: blur(2px);
-    box-shadow: 0 0 50px rgba(207, 27, 177, 0.521); margin-top: 80px; margin-left: 550px; }
-.blood_notice dl { position: relative; height: 100%; }
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
 /*함께 만다는 즐거운 헌혈*/
-.blood_notice dt { position: relative; text-align: center; color: #fff; font-size: 1.1rem; line-height: 1.3; padding: 2rem 0 0.7rem; font-weight: 700;  }
-
 
 /*카드위 배경*/
 .blood_notice dt::before { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% + 1rem); background: #f42e3d; z-index: -1; content: ""; border-radius: 30px; }
