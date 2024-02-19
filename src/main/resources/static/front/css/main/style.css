@@ -177,16 +177,15 @@ h1{ text-align: center;}
         /* 오늘의 혈액보유량 */
 .blood_notice {
     position: absolute;
-    top: auto;
-    right: auto;
+    left: 50%;
     width: 100%;
-    height: auto;
+    margin-left: -50%;
     border: 3px solid rgba(229, 46, 64, 0.452);
     border-radius: 20px;
     backdrop-filter: blur(2px);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
-/*함께 만다는 즐거운 헌혈*/
+/*함께 만드는 즐거운 헌혈*/
 
 /*카드위 배경*/
 .blood_notice dt::before { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% + 1rem); background: #f42e3d; z-index: -1; content: ""; border-radius: 30px; }
