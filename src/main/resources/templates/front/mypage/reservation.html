@@ -20,6 +20,8 @@
  margin-bottom: 20px;">검색하기</button>
         </div>
     </form>
+    <form name="frmSearch2" method="post" th:action="@{/mypage/reservation}" autocomplete="off"
+    th:object="${requestMyReservation}">
     <table border="1"
     width="1200px;"
     height="500px"
@@ -31,20 +33,18 @@
             <th>헌혈종류</th>
             <th>예약장소</th>
             <th>예약자전화번호</th>
-            <th>전자문진 여부</th>
+            <th>전자문진</th>
             <th>예약</th>
         </tr>
       </thead>
         <tbody>
             <tr align="center">
-               <td>예약일시-날짜,시간</td>
-                <td>헌혈종류</td>
-                <td>예약장소</td>
+               <td>예약날짜,시간</td>
+                <td th:text="*{bookType}"></td>
+                <td th:text="*{center}"></td>
+                <td th:text="*{donorTel}"></td>
                 <td>
-                    <input type="text" name="tel" id="tel" readonly>
-                </td>
-                <td>
-                    <button type="button"><a th:href="@{/mypage/survey}">전자문진_하러가기</button>
+                    <button type="button"><a th:href="@{/mypage/survey}">전자문진_하러가기</a></button>
                 </td>
                 <td>
                     <button type="button"><a th:href="@{/reservation/centerChoice}">변경</a></button>
@@ -53,6 +53,7 @@
             </tr>
         </tbody>
     </table>
+    </form>
 
 </section>
 </html>

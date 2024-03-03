@@ -2,21 +2,28 @@ package com.bloodDonation.mypage.controllers;
 
 
 import com.bloodDonation.commons.ExceptionProcessor;
+import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Utils;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.mypage.service.MemberDeleteService;
 import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
+import com.bloodDonation.mypage.service.ReservationModifyService;
+import com.bloodDonation.reservation.controllers.ReservationSearch;
+import com.bloodDonation.reservation.entities.Reservation;
+import com.bloodDonation.reservation.service.ReservationInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +40,8 @@ public class MypageController implements ExceptionProcessor {
     private final MemberUpdateService updateService;
     private final MemberDeleteService deleteService;
     private final ResignValidator resignValidator;
+    private final ReservationModifyService modifyService;
+    private final ReservationInfoService reservationInfoService;
     @ModelAttribute("addCss")
     public String[] getAddCss() {
 
@@ -90,10 +99,25 @@ public class MypageController implements ExceptionProcessor {
         return "redirect:/mypage/info";
     }
     @GetMapping("/reservation")
-    public String reservation(Model model){
+    public String reservation(Model model,@ModelAttribute ReservationSearch search){
         commonProcess("reservation", model);
+        ListData<Reservation> data = reservationInfoService.getMyList(search);
+        model.addAttribute("items",data.getItems());
+        model.addAttribute("pagination",data.getPagination());
         return utils.tpl("mypage/reservation");
     }
+   /* @PostMapping("/reservation")
+    public String reservation(Model model, @ModelAttribute ReservationSearch search){
+        commonProcess("reservation", model);
+
+        ListData<Reservation> data = reservationInfoService.getMyList(search);
+        model.addAttribute("items",data.getItems());
+        model.addAttribute("pagination",data.getPagination());
+        return utils.tpl("mypage/reservation");
+    }*/
+
+
+
     @RequestMapping("/reservation")
      @GetMapping("/centerChoice")
      public String reservationModify(@ModelAttribute RequestMyReservation form, Model model){
@@ -102,7 +126,7 @@ public class MypageController implements ExceptionProcessor {
              Member member = memberUtil.getMember();//예약은 getReservation() 이용?
              form = new ModelMapper().map(member, RequestMyReservation.class);
          }
-
+        Reservation reservation = modifyService.modify(form);
          model.addAttribute("requestMyReservation", form);
             /*return utils.tpl("mypage/reservation_modify");*/
         return utils.tpl("reservation/centerChoice");
