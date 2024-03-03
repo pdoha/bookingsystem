@@ -4,7 +4,8 @@
       layout:decorate="~{front/layouts/mypage}">
 <section layout:fragment="content">
     <h1 th:text="#{예약조회}"></h1>
-    <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off">
+    <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off"
+          th:object="reservationSearch">
           <!--th:object="${예-reservationSearch}"-->
         <table class="table_cols">
             <tr>
@@ -21,7 +22,7 @@
         </div>
     </form>
     <form name="frmSearch2" method="post" th:action="@{/mypage/reservation}" autocomplete="off"
-    th:object="${requestMyReservation}">
+    >
     <table border="1"
     width="1200px;"
     height="500px"
@@ -38,7 +39,7 @@
         </tr>
       </thead>
         <tbody>
-            <tr align="center">
+            <tr align="center" th:object="${requestMyReservation}">
                <td>예약날짜,시간</td>
                 <td th:text="*{bookType}"></td>
                 <td th:text="*{center}"></td>
