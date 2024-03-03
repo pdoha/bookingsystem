@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<form th:fragment="form" name="frmCenterChoice" method="get" th:action="@{/reservation/centerChoice}" autocomplete="off" th:object="${rCenterSearch}">
+    <table class="table_terms">
+        <colgroup>
+            <col width="10%">
+            <col width="30%">
+        </colgroup>
+        <tr>
+            <th>모두선택</th>
+            <td>
+                <label for="chkAll">
+                    <input type="checkbox" id="chkAll" class="checkAll" title="모두선택" value="Y" data-target-name="sopr"> "모두선택"
+                </label>
+            </td>
+        </tr>
+        <tr>
+
+            <th >운영정보 선택</th>
+            <td style="display: flex;
+                       justify-content: space-between; width: 350px;">
+                <label for="opWkDay">
+                    <input type="checkbox" name="sopr" id="opWkDay" value="평일" title="평일" th:field="*{sopr}"> "평일"
+                </label>
+                <label for="opWkend">
+                    <input type="checkbox" name="sopr" id="opWkend" value="주말" title="주말" th:field="*{sopr}"> "주말"
+                </label>
+                <label for="opHldy">
+                    <input type="checkbox" name="sopr" id="opHldy" value="공휴일" title="공휴일" th:field="*{sopr}"> "공휴일"
+                </label>
+                <label for="opExtn">
+                    <input type="checkbox" name="sopr" id="opExtn" value="야간" title="야간" th:field="*{sopr}"> "18시 이후"
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>지역 선택</th>
+            <td>
+                <select title="시/도 선택" name="sido" class="select_area" data-target-id="sigugun" th:field="*{sido}">
+                    <option value="">시/도</option>
+                    <option th:each="sido : ${sidoList}" th:value="${sido}" th:text="${sido}"></option>
+                </select>
+                <select title="시/구/군 선택" name="sigugun" id="sigugun" th:field="*{sigugun}">
+                    <option value="">시/구/군</option>
+                    <option th:if="${sigugunList != null}" th:each="item : ${sigugunList}" th:value="${item}" th:text="${item}"></option>
+                </select>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>키워드 입력</th>
+            <td>
+                <div>
+                    <input type="text" name="skey"  th:field="*{skey}" title="검색단어" placeholder="헌혈의집 이름 또는 헌혈의집 주소를 입력해주세요" maxlength="80" style="width: 320px; border: 2px solid #e6e6e6;">
+                </div>
+            </td>
+            <td>
+                <div class="search_btn">
+                    <button type="submit" class="btn">검색</button>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</form>

@@ -27,7 +27,7 @@ public class MemberDeleteService {
 
         member.setEnable(false);
         member.setMName("****");
-        member.setUserPw("****");
+        //member.setUserPw("****"); //비밀번호 초기화 ****
         memberRepository.saveAndFlush(member);
 
         session.invalidate(); // 로그아웃
