@@ -28,7 +28,7 @@ public class ReservationModifyService {
 
         Member member = memberUtil.getMember();
         member = memberRepository.findByUserId(member.getUserId()).orElse(null);
-        //로그인한 회원에서 예약정보를 가져오려면 member엔티티에 reservation을 추가해야 됨??
+        //---로그인한 회원에서 예약정보를 가져오려면 member엔티티에 reservation을 추가해야 됨??
 
         Reservation reservation = new Reservation();
         reservation.setCenter(form.getCenter());
