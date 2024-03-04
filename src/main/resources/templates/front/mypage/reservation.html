@@ -5,7 +5,7 @@
 <section layout:fragment="content">
     <h1 th:text="#{예약조회}"></h1>
     <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off"
-          th:object="reservationSearch">
+          th:object="${reservationSearch}">
           <!--th:object="${예-reservationSearch}"-->
         <table class="table_cols">
             <tr>
@@ -21,8 +21,7 @@
  margin-bottom: 20px;">검색하기</button>
         </div>
     </form>
-    <form name="frmSearch2" method="post" th:action="@{/mypage/reservation}" autocomplete="off"
-    >
+
     <table border="1"
     width="1200px;"
     height="500px"
@@ -39,22 +38,27 @@
         </tr>
       </thead>
         <tbody>
-            <tr align="center" th:object="${requestMyReservation}">
-               <td>예약날짜,시간</td>
-                <td th:text="*{bookType}"></td>
-                <td th:text="*{center}"></td>
+            <tr th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+                <td th:text="*{#temporals.format(bookDateTime, 'yyyy.MM.dd HH:mm')}"></td>
+                <td th:text="*{bookType.title}"></td>
+                <td>
+                    [<th:block th:text="*{center.cName}"></th:block>]
+                    <th:block th:text="*{center.address}"></th:block>
+                </td>
                 <td th:text="*{donorTel}"></td>
                 <td>
-                    <button type="button"><a th:href="@{/mypage/survey}">전자문진_하러가기</a></button>
+                    <a th:href="@{/mypage/survey}">전자문진_하러가기</a>
                 </td>
                 <td>
-                    <button type="button"><a th:href="@{/reservation/centerChoice}">변경</a></button>
-                    <button type="button">취소</button>
+                    <a th:href="@{/mypage/reservation/{bookCode}(bookCode=*{bookCode})}">예약변경</a>
                 </td>
+            </tr>
+            <tr th:unless="${items != null && !items.isEmpty()}">
+                <td colspan="6" class="no_data">조회된 예약이 없습니다.</td>
             </tr>
         </tbody>
     </table>
-    </form>
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 
 </section>
 </html>

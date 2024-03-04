@@ -45,23 +45,4 @@ public class ReservationModifyService {
     }
 }
 
-        /*CenterInfo center = centerInfoService.get(form.getCCode());
-        LocalDateTime bookDateTime = LocalDateTime.of(form.getDate(), form.getTime());
-        LocalDateTime bookDateTime =LocalDateTime.of(form.getBookDate(),form.getBookHour(), form.getBookMin());
-
-        Reservation reservation = Reservation.builder()
-                .bookDateTime(bookDateTime)
-                .bookType(DonationType.valueOf(form.getBookType()))
-                .center(center)
-                .member(memberUtil.getMember())
-                .capacity(form.getPersons())
-                .status(ReservationStatus.APPLY)
-                .donorTel(form.getDonorTel())
-                .build();
-
-        reservationRepository.saveAndFlush(reservation);
-
-        return reservation;
-    }*/
-
 

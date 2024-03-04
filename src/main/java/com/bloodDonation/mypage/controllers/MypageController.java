@@ -101,24 +101,18 @@ public class MypageController implements ExceptionProcessor {
     @GetMapping("/reservation")
     public String reservation(Model model,@ModelAttribute ReservationSearch search){
         commonProcess("reservation", model);
+
         ListData<Reservation> data = reservationInfoService.getMyList(search);
-        model.addAttribute("items",data.getItems());
-        model.addAttribute("pagination",data.getPagination());
+        if (data != null) {
+            model.addAttribute("items", data.getItems());
+            model.addAttribute("pagination", data.getPagination());
+        }
+
         return utils.tpl("mypage/reservation");
     }
-   /* @PostMapping("/reservation")
-    public String reservation(Model model, @ModelAttribute ReservationSearch search){
-        commonProcess("reservation", model);
-
-        ListData<Reservation> data = reservationInfoService.getMyList(search);
-        model.addAttribute("items",data.getItems());
-        model.addAttribute("pagination",data.getPagination());
-        return utils.tpl("mypage/reservation");
-    }*/
 
 
-
-    @RequestMapping("/reservation")
+  //  @RequestMapping("/reservation")
      @GetMapping("/centerChoice")
      public String reservationModify(@ModelAttribute RequestMyReservation form, Model model){
             /*commonProcess("reservation/modify",model);*/
