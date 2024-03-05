@@ -1,7 +1,9 @@
 package com.bloodDonation.reservation.controllers;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,8 +21,12 @@ public class ReservationSearch {
 
  */
     //예약 날짜 범위
-    //private LocalDate sDate; //예약 시작날짜
-    //private LocalDate eDate; //예약 끝 날짜
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate sDate; //예약 시작날짜
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate eDate; //예약 끝 날짜
+
     private String sopt; //검새 옵션
     private String skey; //검색 키워드
 }

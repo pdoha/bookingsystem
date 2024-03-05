@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+<section layout:fragment="content">
+    <h1 th:text="#{예약변경}"></h1>
+    <form name="frmSave" method="POST" th:action="@{/mypage/reservation/save}" autocomplete="off" th:object="${requestReservation}">
+
+        <div class="btns">
+            <button type="reset">다시입력</button>
+            <button type="submit">변경하기</button>
+        </div>
+    </form>
+</section>
+</html>

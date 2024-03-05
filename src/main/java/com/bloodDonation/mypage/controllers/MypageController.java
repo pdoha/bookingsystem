@@ -4,26 +4,25 @@ package com.bloodDonation.mypage.controllers;
 import com.bloodDonation.commons.ExceptionProcessor;
 import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.commons.exceptions.AlertBackException;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.mypage.service.MemberDeleteService;
 import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
-import com.bloodDonation.mypage.service.ReservationModifyService;
+import com.bloodDonation.reservation.controllers.RequestReservation;
 import com.bloodDonation.reservation.controllers.ReservationSearch;
 import com.bloodDonation.reservation.entities.Reservation;
 import com.bloodDonation.reservation.service.ReservationInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +110,28 @@ public class MypageController implements ExceptionProcessor {
         return utils.tpl("mypage/reservation");
     }
 
+    /**
+     * 예약 정보 변경
+     *
+     * @param bookCode : 예약 번호
+     * @param model
+     * @return
+     */
+    @GetMapping("/reservation/{bookCode}")
+    public String reservationInfo(@PathVariable("bookCode") Long bookCode, Model model) {
+        commonProcess("reservation_info", model);
+
+        RequestReservation data = reservationInfoService.getForm(bookCode);
+        Member _member = data.getMember();
+        Member member = memberUtil.getMember();
+        if (!memberUtil.isLogin() || !member.getUserId().equals(_member.getUserId())) {
+            throw new AlertBackException("직접 예약건만 변경이 가능합니다.", HttpStatus.UNAUTHORIZED);
+        }
+
+        model.addAttribute("requestReservation", data);
+
+        return utils.tpl("mypage/reservation_info");
+    }
 
   //  @RequestMapping("/reservation")
      @GetMapping("/centerChoice")

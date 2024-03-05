@@ -6,13 +6,14 @@
     <h1 th:text="#{예약조회}"></h1>
     <form name="frmSearch" method="get" th:action="@{/mypage/reservation}" autocomplete="off"
           th:object="${reservationSearch}">
-          <!--th:object="${예-reservationSearch}"-->
         <table class="table_cols">
             <tr>
                 <td>
-                    <input type="date" name="dateres" id="datestart">
+                    <input type="date" name="sDate" th:field="*{sDate}">
+                    <span th:each="err : ${#fields.errors('sDate')}" th:text="${err}"></span>
                     ~
-                    <input type="date" name="dateres" id="dateend">
+                    <input type="date" name="eDate" th:field="*{eDate}">
+                    <span th:each="err : ${#fields.errors('eDate')}" th:text="${err}"></span>
                 </td>
             </tr>
         </table>

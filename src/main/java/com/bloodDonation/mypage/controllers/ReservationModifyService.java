@@ -1,10 +1,9 @@
-package com.bloodDonation.mypage.service;
+package com.bloodDonation.mypage.controllers;
 
 import com.bloodDonation.admin.center.service.CenterInfoService;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.member.repositories.MemberRepository;
-import com.bloodDonation.mypage.controllers.RequestMyReservation;
 import com.bloodDonation.reservation.constants.DonationType;
 import com.bloodDonation.reservation.entities.Reservation;
 import com.bloodDonation.reservation.repositories.ReservationRepository;
