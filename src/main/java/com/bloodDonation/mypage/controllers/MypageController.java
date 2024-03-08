@@ -115,7 +115,8 @@ public class MypageController implements ExceptionProcessor {
     }
 
     /**
-     * 예약 정보 취소, 변경
+     * 예약 정보 취소, 변경--변경은 조회된 리스트에서 누르면 변경페이지로 넘어가고,
+     * 취소는 취소 후 목록 리스트에 남는방식
      *
      * @param bookCode : 예약 번호
      * @param model
