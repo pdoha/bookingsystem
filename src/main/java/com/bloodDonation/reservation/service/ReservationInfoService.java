@@ -42,6 +42,7 @@ public class ReservationInfoService {
 
 
     public Reservation get(Long bookCode) {
+        //System.out.println("bookCode=" + bookCode);
         Reservation reservation = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
 
         //추가작업 필요

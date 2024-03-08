@@ -13,6 +13,7 @@ import com.bloodDonation.mypage.service.MyPageModifyService;
 import com.bloodDonation.reservation.controllers.RequestReservation;
 import com.bloodDonation.reservation.controllers.ReservationSearch;
 import com.bloodDonation.reservation.entities.Reservation;
+import com.bloodDonation.reservation.service.ReservationDeleteService;
 import com.bloodDonation.reservation.service.ReservationInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +43,8 @@ public class MypageController implements ExceptionProcessor {
     private final ResignValidator resignValidator;
     private final ReservationModifyService modifyService;
     private final ReservationInfoService reservationInfoService;
+    private final ReservationDeleteService reservationDeleteService;
+
     @ModelAttribute("addCss")
     public String[] getAddCss() {
 
@@ -111,29 +115,36 @@ public class MypageController implements ExceptionProcessor {
     }
 
     /**
-     * 예약 정보 변경
+     * 예약 정보 취소, 변경
      *
      * @param bookCode : 예약 번호
      * @param model
      * @return
      */
     @GetMapping("/reservation/{bookCode}")
-    public String reservationInfo(@PathVariable("bookCode") Long bookCode, Model model) {
+    public String reservationInfo(@PathVariable("bookCode") Long bookCode, Model model, @RequestParam(name="mode", required = false) String mode) {
         commonProcess("reservation_info", model);
 
         RequestReservation data = reservationInfoService.getForm(bookCode);
         Member _member = data.getMember();
         Member member = memberUtil.getMember();
         if (!memberUtil.isLogin() || !member.getUserId().equals(_member.getUserId())) {
-            throw new AlertBackException("직접 예약건만 변경이 가능합니다.", HttpStatus.UNAUTHORIZED);
+            throw new AlertBackException("직접 예약건만 취소 가능합니다.", HttpStatus.UNAUTHORIZED);
         }
 
-        model.addAttribute("requestReservation", data);
+        Long code = data.getBookCode();
+        Long cCode = data.getCCode();
+        reservationDeleteService.delete(code);
 
-        return utils.tpl("mypage/reservation_info");
+        if (StringUtils.hasText(mode) && mode.equals("Cancel")) {
+            return "redirect:/mypage/reservation";
+        }
+
+        return "redirect:/center/" + cCode;
     }
 
   //  @RequestMapping("/reservation")
+    //예약페이지로 넘겨버림-----변경페이지 따로 안만든 것(수정필요합니다.)
      @GetMapping("/centerChoice")
      public String reservationModify(@ModelAttribute RequestMyReservation form, Model model){
             /*commonProcess("reservation/modify",model);*/

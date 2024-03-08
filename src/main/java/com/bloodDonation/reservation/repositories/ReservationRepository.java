@@ -10,11 +10,7 @@ import java.time.LocalDateTime;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>,
         QuerydslPredicateExecutor<Reservation> {
-    /*//편리한기능을 추가 - 이메일과 아이디로 조회할수있는 쿼리 작성
-    @EntityGraph(attributePaths = "authorities")
-    Optional<Reservation> findByEmail(String email);
-    @EntityGraph(attributePaths = "authorities")
-    Optional<Reservation> findByUserId(String userId);*/
+
 
     @Query("SELECT SUM(r.capacity) FROM Reservation r WHERE r.center.cCode = :cCode AND r.bookDateTime = :dateTime AND r.status <> com.bloodDonation.reservation.constants.ReservationStatus.CANCEL")
     Integer getTotalCapacity(@Param("cCode") Long cCode, @Param("dateTime") LocalDateTime dateTime);

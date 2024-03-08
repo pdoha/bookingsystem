@@ -51,7 +51,8 @@
                     <a th:href="@{/mypage/survey}">전자문진_하러가기</a>
                 </td>
                 <td>
-                    <a th:href="@{/mypage/reservation/{bookCode}(bookCode=*{bookCode})}">예약변경</a>
+                    <a th:href="@{/mypage/reservation/{bookCode}(bookCode=*{bookCode})}" onclick="return confirm('정말 취소 및 변경 하시겠습니까?');">에약취소/변경</a>
+                    <a th:href="@{/mypage/reservation/{bookCode}?mode=Cancel(bookCode=*{bookCode})}" onclick="return confirm('정말 취소 하시겠습니까?');">에약취소</a>
                 </td>
             </tr>
             <tr th:unless="${items != null && !items.isEmpty()}">
