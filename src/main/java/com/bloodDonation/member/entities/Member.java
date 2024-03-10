@@ -2,6 +2,7 @@ package com.bloodDonation.member.entities;
 
 import com.bloodDonation.commons.entities.Base;
 import com.bloodDonation.mypage.entities.Survey;
+import com.bloodDonation.reservation.entities.Reservation;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,10 @@ public class Member extends Base {
 
     @Column(length = 65, nullable = false)
     private String gid; //그룹아이디
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "member", fetch= FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>(); //회원쪽정보 가져올 것임
 
     @Column(length=40, nullable = false, unique = true)
     private String userId;

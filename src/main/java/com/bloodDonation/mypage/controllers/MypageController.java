@@ -2,19 +2,27 @@ package com.bloodDonation.mypage.controllers;
 
 
 import com.bloodDonation.commons.ExceptionProcessor;
+import com.bloodDonation.commons.ListData;
 import com.bloodDonation.commons.Utils;
+import com.bloodDonation.commons.exceptions.AlertBackException;
 import com.bloodDonation.member.MemberUtil;
 import com.bloodDonation.member.entities.Member;
 import com.bloodDonation.mypage.service.MemberDeleteService;
 import com.bloodDonation.mypage.service.MemberUpdateService;
 import com.bloodDonation.mypage.service.MyPageModifyService;
+import com.bloodDonation.reservation.controllers.RequestReservation;
+import com.bloodDonation.reservation.controllers.ReservationSearch;
+import com.bloodDonation.reservation.entities.Reservation;
+import com.bloodDonation.reservation.service.ReservationDeleteService;
+import com.bloodDonation.reservation.service.ReservationInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +41,10 @@ public class MypageController implements ExceptionProcessor {
     private final MemberUpdateService updateService;
     private final MemberDeleteService deleteService;
     private final ResignValidator resignValidator;
+    private final ReservationModifyService modifyService;
+    private final ReservationInfoService reservationInfoService;
+    private final ReservationDeleteService reservationDeleteService;
+
     @ModelAttribute("addCss")
     public String[] getAddCss() {
 
@@ -90,11 +102,50 @@ public class MypageController implements ExceptionProcessor {
         return "redirect:/mypage/info";
     }
     @GetMapping("/reservation")
-    public String reservation(Model model){
+    public String reservation(Model model,@ModelAttribute ReservationSearch search){
         commonProcess("reservation", model);
+
+        ListData<Reservation> data = reservationInfoService.getMyList(search);
+        if (data != null) {
+            model.addAttribute("items", data.getItems());
+            model.addAttribute("pagination", data.getPagination());
+        }
+
         return utils.tpl("mypage/reservation");
     }
-    @RequestMapping("/reservation")
+
+    /**
+     * 예약 정보 취소, 변경--변경은 조회된 리스트에서 누르면 변경페이지로 넘어가고,
+     * 취소는 취소 후 목록 리스트에 남는방식
+     *
+     * @param bookCode : 예약 번호
+     * @param model
+     * @return
+     */
+    @GetMapping("/reservation/{bookCode}")
+    public String reservationInfo(@PathVariable("bookCode") Long bookCode, Model model, @RequestParam(name="mode", required = false) String mode) {
+        commonProcess("reservation_info", model);
+
+        RequestReservation data = reservationInfoService.getForm(bookCode);
+        Member _member = data.getMember();
+        Member member = memberUtil.getMember();
+        if (!memberUtil.isLogin() || !member.getUserId().equals(_member.getUserId())) {
+            throw new AlertBackException("직접 예약건만 취소 가능합니다.", HttpStatus.UNAUTHORIZED);
+        }
+
+        Long code = data.getBookCode();
+        Long cCode = data.getCCode();
+        reservationDeleteService.delete(code);
+
+        if (StringUtils.hasText(mode) && mode.equals("Cancel")) {
+            return "redirect:/mypage/reservation";
+        }
+
+        return "redirect:/center/" + cCode;
+    }
+
+  //  @RequestMapping("/reservation")
+    //예약페이지로 넘겨버림-----변경페이지 따로 안만든 것(수정필요합니다.)
      @GetMapping("/centerChoice")
      public String reservationModify(@ModelAttribute RequestMyReservation form, Model model){
             /*commonProcess("reservation/modify",model);*/
@@ -102,7 +153,7 @@ public class MypageController implements ExceptionProcessor {
              Member member = memberUtil.getMember();//예약은 getReservation() 이용?
              form = new ModelMapper().map(member, RequestMyReservation.class);
          }
-
+        Reservation reservation = modifyService.modify(form);
          model.addAttribute("requestMyReservation", form);
             /*return utils.tpl("mypage/reservation_modify");*/
         return utils.tpl("reservation/centerChoice");

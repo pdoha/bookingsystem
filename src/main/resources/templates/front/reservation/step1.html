@@ -17,7 +17,7 @@
                 <th:block th:text="#{년}"></th:block>
 
                 <th:block th:text="${#numbers.formatInteger(month,2)}"></th:block>
-                <th:block th:test="#{월}"></th:block>
+                <th:block th:text="#{월}"></th:block>
             </span>
             <a th:href="@{/reservation/step1/{cCode}(cCode=*{cCode},year=${nextYear},
             month=${nextMonth}, targetId=${param.targetId})}" th:text="#{다음달}"></a>

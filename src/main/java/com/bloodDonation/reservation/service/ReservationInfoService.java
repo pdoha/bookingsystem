@@ -23,9 +23,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 import static org.springframework.data.domain.Sort.Order.desc;
@@ -41,6 +42,7 @@ public class ReservationInfoService {
 
 
     public Reservation get(Long bookCode) {
+        //System.out.println("bookCode=" + bookCode);
         Reservation reservation = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
 
         //추가작업 필요
@@ -78,8 +80,19 @@ public class ReservationInfoService {
         List<String> userName = search.getUserName();
         List<String> center = search.getCenter();
          */
-        //LocalDate sDate = search.getSDate();
-        //LocalDate eDate = search.getEDate();
+
+        LocalDate sDate = search.getSDate();
+        LocalDate eDate = search.getEDate();
+
+        /* 예약 기간 검색 S */
+        if (sDate != null) {
+            andBuilder.and(reservation.bookDateTime.after(LocalDateTime.of(sDate, LocalTime.of(0, 0, 0))));
+        }
+
+        if (eDate != null) {
+            andBuilder.and(reservation.bookDateTime.before(LocalDateTime.of(eDate, LocalTime.of(23,59,59))));
+        }
+        /* 예약 기간 검색 E */
 
         String sopt = search.getSopt();
         String skey = search.getSkey();
