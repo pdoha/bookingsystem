@@ -122,6 +122,21 @@ commonLib.map = {
          this.mapEl = map;
 
 
+
+         let marker = new kakao.maps.Marker({
+             // 지도 중심좌표에 마커를 생성합니다
+             position: map.getCenter(),
+             title,
+             image : image && image.length >= 3 ? new kakao.maps.MarkerImage(image[0], new kakao.maps.Size(image[1], image[2])) : undefined,
+         });
+
+         marker.setMap(map);
+
+         // 인포 윈도우 있는 경우
+         if (content && content.trim()) {
+             infoWindow(map, 36.63561274925683, 127.48850318407854, content, marker);
+         }
+
          // 지도에 마커를 표시합니다
          if (address && address.trim()) {
             // 주소-좌표 변환 객체를 생성합니다
