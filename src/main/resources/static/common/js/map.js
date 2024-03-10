@@ -122,6 +122,7 @@ commonLib.map = {
          this.mapEl = map;
 
 
+
          let marker = new kakao.maps.Marker({
              // 지도 중심좌표에 마커를 생성합니다
              position: map.getCenter(),
